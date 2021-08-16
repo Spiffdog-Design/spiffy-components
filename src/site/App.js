@@ -1,3 +1,4 @@
+import React from 'react';
 import { Button, ThemeProvider } from '../components';
 import './App.css';
 

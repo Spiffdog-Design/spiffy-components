@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+import React, { createContext, useContext } from 'react';
 import _merge from 'lodash/merge';
 
 const defaultTheme = Object.freeze({
