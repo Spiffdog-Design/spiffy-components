@@ -1,28 +1,6 @@
 import React, { createContext, useContext } from 'react';
 import _merge from 'lodash/merge';
-
-const defaultTheme = Object.freeze({
-    colors: {
-        primary: '',
-        success: '',
-        warning: '',
-        alert: '',
-    },
-    fonts: {
-        headings: {
-            family: [],
-            size: [],
-        },
-        text: {
-            family: [],
-            size: 12,
-        },
-    },
-    sizes: [0, 4, 8, 12, 16, 24, 32, 40, 48, 56, 64],
-    disabled: {
-        opacity: 0.65,
-    },
-});
+import defaultTheme from './theme';
 
 const ThemeContext = createContext(defaultTheme);
 

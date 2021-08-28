@@ -1,12 +1,16 @@
-html,
-body {
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro&display=swap');
+
+* {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-size: 14px;
-    background-color: steelblue;
 }
 
-body {
-    line-height: 1.5;
+html,
+body,
+#root {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    min-height: 100vh;
+    font-size: 14px;
 }

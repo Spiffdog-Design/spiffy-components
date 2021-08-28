@@ -1,37 +1,72 @@
-import React, { forwardRef } from 'react';
+import { forwardRef, memo } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import { useTheme } from '../theme/Provider';
+import chroma from 'chroma-js';
 
-const Styled = styled.button`
-    font-size: ${({ size, theme }) => getFontSize(size, theme)};
-    background: none;
-    border: 0;
+import { Appearance, Colors, Intent, useTheme } from 'components';
+import { hasEntries } from '../utilities/arrayHelpers';
 
-    &:disabled {
-        opacity: ${({ theme }) => theme.disabled.opacity};
-    }
-`;
-
-export const Button = forwardRef(({ children, intent, size, ...props }, ref) => {
+const Button = forwardRef(({ appearance = Appearance.DEFAULT, intent = Intent.DEFAULT, ...props }, ref) => {
     const theme = useTheme();
-    return (
-        <Styled ref={ref} intent={intent} size={size} theme={theme} {...props}>
-            {children}
-        </Styled>
+    return appearance === Appearance.MINIMAL ? (
+        <MinimalButton ref={ref} color={Colors[intent]} theme={theme} {...props} />
+    ) : (
+        <DefaultButton ref={ref} color={Colors[intent]} theme={theme} {...props} />
     );
 });
 
-Button.propTypes = {
-    children: PropTypes.node,
-    intent: PropTypes.oneOf(['default', 'outline', 'minimal']),
-    size: PropTypes.oneOf(['sm', 'md', 'lg']),
-};
-Button.defaultProps = {
-    intent: 'default',
-    size: 'md',
-};
+export default memo(Button);
 
-function getFontSize(size, theme) {
-    return size === 'sm' ? `${theme.sizes[3]}px` : size === 'lg' ? `${theme.sizes[5]}px` : `${theme.sizes[4]}px`;
-}
+const BaseButton = styled.button`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    border: 0;
+    border-radius: 4px;
+    font-family: ${({ theme }) => (hasEntries(theme.fonts.text.family) ? theme.fonts.text.family.join(',') : undefined)};
+    font-size: 10pt;
+    font-weight: 700;
+    outline: none;
+    padding: 8px;
+    text-transform: uppercase;
+    user-select: none;
+
+    & > * + * {
+        margin-left: 4px;
+    }
+`;
+
+const DefaultButton = styled(BaseButton)`
+    background-color: ${({ color }) => chroma(color).brighten(0.25)};
+    color: ${() => Colors.white};
+
+    &:hover,
+    &:focus {
+        box-shadow: inset 0 0 2px 1px ${({ color }) => chroma(color).darken(2)}, 0 0 1px 0px ${({ color }) => chroma(color).darken(2)};
+    }
+
+    &:active {
+        background-color: ${({ color }) => chroma(color).darken()};
+    }
+`;
+
+const MinimalButton = styled(BaseButton)`
+    background-color: ${() => Colors.white};
+    color: ${({ color }) => color};
+
+    &:hover,
+    &:focus {
+        background-color: ${({ color }) => chroma(color).luminance(0.75)};
+    }
+
+    &:focus {
+        box-shadow: inset 0 0 1px 1px ${({ color }) => color}, 0 0 1px 0px ${({ color }) => color},
+            inset 0px 1px 2px 0px ${({ color }) => chroma(color).alpha(0.85)};
+    }
+
+    &:active {
+        background-color: ${({ color }) => chroma(color).luminance(0.5)};
+        color: ${({ color }) => chroma(color).darken(0.85)};
+    }
+`;
