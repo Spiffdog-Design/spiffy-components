@@ -1,63 +1,64 @@
 {
-  "name": "spiffy-sandbox",
-  "version": "0.1.0",
-  "private": true,
-  "files": [
-    "dist",
-    "README.md"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "URL_OF_YOUR_REPOSITORY"
-  },
-  "scripts": {
+    "name": "spiffy-sandbox",
+    "version": "0.1.0",
+    "private": true,
+    "files": [
+        "dist",
+        "README.md"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "URL_OF_YOUR_REPOSITORY"
+    },
+    "scripts": {
+        "build": "npm run build-components && npm run build-site",
         "build-components": "npm run clean && cross-env NODE_ENV=production babel src/components --out-dir dist --copy-files",
         "build-site": "react-scripts build",
-    "clean": "npx rimraf dist",
-    "compile": "npm run clean && cross-env NODE_ENV=production babel src/components --out-dir dist --copy-files",
-    "start": "react-scripts start",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "dependencies": {
+        "clean": "npx rimraf dist",
+        "compile": "npm run clean && cross-env NODE_ENV=production babel src/components --out-dir dist --copy-files",
+        "start": "react-scripts start",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject"
+    },
+    "dependencies": {
         "chroma-js": "^2.1.2",
-    "lodash": "^4.17.21",
-    "prop-types": "^15.7.2",
-    "styled-components": "^5.3.0",
-    "web-vitals": "^1.1.2"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.14.8",
-    "@babel/preset-env": "^7.14.9",
-    "@babel/preset-react": "^7.14.5",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
-        "cross-env": "^7.0.3",
-  },
-  "peerDependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "keywords": [],
-  "description": "Sandbox for working on the Spiffy Component library."
+        "lodash": "^4.17.21",
+        "prop-types": "^15.7.2",
+        "styled-components": "^5.3.0",
+        "web-vitals": "^1.1.2"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.14.8",
+        "@babel/preset-env": "^7.14.9",
+        "@babel/preset-react": "^7.14.5",
+        "@testing-library/jest-dom": "^5.14.1",
+        "@testing-library/react": "^11.2.7",
+        "@testing-library/user-event": "^12.8.3",
+        "cross-env": "^7.0.3"
+    },
+    "peerDependencies": {
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-scripts": "4.0.3"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "keywords": [],
+    "description": "Sandbox for working on the Spiffy Component library."
 }
