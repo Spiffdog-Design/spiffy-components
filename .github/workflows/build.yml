@@ -41,8 +41,8 @@ jobs:
               with:
                   node-version: 14.x
                   registry-url: https://npm.pkg.github.com/
-                  scope: '@spiffdog'
-            - run: echo "registry=https://npm.pkg.github.com/@spiffdog" >> .npmrc
+                  scope: '@spiffdog-design'
+            - run: echo "registry=https://npm.pkg.github.com/@spiffdog-design" >> .npmrc
             - run: npm publish $(ls *.tgz)
               env:
                   NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
