@@ -1,64 +1,50 @@
 {
-    "name": "spiffy-sandbox",
-    "version": "0.1.0",
-    "private": true,
-    "files": [
-        "dist",
-        "README.md"
-    ],
+    "name": "spiffy",
+    "version": "0.0.1",
+    "description": "Stencil Component Starter",
+    "main": "dist/index.cjs.js",
+    "module": "dist/index.js",
+    "es2015": "dist/esm/index.mjs",
+    "es2017": "dist/esm/index.mjs",
+    "types": "dist/types/index.d.ts",
+    "collection": "dist/collection/collection-manifest.json",
+    "collection:main": "dist/collection/index.js",
+    "unpkg": "dist/spiffy/spiffy.esm.js",
     "repository": {
         "type": "git",
-        "url": "URL_OF_YOUR_REPOSITORY"
+        "url": "https://github.com/ionic-team/stencil-component-starter.git"
     },
+    "files": [
+        "dist/",
+        "loader/"
+    ],
     "scripts": {
-        "build": "npm run build-components && npm run build-site",
-        "build-components": "npm run clean && cross-env NODE_ENV=production babel src/components --out-dir dist --copy-files",
-        "build-site": "react-scripts build",
-        "clean": "npx rimraf dist",
-        "compile": "npm run clean && cross-env NODE_ENV=production babel src/components --out-dir dist --copy-files",
-        "start": "react-scripts start",
-        "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "build": "stencil build --docs",
+        "start": "stencil build --watch",
+        "test": "stencil test --spec --e2e",
+        "test.watch": "stencil test --spec --watchAll",
+        "generate": "stencil generate",
+        "storybook": "start-storybook -p 6006",
+        "build-storybook": "build-storybook"
     },
     "dependencies": {
-        "chroma-js": "^2.1.2",
-        "lodash": "^4.17.21",
-        "prop-types": "^15.7.2",
-        "styled-components": "^5.3.0",
-        "web-vitals": "^1.1.2"
+        "@stencil/core": "^2.13.0"
     },
     "devDependencies": {
-        "@babel/cli": "^7.14.8",
-        "@babel/preset-env": "^7.14.9",
-        "@babel/preset-react": "^7.14.5",
-        "@testing-library/jest-dom": "^5.14.1",
-        "@testing-library/react": "^11.2.7",
-        "@testing-library/user-event": "^12.8.3",
-        "cross-env": "^7.0.3"
+        "@babel/core": "^7.19.0",
+        "@storybook/addon-actions": "^6.5.10",
+        "@storybook/addon-essentials": "^6.5.10",
+        "@storybook/addon-interactions": "^6.5.10",
+        "@storybook/addon-links": "^6.5.10",
+        "@storybook/builder-webpack4": "^6.5.10",
+        "@storybook/html": "^6.5.10",
+        "@storybook/manager-webpack4": "^6.5.10",
+        "@storybook/testing-library": "0.0.13",
+        "@types/jest": "^27.0.3",
+        "babel-loader": "^8.2.5",
+        "jest": "^27.4.5",
+        "jest-cli": "^27.4.5",
+        "puppeteer": "^10.0.0"
     },
-    "peerDependencies": {
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2",
-        "react-scripts": "4.0.3"
-    },
-    "eslintConfig": {
-        "extends": [
-            "react-app",
-            "react-app/jest"
-        ]
-    },
-    "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
-    },
-    "keywords": [],
-    "description": "Sandbox for working on the Spiffy Component library."
+    "license": "MIT"
 }
