@@ -30,7 +30,7 @@ jobs:
 
     publish:
         name: 'Publish to GitHub Packages'
-        needs: [package]
+        needs: [build]
         runs-on: ubuntu-18.04
         steps:
             - name: Upload
