@@ -23,6 +23,11 @@
         "noUnusedParameters": true, // Flags unused function parameters.
         "noFallthroughCasesInSwitch": true, // Requires handling all cases in a switch statement.
         "declaration": true, // Generates declaration files for TypeScript.
+        "types": [
+            "node",
+            "jest",
+            "@testing-library/jest-dom"
+        ],
     },
     "include": [
         "src"
