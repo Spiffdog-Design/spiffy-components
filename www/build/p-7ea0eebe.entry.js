@@ -1,1 +1,0 @@
-import{r as s,h as t,H as o}from"./p-72c730a9.js";const l=class{constructor(t){s(this,t)}render(){return t(o,null,t("button",null,t("slot",null)))}};l.style=":host{display:block}";export{l as s_button}
