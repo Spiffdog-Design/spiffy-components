@@ -25,14 +25,15 @@
     ]
   },
   "scripts": {
-    "build": "tsc && vite build && npm run build-storybook",
+    "build": "tsc && vite build",
+    "dev": "npm run storybook",
     "format": "prettier --write --parser typescript '**/*.{ts,tsx}'",
     "lint": "eslint . --ext .ts,.tsx --ignore-path .gitignore --fix",
     "test": "vitest run",
     "test:ui": "vitest --ui",
     "test:watch": "vitest",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build -o docs"
+    "build-storybook": "storybook build -o dist/storybook"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.2.26",
