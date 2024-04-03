@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Build and Deploy
 
 on:
   push:
@@ -9,6 +9,7 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
@@ -27,6 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
       - name: Use Node.js 20.x
         uses: actions/setup-node@v1
         with:
@@ -43,30 +45,16 @@ jobs:
         with:
           name: package
           path: '*.tgz'
-
-  deploy:
-    name: 'Publish to GitHub Pages'
+  
+          publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: bitovi/github-actions-storybook-to-github-pages@v1.0.0
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
         with:
-          path: dist/storybook
-
-  publish:
-    name: 'Publish to GitHub Packages'
-    needs: [build]
-    runs-on: ubuntu-18.04
-    steps:
-      - name: Upload
-        uses: actions/download-artifact@v2
+          node-version: '20'
+      - run: npm ci
+      - run: npm test
+      - uses: JS-DevTools/npm-publish@v3
         with:
-          name: package
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
-          registry-url: https://npm.pkg.github.com/
-          scope: '@spiffdog-design'
-      - run: echo "registry=https://npm.pkg.github.com/@spiffdog-design" >> .npmrc
-      - run: npm publish $(ls *.tgz)
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          token: ${{ secrets.NPM_TOKEN }}
