@@ -1,4 +1,6 @@
 import React, { MouseEventHandler, PropsWithChildren } from 'react';
+import cn from 'classnames';
+import classes from './Button.module.css';
 
 export type ButtonProps = {
   disabled?: boolean;
@@ -12,7 +14,12 @@ const Button: React.FC<ButtonProps & PropsWithChildren> = ({
   ...props
 }) => {
   return (
-    <button onClick={onClick} disabled={disabled} {...props}>
+    <button
+      className={cn(classes.success, classes.button)}
+      onClick={onClick}
+      disabled={disabled}
+      {...props}
+    >
       {children}
     </button>
   );
