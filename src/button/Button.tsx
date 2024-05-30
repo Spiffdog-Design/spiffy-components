@@ -1,42 +1,48 @@
-import React, { MouseEventHandler, PropsWithChildren } from 'react';
+import { ComponentPropsWithRef } from 'react';
 import cn from 'classnames';
 import classes from './Button.module.css';
 
-export const ButtonStatuses = {
-  PRIMARY: 'primary',
-} as const;
-
+export type ButtonStatuses = 'primary' | 'alert' | 'success' | 'warning';
 export type ButtonSize = 'xs' | 's' | 'm' | 'l' | 'xl';
+export type ButtonAppearance = 'default' | 'outline' | 'minimal' | 'link';
 
-export type ButtonProps = {
-  disabled?: boolean;
+export interface ButtonProps extends ComponentPropsWithRef<'button'> {
+  appearance: ButtonAppearance;
+  disabled: boolean;
+  pill: boolean;
   size: ButtonSize;
-  variant: string;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-};
+  status: ButtonStatuses;
+}
 
-const Button: React.FC<ButtonProps & PropsWithChildren> = ({
-  children,
-  disabled,
+const Button = ({
+  appearance = 'default',
+  disabled = false,
+  pill = false,
   size = 'm',
-  onClick,
+  status = 'primary',
   ...props
-}) => {
+}: ButtonProps) => {
   return (
     <button
-      className={cn(classes.button, {
-        [classes.xs]: size === 'xs',
-        [classes.s]: size === 's',
-        [classes.m]: size === 'm',
-        [classes.l]: size === 'l',
-        [classes.xl]: size === 'xl',
-      })}
-      onClick={onClick}
       disabled={disabled}
+      className={cn(classes.button, {
+        [classes.outline]: appearance === 'outline',
+        [classes.link]: appearance === 'link',
+        [classes.minimal]: appearance === 'minimal',
+
+        [classes.pill]: pill === true,
+
+        [classes.l]: size === 'l',
+        [classes.s]: size === 's',
+        [classes.xl]: size === 'xl',
+        [classes.xs]: size === 'xs',
+
+        [classes.alert]: status === 'alert',
+        [classes.success]: status === 'success',
+        [classes.warning]: status === 'warning',
+      })}
       {...props}
-    >
-      {children}
-    </button>
+    />
   );
 };
 
