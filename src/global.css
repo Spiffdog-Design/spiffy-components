@@ -14,11 +14,13 @@
   --color-alert: 155, 28, 28; /* red */
   --color-warning: 227, 160, 8; /* yellow */
 
-  --font-size-xsmall: 0.75rem;
-  --font-size-small: 0.875rem;
-  --font-size-medium: 1rem;
-  --font-size-large: 1.125rem;
-  --font-size-xlarge: 1.25rem;
+  --font-family: sans-serif;
+
+  --font-size-xs: 0.75rem;
+  --font-size-s: 0.875rem;
+  --font-size-m: 1rem;
+  --font-size-l: 1.125rem;
+  --font-size-xl: 1.25rem;
 
   --font-weight-normal: 400;
   --font-weight-bold: 700;

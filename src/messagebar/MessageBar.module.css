@@ -1,0 +1,56 @@
+:root {
+  --alert--background-color: var(--color-primary);
+  --alert--border-color: var(--color-primary);
+  --alert--border-radius: var(--radius-border-l);
+  --alert--font-family: var(--font-family);
+  --alert--font-size: var(--font-size-m);
+  --alert--foreground-color: var(--color-primary);
+  --alert--padding: 0.625rem 1.25rem;
+}
+
+.messageBar {
+  background-color: rgba(var(--alert--background-color), 0.15);
+  border-radius: var(--alert--border-radius);
+  color: rgb(var(--alert--foreground-color));
+  font-family: var(--alert--font-family);
+  font-size: var(--alert--font-size);
+  padding: var(--alert--padding);
+}
+
+@media (prefers-color-scheme: dark) {
+  .messageBar {
+    --alert--background-color: var(--color-gray-3);
+    --alert--border-color: var(--color-gray-3) !important;
+  }
+}
+
+.xs {
+  --alert--border-radius: var(--radius-border-l);
+  --alert--font-size: var(--font-size-xs);
+  --alert--padding: 0.5rem 0.75rem;
+}
+.s {
+  --alert--font-size: var(--font-size-s);
+  --alert--padding: 0.5rem 0.75rem;
+}
+.l {
+  --alert--font-size: var(--font-size-l);
+  --alert--padding: 0.75rem 1.25rem;
+}
+.xl {
+  --alert--font-size: var(--font-size-xl);
+  --alert--padding: 0.875rem 1.5rem;
+}
+
+.success {
+  --alert--border-color: var(--color-success);
+  --alert--foreground-color: var(--color-success);
+}
+.alert {
+  --alert--border-color: var(--color-alert);
+  --alert--foreground-color: var(--color-alert);
+}
+.warning {
+  --alert--border-color: var(--color-warning);
+  --alert--foreground-color: var(--color-warning);
+}

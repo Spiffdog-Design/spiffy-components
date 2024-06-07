@@ -1,22 +1,21 @@
 import { ComponentPropsWithRef } from 'react';
 import cn from 'classnames';
 import classes from './Button.module.css';
-
-export type ButtonStatuses = 'primary' | 'alert' | 'success' | 'warning';
-export type ButtonSize = 'xs' | 's' | 'm' | 'l' | 'xl';
-export type ButtonAppearance = 'default' | 'outline' | 'minimal' | 'link';
+import { Appearances, Sizes, Statuses } from '../constants/constants';
 
 export interface ButtonProps extends ComponentPropsWithRef<'button'> {
-  appearance: ButtonAppearance;
-  disabled: boolean;
-  pill: boolean;
-  size: ButtonSize;
-  status: ButtonStatuses;
+  appearance?: Appearances;
+  disabled?: boolean;
+  fullWidth?: boolean;
+  pill?: boolean;
+  size?: Sizes;
+  status?: Statuses;
 }
 
 const Button = ({
   appearance = 'default',
   disabled = false,
+  fullWidth = false,
   pill = false,
   size = 'm',
   status = 'primary',
@@ -26,10 +25,10 @@ const Button = ({
     <button
       disabled={disabled}
       className={cn(classes.button, {
-        [classes.outline]: appearance === 'outline',
         [classes.link]: appearance === 'link',
         [classes.minimal]: appearance === 'minimal',
 
+        [classes.fullWidth]: fullWidth === true,
         [classes.pill]: pill === true,
 
         [classes.l]: size === 'l',

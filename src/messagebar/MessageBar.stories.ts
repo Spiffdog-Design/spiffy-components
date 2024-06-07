@@ -1,22 +1,22 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
-import Button from './Button';
+import MessageBar from './MessageBar';
 
 const meta = {
-  title: 'Example/Button',
-  component: Button,
+  title: 'Example/MessageBar',
+  component: MessageBar,
   parameters: {
     layout: 'padded',
   },
   tags: ['autodocs'],
   args: { onClick: fn() },
-} satisfies Meta<typeof Button>;
+} satisfies Meta<typeof MessageBar>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 export const Example: Story = {
   args: {
-    children: 'Button',
+    children: 'MessageBar',
   },
 };
