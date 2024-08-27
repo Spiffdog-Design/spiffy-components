@@ -1,36 +1,42 @@
-/// <reference types="vitest" />
-
-import browserslist from 'browserslist';
-import { browserslistToTargets } from 'lightningcss';
-import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 import dts from 'vite-plugin-dts';
-import { peerDependencies } from './package.json';
 
+import { defineConfig } from 'vite';
+import { extname, relative, resolve } from 'path';
+import { fileURLToPath } from 'node:url';
+import { glob } from 'glob';
+import { libInjectCss } from 'vite-plugin-lib-inject-css';
+
+// https://vitejs.dev/config/
 export default defineConfig({
+  plugins: [react(), libInjectCss(), dts({ include: ['lib'] })],
   build: {
-    cssMinify: 'lightningcss',
-    emptyOutDir: true, // Clears the output directory before building.
+    copyPublicDir: false,
     lib: {
-      entry: './src/index.ts', // Specifies the entry point for building the library.
-      fileName: (format) => `index.${format}.js`, // Generates the output file name based on the format.
-      formats: ['cjs', 'es'], // Specifies the output formats (CommonJS and ES modules).
-      name: 'vite-react-ts-button', // Sets the name of the generated library.
+      entry: resolve(__dirname, 'lib/main.ts'),
+      formats: ['es'],
     },
     rollupOptions: {
-      external: [...Object.keys(peerDependencies)], // Defines external dependencies for Rollup bundling.
+      external: ['react', 'react/jsx-runtime'],
+      input: Object.fromEntries(
+        // https://rollupjs.org/configuration-options/#input
+        glob
+          .sync('lib/**/*.{ts,tsx}', {
+            ignore: ['lib/**/*.d.ts', 'lib/**/*.stories.tsx'],
+          })
+          .map((file) => [
+            // 1. The name of the entry point
+            // lib/nested/foo.js becomes nested/foo
+            relative('lib', file.slice(0, file.length - extname(file).length)),
+            // 2. The absolute path to the entry file
+            // lib/nested/foo.ts becomes /project/lib/nested/foo.ts
+            fileURLToPath(new URL(file, import.meta.url)),
+          ]),
+      ),
+      output: {
+        assetFileNames: 'assets/[name][extname]',
+        entryFileNames: '[name].js',
+      },
     },
-    sourcemap: true, // Generates source maps for debugging.
-  },
-  css: {
-    lightningcss: {
-      targets: browserslistToTargets(browserslist('>= 0.25%')),
-    },
-    transformer: 'lightningcss',
-  },
-  plugins: [dts()], // Uses the 'vite-plugin-dts' plugin for generating TypeScript declaration files (d.ts).
-  test: {
-    environment: 'jsdom',
-    globals: true,
-    setupFiles: './setupTests.ts',
   },
 });
