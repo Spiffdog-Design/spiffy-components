@@ -1,6 +1,5 @@
 import '@spiffdog/colors/dist/black-alpha.css';
 import '@spiffdog/colors/dist/white-alpha.css';
-
 import '@spiffdog/colors/dist/amber.css';
 import '@spiffdog/colors/dist/blue.css';
 import '@spiffdog/colors/dist/bronze.css';
@@ -33,6 +32,8 @@ import '@spiffdog/colors/dist/tomato.css';
 import '@spiffdog/colors/dist/violet.css';
 import '@spiffdog/colors/dist/yellow.css';
 import '@spiffdog/colors/dist/sky.css';
+
+import './styles.css';
 
 const Root = ({ children, ...props }: React.HTMLAttributes<HTMLDivElement>) => {
   return <div {...props}>{children}</div>;
