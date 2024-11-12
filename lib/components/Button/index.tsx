@@ -4,10 +4,10 @@ import styles from './styles.module.css';
 import { APPEARANCES, SIZES, VARIANTS } from '../../types';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  appearance: APPEARANCES;
-  variant: VARIANTS;
-  size: SIZES;
-  rounded: boolean;
+  appearance?: APPEARANCES;
+  variant?: VARIANTS;
+  size?: SIZES;
+  rounded?: boolean;
 }
 
 const Button = ({

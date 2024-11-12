@@ -40,11 +40,6 @@ select {
   font: inherit;
 }
 
-button,
-select {
-  line-height: 1;
-}
-
 p,
 h1,
 h2,

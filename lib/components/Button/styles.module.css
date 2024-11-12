@@ -6,8 +6,7 @@
   --button-hover-color-light: var(--gray-5);
   --button-text-color: var(--white);
 
-  --button-border-shadow: inset 0px 0px 0px 1px;
-  --button-focus-blur: 0px 0px 12px;
+  --button-focus-blur: 0px 0px 7px 4px;
 }
 
 .button {
@@ -17,7 +16,7 @@
   justify-content: center;
 
   background-color: var(--button-color);
-  box-shadow: var(--button-border-shadow) var(--button-border-color);
+  box-shadow: var(--button-border-color);
   border: 1px solid var(--button-border-color);
   color: var(--button-text-color);
   outline: none;
@@ -28,8 +27,9 @@
 .button:active,
 .button:focus,
 .button:focus-visible {
-  box-shadow: var(--button-border-shadow) var(--button-border-color),
-    var(--button-focus-blur) var(--button-focus-blur-color);
+  box-shadow: var(--button-focus-blur) var(--button-focus-blur-color);
+  outline: 2px solid var(--white);
+  z-index: 1;
 }
 .button:hover {
   background-color: var(--button-hover-color);
@@ -75,11 +75,9 @@
 
 .basic {
   --button-border-color: transparent;
-  --button-border-shadow: 0px;
-  --button-focus-blur-color: transparent;
-  --button-focus-blur: 0px;
 
   background-color: var(--white);
+  box-shadow: none;
   color: var(--button-color);
 }
 .solid {
@@ -94,7 +92,9 @@
 
 .basic:active,
 .basic:focus,
-.basic:focus-visible,
+.basic:focus-visible {
+  box-shadow: var(--button-focus-blur) var(--button-focus-blur-color);
+}
 .basic:hover {
   --button-border-color: transparent;
   --button-hover-color: var(--button-hover-color-light);
