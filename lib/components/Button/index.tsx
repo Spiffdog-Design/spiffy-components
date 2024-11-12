@@ -7,9 +7,17 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   appearance: APPEARANCES;
   variant: VARIANTS;
   size: SIZES;
+  rounded: boolean;
 }
 
-const Button = ({ appearance = 'SOLID', size = 'MD', variant = 'PRIMARY', className, ...props }: ButtonProps) => {
+const Button = ({
+  appearance = 'SOLID',
+  size = 'MD',
+  variant = 'PRIMARY',
+  rounded = true,
+  className,
+  ...props
+}: ButtonProps) => {
   const cnames = cn(className, styles.button, {
     [styles.basic]: appearance === 'BASIC',
     [styles.outline]: appearance === 'OUTLINE',
@@ -25,6 +33,8 @@ const Button = ({ appearance = 'SOLID', size = 'MD', variant = 'PRIMARY', classN
     [styles.md]: size === 'MD',
     [styles.lg]: size === 'LG',
     [styles.xl]: size === 'XL',
+
+    [styles.rounded]: rounded,
   });
 
   return <button className={cnames} {...props} />;
