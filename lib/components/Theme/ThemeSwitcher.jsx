@@ -1,17 +1,17 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Icon, defaultTheme } from '/lib';
-import { useLocalStorage } from '@spiffdog/spiffy-hooks';
 
 const ThemeSwitcher = () => {
-    const [theme, setTheme] = useLocalStorage('theme');
     const [mode, setMode] = useState('light');
 
     const toggleMode = () => {
         const newMode = mode === 'light' ? 'dark' : 'light';
+        const theme = newMode == 'light' ? defaultTheme.light : defaultTheme.dark;
         setMode(newMode);
-        setTheme(newMode == 'light' ? defaultTheme.light : defaultTheme.dark);
+        localStorage.setItem('theme', JSON.stringify(theme));
+        window.dispatchEvent(new Event('theme-changed', { bubbles: true }));
     };
 
     return (

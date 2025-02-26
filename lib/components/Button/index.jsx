@@ -1,121 +1,81 @@
 // Button.js
 import styled, { css } from 'styled-components';
 
+const basicStyles = (color, hover) => css`
+    background-color: transparent;
+    border: 3px solid transparent;
+    color: ${color};
+    &:hover {
+        background-color: ${hover};
+    }
+`;
+const outlineStyles = (color, hover) => css`
+    background-color: transparent;
+    border: 3px solid ${color};
+    color: ${color};
+    &:hover {
+        background-color: ${hover};
+        border-color: ${hover};
+        color: ${({ theme }) => theme.colors.primary[1]};
+    }
+`;
+const solidStyles = (color, hover) => css`
+    background-color: ${color};
+    border: 3px solid ${color};
+    color: ${({ theme }) => theme.colors.primary[1]};
+    &:hover {
+        background-color: ${hover};
+        border-color: ${hover};
+    }
+`;
+
 // Define the button styles for different states
 const buttonStyles = {
     alert: {
         basic: css`
-            background-color: transparent;
-            color: ${({ theme }) => theme.colors.danger[10]};
-            &:hover {
-                background-color: ${({ theme }) => theme.colors.danger[10]};
-                color: ${({ theme }) => theme.colors.primary[1]};
-            }
+            ${({ theme }) => basicStyles(theme.colors.danger[9], theme.colors.danger[4])}
         `,
         outline: css`
-            background-color: transparent;
-            border: 2px solid #dc3545;
-            color: #dc3545;
-            &:hover {
-                background-color: #dc3545;
-                color: white;
-            }
+            ${({ theme }) => outlineStyles(theme.colors.danger[9], theme.colors.danger[11])}
         `,
         solid: css`
-            background-color: #dc3545;
-            border: 2px solid #dc3545;
-            color: white;
-            &:hover {
-                background-color: #c82333;
-                border: 2px solid #c82333;
-            }
+            ${({ theme }) => solidStyles(theme.colors.danger[9], theme.colors.danger[11])}
         `,
     },
 
     primary: {
         basic: css`
-            background-color: transparent;
-            color: #007bff;
-            &:hover {
-                background-color: #007bff;
-                color: white;
-            }
+            ${({ theme }) => basicStyles(theme.colors.info[9], theme.colors.info[4])}
         `,
         outline: css`
-            background-color: transparent;
-            border: 2px solid #007bff;
-            color: #007bff;
-            &:hover {
-                background-color: #007bff;
-                color: white;
-            }
+            ${({ theme }) => outlineStyles(theme.colors.info[9], theme.colors.info[11])}
         `,
         solid: css`
-            background-color: #007bff;
-            border: 2px solid #007bff;
-            color: white;
-            &:hover {
-                background-color: #0056b3;
-                border: 2px solid #0056b3;
-            }
+            ${({ theme }) => solidStyles(theme.colors.info[9], theme.colors.info[11])}
         `,
     },
 
     success: {
         basic: css`
-            background-color: transparent;
-            color: #28a745;
-            &:hover {
-                background-color: #28a745;
-                color: white;
-            }
+            ${({ theme }) => basicStyles(theme.colors.success[9], theme.colors.success[4])}
         `,
         outline: css`
-            background-color: transparent;
-            border: 2px solid #28a745;
-            color: #28a745;
-            &:hover {
-                background-color: #28a745;
-                color: white;
-            }
+            ${({ theme }) => outlineStyles(theme.colors.success[9], theme.colors.success[11])}
         `,
         solid: css`
-            background-color: #28a745;
-            border: 2px solid #28a745;
-            color: white;
-            &:hover {
-                background-color: #218838;
-                border: 2px solid #218838;
-            }
+            ${({ theme }) => solidStyles(theme.colors.success[9], theme.colors.success[11])}
         `,
     },
 
     warning: {
         basic: css`
-            background-color: transparent;
-            color: #ffc107;
-            &:hover {
-                background-color: #ffc107;
-                color: black;
-            }
+            ${({ theme }) => basicStyles(theme.colors.warning[8], theme.colors.warning[4])}
         `,
         outline: css`
-            background-color: transparent;
-            border: 2px solid #ffc107;
-            color: #ffc107;
-            &:hover {
-                background-color: #ffc107;
-                color: black;
-            }
+            ${({ theme }) => outlineStyles(theme.colors.warning[9], theme.colors.warning[11])}
         `,
         solid: css`
-            background-color: #ffc107;
-            border: 2px solid #ffc107;
-            color: black;
-            &:hover {
-                background-color: #e0a800;
-                border: 2px solid #e0a800;
-            }
+            ${({ theme }) => solidStyles(theme.colors.warning[9], theme.colors.warning[11])}
         `,
     },
 };
@@ -155,7 +115,6 @@ const Button = styled.button`
     font-size: 16px;
     font-weight: 700;
     text-transform: uppercase;
-    transition: background-color 200ms, color 200ms;
 
     ${({ rounded, size }) => (rounded === true ? roundedStyles[size] : null)}
     ${({ size }) => sizeStyles[size] ?? sizeStyles.medium}

@@ -7,18 +7,16 @@ const Line = styled.div`
     align-items: center;
     justify-content: flex-end;
 
-    background-color: #eee;
+    background-color: ${({ theme }) => theme.colors.primary[3]};
     padding: 8px;
     width: 100%;
 `;
 
 const Container = styled.div`
-    background-color: ${({ theme }) => theme.colors.primary[1]};
-
     & * {
         box-sizing: border-box;
     }
-    border: 1px solid lightgray;
+    border: 1px solid ${({ theme }) => theme.colors.primary[6]};
     width: 100%;
 `;
 
@@ -26,18 +24,12 @@ const Content = styled.div`
     padding: 20px;
 `;
 
-const Root = ({ children, ...props }) => {
-    const [theme, setTheme] = useState(defaultTheme);
-
-    const handleThemeChange = (theme) => {
-        setTheme(theme);
-    };
-
+const Root = ({ children }) => {
     return (
         <AppRoot>
             <Container>
                 <Line>
-                    <ThemeSwitcher onChange={handleThemeChange} />
+                    <ThemeSwitcher />
                 </Line>
                 <Content>{children}</Content>
             </Container>
