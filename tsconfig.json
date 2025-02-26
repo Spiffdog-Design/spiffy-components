@@ -30,8 +30,7 @@
   },
   "include": [
     "src",
-    "lib",
-    "lib/declaration.d.ts"
+    "lib"
   ],
   "references": [
     {
