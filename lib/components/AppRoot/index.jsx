@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-
 import { ThemeProvider, defaultTheme } from '/lib';
+import './styles.css';
 
 const AppRoot = ({ children, ...props }) => {
     const [theme, setTheme] = useState(defaultTheme.light);

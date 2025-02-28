@@ -3,16 +3,19 @@ import styled, { css } from 'styled-components';
 
 const styles = {
     alert: css`
-        border: 1px solid red;
+        border-color: ${({ theme }) => theme.colors.alert[9]};
+    `,
+    info: css`
+        border-color: ${({ theme }) => theme.colors.info[9]};
     `,
     primary: css`
-        border: 1px solid blue;
+        border-color: ${({ theme }) => theme.colors.primary[12]};
     `,
     success: css`
-        border: 1px solid green;
+        border-color: ${({ theme }) => theme.colors.success[9]};
     `,
     warning: css`
-        border: 1px solid yellow;
+        border-color: ${({ theme }) => theme.colors.warning[9]};
     `,
 };
 
@@ -24,13 +27,17 @@ const ButtonBarContainer = styled.div`
     width: fit-content;
 
     border-radius: 8px;
-    ${({ variant }) => styles[variant] ?? styles.variant}
+    border: 3px solid transparent;
+    overflow: hidden;
+
+    ${({ showBorder, variant }) => (showBorder == true ? styles[variant] ?? styles.variant : null)}
 `;
 
 const ButtonBar = ({
     active = 0,
     size = 'medium',
     variant = 'primary',
+    showBorder = true,
     className,
     children,
     onActiveClick = (index) => console.log(index),
@@ -48,10 +55,10 @@ const ButtonBar = ({
     }, [active]);
 
     return (
-        <ButtonBarContainer variant={variant} {...props}>
+        <ButtonBarContainer showBorder={showBorder} variant={variant} {...props}>
             {Children.map(children, (child, index) => {
                 const item = child;
-                const activeProps = { appearance: index === activeIdx ? 'solid' : 'outline' };
+                const activeProps = { appearance: index === activeIdx ? 'solid' : 'basic' };
                 return cloneElement(item, {
                     ...activeProps,
                     variant,

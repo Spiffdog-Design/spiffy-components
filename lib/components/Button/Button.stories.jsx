@@ -17,7 +17,7 @@ const meta = {
             control: { type: 'radio' },
         },
         variant: {
-            options: ['alert', 'primary', 'success', 'warning'],
+            options: ['alert', 'info', 'primary', 'success', 'warning'],
             control: { type: 'radio' },
         },
         rounded: {

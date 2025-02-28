@@ -18,6 +18,7 @@ const Container = styled.div`
         box-sizing: border-box;
     }
     border: 1px solid ${({ theme }) => theme.colors.primary[7]};
+    height: 100%;
     width: 100%;
 `;
 

@@ -1,66 +1,156 @@
-import cn from 'classnames';
+import {
+    Close,
+    Content as RdxContent,
+    Description as RdxDescription,
+    Overlay as RdxOverlay,
+    Portal,
+    Root,
+    Title as RdxTitle,
+    Trigger,
+} from '@radix-ui/react-dialog';
+import styled, { css } from 'styled-components';
 
-import styles from './styles.module.css';
-import { useEffect, useRef } from 'react';
+import { Icons } from '/lib';
+
+const getVariantColor = (variant) => theme.colors[variant];
+
+const Actions = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-top: 20px;
+    gap: 12;
+    width: 100%;
+`;
+
+const Children = styled.div`
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+    gap: 8px;
+    height: fit-content;
+    overflow: hidden;
+    overflow-y: auto;
+    border-top: 1px solid ${({ theme }) => theme.colors.primary[7]};
+    border-bottom: 1px solid ${({ theme }) => theme.colors.primary[7]};
+    padding: 24px 0;
+`;
+
+const CloseButton = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    background-color: ${({ theme }) => theme.colors.primary[1]};
+    border-radius: 9999px;
+    padding: 8px;
+
+    &:hover {
+        background-color: ${({ theme }) => theme.colors.primary[7]};
+    }
+
+    & svg {
+        fill: ${({ theme }) => theme.colors.primary[12]};
+    }
+`;
+
+const Content = styled(RdxContent)`
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    background-color: ${({ theme }) => theme.colors.primary[1]};
+    border-radius: 6px;
+    box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+    padding: 25px;
+    position: fixed;
+    max-height: 85vh;
+    max-width: 90vw;
+    min-width: 200px;
+    overflow: auto;
+    height: fit-content;
+    width: fit-content;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    &:focus {
+        outline: none;
+    }
+`;
+
+const Description = styled(RdxDescription)`
+    color: ${({ theme }) => theme.colors.primary[12]};
+    font-size: 1rem;
+    margin: 0;
+`;
+
+const Footer = styled.div`
+    color: ${({ theme }) => theme.colors.primary[11]};
+    font-size: 0.8rem;
+    margin: 0;
+`;
+
+const Heading = styled.div``;
+
+const Overlay = styled(RdxOverlay)`
+    background-color: ${({ theme }) => theme.colors.primary[12] + '99'};
+    position: fixed;
+    inset: 0;
+`;
+
+const Title = styled(RdxTitle)`
+    margin: 0;
+    font-weight: 700;
+    color: ${({ theme }) => theme.colors.primary[12]};
+    font-size: 1.2rem;
+    text-transform: uppercase;
+`;
 
 const Dialog = ({
-  appearance = 'SOLID',
-  variant = 'PRIMARY',
-  className,
-  onOpen = () => null,
-  onClose = () => null,
-  ...props
+    variant = 'primary',
+    actions,
+    open,
+    trigger,
+    title,
+    description,
+    footer,
+    children,
+    onOpenChange = () => null,
 }) => {
-  const cnames = cn(className, styles.button, {
-    [styles.basic]: appearance === 'BASIC',
-    [styles.outline]: appearance === 'OUTLINE',
-    [styles.solid]: appearance === 'SOLID',
-
-    [styles.alert]: variant === 'ALERT',
-    [styles.primary]: variant === 'PRIMARY',
-    [styles.success]: variant === 'SUCCESS',
-    [styles.warning]: variant === 'WARNING',
-  });
-
-  const closeRef = useRef(null);
-  const dialogRef = useRef(null);
-  const triggerRef = useRef(null);
-
-  const handleCloseClick = (ev) => {
-    ev.preventDefault();
-    if (onClose != null) {
-      onClose();
-    }
-    dialogRef.current?.close();
-  };
-
-  const handleTriggerClick = (ev) => {
-    ev.preventDefault();
-    if (onOpen != null) {
-      onOpen();
-    }
-    dialogRef.current?.showModal();
-  };
-
-  useEffect(() => {
-    closeRef.current?.addEventListener('click', handleCloseClick);
-    triggerRef.current?.addEventListener('click', handleTriggerClick);
-
-    return () => {
-      closeRef.current?.removeEventListener('click', handleCloseClick);
-      triggerRef.current?.removeEventListener('click', handleTriggerClick);
+    const handleOpenClose = (open) => {
+        if (onOpenChange != null) onOpenChange(open);
     };
-  }, []);
 
-  return (
-    <div className={cnames} {...props}>
-      <button ref={triggerRef}>Trigger</button>
-      <dialog ref={dialogRef} autoFocus={true}>
-        <h3>I'm a dialog!</h3>
-        <button ref={closeRef}>Close</button>
-      </dialog>
-    </div>
-  );
+    const classes = {};
+
+    return (
+        <Root open={open} onOpenChange={handleOpenClose}>
+            <Trigger asChild>{trigger}</Trigger>
+            <Portal>
+                <Overlay />
+                <Content>
+                    <Heading>
+                        {title != null && <Title>{title}</Title>}
+                        {description != null && <Description>{description}</Description>}
+                    </Heading>
+                    <Children>{children}</Children>
+                    {footer != null && <Footer>{footer}</Footer>}
+                    {actions != null && <Actions>{actions}</Actions>}
+                    <Close asChild>
+                        <CloseButton onClick={() => handleOpenClose(false)}>
+                            <Icons.XCircle size={32} />
+                        </CloseButton>
+                    </Close>
+                </Content>
+            </Portal>
+        </Root>
+    );
 };
 
 export default Dialog;

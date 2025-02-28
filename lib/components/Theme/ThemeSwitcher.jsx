@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Button, Icon, defaultTheme } from '/lib';
+import { Button, Icons, defaultTheme } from '/lib';
 
 const ThemeSwitcher = () => {
     const [mode, setMode] = useState('light');
@@ -16,7 +16,7 @@ const ThemeSwitcher = () => {
 
     return (
         <Button appearance="basic" rounded size="small" variant="primary" onClick={toggleMode}>
-            {mode === 'light' ? <Icon.Sun size={20} weight="bold" /> : <Icon.Moon size={20} weight="bold" />}
+            {mode === 'light' ? <Icons.Sun size={20} weight="bold" /> : <Icons.Moon size={20} weight="bold" />}
         </Button>
     );
 };

@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "@phosphor-icons/react": "^2.1.7",
+        "@radix-ui/react-dialog": "^1.1.6",
         "@spiffdog/spiffy-colors": "^1.1.1",
         "@spiffdog/spiffy-hooks": "^0.0.8",
         "classnames": "^2.5.1",
