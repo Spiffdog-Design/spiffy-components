@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { AppRoot, ThemeSwitcher } from '@/components';
+import './StoryWrapper.css';
 
 const Line = styled.div`
     display: flex;
@@ -14,11 +15,10 @@ const Line = styled.div`
 `;
 
 const Container = styled.div`
-    & * {
-        box-sizing: border-box;
-    }
+    display: grid;
+    grid-template-rows: auto 1fr;
     border: 1px solid ${({ theme }) => theme.colors.primary[7]};
-    height: 50vh;
+    height: 100%;
     width: 100%;
 `;
 

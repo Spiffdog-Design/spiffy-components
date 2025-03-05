@@ -19,7 +19,6 @@ const Actions = styled.div`
     flex-direction: row;
     justify-content: flex-end;
     gap: 12px;
-    padding: 12px;
     background-color: ${({ theme }) => theme.colors.primary[4]};
     width: 100%;
 `;
@@ -59,11 +58,6 @@ const CloseButton = styled.div`
     }
 `;
 
-const Content = styled.div`
-    display: flex;
-    flex-direction: column;
-`;
-
 const Container = styled(RdxContent)`
     display: flex;
     flex-direction: column;
@@ -94,6 +88,11 @@ const Container = styled(RdxContent)`
     }
 `;
 
+const Content = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
+
 const Description = styled(RdxDescription)`
     color: ${({ theme }) => theme.colors.primary[12]};
     font-size: 1.2rem;
@@ -101,11 +100,23 @@ const Description = styled(RdxDescription)`
 `;
 
 const Footer = styled.div`
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+
+    background-color: ${({ theme }) => theme.colors.primary[4]};
+    margin: 0;
+    padding: 8px 12px;
+`;
+
+const FooterText = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+
     color: ${({ theme }) => theme.colors.primary[12]};
     font-size: 1.2rem;
-    margin: 0;
-    background-color: ${({ theme }) => theme.colors.primary[4]};
-    padding: 8px 12px 4px;
 `;
 
 const Heading = styled.div`
@@ -167,11 +178,13 @@ const Dialog = ({
                     </Heading>
                     <Content>
                         <Children variant={variant}>{children}</Children>
-                        {footer != null && <Footer>{footer}</Footer>}
                     </Content>
-                    {actions != null && (
-                        <Actions>{typeof actions === 'function' ? actions(handleClose) : actions}</Actions>
-                    )}
+                    <Footer>
+                        {footer != null && <FooterText>{footer}</FooterText>}
+                        {actions != null && (
+                            <Actions>{typeof actions === 'function' ? actions(handleClose) : actions}</Actions>
+                        )}
+                    </Footer>
                     <Close asChild>
                         <CloseButton onClick={handleClose}>
                             <X size={24} weight="bold" />

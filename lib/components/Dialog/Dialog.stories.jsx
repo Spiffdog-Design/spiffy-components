@@ -26,7 +26,7 @@ export const Primary = {
         variant: 'primary',
         title: 'Format Hard Drive',
         description: 'Format your disk to allocate space and make it visible to the operating system.',
-        footer: "This is just a demo.  We won't really format your disk... or will we?",
+        footer: "This is just a demo.  We won't really format your disk... or will we? 😈",
     },
 
     render: (args) => (
