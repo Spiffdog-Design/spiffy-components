@@ -1,6 +1,5 @@
 {
     "name": "spiffy-components",
-    "private": true,
     "version": "0.1.0",
     "type": "module",
     "main": "dist/index.js",
@@ -14,7 +13,7 @@
         "dev": "storybook dev -p 6006",
         "dev:vite": "vite",
         "build": "vite build",
-        "build:sb": "storybook build",
+        "build-storybook": "storybook build",
         "lint": "eslint .",
         "prepublishOnly": "npm run build",
         "preview": "vite preview"
