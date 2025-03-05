@@ -1,20 +1,29 @@
 import type { StorybookConfig } from '@storybook/react-vite';
+import path from 'path';
 
 const config: StorybookConfig = {
-  stories: ['../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+  stories: ['../lib/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
-    '@storybook/addon-onboarding',
     '@storybook/addon-links',
     '@storybook/addon-essentials',
-    '@chromatic-com/storybook',
+    '@storybook/addon-onboarding',
     '@storybook/addon-interactions',
   ],
-  framework: {
-    name: '@storybook/react-vite',
-    options: {},
+  framework: '@storybook/react-vite',
+  core: {
+    builder: '@storybook/builder-vite',
   },
-  docs: {
-    autodocs: 'tag',
+  async viteFinal(config) {
+    return {
+      ...config,
+      resolve: {
+        alias: {
+          components: path.resolve(__dirname, '../lib/components'), // Add more aliases as needed
+        },
+      },
+    };
   },
+  docs: {},
 };
+
 export default config;
