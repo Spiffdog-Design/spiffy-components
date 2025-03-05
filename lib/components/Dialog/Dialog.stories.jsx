@@ -22,7 +22,7 @@ export default meta;
 
 export const Primary = {
     args: {
-        open: true,
+        open: false,
         variant: 'primary',
         title: 'Format Hard Drive',
         description: 'Format your disk to allocate space and make it visible to the operating system.',
