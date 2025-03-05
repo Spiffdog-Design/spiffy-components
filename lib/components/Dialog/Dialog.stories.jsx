@@ -22,27 +22,29 @@ export default meta;
 
 export const Primary = {
     args: {
+        open: true,
         variant: 'primary',
         title: 'Format Hard Drive',
-        description: 'Formatting your hard drive will erase all data.',
-        footer: "This is just a demo.  We won't really format your disk.",
+        description: 'Format your disk to allocate space and make it visible to the operating system.',
+        footer: "This is just a demo.  We won't really format your disk... or will we?",
     },
 
     render: (args) => (
         <StoryWrapper>
             <Dialog
                 onClick={action('clicked')}
-                actions={
+                actions={(onClose) => (
                     <>
-                        <Button appearance="basic">Cancel</Button>
+                        <Button appearance="basic" onClick={onClose}>
+                            Cancel
+                        </Button>
                         <Button variant="alert">Nuke Me!</Button>
                     </>
-                }
+                )}
                 trigger={<Button>Open Dialog</Button>}
                 {...args}
             >
-                <p>This action will remove all data from your hard drive.</p>
-                <p>Are you sure you want to continue?</p>
+                <p>This action will remove all data from your hard drive. Are you sure you want to continue?</p>
             </Dialog>
         </StoryWrapper>
     ),

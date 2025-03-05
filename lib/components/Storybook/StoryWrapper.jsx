@@ -18,13 +18,14 @@ const Container = styled.div`
         box-sizing: border-box;
     }
     border: 1px solid ${({ theme }) => theme.colors.primary[7]};
-    height: 100%;
+    height: 50vh;
     width: 100%;
 `;
 
 const Content = styled.div`
     background-color: ${({ theme }) => theme.colors.primary[1]};
     padding: 20px;
+    height: 100%;
 `;
 
 const StoryWrapper = ({ children, ...props }) => {

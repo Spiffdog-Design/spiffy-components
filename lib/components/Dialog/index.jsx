@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import {
     Close,
     Content as RdxContent,
@@ -8,32 +9,34 @@ import {
     Title as RdxTitle,
     Trigger,
 } from '@radix-ui/react-dialog';
-import styled, { css } from 'styled-components';
 
 import { Icons } from '/lib';
+import { useEffect, useState } from 'react';
 
-const getVariantColor = (variant) => theme.colors[variant];
+const getVariantColor = (theme, variant = 'primary', code = 12) => theme.colors[variant][code];
 
 const Actions = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    padding-top: 20px;
-    gap: 12;
+    gap: 12px;
+    padding: 12px;
+    background-color: ${({ theme }) => theme.colors.primary[4]};
     width: 100%;
 `;
 
 const Children = styled.div`
     display: flex;
     flex-direction: column;
-    font-size: 1rem;
+    font-size: 1.6rem;
     gap: 8px;
+
+    color: ${({ theme }) => theme.colors.primary[12]};
     height: fit-content;
     overflow: hidden;
     overflow-y: auto;
-    border-top: 1px solid ${({ theme }) => theme.colors.primary[7]};
-    border-bottom: 1px solid ${({ theme }) => theme.colors.primary[7]};
-    padding: 24px 0;
+
+    padding: 24px;
 `;
 
 const CloseButton = styled.div`
@@ -42,31 +45,39 @@ const CloseButton = styled.div`
     justify-content: center;
 
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 3px;
+    right: 3px;
 
-    background-color: ${({ theme }) => theme.colors.primary[1]};
-    border-radius: 9999px;
-    padding: 8px;
-
-    &:hover {
-        background-color: ${({ theme }) => theme.colors.primary[7]};
-    }
+    background-color: 'transparent';
+    border-radius: 4px;
+    padding: 4px;
 
     & svg {
         fill: ${({ theme }) => theme.colors.primary[12]};
     }
+    &:hover {
+        background-color: ${({ theme }) => theme.colors.primary[7]};
+    }
 `;
 
-const Content = styled(RdxContent)`
+const Content = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 12px;
+`;
+
+const Container = styled(RdxContent)`
+    display: flex;
+    flex-direction: column;
 
     background-color: ${({ theme }) => theme.colors.primary[1]};
+
+    border-width: ${({ variant }) => (variant === 'primary' ? 0 : '5px')};
+    border-style: solid;
+    border-color: ${({ theme, variant }) =>
+        variant === 'primary' ? 'transparent' : getVariantColor(theme, variant, 10)};
     border-radius: 6px;
-    box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
-    padding: 25px;
+    box-shadow: ${({ theme, variant }) => getVariantColor(theme, variant, 12)} 0px 10px 38px -10px,
+        ${({ theme, variant }) => getVariantColor(theme, variant, 10)} 0px 10px 20px -15px;
     position: fixed;
     max-height: 85vh;
     max-width: 90vw;
@@ -86,20 +97,25 @@ const Content = styled(RdxContent)`
 
 const Description = styled(RdxDescription)`
     color: ${({ theme }) => theme.colors.primary[12]};
-    font-size: 1rem;
+    font-size: 1.2rem;
     margin: 0;
 `;
 
 const Footer = styled.div`
-    color: ${({ theme }) => theme.colors.primary[11]};
-    font-size: 0.8rem;
+    color: ${({ theme }) => theme.colors.primary[12]};
+    font-size: 1.2rem;
     margin: 0;
+    background-color: ${({ theme }) => theme.colors.primary[4]};
+    padding: 8px 12px 4px;
 `;
 
-const Heading = styled.div``;
+const Heading = styled.div`
+    background-color: ${({ theme }) => theme.colors.primary[4]};
+    padding: 8px 12px;
+`;
 
 const Overlay = styled(RdxOverlay)`
-    background-color: ${({ theme }) => theme.colors.primary[12] + '99'};
+    background-color: ${({ theme }) => theme.colors.primary[12] + 'cc'};
     position: fixed;
     inset: 0;
 `;
@@ -108,46 +124,61 @@ const Title = styled(RdxTitle)`
     margin: 0;
     font-weight: 700;
     color: ${({ theme }) => theme.colors.primary[12]};
-    font-size: 1.2rem;
+    font-size: 1.6rem;
     text-transform: uppercase;
 `;
 
 const Dialog = ({
-    variant = 'primary',
     actions,
-    open,
-    trigger,
-    title,
+    children,
     description,
     footer,
-    children,
+    open = false,
+    title,
+    trigger,
+    variant = 'primary',
     onOpenChange = () => null,
 }) => {
-    const handleOpenClose = (open) => {
-        if (onOpenChange != null) onOpenChange(open);
+    const [isOpen, setIsOpen] = useState(open);
+
+    const handleOpenClose = (state) => {
+        setIsOpen(state);
+        if (onOpenChange != null) {
+            onOpenChange(state);
+        }
     };
 
-    const classes = {};
+    const handleClose = () => {
+        handleOpenClose(false);
+    };
+
+    useEffect(() => {
+        setIsOpen(open);
+    }, [open]);
 
     return (
-        <Root open={open} onOpenChange={handleOpenClose}>
+        <Root open={isOpen} onOpenChange={handleOpenClose}>
             <Trigger asChild>{trigger}</Trigger>
             <Portal>
                 <Overlay />
-                <Content>
+                <Container variant={variant}>
                     <Heading>
-                        {title != null && <Title>{title}</Title>}
+                        {title != null && <Title variant={variant}>{title}</Title>}
                         {description != null && <Description>{description}</Description>}
                     </Heading>
-                    <Children>{children}</Children>
-                    {footer != null && <Footer>{footer}</Footer>}
-                    {actions != null && <Actions>{actions}</Actions>}
+                    <Content>
+                        <Children variant={variant}>{children}</Children>
+                        {footer != null && <Footer>{footer}</Footer>}
+                    </Content>
+                    {actions != null && (
+                        <Actions>{typeof actions === 'function' ? actions(handleClose) : actions}</Actions>
+                    )}
                     <Close asChild>
-                        <CloseButton onClick={() => handleOpenClose(false)}>
-                            <Icons.XCircle size={32} />
+                        <CloseButton onClick={handleClose}>
+                            <Icons.X size={24} weight="bold" />
                         </CloseButton>
                     </Close>
-                </Content>
+                </Container>
             </Portal>
         </Root>
     );
