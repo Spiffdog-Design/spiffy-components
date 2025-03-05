@@ -1,4 +1,4 @@
-import { AppRoot, Input } from '/lib';
+import { AppRoot, Input } from '@/components';
 
 const meta = {
     title: 'Input',

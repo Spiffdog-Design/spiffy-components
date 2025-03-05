@@ -52,4 +52,6 @@ const Tooltip = forwardRef(
         );
     },
 );
+Tooltip.displayName = 'Tooltip';
+
 export default withStyles(styles)(Tooltip);

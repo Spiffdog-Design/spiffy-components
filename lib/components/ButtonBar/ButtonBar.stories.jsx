@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
 
-import { Button, ButtonBar } from '/lib';
+import { Button, ButtonBar } from '@/components';
 import StoryWrapper from '../Storybook/StoryWrapper';
 
 const meta = {

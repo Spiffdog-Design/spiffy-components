@@ -1,7 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { Button, Icons, defaultTheme } from '/lib';
+import { useState } from 'react';
+import { Sun, Moon } from '@phosphor-icons/react'; // https://phosphoricons.com/ -- Phosphor Icons
+
+import { Button, defaultTheme } from '@/components';
 
 const ThemeSwitcher = () => {
     const [mode, setMode] = useState('light');
@@ -16,9 +18,10 @@ const ThemeSwitcher = () => {
 
     return (
         <Button appearance="basic" rounded size="small" variant="primary" onClick={toggleMode}>
-            {mode === 'light' ? <Icons.Sun size={20} weight="bold" /> : <Icons.Moon size={20} weight="bold" />}
+            {mode === 'light' ? <Sun size={20} weight="bold" /> : <Moon size={20} weight="bold" />}
         </Button>
     );
 };
+ThemeSwitcher.displayName = 'ThemeSwitcher';
 
 export default ThemeSwitcher;

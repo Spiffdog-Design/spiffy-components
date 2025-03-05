@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ThemeProvider, defaultTheme } from '/lib';
+import { ThemeProvider, defaultTheme } from '@/components';
 import './styles.css';
 
 const AppRoot = ({ children, ...props }) => {
@@ -20,5 +20,6 @@ const AppRoot = ({ children, ...props }) => {
         </ThemeProvider>
     );
 };
+AppRoot.displayName = 'AppRoot';
 
 export default AppRoot;

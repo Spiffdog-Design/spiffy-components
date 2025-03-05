@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
 
-import { Button, Dialog } from '/lib';
+import { Button, Dialog } from '@/components';
 
 import StoryWrapper from '../Storybook/StoryWrapper';
 

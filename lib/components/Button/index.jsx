@@ -134,5 +134,6 @@ const Button = styled.button`
         return buttonStyles[variant][appearance];
     }}
 `;
+Button.displayName = 'Button';
 
 export default Button;

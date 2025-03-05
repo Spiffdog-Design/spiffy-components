@@ -70,5 +70,6 @@ const ButtonBar = ({
         </ButtonBarContainer>
     );
 };
+ButtonBar.displayName = 'ButtonBar';
 
 export default ButtonBar;

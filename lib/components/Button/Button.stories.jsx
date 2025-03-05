@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
 
-import { Button } from '/lib';
+import { Button } from '@/components';
 
 import StoryWrapper from '../Storybook/StoryWrapper';
 

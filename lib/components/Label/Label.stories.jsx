@@ -1,4 +1,4 @@
-import { AppRoot, Label } from '/lib';
+import { AppRoot, Label } from '@/components';
 
 const meta = {
     title: 'Label',

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { useEffect, useState } from 'react';
 import {
     Close,
     Content as RdxContent,
@@ -9,9 +9,8 @@ import {
     Title as RdxTitle,
     Trigger,
 } from '@radix-ui/react-dialog';
-
-import { Icons } from '/lib';
-import { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { X } from '@phosphor-icons/react'; // https://phosphoricons.com/ -- Phosphor Icons
 
 const getVariantColor = (theme, variant = 'primary', code = 12) => theme.colors[variant][code];
 
@@ -175,7 +174,7 @@ const Dialog = ({
                     )}
                     <Close asChild>
                         <CloseButton onClick={handleClose}>
-                            <Icons.X size={24} weight="bold" />
+                            <X size={24} weight="bold" />
                         </CloseButton>
                     </Close>
                 </Container>
@@ -183,5 +182,6 @@ const Dialog = ({
         </Root>
     );
 };
+Dialog.displayName = 'Dialog';
 
 export default Dialog;

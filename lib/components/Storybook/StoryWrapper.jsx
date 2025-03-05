@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { AppRoot, ThemeSwitcher } from '/lib';
+import { AppRoot, ThemeSwitcher } from '@/components';
 
 const Line = styled.div`
     display: flex;
