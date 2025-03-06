@@ -89,7 +89,6 @@ const buttonStyles = {
         `,
     },
 };
-
 const sizeStyles = {
     small: css`
         font-size: 14px;
@@ -105,18 +104,6 @@ const sizeStyles = {
     `,
 };
 
-const roundedStyles = {
-    small: css`
-        border-radius: 6px;
-    `,
-    medium: css`
-        border-radius: 8px;
-    `,
-    large: css`
-        border-radius: 12px;
-    `,
-};
-
 // Create a styled button component
 const Button = styled.button`
     padding: 10px 20px;
@@ -126,7 +113,6 @@ const Button = styled.button`
     font-weight: 700;
     text-transform: uppercase;
 
-    ${({ rounded, size }) => (rounded === true ? roundedStyles[size] : null)}
     ${({ size }) => sizeStyles[size] ?? sizeStyles.medium}
     ${({ appearance, variant }) => {
         appearance = appearance ?? 'solid';

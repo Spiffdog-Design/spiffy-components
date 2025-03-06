@@ -15,6 +15,10 @@ export default defineConfig({
                 find: '@/components',
                 replacement: resolve(__dirname, './lib/components'),
             },
+            {
+                find: '@/utilities',
+                replacement: resolve(__dirname, './lib/utilities'),
+            },
         ],
     },
     build: {

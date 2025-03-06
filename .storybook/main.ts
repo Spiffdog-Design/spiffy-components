@@ -20,6 +20,7 @@ const config: StorybookConfig = {
             resolve: {
                 alias: {
                     '@/components': path.resolve(__dirname, '../lib/components'), // Add more aliases as needed
+                    '@/utilities': path.resolve(__dirname, '../lib/utilities'), // Add more aliases as needed
                 },
             },
         };

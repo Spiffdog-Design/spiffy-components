@@ -34,13 +34,12 @@ export const Primary = {
         variant: 'primary',
         size: 'medium',
         rounded: true,
+        children: 'Plop',
     },
 
     render: (args) => (
         <StoryWrapper>
-            <Button {...args} onClick={action('clicked')}>
-                Plop
-            </Button>
+            <Button {...args} onClick={action('clicked')} />
         </StoryWrapper>
     ),
 };

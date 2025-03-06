@@ -26,7 +26,6 @@ const ButtonBarContainer = styled.div`
     justify-content: center;
     width: fit-content;
 
-    border-radius: 8px;
     border: 3px solid transparent;
     overflow: hidden;
 
