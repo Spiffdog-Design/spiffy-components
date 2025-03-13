@@ -24,6 +24,7 @@ const ButtonBarContainer = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    height: fit-content;
     width: fit-content;
 
     border: 3px solid transparent;
@@ -34,7 +35,7 @@ const ButtonBarContainer = styled.div`
 
 const ButtonBar = ({
     active = 0,
-    size = 'medium',
+    size = 'md',
     variant = 'primary',
     showBorder = true,
     className,

@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { Sun } from '@phosphor-icons/react'; // https://phosphoricons.com/ -- Phosphor Icons
+import { ArrowCircleRight } from '@phosphor-icons/react'; // https://phosphoricons.com/ -- Phosphor Icons
 
 import { Button, Input } from '@/components';
 
@@ -24,7 +24,7 @@ export const Primary = {
             <Input
                 actions={
                     <Button>
-                        <Sun size={20} weight="bold" />
+                        <ArrowCircleRight size={40} weight="fill" />
                     </Button>
                 }
                 onChange={action('changed')}

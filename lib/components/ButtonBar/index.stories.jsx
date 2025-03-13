@@ -10,10 +10,6 @@ const meta = {
         showBorder: {
             control: { type: 'boolean' },
         },
-        size: {
-            options: ['small', 'medium', 'large'],
-            control: { type: 'radio' },
-        },
         variant: {
             options: ['alert', 'info', 'primary', 'success', 'warning'],
             control: { type: 'radio' },
@@ -27,7 +23,6 @@ export const Primary = {
     args: {
         active: 1,
         showBorder: true,
-        size: 'medium',
         variant: 'primary',
     },
 

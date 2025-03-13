@@ -15,10 +15,6 @@ export default defineConfig({
                 find: '@/components',
                 replacement: resolve(__dirname, './lib/components'),
             },
-            {
-                find: '@/utilities',
-                replacement: resolve(__dirname, './lib/utilities'),
-            },
         ],
     },
     build: {
@@ -31,8 +27,8 @@ export default defineConfig({
             external: ['react', 'react/jsx-runtime'],
             input: Object.fromEntries(
                 glob
-                    .sync('lib/**/*.{js,jsx}', {
-                        ignore: ['lib/**/*.d.js', 'lib/**/*.stories.jsx'],
+                    .sync('lib/components/**/*.{js,jsx}', {
+                        ignore: ['lib/**/*.d.js', 'lib/**/*.stories.jsx', 'lib/components/Storybook/**/*'],
                     })
                     .map((file) => [
                         // 1. The name of the entry point

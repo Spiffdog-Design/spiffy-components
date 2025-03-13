@@ -1,4 +1,5 @@
 import { action } from '@storybook/addon-actions';
+import { ArrowFatRight } from '@phosphor-icons/react'; // https://phosphoricons.com/ -- Phosphor Icons
 
 import { Button } from '@/components';
 
@@ -10,10 +11,6 @@ const meta = {
     argTypes: {
         appearance: {
             options: ['basic', 'outline', 'solid'],
-            control: { type: 'radio' },
-        },
-        size: {
-            options: ['small', 'medium', 'large'],
             control: { type: 'radio' },
         },
         variant: {
@@ -32,9 +29,13 @@ export const Primary = {
     args: {
         appearance: 'solid',
         variant: 'primary',
-        size: 'medium',
-        rounded: true,
-        children: 'Plop',
+        active: false,
+        rounded: false,
+        children: (
+            <div style={{ display: 'flex', flexDirection: 'row', gap: 8, alignItems: 'center' }}>
+                <span>Click Me</span> <ArrowFatRight size={20} weight="fill" />
+            </div>
+        ),
     },
 
     render: (args) => (

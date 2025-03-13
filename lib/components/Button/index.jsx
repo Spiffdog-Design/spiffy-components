@@ -1,17 +1,20 @@
 // Button.js
 import styled, { css } from 'styled-components';
 
+import { Spinner } from '@/components';
+
 const basicStyles = (color, hover) => css`
     background-color: transparent;
-    border: 3px solid transparent;
+    box-shadow: 0 0 0 3px transparent;
     color: ${color};
     &:hover {
         background-color: ${hover};
+        box-shadow: 0 0 0 3px ${hover};
     }
 `;
 const outlineStyles = (color, hover) => css`
     background-color: transparent;
-    border: 3px solid ${color};
+    box-shadow: 0 0 0 3px ${color};
     color: ${color};
     &:hover {
         background-color: ${hover};
@@ -19,7 +22,7 @@ const outlineStyles = (color, hover) => css`
 `;
 const solidStyles = (color, hover) => css`
     background-color: ${color};
-    border: 3px solid ${color};
+    box-shadow: 0 0 0 3px ${color};
     color: ${({ theme }) => theme.colors.primary[1]};
     &:hover {
         background-color: ${hover};
@@ -89,37 +92,52 @@ const buttonStyles = {
         `,
     },
 };
-const sizeStyles = {
-    small: css`
-        font-size: 14px;
-        padding: 8px 16px;
-    `,
-    medium: css`
-        font-size: 16px;
-        padding: 10px 20px;
-    `,
-    large: css`
-        font-size: 18px;
-        padding: 12px 24px;
-    `,
-};
 
 // Create a styled button component
-const Button = styled.button`
-    padding: 10px 20px;
+const StyledButton = styled.button`
+    position: relative;
+    padding: 8px 16px;
     border: none;
     cursor: pointer;
     font-size: 16px;
     font-weight: 700;
     text-transform: uppercase;
+    height: fit-content;
+    overflow: hidden;
 
-    ${({ size }) => sizeStyles[size] ?? sizeStyles.medium}
+    border-radius: ${({ rounded }) => (rounded === true ? '16px' : 'unset')};
+
     ${({ appearance, variant }) => {
         appearance = appearance ?? 'solid';
         variant = variant ?? 'primary';
         return buttonStyles[variant][appearance];
-    }}
+    }};
 `;
+
+const SpinnerContainer = styled.div`
+    position: absolute;
+    backdrop-filter: blur(5px);
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    padding: 4px;
+
+    border-radius: ${({ rounded }) => (rounded === true ? '16px' : 'unset')};
+`;
+
+const Button = ({ children, active, ...props }) => {
+    return (
+        <StyledButton {...props}>
+            {children}
+            {active === true && (
+                <SpinnerContainer {...props}>
+                    <Spinner />
+                </SpinnerContainer>
+            )}
+        </StyledButton>
+    );
+};
 Button.displayName = 'Button';
 
 export default Button;

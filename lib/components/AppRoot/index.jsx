@@ -1,18 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useDebug, useLocalStorage } from '@spiffdog/spiffy-hooks';
+
 import { ThemeProvider, defaultTheme } from '@/components';
 import './styles.css';
 
 const AppRoot = ({ children, ...props }) => {
-    const [theme, setTheme] = useState(defaultTheme.light);
+    const [theme] = useLocalStorage('theme', defaultTheme.light);
 
-    useEffect(() => {
-        const handleStorage = () => {
-            const t = localStorage.getItem('theme');
-            setTheme(t != null ? JSON.parse(t) : defaultTheme.light);
-        };
-        window.addEventListener('theme-changed', handleStorage);
-        return () => window.removeEventListener('theme-changed', handleStorage);
-    }, []);
+    useDebug(theme, 'theme');
 
     return (
         <ThemeProvider theme={theme} {...props}>

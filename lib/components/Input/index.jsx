@@ -1,5 +1,9 @@
 import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
+import { X } from '@phosphor-icons/react';
+
+import { Button } from '@/components';
+import { isNullOrEmpty } from '@/utilities';
 
 const Input = forwardRef(({ actions = null, id = null, required = false, value = null, onChange, ...props }, ref) => {
     const [input, setInput] = useState(value ?? '');
@@ -24,6 +28,11 @@ const Input = forwardRef(({ actions = null, id = null, required = false, value =
     return (
         <Root>
             <BaseInput id={id} ref={innerRef} value={input} onChange={handleChange} onClick={handleClick} {...props} />
+            {!isNullOrEmpty(input) && (
+                <ClearButton appearance="basic" onClick={() => setInput('')}>
+                    <X size={20} weight="bold" />
+                </ClearButton>
+            )}
             {actions != null && <ActionContainer>{actions}</ActionContainer>}
         </Root>
     );
@@ -49,6 +58,10 @@ const variants = {
         border-color: ${({ theme }) => theme.colors.warning[9]};
     `,
 };
+
+const ClearButton = styled(Button)`
+    height: 100%;
+`;
 
 const ActionContainer = styled.div`
     display: flex;
@@ -84,6 +97,10 @@ const Root = styled.div`
     border-width: 3px;
     overflow: hidden;
     width: 100%;
+
+    & button {
+        height: 100%;
+    }
 
     ${({ variant }) => variants[variant]}
 `;
