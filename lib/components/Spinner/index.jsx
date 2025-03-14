@@ -1,6 +1,8 @@
 import styled, { keyframes } from 'styled-components';
 import { CircleNotch } from '@phosphor-icons/react';
 
+import { Icon } from '@/components';
+
 const spin = keyframes`
     from {
         transform: scale(1) rotate(0deg);
@@ -18,7 +20,11 @@ const Animated = styled(CircleNotch)`
     width: 100%;
 `;
 
-const Spinner = ({ size = 24, weight = 'bold' }) => <Animated size={size} weight={weight} />;
+const Spinner = ({ size = undefined, weight = undefined }) => (
+    <Icon size={size} weight={weight}>
+        <Animated />
+    </Icon>
+);
 Spinner.displayName = 'Spinner';
 
 export default Spinner;

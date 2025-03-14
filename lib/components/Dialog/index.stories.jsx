@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 
 import { Button, Dialog } from '@/components';
 
-import StoryWrapper from '../Storybook/StoryWrapper';
+import ThemeWrapper from '../Storybook/ThemeWrapper';
 
 const meta = {
     title: 'Dialog',
@@ -30,7 +30,7 @@ export const Primary = {
     },
 
     render: (args) => (
-        <StoryWrapper>
+        <ThemeWrapper>
             <Dialog
                 onClick={action('clicked')}
                 actions={(onClose) => (
@@ -46,6 +46,6 @@ export const Primary = {
             >
                 <p>This action will remove all data from your hard drive. Are you sure you want to continue?</p>
             </Dialog>
-        </StoryWrapper>
+        </ThemeWrapper>
     ),
 };

@@ -1,9 +1,9 @@
 import { action } from '@storybook/addon-actions';
 import { ArrowCircleRight } from '@phosphor-icons/react'; // https://phosphoricons.com/ -- Phosphor Icons
 
-import { Button, Input } from '@/components';
+import { Button, Icon, Input } from '@/components';
 
-import StoryWrapper from '../Storybook/StoryWrapper';
+import ThemeWrapper from '../Storybook/ThemeWrapper';
 
 const meta = {
     title: 'Input',
@@ -20,17 +20,19 @@ export const Primary = {
     },
 
     render: (args) => (
-        <StoryWrapper>
+        <ThemeWrapper>
             <Input
                 actions={
                     <Button>
-                        <ArrowCircleRight size={40} weight="fill" />
+                        <Icon>
+                            <ArrowCircleRight weight="fill" />
+                        </Icon>
                     </Button>
                 }
                 onChange={action('changed')}
                 onClick={action('clicked')}
                 {...args}
             />
-        </StoryWrapper>
+        </ThemeWrapper>
     ),
 };

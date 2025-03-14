@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { AppRoot, ThemeSwitcher } from '@/components';
-import './StoryWrapper.css';
+import './ThemeWrapper.css';
 
 const Line = styled.div`
     display: flex;
@@ -28,7 +28,7 @@ const Content = styled.div`
     height: 100%;
 `;
 
-const StoryWrapper = ({ children, ...props }) => {
+const ThemeWrapper = ({ children, ...props }) => {
     return (
         <AppRoot>
             <Container>
@@ -41,4 +41,4 @@ const StoryWrapper = ({ children, ...props }) => {
     );
 };
 
-export default StoryWrapper;
+export default ThemeWrapper;

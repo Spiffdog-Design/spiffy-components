@@ -26,7 +26,7 @@ const solidStyles = (color, hover) => css`
     color: ${({ theme }) => theme.colors.primary[1]};
     &:hover {
         background-color: ${hover};
-        border-color: ${hover};
+        box-shadow: 0 0 0 3px ${hover};
     }
 `;
 
@@ -96,7 +96,12 @@ const buttonStyles = {
 // Create a styled button component
 const StyledButton = styled.button`
     position: relative;
-    padding: 8px 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0 12px;
     border: none;
     cursor: pointer;
     font-size: 16px;
@@ -116,19 +121,18 @@ const StyledButton = styled.button`
 
 const SpinnerContainer = styled.div`
     position: absolute;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(2px);
     height: 100%;
     width: 100%;
     top: 0;
     right: 0;
-    padding: 4px;
 
     border-radius: ${({ rounded }) => (rounded === true ? '16px' : 'unset')};
 `;
 
 const Button = ({ children, active, ...props }) => {
     return (
-        <StyledButton {...props}>
+        <StyledButton {...props} disabled={active}>
             {children}
             {active === true && (
                 <SpinnerContainer {...props}>

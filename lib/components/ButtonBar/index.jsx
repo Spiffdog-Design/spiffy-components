@@ -1,3 +1,4 @@
+import { useDebug } from '@spiffdog/spiffy-hooks';
 import { Children, cloneElement, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 
@@ -24,45 +25,77 @@ const ButtonBarContainer = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    height: fit-content;
+    height: 100%;
+    min-height: 40px;
     width: fit-content;
 
     border: 3px solid transparent;
     overflow: hidden;
 
+    & button {
+        height: 100%;
+    }
+
     ${({ showBorder, variant }) => (showBorder == true ? styles[variant] ?? styles.variant : null)}
 `;
 
+const addIndex = (arr, value, multiple) => {
+    return multiple ? [...new Set([...arr, value])].sort() : [value];
+};
+const inArray = (arr, value) => {
+    return (arr ?? []).includes(value);
+};
+const removeIndex = (arr, value, multiple) => {
+    return multiple ? [...new Set([...arr.filter((i) => i != value)])] : [];
+};
+const toggleIndex = (arr, value, multiple) => {
+    return inArray(arr, value) ? removeIndex(arr, value, multiple) : addIndex(arr, value, multiple);
+};
+
 const ButtonBar = ({
-    active = 0,
-    size = 'md',
-    variant = 'primary',
-    showBorder = true,
     className,
     children,
-    onActiveClick = (index) => console.log(index),
+    multiple = false,
+    showBorder = true,
+    value = [],
+    variant = 'primary',
+    onActiveClick = (value) => console.log(value),
     ...props
 }) => {
-    const [activeIdx, setActiveIdx] = useState(active);
+    const [activeIds, setActiveIds] = useState(Array.isArray(value) ? value : [value]);
 
     const handleClick = (idx) => () => {
-        setActiveIdx(idx);
-        onActiveClick(idx);
+        const list = toggleIndex(activeIds, idx, multiple);
+        setActiveIds(list);
+        onActiveClick(list);
     };
 
     useEffect(() => {
-        setActiveIdx(active);
-    }, [active]);
+        if (multiple === false && Array.isArray(activeIds) && activeIds.length > 1) {
+            setActiveIds([activeIds[0]]);
+        }
+    }, [multiple]);
+
+    useEffect(() => {
+        if (value != null) {
+            if (Array.isArray(value)) {
+                setActiveIds(value);
+            } else {
+                setActiveIds([value]);
+            }
+        }
+    }, [value]);
+
+    useDebug(activeIds, 'activeIds');
 
     return (
         <ButtonBarContainer showBorder={showBorder} variant={variant} {...props}>
             {Children.map(children, (child, index) => {
                 const item = child;
-                const activeProps = { appearance: index === activeIdx ? 'solid' : 'basic' };
+                const activeProps = { appearance: inArray(activeIds, index) ? 'solid' : 'basic' };
                 return cloneElement(item, {
                     ...activeProps,
                     variant,
-                    size,
                     rounded: false,
                     onClick: handleClick(index),
                 });

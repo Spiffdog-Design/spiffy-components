@@ -2,36 +2,43 @@ import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import styled, { css } from 'styled-components';
 import { X } from '@phosphor-icons/react';
 
-import { Button } from '@/components';
+import { Button, Icon } from '@/components';
 import { isNullOrEmpty } from '@/utilities';
 
 const Input = forwardRef(({ actions = null, id = null, required = false, value = null, onChange, ...props }, ref) => {
     const [input, setInput] = useState(value ?? '');
-    const innerRef = useRef(null);
+    const inputRef = useRef(null);
 
-    const handleChange = (event) => {
-        setInput(event.target.value);
+    const handleChange = (value) => {
+        setInput(value);
         if (onChange != null) {
-            onChange(event);
+            onChange(value);
         }
     };
 
-    const handleClick = () => {
-        if (innerRef.current != null) {
-            innerRef.current.focus();
-            innerRef.current.select();
-        }
+    const handleClick = (evt) => {
+        evt.currentTarget.focus();
+        evt.currentTarget.select();
     };
 
-    useImperativeHandle(ref, () => innerRef.current);
+    useImperativeHandle(ref, () => inputRef.current);
 
     return (
         <Root>
-            <BaseInput id={id} ref={innerRef} value={input} onChange={handleChange} onClick={handleClick} {...props} />
+            <BaseInput
+                id={id}
+                ref={inputRef}
+                value={input}
+                onChange={(evt) => handleChange(evt.currentTarget.value)}
+                onClick={handleClick}
+                {...props}
+            />
             {!isNullOrEmpty(input) && (
-                <ClearButton appearance="basic" onClick={() => setInput('')}>
-                    <X size={20} weight="bold" />
-                </ClearButton>
+                <Button appearance="basic" onClick={() => handleChange('')}>
+                    <Icon size={26}>
+                        <X weight="bold" />
+                    </Icon>
+                </Button>
             )}
             {actions != null && <ActionContainer>{actions}</ActionContainer>}
         </Root>
@@ -59,10 +66,6 @@ const variants = {
     `,
 };
 
-const ClearButton = styled(Button)`
-    height: 100%;
-`;
-
 const ActionContainer = styled.div`
     display: flex;
     flex-direction: row;
@@ -75,8 +78,8 @@ const BaseInput = styled.input`
     color: ${({ theme }) => theme.colors.primary[12]};
     height: 38px;
     outline: none;
-    padding: 0 12px;
     width: 100%;
+    padding-left: 8px;
 
     &[type='number'] {
         appearance: textfield;
@@ -89,9 +92,8 @@ const BaseInput = styled.input`
 `;
 
 const Root = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
 
     border-style: solid;
     border-width: 3px;
@@ -99,7 +101,7 @@ const Root = styled.div`
     width: 100%;
 
     & button {
-        height: 100%;
+        height: 38px;
     }
 
     ${({ variant }) => variants[variant]}

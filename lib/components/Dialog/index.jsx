@@ -10,7 +10,9 @@ import {
     Trigger,
 } from '@radix-ui/react-dialog';
 import styled from 'styled-components';
-import { X } from '@phosphor-icons/react'; // https://phosphoricons.com/ -- Phosphor Icons
+import { X } from '@phosphor-icons/react';
+
+import { Icon } from '@/components';
 
 const getVariantColor = (theme, variant = 'primary', code = 12) => theme.colors[variant][code];
 
@@ -187,7 +189,9 @@ const Dialog = ({
                     </Footer>
                     <Close asChild>
                         <CloseButton onClick={handleClose}>
-                            <X size={24} weight="bold" />
+                            <Icon>
+                                <X weight="bold" />
+                            </Icon>
                         </CloseButton>
                     </Close>
                 </Container>

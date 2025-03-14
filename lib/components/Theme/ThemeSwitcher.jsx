@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Sun, Moon } from '@phosphor-icons/react'; // https://phosphoricons.com/ -- Phosphor Icons
 import { useLocalStorage } from '@spiffdog/spiffy-hooks';
 
-import { Button, defaultTheme } from '@/components';
+import { Button, Icon, defaultTheme } from '@/components';
 
 const ThemeSwitcher = () => {
     const [mode, setMode] = useState('light');
@@ -20,7 +20,7 @@ const ThemeSwitcher = () => {
 
     return (
         <Button appearance="basic" rounded size="sm" variant="primary" onClick={toggleMode}>
-            {mode === 'light' ? <Sun size={20} weight="bold" /> : <Moon size={20} weight="bold" />}
+            <Icon>{mode === 'light' ? <Sun weight="bold" /> : <Moon size={20} weight="bold" />}</Icon>
         </Button>
     );
 };
