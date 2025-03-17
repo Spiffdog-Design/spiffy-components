@@ -36,7 +36,7 @@ const ButtonBarContainer = styled.div`
         height: 100%;
     }
 
-    ${({ showBorder, variant }) => (showBorder == true ? styles[variant] ?? styles.variant : null)}
+    ${({ border, variant }) => (border == true ? styles[variant] ?? styles.variant : null)}
 `;
 
 const addIndex = (arr, value, multiple) => {
@@ -56,7 +56,7 @@ const ButtonBar = ({
     className,
     children,
     multiple = false,
-    showBorder = true,
+    border = true,
     value = [],
     variant = 'primary',
     onActiveClick = (value) => console.log(value),
@@ -89,7 +89,7 @@ const ButtonBar = ({
     useDebug(activeIds, 'activeIds');
 
     return (
-        <ButtonBarContainer showBorder={showBorder} variant={variant} {...props}>
+        <ButtonBarContainer border={border} variant={variant} {...props}>
             {Children.map(children, (child, index) => {
                 const item = child;
                 const activeProps = { appearance: inArray(activeIds, index) ? 'solid' : 'basic' };

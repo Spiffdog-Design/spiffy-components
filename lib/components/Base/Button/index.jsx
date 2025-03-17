@@ -101,7 +101,32 @@ const StyledButton = styled.button`
     justify-content: center;
     align-items: center;
 
-    padding: 0 12px;
+    padding: 4px 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    height: fit-content;
+    overflow: hidden;
+
+    border-radius: ${({ rounded }) => (rounded === true ? '16px' : 'unset')};
+
+    ${({ appearance, variant }) => {
+        appearance = appearance ?? 'solid';
+        variant = variant ?? 'primary';
+        return buttonStyles[variant][appearance];
+    }};
+`;
+
+const StyledInput = styled.input`
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    padding: 4px 12px;
     border: none;
     cursor: pointer;
     font-size: 16px;
@@ -130,9 +155,18 @@ const SpinnerContainer = styled.div`
     border-radius: ${({ rounded }) => (rounded === true ? '16px' : 'unset')};
 `;
 
-const Button = ({ children, active, ...props }) => {
-    return (
-        <StyledButton {...props} disabled={active}>
+const Button = ({ children, active, asInput = false, rounded, ...props }) => {
+    return asInput ? (
+        <StyledButton disabled={active} type="submit" {...props}>
+            {children}
+            {active === true && (
+                <SpinnerContainer {...props}>
+                    <Spinner />
+                </SpinnerContainer>
+            )}
+        </StyledButton>
+    ) : (
+        <StyledButton disabled={active} rounded={rounded} {...props}>
             {children}
             {active === true && (
                 <SpinnerContainer {...props}>

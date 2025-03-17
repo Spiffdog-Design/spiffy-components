@@ -1,20 +1,8 @@
-import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react';
+import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import styled, { css } from 'styled-components';
-import { X } from '@phosphor-icons/react';
 
-import { Button, Icon } from '@/components';
-import { isNullOrEmpty } from '@/utilities';
-
-const Input = forwardRef(({ actions = null, id = null, required = false, value = null, onChange, ...props }, ref) => {
-    const [input, setInput] = useState(value ?? '');
+const Input = forwardRef(({ id = null, required = false, ...props }, ref) => {
     const inputRef = useRef(null);
-
-    const handleChange = (value) => {
-        setInput(value);
-        if (onChange != null) {
-            onChange(value);
-        }
-    };
 
     const handleClick = (evt) => {
         evt.currentTarget.focus();
@@ -25,22 +13,7 @@ const Input = forwardRef(({ actions = null, id = null, required = false, value =
 
     return (
         <Root>
-            <BaseInput
-                id={id}
-                ref={inputRef}
-                value={input}
-                onChange={(evt) => handleChange(evt.currentTarget.value)}
-                onClick={handleClick}
-                {...props}
-            />
-            {!isNullOrEmpty(input) && (
-                <Button appearance="basic" onClick={() => handleChange('')}>
-                    <Icon size={26}>
-                        <X weight="bold" />
-                    </Icon>
-                </Button>
-            )}
-            {actions != null && <ActionContainer>{actions}</ActionContainer>}
+            <BaseInput id={id} ref={inputRef} onClick={handleClick} {...props} />
         </Root>
     );
 });
@@ -65,12 +38,6 @@ const variants = {
         border-color: ${({ theme }) => theme.colors.warning[9]};
     `,
 };
-
-const ActionContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-`;
 
 const BaseInput = styled.input`
     background: transparent;

@@ -2,10 +2,10 @@ import { action } from '@storybook/addon-actions';
 
 import { Button, Dialog } from '@/components';
 
-import ThemeWrapper from '../Storybook/ThemeWrapper';
+import ThemeWrapper from '../../Storybook/ThemeWrapper';
 
 const meta = {
-    title: 'Dialog',
+    title: 'Base/Dialog',
     component: Dialog,
     parameters: {
         layout: 'fullscreen',

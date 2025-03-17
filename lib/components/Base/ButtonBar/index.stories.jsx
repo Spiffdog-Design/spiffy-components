@@ -1,18 +1,19 @@
 import { action } from '@storybook/addon-actions';
-
-import { Button, ButtonBar, Icon } from '@/components';
-import ThemeWrapper from '../Storybook/ThemeWrapper';
 import { Bluetooth } from '@phosphor-icons/react';
 
+import { Button, ButtonBar, Icon } from '@/components';
+
+import ThemeWrapper from '../../Storybook/ThemeWrapper';
+
 const meta = {
-    title: 'Button Bar',
+    title: 'Base/Button Bar',
     component: ButtonBar,
     argTypes: {
         multiple: {
             control: { type: 'boolean' },
             description: 'Allow multiple values to be selected.',
         },
-        showBorder: {
+        border: {
             control: { type: 'boolean' },
             description: 'Show the button bar border.',
         },
@@ -32,7 +33,7 @@ export default meta;
 
 export const Primary = {
     args: {
-        showBorder: true,
+        border: true,
         multiple: true,
         value: [1],
         variant: 'primary',

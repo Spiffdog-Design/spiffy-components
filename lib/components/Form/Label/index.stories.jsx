@@ -1,7 +1,7 @@
 import { AppRoot, Label } from '@/components';
 
 const meta = {
-    title: 'Label',
+    title: 'Form/Label',
     component: Label,
 };
 

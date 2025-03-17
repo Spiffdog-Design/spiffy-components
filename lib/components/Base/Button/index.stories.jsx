@@ -3,10 +3,10 @@ import { ArrowFatRight } from '@phosphor-icons/react'; // https://phosphoricons.
 
 import { Button, Icon } from '@/components';
 
-import ThemeWrapper from '../Storybook/ThemeWrapper';
+import ThemeWrapper from '../../Storybook/ThemeWrapper';
 
 const meta = {
-    title: 'Button',
+    title: 'Base/Button',
     component: Button,
     argTypes: {
         appearance: {

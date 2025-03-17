@@ -1,0 +1,35 @@
+import { action } from '@storybook/addon-actions';
+import { Button, Form, Input } from '@/components';
+
+import ThemeWrapper from '../../Storybook/ThemeWrapper';
+
+const meta = {
+    title: 'Form/Form',
+    component: Form,
+    argTypes: {},
+};
+
+export default meta;
+
+export const Primary = {
+    args: {
+        label: 'Label',
+        onSubmit: () => action('submit'),
+    },
+    render: (args) => {
+        return (
+            <ThemeWrapper>
+                <Form {...args}>
+                    {({ register, errors, state }) => {
+                        return (
+                            <>
+                                <input {...register('test1', { required: true })} />
+                                <input type="button" value="Submit" />
+                            </>
+                        );
+                    }}
+                </Form>
+            </ThemeWrapper>
+        );
+    },
+};

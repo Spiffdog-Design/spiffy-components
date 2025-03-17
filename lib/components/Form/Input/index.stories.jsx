@@ -3,10 +3,10 @@ import { ArrowCircleRight } from '@phosphor-icons/react'; // https://phosphorico
 
 import { Button, Icon, Input } from '@/components';
 
-import ThemeWrapper from '../Storybook/ThemeWrapper';
+import ThemeWrapper from '../../Storybook/ThemeWrapper';
 
 const meta = {
-    title: 'Input',
+    title: 'Form/Input',
     component: Input,
     argTypes: {},
 };

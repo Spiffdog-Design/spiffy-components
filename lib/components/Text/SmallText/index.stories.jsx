@@ -1,7 +1,7 @@
 import { AppRoot, SmallText } from '@/components';
 
 const meta = {
-    title: 'SmallText',
+    title: 'Text/SmallText',
     component: SmallText,
 };
 

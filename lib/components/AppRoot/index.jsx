@@ -6,8 +6,6 @@ import './styles.css';
 const AppRoot = ({ children, ...props }) => {
     const [theme] = useLocalStorage('theme', defaultTheme.light);
 
-    useDebug(theme, 'theme');
-
     return (
         <ThemeProvider theme={theme} {...props}>
             {children}
