@@ -1,7 +1,10 @@
 import { forwardRef } from 'react';
 import { Provider, Root, Trigger, Portal, Content } from '@radix-ui/react-tooltip';
-import styled from 'styled-components';
-import cn from 'classnames';
+
+const abortEvent = (evt) => {
+    evt.preventDefault();
+    evt.stopPropagation();
+};
 
 const styles = () => ({
     content: {
@@ -37,11 +40,15 @@ const Tooltip = forwardRef(
         return enabled ? (
             <Provider delayDuration={100}>
                 <Root open={open}>
-                    <Trigger ref={ref} className={cn(classes.trigger, className)} asChild>
+                    <Trigger onClick={abortEvent} ref={ref} className={cn(classes.trigger, className)} asChild>
                         {trigger}
                     </Trigger>
                     <Portal>
-                        <Content className={cn(classes.content, { [classes.padded]: padded })} {...props}>
+                        <Content
+                            onPointerDownOutside={abortEvent}
+                            className={cn(classes.content, { [classes.padded]: padded })}
+                            {...props}
+                        >
                             {children}
                         </Content>
                     </Portal>
@@ -54,4 +61,4 @@ const Tooltip = forwardRef(
 );
 Tooltip.displayName = 'Tooltip';
 
-export default withStyles(styles)(Tooltip);
+export default Tooltip;
