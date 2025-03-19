@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { ArrowFatRight } from '@phosphor-icons/react'; // https://phosphoricons.com/ -- Phosphor Icons
+import { CaretCircleDoubleRight } from '@phosphor-icons/react'; // https://phosphoricons.com/ -- Phosphor Icons
 
 import { Button, Icon } from '@/components';
 
@@ -14,7 +14,7 @@ const meta = {
             control: { type: 'radio' },
         },
         variant: {
-            options: ['alert', 'info', 'primary', 'success', 'warning'],
+            options: ['alert', 'primary', 'success', 'warning'],
             control: { type: 'radio' },
         },
         rounded: {
@@ -33,9 +33,9 @@ export const Primary = {
         rounded: false,
         children: (
             <div style={{ display: 'flex', flexDirection: 'row', gap: 8, alignItems: 'center' }}>
-                <span>Click Me</span>{' '}
+                <span>Click Me</span>
                 <Icon>
-                    <ArrowFatRight weight="fill" />
+                    <CaretCircleDoubleRight weight="fill" />
                 </Icon>
             </div>
         ),

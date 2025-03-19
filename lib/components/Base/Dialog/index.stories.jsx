@@ -1,8 +1,9 @@
 import { action } from '@storybook/addon-actions';
 
-import { Button, Dialog } from '@/components';
+import { Button, Dialog, Icon } from '@/components';
 
 import ThemeWrapper from '../../Storybook/ThemeWrapper';
+import { Radioactive } from '@phosphor-icons/react';
 
 const meta = {
     title: 'Base/Dialog',
@@ -12,7 +13,7 @@ const meta = {
     },
     argTypes: {
         variant: {
-            options: ['alert', 'info', 'primary', 'success', 'warning'],
+            options: ['alert', 'primary', 'success', 'warning'],
             control: { type: 'radio' },
         },
     },
@@ -38,7 +39,12 @@ export const Primary = {
                         <Button appearance="basic" onClick={onClose}>
                             Cancel
                         </Button>
-                        <Button variant="alert">Nuke Me!</Button>
+                        <Button variant="alert">
+                            <Icon>
+                                <Radioactive weight="fill" />
+                            </Icon>
+                            Me!
+                        </Button>
                     </>
                 )}
                 trigger={<Button>Open Dialog</Button>}

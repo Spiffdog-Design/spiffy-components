@@ -3,30 +3,30 @@ import styled, { css } from 'styled-components';
 
 import { Spinner } from '@/components';
 
-const basicStyles = (color, hover) => css`
+const basicStyles = (color) => css`
     background-color: transparent;
-    box-shadow: 0 0 0 3px transparent;
+    border: 3px solid transparent;
     color: ${color};
     &:hover {
-        background-color: ${hover};
-        box-shadow: 0 0 0 3px ${hover};
+        background-color: rgb(from ${color} r g b / 0.2);
+        color: ${color};
     }
 `;
-const outlineStyles = (color, hover) => css`
+const outlineStyles = (color) => css`
     background-color: transparent;
-    box-shadow: 0 0 0 3px ${color};
+    border: 3px solid rgb(from ${color} r g b / 0.75);
     color: ${color};
     &:hover {
-        background-color: ${hover};
+        background-color: rgb(from ${color} r g b / 0.2);
     }
 `;
-const solidStyles = (color, hover) => css`
+const solidStyles = (color, theme) => css`
     background-color: ${color};
-    box-shadow: 0 0 0 3px ${color};
-    color: ${({ theme }) => theme.colors.primary[1]};
+    border: 3px solid ${color};
+    color: ${theme.colors.base[1]};
     &:hover {
-        background-color: ${hover};
-        box-shadow: 0 0 0 3px ${hover};
+        background-color: hsl(from ${color} h s calc(l + 10));
+        border-color: hsl(from ${color} h s calc(l + 10));
     }
 `;
 
@@ -34,61 +34,49 @@ const solidStyles = (color, hover) => css`
 const buttonStyles = {
     alert: {
         basic: css`
-            ${({ theme }) => basicStyles(theme.colors.alert[9], theme.colors.alert[4])}
+            ${({ theme }) => basicStyles(theme.colors.alert[9])}
         `,
         outline: css`
-            ${({ theme }) => outlineStyles(theme.colors.alert[9], theme.colors.alert[4])}
+            ${({ theme }) => outlineStyles(theme.colors.alert[9])}
         `,
         solid: css`
-            ${({ theme }) => solidStyles(theme.colors.alert[9], theme.colors.alert[11])}
-        `,
-    },
-
-    info: {
-        basic: css`
-            ${({ theme }) => basicStyles(theme.colors.info[9], theme.colors.info[4])}
-        `,
-        outline: css`
-            ${({ theme }) => outlineStyles(theme.colors.info[9], theme.colors.info[4])}
-        `,
-        solid: css`
-            ${({ theme }) => solidStyles(theme.colors.info[9], theme.colors.info[11])}
+            ${({ theme }) => solidStyles(theme.colors.alert[9], theme)}
         `,
     },
 
     primary: {
         basic: css`
-            ${({ theme }) => basicStyles(theme.colors.primary[12], theme.colors.primary[7])}
+            ${({ theme }) => basicStyles(theme.colors.primary[11])}
         `,
         outline: css`
-            ${({ theme }) => outlineStyles(theme.colors.primary[12], theme.colors.primary[7])}
+            ${({ theme }) => outlineStyles(theme.colors.primary[11])}
         `,
         solid: css`
-            ${({ theme }) => solidStyles(theme.colors.primary[12], theme.colors.primary[11])}
+            ${({ theme }) => solidStyles(theme.colors.primary[9], theme)}
         `,
     },
 
     success: {
         basic: css`
-            ${({ theme }) => basicStyles(theme.colors.success[9], theme.colors.success[4])}
+            ${({ theme }) => basicStyles(theme.colors.success[9])}
         `,
         outline: css`
-            ${({ theme }) => outlineStyles(theme.colors.success[9], theme.colors.success[4])}
+            ${({ theme }) => outlineStyles(theme.colors.success[9])}
         `,
         solid: css`
-            ${({ theme }) => solidStyles(theme.colors.success[9], theme.colors.success[11])}
+            ${({ theme }) => solidStyles(theme.colors.success[9], theme)}
         `,
     },
 
     warning: {
         basic: css`
-            ${({ theme }) => basicStyles(theme.colors.warning[9], theme.colors.warning[3])}
+            ${({ theme }) => basicStyles(theme.colors.warning[9])}
         `,
         outline: css`
-            ${({ theme }) => outlineStyles(theme.colors.warning[9], theme.colors.warning[3])}
+            ${({ theme }) => outlineStyles(theme.colors.warning[9])}
         `,
         solid: css`
-            ${({ theme }) => solidStyles(theme.colors.warning[9], theme.colors.warning[10])}
+            ${({ theme }) => solidStyles(theme.colors.warning[9], theme)}
         `,
     },
 };
@@ -96,37 +84,12 @@ const buttonStyles = {
 // Create a styled button component
 const StyledButton = styled.button`
     position: relative;
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 
-    padding: 4px 12px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 700;
-    text-transform: uppercase;
-    height: fit-content;
-    overflow: hidden;
-
-    border-radius: ${({ rounded }) => (rounded === true ? '16px' : 'unset')};
-
-    ${({ appearance, variant }) => {
-        appearance = appearance ?? 'solid';
-        variant = variant ?? 'primary';
-        return buttonStyles[variant][appearance];
-    }};
-`;
-
-const StyledInput = styled.input`
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-
-    padding: 4px 12px;
+    padding: 6px 12px;
     border: none;
     cursor: pointer;
     font-size: 16px;
@@ -156,20 +119,11 @@ const SpinnerContainer = styled.div`
 `;
 
 const Button = ({ children, active, asInput = false, rounded, ...props }) => {
-    return asInput ? (
-        <StyledButton disabled={active} type="submit" {...props}>
-            {children}
-            {active === true && (
-                <SpinnerContainer {...props}>
-                    <Spinner />
-                </SpinnerContainer>
-            )}
-        </StyledButton>
-    ) : (
+    return (
         <StyledButton disabled={active} rounded={rounded} {...props}>
             {children}
             {active === true && (
-                <SpinnerContainer {...props}>
+                <SpinnerContainer rounded={rounded} {...props}>
                     <Spinner />
                 </SpinnerContainer>
             )}

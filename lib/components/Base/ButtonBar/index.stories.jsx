@@ -17,6 +17,10 @@ const meta = {
             control: { type: 'boolean' },
             description: 'Show the button bar border.',
         },
+        rounded: {
+            control: { type: 'boolean' },
+            description: 'Round the sides of button bar border.',
+        },
         value: {
             control: { type: 'array' },
             description: 'An array of button indexes to pre-select.',
@@ -24,7 +28,7 @@ const meta = {
         variant: {
             control: { type: 'radio' },
             description: 'Select the display variant mode.',
-            options: ['alert', 'info', 'primary', 'success', 'warning'],
+            options: ['alert', 'primary', 'success', 'warning'],
         },
     },
 };
@@ -33,8 +37,9 @@ export default meta;
 
 export const Primary = {
     args: {
-        border: true,
-        multiple: true,
+        border: false,
+        multiple: false,
+        rounded: false,
         value: [1],
         variant: 'primary',
     },

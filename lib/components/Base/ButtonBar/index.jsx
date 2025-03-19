@@ -6,17 +6,14 @@ const styles = {
     alert: css`
         border-color: ${({ theme }) => theme.colors.alert[9]};
     `,
-    info: css`
-        border-color: ${({ theme }) => theme.colors.info[9]};
-    `,
     primary: css`
-        border-color: ${({ theme }) => theme.colors.primary[12]};
+        border-color: ${({ theme }) => theme.colors.primary[9]};
     `,
     success: css`
         border-color: ${({ theme }) => theme.colors.success[9]};
     `,
     warning: css`
-        border-color: ${({ theme }) => theme.colors.warning[9]};
+        border-color: ${({ theme }) => theme.colors.warning[8]};
     `,
 };
 
@@ -36,7 +33,9 @@ const ButtonBarContainer = styled.div`
         height: 100%;
     }
 
-    ${({ border, variant }) => (border == true ? styles[variant] ?? styles.variant : null)}
+    border-radius: ${({ rounded }) => (rounded === true ? '16px' : 'unset')};
+
+    ${({ border, variant }) => (border == true ? styles[variant] ?? styles.primary : null)}
 `;
 
 const addIndex = (arr, value, multiple) => {
@@ -53,10 +52,11 @@ const toggleIndex = (arr, value, multiple) => {
 };
 
 const ButtonBar = ({
-    className,
+    border = false,
     children,
+    className,
     multiple = false,
-    border = true,
+    rounded = false,
     value = [],
     variant = 'primary',
     onActiveClick = (value) => console.log(value),
@@ -86,10 +86,8 @@ const ButtonBar = ({
         }
     }, [value]);
 
-    useDebug(activeIds, 'activeIds');
-
     return (
-        <ButtonBarContainer border={border} variant={variant} {...props}>
+        <ButtonBarContainer border={border} rounded={rounded} variant={variant} {...props}>
             {Children.map(children, (child, index) => {
                 const item = child;
                 const activeProps = { appearance: inArray(activeIds, index) ? 'solid' : 'basic' };
