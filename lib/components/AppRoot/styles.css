@@ -7,10 +7,15 @@
     margin: 0;
 }
 
-html {
-    font-size: 62.5%;
+html,
+body,
+#root {
     height: 100%;
     width: 100%;
+}
+
+html {
+    font-size: 62.5%;
 }
 
 body {
@@ -19,9 +24,6 @@ body {
     font-style: normal;
     -webkit-font-smoothing: antialiased;
     font-size: 1.2rem;
-
-    height: 100%;
-    width: 100%;
 }
 
 strong {
