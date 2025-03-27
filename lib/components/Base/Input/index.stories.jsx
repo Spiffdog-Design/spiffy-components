@@ -6,9 +6,14 @@ import { Button, Icon, Input } from '@/components';
 import ThemeWrapper from '../../Storybook/ThemeWrapper';
 
 const meta = {
-    title: 'Form/Input',
+    title: 'Base/Input',
     component: Input,
-    argTypes: {},
+    argTypes: {
+        variant: {
+            options: ['alert', 'primary', 'success', 'warning'],
+            control: { type: 'radio' },
+        },
+    },
 };
 
 export default meta;
@@ -17,6 +22,7 @@ export const Primary = {
     args: {
         label: 'Label',
         value: 'This is an input value',
+        variant: 'primary',
     },
 
     render: (args) => (
