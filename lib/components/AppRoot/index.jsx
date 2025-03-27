@@ -1,16 +1,15 @@
 import { useLocalStorage } from '@spiffdog/spiffy-hooks';
-import styled, { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 import { ThemeProvider, defaultTheme } from '@/components';
-import './styles.css';
 
 const AppRoot = ({ children, customTheme, ...props }) => {
     const [t] = useLocalStorage('theme', defaultTheme?.light);
     const theme = t ?? customTheme?.light ?? defaultTheme?.light;
     return (
         <ThemeProvider theme={theme} {...props}>
-            {children}
             <GlobalCssTheme />
+            {children}
         </ThemeProvider>
     );
 };
@@ -19,6 +18,8 @@ AppRoot.displayName = 'AppRoot';
 export default AppRoot;
 
 const GlobalCssTheme = createGlobalStyle`
+    @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+
     :root {
         --alert-01: ${({ theme }) => theme.colors.alert[1]};
         --alert-02: ${({ theme }) => theme.colors.alert[2]};
@@ -84,5 +85,77 @@ const GlobalCssTheme = createGlobalStyle`
         --warning-10: ${({ theme }) => theme.colors.warning[10]};
         --warning-11: ${({ theme }) => theme.colors.warning[11]};
         --warning-12: ${({ theme }) => theme.colors.warning[12]};
+
+        ${({ theme }) => {
+            let literal = ``;
+            console.log('palette', theme?.palette);
+            Object.keys(theme?.palette).forEach((color) => {
+                console.log('color', theme?.palette[color]);
+                Object.keys(theme?.palette[color]).forEach((key) => {
+                    literal += `
+                    --${color}-${key}: ${theme?.palette[color][key]};
+                `;
+                });
+            });
+            return literal;
+        }}
     }
+
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+        margin: 0;
+    }
+
+    html,
+    body,
+    #root {
+        height: 100%;
+        width: 100%;
+    }
+
+    html {
+        font-size: 62.5%;
+    }
+
+    body {
+        font-family: 'Source Sans 3', sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        font-size: 1.2rem;
+    }
+
+    strong {
+        font-weight: 700;
+    }
+
+    img,
+    picture,
+    video,
+    canvas,
+    svg {
+        display: block;
+        max-width: 100%;
+    }
+
+    input,
+    button,
+    textarea,
+    select {
+        font-family: inherit;
+    }
+
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+
 `;
