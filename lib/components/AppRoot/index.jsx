@@ -6,6 +6,7 @@ import './styles.css';
 const AppRoot = ({ children, theme, ...props }) => {
     //const [t] = useLocalStorage('theme', defaultTheme.light);
     const t = theme?.light ?? defaultTheme.light;
+    console.log(t);
     useDebug(t);
 
     return (
