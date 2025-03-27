@@ -231,21 +231,21 @@ const Heading = styled.div`
 `;
 
 const Overlay = styled(RdxOverlay)`
-    --color: var(--primary-04);
+    --color: var(--primaryA-04);
 
-    background-color: rgb(from var(--color) r g b / 0.5);
+    background-color: var(--color);
     backdrop-filter: blur(2px);
     inset: 0;
     position: fixed;
 
     &.alert {
-        --color: var(--alert-04);
+        --color: var(--alertA-04);
     }
     &.success {
-        --color: var(--success-04);
+        --color: var(--successA-04);
     }
     &.warning {
-        --color: var(--warning-04);
+        --color: var(--warningA-04);
     }
 `;
 

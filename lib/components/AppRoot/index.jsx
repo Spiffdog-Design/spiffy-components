@@ -8,7 +8,9 @@ const AppRoot = ({ children, customTheme, ...props }) => {
     const theme = t ?? customTheme?.light ?? defaultTheme?.light;
     return (
         <ThemeProvider theme={theme} {...props}>
-            <GlobalCssTheme />
+            <GlobalColorTheme />
+            <GlobalCss />
+            <GoogleFont />
             {children}
         </ThemeProvider>
     );
@@ -17,9 +19,10 @@ AppRoot.displayName = 'AppRoot';
 
 export default AppRoot;
 
-const GlobalCssTheme = createGlobalStyle`
+const GoogleFont = createGlobalStyle`
     @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
-
+`;
+const GlobalColorTheme = createGlobalStyle`
     :root {
         --alert-01: ${({ theme }) => theme.colors.alert[1]};
         --alert-02: ${({ theme }) => theme.colors.alert[2]};
@@ -33,6 +36,18 @@ const GlobalCssTheme = createGlobalStyle`
         --alert-10: ${({ theme }) => theme.colors.alert[10]};
         --alert-11: ${({ theme }) => theme.colors.alert[11]};
         --alert-12: ${({ theme }) => theme.colors.alert[12]};
+        --alertA-01: ${({ theme }) => theme.colors.alertA[1]};
+        --alertA-02: ${({ theme }) => theme.colors.alertA[2]};
+        --alertA-03: ${({ theme }) => theme.colors.alertA[3]};
+        --alertA-04: ${({ theme }) => theme.colors.alertA[4]};
+        --alertA-05: ${({ theme }) => theme.colors.alertA[5]};
+        --alertA-06: ${({ theme }) => theme.colors.alertA[6]};
+        --alertA-07: ${({ theme }) => theme.colors.alertA[7]};
+        --alertA-08: ${({ theme }) => theme.colors.alertA[8]};
+        --alertA-09: ${({ theme }) => theme.colors.alertA[9]};
+        --alertA-10: ${({ theme }) => theme.colors.alertA[10]};
+        --alertA-11: ${({ theme }) => theme.colors.alertA[11]};
+        --alertA-12: ${({ theme }) => theme.colors.alertA[12]};
 
         --base-01: ${({ theme }) => theme.colors.base[1]};
         --base-02: ${({ theme }) => theme.colors.base[2]};
@@ -46,6 +61,18 @@ const GlobalCssTheme = createGlobalStyle`
         --base-10: ${({ theme }) => theme.colors.base[10]};
         --base-11: ${({ theme }) => theme.colors.base[11]};
         --base-12: ${({ theme }) => theme.colors.base[12]};
+        --baseA-01: ${({ theme }) => theme.colors.baseA[1]};
+        --baseA-02: ${({ theme }) => theme.colors.baseA[2]};
+        --baseA-03: ${({ theme }) => theme.colors.baseA[3]};
+        --baseA-04: ${({ theme }) => theme.colors.baseA[4]};
+        --baseA-05: ${({ theme }) => theme.colors.baseA[5]};
+        --baseA-06: ${({ theme }) => theme.colors.baseA[6]};
+        --baseA-07: ${({ theme }) => theme.colors.baseA[7]};
+        --baseA-08: ${({ theme }) => theme.colors.baseA[8]};
+        --baseA-09: ${({ theme }) => theme.colors.baseA[9]};
+        --baseA-10: ${({ theme }) => theme.colors.baseA[10]};
+        --baseA-11: ${({ theme }) => theme.colors.baseA[11]};
+        --baseA-12: ${({ theme }) => theme.colors.baseA[12]};
 
         --primary-01: ${({ theme }) => theme.colors.primary[1]};
         --primary-02: ${({ theme }) => theme.colors.primary[2]};
@@ -59,6 +86,18 @@ const GlobalCssTheme = createGlobalStyle`
         --primary-10: ${({ theme }) => theme.colors.primary[10]};
         --primary-11: ${({ theme }) => theme.colors.primary[11]};
         --primary-12: ${({ theme }) => theme.colors.primary[12]};
+        --primaryA-01: ${({ theme }) => theme.colors.primaryA[1]};
+        --primaryA-02: ${({ theme }) => theme.colors.primaryA[2]};
+        --primaryA-03: ${({ theme }) => theme.colors.primaryA[3]};
+        --primaryA-04: ${({ theme }) => theme.colors.primaryA[4]};
+        --primaryA-05: ${({ theme }) => theme.colors.primaryA[5]};
+        --primaryA-06: ${({ theme }) => theme.colors.primaryA[6]};
+        --primaryA-07: ${({ theme }) => theme.colors.primaryA[7]};
+        --primaryA-08: ${({ theme }) => theme.colors.primaryA[8]};
+        --primaryA-09: ${({ theme }) => theme.colors.primaryA[9]};
+        --primaryA-10: ${({ theme }) => theme.colors.primaryA[10]};
+        --primaryA-11: ${({ theme }) => theme.colors.primaryA[11]};
+        --primaryA-12: ${({ theme }) => theme.colors.primaryA[12]};
 
         --success-01: ${({ theme }) => theme.colors.success[1]};
         --success-02: ${({ theme }) => theme.colors.success[2]};
@@ -72,6 +111,18 @@ const GlobalCssTheme = createGlobalStyle`
         --success-10: ${({ theme }) => theme.colors.success[10]};
         --success-11: ${({ theme }) => theme.colors.success[11]};
         --success-12: ${({ theme }) => theme.colors.success[12]};
+        --successA-01: ${({ theme }) => theme.colors.successA[1]};
+        --successA-02: ${({ theme }) => theme.colors.successA[2]};
+        --successA-03: ${({ theme }) => theme.colors.successA[3]};
+        --successA-04: ${({ theme }) => theme.colors.successA[4]};
+        --successA-05: ${({ theme }) => theme.colors.successA[5]};
+        --successA-06: ${({ theme }) => theme.colors.successA[6]};
+        --successA-07: ${({ theme }) => theme.colors.successA[7]};
+        --successA-08: ${({ theme }) => theme.colors.successA[8]};
+        --successA-09: ${({ theme }) => theme.colors.successA[9]};
+        --successA-10: ${({ theme }) => theme.colors.successA[10]};
+        --successA-11: ${({ theme }) => theme.colors.successA[11]};
+        --successA-12: ${({ theme }) => theme.colors.successA[12]};
 
         --warning-01: ${({ theme }) => theme.colors.warning[1]};
         --warning-02: ${({ theme }) => theme.colors.warning[2]};
@@ -85,22 +136,33 @@ const GlobalCssTheme = createGlobalStyle`
         --warning-10: ${({ theme }) => theme.colors.warning[10]};
         --warning-11: ${({ theme }) => theme.colors.warning[11]};
         --warning-12: ${({ theme }) => theme.colors.warning[12]};
+        --warningA-01: ${({ theme }) => theme.colors.warningA[1]};
+        --warningA-02: ${({ theme }) => theme.colors.warningA[2]};
+        --warningA-03: ${({ theme }) => theme.colors.warningA[3]};
+        --warningA-04: ${({ theme }) => theme.colors.warningA[4]};
+        --warningA-05: ${({ theme }) => theme.colors.warningA[5]};
+        --warningA-06: ${({ theme }) => theme.colors.warningA[6]};
+        --warningA-07: ${({ theme }) => theme.colors.warningA[7]};
+        --warningA-08: ${({ theme }) => theme.colors.warningA[8]};
+        --warningA-09: ${({ theme }) => theme.colors.warningA[9]};
+        --warningA-10: ${({ theme }) => theme.colors.warningA[10]};
+        --warningA-11: ${({ theme }) => theme.colors.warningA[11]};
+        --warningA-12: ${({ theme }) => theme.colors.warningA[12]};
 
         ${({ theme }) => {
             let literal = ``;
-            console.log('palette', theme?.palette);
             Object.keys(theme?.palette).forEach((color) => {
-                console.log('color', theme?.palette[color]);
                 Object.keys(theme?.palette[color]).forEach((key) => {
                     literal += `
-                    --${color}-${key}: ${theme?.palette[color][key]};
-                `;
+                        --${color}-${key}: ${theme?.palette[color][key]};
+                    `;
                 });
             });
             return literal;
         }}
     }
-
+`;
+const GlobalCss = createGlobalStyle`
     *,
     *::before,
     *::after {
