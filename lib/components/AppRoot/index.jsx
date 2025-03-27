@@ -3,15 +3,15 @@ import { useDebug, useLocalStorage } from '@spiffdog/spiffy-hooks';
 import { ThemeProvider, defaultTheme } from '@/components';
 import './styles.css';
 
-const AppRoot = ({ children, theme, ...props }) => {
-    //const [t] = useLocalStorage('theme', defaultTheme.light);
-    const t = theme?.light ?? defaultTheme.light;
-    console.log(t);
-    useDebug(t);
+const AppRoot = ({ children, customTheme, ...props }) => {
+    const [t] = useLocalStorage('theme', defaultTheme?.light);
+    const theme = t ?? customTheme?.light ?? defaultTheme?.light;
 
+    useDebug(t, 'AppRoot LocalStorage');
+    useDebug(customTheme, 'AppRoot customTheme');
+    useDebug(theme, 'AppRoot Compiled');
     return (
-        //<ThemeProvider theme={t ?? theme?.light ?? defaultTheme.light} {...props}>
-        <ThemeProvider theme={t} {...props}>
+        <ThemeProvider theme={theme} {...props}>
             {children}
         </ThemeProvider>
     );
