@@ -12,7 +12,7 @@ const StyledButton = styled.button`
     align-items: center;
 
     border: none;
-    border-radius: ${({ rounded }) => (rounded === true ? '999px' : 'unset')};
+    border-radius: unset;
     cursor: pointer;
     font-size: 16px;
     font-weight: 700;
@@ -21,6 +21,9 @@ const StyledButton = styled.button`
     padding: 6px 12px;
     text-transform: uppercase;
 
+    &.rounded {
+        border-radius: 999px;
+    }
     &.basic {
         --color: var(--primary-11);
 
@@ -99,10 +102,18 @@ const SpinnerContainer = styled.div`
     border-radius: ${({ rounded }) => (rounded === true ? '16px' : 'unset')};
 `;
 
-const Button = ({ active, appearance = 'solid', children, className, rounded, variant = 'primary', ...props }) => {
-    const classes = cn(className, variant, appearance);
+const Button = ({
+    active = true,
+    appearance = 'solid',
+    children,
+    className,
+    rounded = false,
+    variant = 'primary',
+    ...props
+}) => {
+    const classes = cn(className, variant, appearance, { rounded: rounded === true });
     return (
-        <StyledButton disabled={active} rounded={rounded} className={classes} {...props}>
+        <StyledButton disabled={!active} className={classes} {...props}>
             {children}
             {active === true && (
                 <SpinnerContainer rounded={rounded} {...props}>
