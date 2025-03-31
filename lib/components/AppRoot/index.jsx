@@ -20,7 +20,7 @@ AppRoot.displayName = 'AppRoot';
 export default AppRoot;
 
 const GoogleFont = createGlobalStyle`
-    @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 `;
 const GlobalColorTheme = createGlobalStyle`
     :root {
@@ -154,7 +154,7 @@ const GlobalColorTheme = createGlobalStyle`
             Object.keys(theme?.palette).forEach((color) => {
                 Object.keys(theme?.palette[color]).forEach((key) => {
                     literal += `
-                        --${color}-${key}: ${theme?.palette[color][key]};
+                        --${color}-${key.padStart(2, '0')}: ${theme?.palette[color][key]};
                     `;
                 });
             });
@@ -182,15 +182,12 @@ const GlobalCss = createGlobalStyle`
     }
 
     body {
-        font-family: 'Source Sans 3', sans-serif;
-        font-weight: 400;
-        font-style: normal;
         -webkit-font-smoothing: antialiased;
+        font-family: 'Poppins', sans-serif;
+        line-height: 1.65;
         font-size: 1.2rem;
-    }
-
-    strong {
-        font-weight: 700;
+        font-style: normal;
+        font-weight: 400;
     }
 
     img,
@@ -216,8 +213,42 @@ const GlobalCss = createGlobalStyle`
     h4,
     h5,
     h6 {
-        overflow-wrap: break-word;
+        font-family: inherit;
         hyphens: auto;
+        margin: 0;
+        overflow-wrap: break-word;
+        padding: .5rem 0;
     }
 
+    h1, h2, h3,
+    h4, h5, h6 {
+        font-weight: 600;
+        line-height: 1.15;
+    }
+    h1 { font-size: 3.98rem; }
+    h2 { font-size: 3.31rem; }
+    h3 { font-size: 2.31rem; }
+    
+    h4, h5, h6 {
+        font-weight: 500;
+    }
+    h4 { font-size: 2.31rem; }
+    h5 { font-size: 1.92rem; }
+    h6 { font-size: 1.60rem; }
+    small { font-size: 1.11rem; }
+    .text-caption { font-size: 1.33rem; }
+
+    pre, code {
+        background-color: var(--base-04);
+        font-family: 'Courier New', Courier, monospace;
+    }
+    pre {
+        padding: .5rem 1.5rem;
+    }
+
+    hr {
+        border: none;
+        border-top: 1px solid var(--base-10);
+        margin: 1rem 0;
+    }
 `;
