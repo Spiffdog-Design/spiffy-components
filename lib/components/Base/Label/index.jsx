@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Container = styled.div`
     position: relative;
     background-color: transparent;
-    color: #000;
+    color: var(--base-12);
     font-weight: 700;
     font-size: 0.85em;
     text-transform: uppercase;
@@ -13,7 +13,7 @@ const Container = styled.div`
         position: absolute;
         top: -4px;
         right: -14px;
-        color: red;
+        color: var(--red-10);
         content: '*';
         font-size: 18px;
         font-weight: 700;

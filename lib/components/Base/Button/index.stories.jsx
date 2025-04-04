@@ -2,8 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { CaretCircleDoubleRight } from '@phosphor-icons/react'; // https://phosphoricons.com/ -- Phosphor Icons
 
 import { Button, Icon } from '@/components';
-
-import ThemeWrapper from '../../Storybook/ThemeWrapper';
+import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
 
 const meta = {
     title: 'Base/Button',
@@ -29,7 +28,7 @@ export const Primary = {
     args: {
         appearance: 'solid',
         variant: 'primary',
-        active: false,
+        busy: false,
         rounded: false,
         children: (
             <div style={{ display: 'flex', flexDirection: 'row', gap: 8, alignItems: 'center' }}>

@@ -1,10 +1,11 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import cn from 'classnames';
 
 import { Spinner } from '@/components';
 
-// Create a styled button component
-const StyledButton = styled.button`
+// Create a styled button css template literal.
+// This is used for buttons and form submit inputs.
+export const buttonStyles = css`
     position: relative;
     display: inline-flex;
     flex-direction: row;
@@ -16,7 +17,7 @@ const StyledButton = styled.button`
     cursor: pointer;
     font-size: 16px;
     font-weight: 700;
-    height: fit-content;
+    height: 100%;
     overflow: hidden;
     padding: 6px 12px;
     text-transform: uppercase;
@@ -91,6 +92,10 @@ const StyledButton = styled.button`
     }
 `;
 
+const StyledButton = styled.button`
+    ${buttonStyles}
+`;
+
 const SpinnerContainer = styled.div`
     position: absolute;
     backdrop-filter: blur(2px);
@@ -103,7 +108,7 @@ const SpinnerContainer = styled.div`
 `;
 
 const Button = ({
-    active = true,
+    busy = false,
     appearance = 'solid',
     children,
     className,
@@ -113,9 +118,9 @@ const Button = ({
 }) => {
     const classes = cn(className, variant, appearance, { rounded: rounded === true });
     return (
-        <StyledButton disabled={!active} className={classes} {...props}>
+        <StyledButton disabled={busy} className={classes} {...props}>
             {children}
-            {active === true && (
+            {busy === true && (
                 <SpinnerContainer rounded={rounded} {...props}>
                     <Spinner />
                 </SpinnerContainer>

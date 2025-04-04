@@ -1,17 +1,23 @@
 import styled from 'styled-components';
 
-import { AppRoot, ThemeSwitcher } from '@/components';
+import { AppRoot, Button, Icon, ThemeSwitcher } from '@/components';
 import './ThemeWrapper.css';
+import { ArrowsClockwise } from '@phosphor-icons/react';
 
 const Line = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
 
     background-color: ${({ theme }) => theme.colors.primary[4]};
     padding: 8px;
     width: 100%;
+
+    & .title {
+        color: var(--primary-11);
+        padding-left: 8px;
+    }
 `;
 
 const Container = styled.div`
@@ -28,12 +34,21 @@ const Content = styled.div`
     height: 100%;
 `;
 
-const ThemeWrapper = ({ children, ...props }) => {
+const ThemeWrapper = ({ children, title, ...props }) => {
+    const _this = window;
     return (
         <AppRoot>
             <Container>
                 <Line>
-                    <ThemeSwitcher />
+                    <h3 className="title">{title}</h3>
+                    <div>
+                        <ThemeSwitcher />
+                        <Button appearance="basic" rounded={true} onClick={() => _this.location.reload()}>
+                            <Icon>
+                                <ArrowsClockwise />
+                            </Icon>
+                        </Button>
+                    </div>
                 </Line>
                 <Content>{children}</Content>
             </Container>

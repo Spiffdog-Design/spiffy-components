@@ -2,8 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { ArrowCircleRight } from '@phosphor-icons/react'; // https://phosphoricons.com/ -- Phosphor Icons
 
 import { Button, Icon, Input } from '@/components';
-
-import ThemeWrapper from '../../Storybook/ThemeWrapper';
+import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
 
 const meta = {
     title: 'Base/Input',

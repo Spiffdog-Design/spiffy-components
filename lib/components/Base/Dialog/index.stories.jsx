@@ -1,9 +1,8 @@
 import { action } from '@storybook/addon-actions';
+import { Radioactive } from '@phosphor-icons/react';
 
 import { Button, Dialog, Icon } from '@/components';
-
-import ThemeWrapper from '../../Storybook/ThemeWrapper';
-import { Radioactive } from '@phosphor-icons/react';
+import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
 
 const meta = {
     title: 'Base/Dialog',

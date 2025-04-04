@@ -2,11 +2,12 @@
 // https://phosphoricons.com/
 import { Children, cloneElement } from 'react';
 
-const Icon = ({ size = 23, weight = 'bold', children, ...props }) =>
+const Icon = ({ size = 18, weight = 'bold', children, ...props }) =>
     Children.map(children, (child) =>
         cloneElement(child, {
             size,
             weight,
+            ariaHidden: true,
             ...child.props,
         }),
     );

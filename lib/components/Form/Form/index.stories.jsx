@@ -1,7 +1,6 @@
 import { action } from '@storybook/addon-actions';
-import { Button, Form, Input } from '@/components';
-
-import ThemeWrapper from '../../Storybook/ThemeWrapper';
+import { Form } from '@/components';
+import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
 
 const meta = {
     title: 'Form/Form',

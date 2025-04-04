@@ -2,8 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { Bluetooth } from '@phosphor-icons/react';
 
 import { Button, ButtonBar, Icon } from '@/components';
-
-import ThemeWrapper from '../../Storybook/ThemeWrapper';
+import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
 
 const meta = {
     title: 'Base/Button Bar',

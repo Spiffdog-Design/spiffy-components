@@ -11,6 +11,8 @@ const ThemeSwitcher = () => {
     const [_, setTheme] = useLocalStorage('theme', defaultTheme.light);
 
     const toggleMode = () => {
+        console.log('plop');
+
         setMode((m) => (m === 'light' ? 'dark' : 'light'));
     };
 
