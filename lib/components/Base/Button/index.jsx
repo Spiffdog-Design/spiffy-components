@@ -107,7 +107,7 @@ const SpinnerContainer = styled.div`
     border-radius: ${({ rounded }) => (rounded === true ? '16px' : 'unset')};
 `;
 
-const Button = ({
+export const Button = ({
     busy = false,
     appearance = 'solid',
     children,
@@ -129,5 +129,3 @@ const Button = ({
     );
 };
 Button.displayName = 'Button';
-
-export default Button;

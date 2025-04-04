@@ -21,7 +21,7 @@ const ThemeSwitcher = () => {
     }, [mode]);
 
     return (
-        <Button appearance="basic" rounded size="sm" variant="primary" onClick={toggleMode}>
+        <Button appearance="basic" rounded={true} size="sm" variant="primary" onClick={toggleMode}>
             <Icon>{mode === 'light' ? <Sun weight="bold" /> : <Moon weight="bold" />}</Icon>
         </Button>
     );

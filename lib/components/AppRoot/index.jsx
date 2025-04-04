@@ -10,7 +10,7 @@ const AppRoot = ({ children, customTheme, ...props }) => {
         <ThemeProvider theme={theme} {...props}>
             <GlobalColorTheme />
             <GlobalCss />
-            <GoogleFont />
+            <GlobalFont />
             {children}
         </ThemeProvider>
     );
@@ -19,7 +19,7 @@ AppRoot.displayName = 'AppRoot';
 
 export default AppRoot;
 
-const GoogleFont = createGlobalStyle`
+const GlobalFont = createGlobalStyle`
     ${/* Poppins */ ''}
     ${/* latin-ext */ ''}
     @font-face {
