@@ -1,28 +1,26 @@
-'use client';
-
-import { useEffect, useState } from 'react';
-import { Sun, Moon } from '@phosphor-icons/react'; // https://phosphoricons.com/ -- Phosphor Icons
+import { useEffect } from 'react';
 import { useLocalStorage } from '@spiffdog/spiffy-hooks';
+import { Sun, Moon } from '@phosphor-icons/react'; // https://phosphoricons.com/ -- Phosphor Icons
 
-import { Button, Icon, defaultTheme } from '@/components';
+import { Button, Icon } from '@/components';
+
+const getSystemTheme = () => (window?.matchMedia('(prefers-color-scheme: dark)')?.matches ? 'dark' : 'light');
 
 const ThemeSwitcher = () => {
-    const [mode, setMode] = useState('light');
-    const [_, setTheme] = useLocalStorage('theme', defaultTheme.light);
+    const [theme, setTheme] = useLocalStorage('theme');
 
     const toggleMode = () => {
-        console.log('plop');
-
-        setMode((m) => (m === 'light' ? 'dark' : 'light'));
+        var t = theme === 'light' ? 'dark' : 'light';
+        setTheme(t);
     };
 
     useEffect(() => {
-        setTheme(mode == 'light' ? defaultTheme.light : defaultTheme.dark);
-    }, [mode]);
+        setTheme(theme ?? getSystemTheme());
+    }, []);
 
     return (
         <Button appearance="basic" rounded={true} size="sm" variant="primary" onClick={toggleMode}>
-            <Icon>{mode === 'light' ? <Sun weight="bold" /> : <Moon weight="bold" />}</Icon>
+            <Icon>{theme === 'light' ? <Sun weight="bold" /> : <Moon weight="bold" />}</Icon>
         </Button>
     );
 };

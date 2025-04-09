@@ -1,8 +1,8 @@
 import styled from 'styled-components';
+import { ArrowsClockwise } from '@phosphor-icons/react';
 
 import { AppRoot, Button, Icon, ThemeSwitcher } from '@/components';
 import './ThemeWrapper.css';
-import { ArrowsClockwise } from '@phosphor-icons/react';
 
 const Line = styled.div`
     display: flex;
@@ -10,7 +10,7 @@ const Line = styled.div`
     align-items: center;
     justify-content: space-between;
 
-    background-color: ${({ theme }) => theme.colors.primary[4]};
+    background-color: var(--primary-04);
     padding: 8px;
     width: 100%;
 
@@ -23,13 +23,13 @@ const Line = styled.div`
 const Container = styled.div`
     display: grid;
     grid-template-rows: auto 1fr;
-    border: 1px solid ${({ theme }) => theme.colors.primary[7]};
+    border: 1px solid var(--primary-07);
     height: 100%;
     width: 100%;
 `;
 
 const Content = styled.div`
-    background-color: ${({ theme }) => theme.colors.primary[1]};
+    background-color: var(--primary-01);
     padding: 20px;
     height: 100%;
 `;

@@ -19,7 +19,6 @@ export const buttonStyles = css`
     font-weight: 700;
     height: 100%;
     overflow: hidden;
-    padding: 6px 12px;
     text-transform: uppercase;
 
     &.rounded {
