@@ -1,13 +1,14 @@
 import { useEffect } from 'react';
-import { useLocalStorage } from '@spiffdog/spiffy-hooks';
 import { Sun, Moon } from '@phosphor-icons/react'; // https://phosphoricons.com/ -- Phosphor Icons
 
-import { Button, Icon } from '@/components';
+// import { useLocalStorage } from '@spiffdog/spiffy-hooks';
+// import { Button, Icon } from '@/components';
+
+import { Button } from '@/components';
 
 const getSystemTheme = () => (window?.matchMedia('(prefers-color-scheme: dark)')?.matches ? 'dark' : 'light');
-
 const ThemeSwitcher = () => {
-    const [theme, setTheme] = useLocalStorage('theme');
+    // const [theme, setTheme] = useLocalStorage('theme');
 
     const toggleMode = () => {
         var t = theme === 'light' ? 'dark' : 'light';
@@ -20,7 +21,7 @@ const ThemeSwitcher = () => {
 
     return (
         <Button appearance="basic" rounded={true} size="sm" variant="primary" onClick={toggleMode}>
-            <Icon>{theme === 'light' ? <Sun weight="bold" /> : <Moon weight="bold" />}</Icon>
+            {theme === 'light' ? <Sun weight="bold" /> : <Moon weight="bold" />}
         </Button>
     );
 };

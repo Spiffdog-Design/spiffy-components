@@ -1,18 +1,18 @@
 import react from '@vitejs/plugin-react';
-import dts from 'vite-plugin-dts';
 
 import { defineConfig } from 'vite';
 import { extname, relative, resolve } from 'path';
 import { fileURLToPath } from 'node:url';
 import { glob } from 'glob';
+import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 
 export default defineConfig({
-    plugins: [react(), dts({ include: ['lib'] })],
+    plugins: [vanillaExtractPlugin(), react()],
     resolve: {
         alias: [
             {
-                find: '@/components',
-                replacement: resolve(__dirname, './lib/components'),
+                find: '@',
+                replacement: resolve(__dirname, './lib'),
             },
         ],
     },
@@ -26,13 +26,18 @@ export default defineConfig({
             external: ['react', 'react/jsx-runtime'],
             input: Object.fromEntries(
                 glob
-                    .sync('lib/components/**/*.{js,jsx}', {
-                        ignore: ['lib/**/*.d.js', 'lib/**/*.stories.jsx', 'lib/components/Storybook/**/*'],
+                    .sync('lib/**/*.{js,jsx}', {
+                        ignore: [
+                            'lib/**/*.d.{js,jsx}',
+                            'lib/**/*.test.{js,jsx}',
+                            'lib/**/*.stories.{js,jsx}',
+                            'lib/**/Storybook/**/*.{js,jsx}',
+                        ],
                     })
                     .map((file) => [
                         // 1. The name of the entry point
                         // lib/nested/foo.js becomes nested/foo
-                        relative('lib/components', file.slice(0, file.length - extname(file).length)),
+                        relative('lib', file.slice(0, file.length - extname(file).length)),
                         // 2. The absolute path to the entry file
                         // lib/nested/foo.ts becomes /project/lib/nested/foo.ts
                         fileURLToPath(new URL(file, import.meta.url)),
