@@ -1,14 +1,22 @@
-import { useState } from 'react';
-import ThemeContext from './ThemeContext';
+import { createContext, useContext, useState } from 'react';
+import { lightTheme } from '@/components/Theme/themes/lightTheme.css';
+import { darkTheme } from '@/components/Theme/themes/darkTheme.css';
 
-export const ThemeProvider = ({ children, theme }) => {
-    const [themeName, setThemeName] = useState('light'); // Initial theme
+const ThemeContext = createContext({
+    theme: 'light', // Default theme
+    themeClass: lightTheme,
+    setTheme: (name) => {},
+});
 
-    const updateTheme = (name) => setThemeName(name);
+export const useTheme = () => useContext(ThemeContext);
+
+export const ThemeProvider = ({ children }) => {
+    const [theme, setTheme] = useState('light'); // Initial theme name
 
     const value = {
-        themeName,
-        updateTheme,
+        theme,
+        themeClass: theme === 'light' ? lightTheme : darkTheme,
+        setTheme: (name) => setTheme(name),
     };
 
     return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;

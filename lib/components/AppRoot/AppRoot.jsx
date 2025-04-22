@@ -1,17 +1,27 @@
-// import { useLocalStorage } from '@spiffdog/spiffy-hooks';
-
+import { useEffect, useRef } from 'react';
 import * as styles from './AppRoot.css';
-import { ThemeProvider } from '@/components';
+import { ThemeProvider, useTheme } from '@/components';
 
 const AppRoot = ({ children, ...props }) => {
-    // const [t] = useLocalStorage('theme', defaultTheme?.light);
-    // const theme = t ?? customTheme?.light ?? defaultTheme?.light;
     return (
         <ThemeProvider {...props}>
-            <div className={styles.appRoot}>{children}</div>
+            <AppRootContainer>{children}</AppRootContainer>
         </ThemeProvider>
     );
 };
 AppRoot.displayName = 'AppRoot';
 
 export default AppRoot;
+
+const AppRootContainer = ({ children, ...props }) => {
+    const { themeClass } = useTheme();
+    const winRef = useRef(window);
+
+    useEffect(() => {
+        if (winRef.current != null) {
+            winRef.current.document.querySelector('body').className = themeClass;
+        }
+    }, [themeClass]);
+
+    return children;
+};

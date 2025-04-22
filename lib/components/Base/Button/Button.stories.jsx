@@ -1,8 +1,8 @@
 import { action } from '@storybook/addon-actions';
-import { CaretCircleDoubleRight } from '@phosphor-icons/react'; // https://phosphoricons.com/ -- Phosphor Icons
+import { ArrowFatRight } from '@phosphor-icons/react'; // https://phosphoricons.com/ -- Phosphor Icons
 
-import { Button } from '@/components';
-//import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
+import { Button, Icon } from '@/components';
+import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
 
 const meta = {
     title: 'Base/Button',
@@ -33,10 +33,16 @@ export const Primary = {
         children: (
             <div style={{ display: 'flex', flexDirection: 'row', gap: 8, alignItems: 'center' }}>
                 <span>Click Me</span>
-                <CaretCircleDoubleRight weight="fill" />
+                <Icon>
+                    <ArrowFatRight weight="fill" />
+                </Icon>
             </div>
         ),
     },
 
-    render: (args) => <Button {...args} onClick={action('clicked')} />,
+    render: (args) => (
+        <ThemeWrapper>
+            <Button {...args} onClick={action('clicked')} />
+        </ThemeWrapper>
+    ),
 };

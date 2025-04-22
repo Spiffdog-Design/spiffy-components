@@ -1,20 +1,13 @@
 import { useEffect, useState } from 'react';
-import {
-    Close,
-    Content as RdxContent,
-    Description as RdxDescription,
-    Overlay as RdxOverlay,
-    Portal,
-    Root,
-    Title as RdxTitle,
-    Trigger,
-} from '@radix-ui/react-dialog';
-import styled from 'styled-components';
-import cn from 'classnames';
 import { X } from '@phosphor-icons/react';
+import { Close, Content, Description, Overlay, Portal, Root, Title, Trigger } from '@radix-ui/react-dialog';
+import cn from 'classnames';
+
 import { Icon } from '@/components';
 
-const Dialog = ({
+import * as styles from './Dialog.css';
+
+export const Dialog = ({
     actions,
     className,
     children,
@@ -43,43 +36,42 @@ const Dialog = ({
         setIsOpen(open);
     }, [open]);
 
-    const classes = cn(variant, className);
-
     return (
         <Root open={isOpen} onOpenChange={handleOpenClose}>
             <Trigger asChild>{trigger}</Trigger>
             <Portal>
-                <Overlay className={classes} />
-                <Container className={classes}>
-                    <Heading className={classes}>
-                        {title != null && <Title className={classes}>{title}</Title>}
-                        {description != null && <Description>{description}</Description>}
-                    </Heading>
-                    <Content>
-                        <Children className={classes}>{children}</Children>
+                <Overlay className={styles.overlay} />
+                <div className={cn(styles.container, className)}>
+                    <div className={styles.heading}>
+                        {title != null && <Title className={styles.title}>{title}</Title>}
+                        {description != null && <Description className={styles.description}>{description}</Description>}
+                    </div>
+                    <Content className={styles.content}>
+                        <div className={styles.children}>{children}</div>
                     </Content>
-                    <Footer>
-                        {footer != null && <FooterText>{footer}</FooterText>}
+                    <div className={styles.footer}>
+                        {footer != null && <div className={styles.footerText}>{footer}</div>}
                         {actions != null && (
-                            <Actions>{typeof actions === 'function' ? actions(handleClose) : actions}</Actions>
+                            <div className={styles.actions}>
+                                {typeof actions === 'function' ? actions(handleClose) : actions}
+                            </div>
                         )}
-                    </Footer>
+                    </div>
                     <Close asChild>
-                        <CloseButton className={classes} onClick={handleClose}>
+                        <div className={styles.closeButton} onClick={handleClose}>
                             <Icon>
                                 <X weight="bold" />
                             </Icon>
-                        </CloseButton>
+                        </div>
                     </Close>
-                </Container>
+                </div>
             </Portal>
         </Root>
     );
 };
 Dialog.displayName = 'Dialog';
 
-export default Dialog;
-
+/*
 const Actions = styled.div`
     display: flex;
     flex-direction: row;
@@ -268,3 +260,4 @@ const Title = styled(RdxTitle)`
         --color: var(--warning-11);
     }
 `;
+*/
