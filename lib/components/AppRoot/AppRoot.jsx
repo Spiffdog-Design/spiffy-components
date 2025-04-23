@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
-import * as styles from './AppRoot.css';
 import { ThemeProvider, useTheme } from '@/components';
+
+import './AppRoot.css';
 
 const AppRoot = ({ children, ...props }) => {
     return (

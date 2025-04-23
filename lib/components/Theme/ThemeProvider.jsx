@@ -1,17 +1,20 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, forwardRef, useContext, useEffect, useRef, useState } from 'react';
 import { lightTheme } from '@/components/Theme/themes/lightTheme.css';
 import { darkTheme } from '@/components/Theme/themes/darkTheme.css';
 
-const ThemeContext = createContext({
-    theme: 'light', // Default theme
-    themeClass: lightTheme,
-    setTheme: (name) => {},
-});
-
 export const useTheme = () => useContext(ThemeContext);
+export const ThemeProvider = forwardRef(({ children }, ref) => {
+    const matcher = useRef(window?.matchMedia('(prefers-color-scheme: dark)'));
+    const [theme, setTheme] = useState(getSystemTheme(matcher.current)); // Initial theme name
 
-export const ThemeProvider = ({ children }) => {
-    const [theme, setTheme] = useState('light'); // Initial theme name
+    useEffect(() => {
+        matcher.current?.addEventListener('change', (event) => {
+            setTheme(event.matches ? 'dark' : 'light');
+        });
+        return () => {
+            matcher.current?.removeEventListener('change');
+        };
+    }, []);
 
     const value = {
         theme,
@@ -19,6 +22,18 @@ export const ThemeProvider = ({ children }) => {
         setTheme: (name) => setTheme(name),
     };
 
-    return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
-};
+    return (
+        <ThemeContext.Provider ref={ref} value={value}>
+            {children}
+        </ThemeContext.Provider>
+    );
+});
 ThemeProvider.displayName = 'ThemeProvider';
+
+const getSystemTheme = (matcher) => (matcher?.matches ? 'dark' : 'light');
+
+const ThemeContext = createContext({
+    theme: 'light', // Default theme
+    themeClass: lightTheme,
+    setTheme: (name) => {},
+});

@@ -13,8 +13,11 @@ const meta = {
             control: { type: 'radio' },
         },
         variant: {
-            options: ['alert', 'primary', 'success', 'warning'],
+            options: ['alert', 'base', 'primary', 'success', 'warning'],
             control: { type: 'radio' },
+        },
+        disabled: {
+            control: { type: 'boolean' },
         },
         rounded: {
             control: { type: 'boolean' },
@@ -27,8 +30,9 @@ export default meta;
 export const Primary = {
     args: {
         appearance: 'solid',
-        variant: 'primary',
+        variant: 'base',
         busy: false,
+        disabled: false,
         rounded: false,
         children: (
             <div style={{ display: 'flex', flexDirection: 'row', gap: 8, alignItems: 'center' }}>
