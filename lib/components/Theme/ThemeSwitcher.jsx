@@ -4,7 +4,7 @@ import { Sun, Moon } from '@phosphor-icons/react'; // https://phosphoricons.com/
 import { Button, Icon, useTheme } from '@/components';
 
 const getSystemTheme = () => (window?.matchMedia('(prefers-color-scheme: dark)')?.matches ? 'dark' : 'light');
-const ThemeSwitcher = forwardRef((_, ref) => {
+const ThemeSwitcher = forwardRef(({ variant = 'base' }, ref) => {
     const { theme, setTheme } = useTheme();
 
     const toggleMode = () => {
@@ -17,7 +17,7 @@ const ThemeSwitcher = forwardRef((_, ref) => {
     }, []);
 
     return (
-        <Button ref={ref} appearance="basic" rounded={true} size="sm" variant="primary" onClick={toggleMode}>
+        <Button ref={ref} appearance="basic" rounded={true} size="sm" variant={variant} onClick={toggleMode}>
             <Icon>{theme === 'light' ? <Sun weight="bold" /> : <Moon weight="bold" />}</Icon>
         </Button>
     );

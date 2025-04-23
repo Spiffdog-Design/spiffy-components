@@ -17,7 +17,7 @@ const ThemeWrapper = ({ children, title }) => {
                     <h3 className="title">{title}</h3>
                     <div className={styles.actions}>
                         <ThemeSwitcher />
-                        <Button appearance="basic" rounded={true} onClick={handleReload}>
+                        <Button appearance="basic" variant="base" rounded={true} onClick={handleReload}>
                             <Icon>
                                 <ArrowsClockwise />
                             </Icon>

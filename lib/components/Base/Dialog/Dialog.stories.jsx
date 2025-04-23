@@ -12,7 +12,7 @@ const meta = {
     },
     argTypes: {
         variant: {
-            options: ['alert', 'primary', 'success', 'warning'],
+            options: ['alert', 'base', 'primary', 'success', 'warning'],
             control: { type: 'radio' },
         },
     },
@@ -23,7 +23,7 @@ export default meta;
 export const Primary = {
     args: {
         open: false,
-        variant: 'primary',
+        variant: 'base',
         title: 'Format Hard Drive',
         description: 'Format your disk to allocate space and make it visible to the operating system.',
         footer: "This is just a demo.  We won't really format your disk... or will we? 😈",
@@ -35,7 +35,7 @@ export const Primary = {
                 onClick={action('clicked')}
                 actions={(onClose) => (
                     <>
-                        <Button appearance="basic" onClick={onClose}>
+                        <Button appearance="basic" variant={args.variant} onClick={onClose}>
                             Cancel
                         </Button>
                         <Button variant="alert">
@@ -46,7 +46,7 @@ export const Primary = {
                         </Button>
                     </>
                 )}
-                trigger={<Button>Open Dialog</Button>}
+                trigger={<Button variant={args.variant}>Open Dialog</Button>}
                 {...args}
             >
                 <p>This action will remove all data from your hard drive. Are you sure you want to continue?</p>

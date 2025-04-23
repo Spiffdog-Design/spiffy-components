@@ -18,7 +18,7 @@ export const Dialog = forwardRef(
             open = false,
             title,
             trigger,
-            variant = 'primary',
+            variant = 'base',
             onOpenChange = () => null,
         },
         ref,
@@ -42,6 +42,7 @@ export const Dialog = forwardRef(
 
         const variantClass = cn({
             [`${styles.alert}`]: variant === 'alert',
+            [`${styles.primary}`]: variant === 'primary',
             [`${styles.success}`]: variant === 'success',
             [`${styles.warning}`]: variant === 'warning',
         });

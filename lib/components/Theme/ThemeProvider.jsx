@@ -7,12 +7,14 @@ export const ThemeProvider = forwardRef(({ children }, ref) => {
     const matcher = useRef(window?.matchMedia('(prefers-color-scheme: dark)'));
     const [theme, setTheme] = useState(getSystemTheme(matcher.current)); // Initial theme name
 
+    const handleColorSchemeChange = (event) => {
+        setTheme(event.matches ? 'dark' : 'light');
+    };
+
     useEffect(() => {
-        matcher.current?.addEventListener('change', (event) => {
-            setTheme(event.matches ? 'dark' : 'light');
-        });
+        matcher.current?.addEventListener('change', handleColorSchemeChange);
         return () => {
-            matcher.current?.removeEventListener('change');
+            matcher.current?.removeEventListener('change', handleColorSchemeChange);
         };
     }, []);
 
