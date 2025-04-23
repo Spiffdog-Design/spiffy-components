@@ -4,11 +4,11 @@ import cn from 'classnames';
 
 import { Spinner } from '@/components';
 
-export const Button = ({ busy, children, className, rounded, ...props }) => {
+export const Button = ({ busy, children, className, rounded, variant, ...props }) => {
     return (
         <button className={cn(styles.base, className, { rounded: rounded })} {...props}>
             {children}
-            <div className={cn(styles.busy, { rounded: rounded, show: busy })}>
+            <div className={cn(styles.busy, variant, { rounded: rounded, show: busy })}>
                 <Spinner />
             </div>
         </button>

@@ -58,7 +58,7 @@ export const Dialog = ({
                         )}
                     </div>
                     <Close asChild>
-                        <div className={styles.closeButton} onClick={handleClose}>
+                        <div className={cn(styles.closeButton, variant)} onClick={handleClose}>
                             <Icon>
                                 <X weight="bold" />
                             </Icon>
