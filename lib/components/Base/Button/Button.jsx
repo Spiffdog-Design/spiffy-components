@@ -6,7 +6,7 @@ import cn from 'classnames';
 import { Spinner } from '@/components';
 
 export const Button = forwardRef(
-    ({ appearance = 'solid', busy, children, className, disabled, rounded, variant = 'primary', ...props }, ref) => {
+    ({ appearance = 'solid', busy, children, className, disabled, rounded, variant = 'base', ...props }, ref) => {
         const displayClassName = cn(styles.base, className, {
             rounded: rounded,
             [`${styles.basic}`]: appearance === 'basic',
@@ -27,3 +27,4 @@ export const Button = forwardRef(
         );
     },
 );
+Button.displayName = 'Button';
