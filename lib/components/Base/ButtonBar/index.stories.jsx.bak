@@ -34,7 +34,7 @@ const meta = {
 
 export default meta;
 
-export const Primary = {
+export const Demo = {
     args: {
         border: false,
         multiple: false,

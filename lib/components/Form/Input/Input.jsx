@@ -1,65 +1,36 @@
-import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import { X } from '@phosphor-icons/react'; // https://phosphoricons.com/ -- Phosphor Icons
+import { useId } from 'react';
 import cn from 'classnames';
 
-import { Button, Icon } from '@/components';
-import { isNullOrEmpty } from '../../../utilities';
+import { BaseInput, BaseLabel } from '@/components';
 import * as styles from './Input.css';
+import { isNullOrEmpty } from '../../../utilities';
 
-const displayClassName = (root, className, variant) =>
-    cn(root, className, {
-        [`${styles.alert}`]: variant === 'alert',
-        [`${styles.primary}`]: variant === 'primary',
-        [`${styles.success}`]: variant === 'success',
-        [`${styles.warning}`]: variant === 'warning',
+export const Input = ({ layout = 'unset', ...props }) => {
+    const className = cn({
+        [`${styles.vertical}`]: layout === 'vertical',
+        [`${styles.horizontal}`]: layout === 'horizontal',
     });
 
-export const Input = forwardRef(({ actions, className, onChange, variant = 'primary', value = '', ...props }, ref) => {
-    const inputRef = useRef(null);
-    const [inputText, setInputText] = useState(value);
-
-    const handleChange = (evt) => {
-        if (onChange != null) {
-            onChange(evt.currentTarget.value);
-        }
-    };
-    const handleClear = () => {
-        if (onChange != null) {
-            onChange('');
-        }
-    };
-    const handleFocus = (evt) => {
-        evt.currentTarget.focus();
-        evt.currentTarget.select();
-    };
-
-    useEffect(() => {
-        setInputText(value);
-    }, [value]);
-
-    useImperativeHandle(ref, () => inputRef.current);
-
-    return (
-        <div className={displayClassName(styles.root, className, variant)}>
-            <input
-                className={displayClassName(styles.input, className, variant)}
-                ref={inputRef}
-                onFocus={handleFocus}
-                onChange={handleChange}
-                value={inputText}
-                {...props}
-            />
-            <div className={displayClassName(styles.actions, variant)}>
-                {!isNullOrEmpty(inputText) && (
-                    <Button appearance="basic" variant={variant} onClick={handleClear}>
-                        <Icon>
-                            <X />
-                        </Icon>
-                    </Button>
-                )}
-                {actions != null && actions}
-            </div>
+    return layout === 'unset' ? (
+        <InnerInputComponents {...props} />
+    ) : (
+        <div className={className}>
+            <InnerInputComponents layout={layout} {...props} />
         </div>
     );
-});
+};
 Input.displayName = 'Input';
+
+const InnerInputComponents = ({ helperText, layout, label, required, variant, ...props }) => {
+    const id = useId();
+
+    return (
+        <>
+            <BaseLabel htmlFor={id} required={required} variant={variant}>
+                {label}
+            </BaseLabel>
+            <BaseInput id={id} required={required} variant={variant} {...props} />
+            {!isNullOrEmpty(helperText) ? <small className="helperText">{helperText}</small> : null}
+        </>
+    );
+};

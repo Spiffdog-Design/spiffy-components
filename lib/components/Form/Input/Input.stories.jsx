@@ -1,8 +1,6 @@
-import { useState } from 'react';
-import { ArrowFatRight } from '@phosphor-icons/react'; // https://phosphoricons.com/ -- Phosphor Icons
-
-import { Button, Icon, Input } from '@/components';
+import { Input } from '@/components';
 import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
+import { useState } from 'react';
 
 const meta = {
     title: 'Form/Input',
@@ -12,14 +10,25 @@ const meta = {
             options: ['alert', 'base', 'primary', 'success', 'warning'],
             control: { type: 'radio' },
         },
+        layout: {
+            options: ['horizontal', 'vertical', 'unset'],
+            control: { type: 'radio' },
+        },
+        required: {
+            control: { type: 'boolean' },
+        },
     },
 };
 
 export default meta;
 
-export const Primary = {
+export const Demo = {
     args: {
-        variant: 'base',
+        helperText: 'Fill out this form',
+        label: 'This is a label',
+        layout: 'unset',
+        placeholder: 'Enter text in the field',
+        required: false,
     },
 
     render: (args) => {
@@ -28,21 +37,7 @@ export const Primary = {
 
         return (
             <ThemeWrapper>
-                <Input
-                    placeholder="Enter something here"
-                    actions={
-                        <>
-                            <Button>
-                                <Icon>
-                                    <ArrowFatRight weight="fill" />
-                                </Icon>
-                            </Button>
-                        </>
-                    }
-                    onChange={handleChange}
-                    value={text}
-                    {...args}
-                />
+                <Input onChange={handleChange} value={text} {...args}></Input>
             </ThemeWrapper>
         );
     },

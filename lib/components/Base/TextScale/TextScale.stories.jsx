@@ -7,7 +7,7 @@ const meta = {
 
 export default meta;
 
-export const Primary = {
+export const Demo = {
     args: {
         children: 'The quick brown fox jumps over the lazy dog',
     },

@@ -27,7 +27,7 @@ const meta = {
 
 export default meta;
 
-export const Primary = {
+export const Demo = {
     args: {
         appearance: 'solid',
         variant: 'base',
@@ -35,12 +35,12 @@ export const Primary = {
         disabled: false,
         rounded: false,
         children: (
-            <div style={{ display: 'flex', flexDirection: 'row', gap: 8, alignItems: 'center' }}>
+            <>
                 <span>Click Me</span>
                 <Icon>
                     <ArrowFatRight weight="fill" />
                 </Icon>
-            </div>
+            </>
         ),
     },
 

@@ -1,9 +1,9 @@
-import { Label } from '@/components';
+import { BaseLabel } from '@/components';
 import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
 
 const meta = {
-    title: 'Form/Label',
-    component: Label,
+    title: 'Form/Base/BaseLabel',
+    component: BaseLabel,
     argTypes: {
         required: {
             control: { type: 'boolean' },
@@ -13,14 +13,14 @@ const meta = {
 
 export default meta;
 
-export const Primary = {
+export const Demo = {
     args: {
         required: false,
     },
 
     render: (args) => (
         <ThemeWrapper>
-            <Label {...args}>This is a label</Label>
+            <BaseLabel {...args}>This is a label</BaseLabel>
         </ThemeWrapper>
     ),
 };

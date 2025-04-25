@@ -22,7 +22,7 @@ const meta = {
 
 export default meta;
 
-export const Primary = {
+export const Demo = {
     args: {
         type: 'single',
         defaultValue: 'item-2',

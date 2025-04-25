@@ -20,7 +20,7 @@ const meta = {
 
 export default meta;
 
-export const Primary = {
+export const Demo = {
     args: {
         open: false,
         variant: 'base',
