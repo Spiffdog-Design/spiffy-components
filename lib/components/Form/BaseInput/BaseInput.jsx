@@ -7,16 +7,17 @@ import { getVariantMainColor, isNullOrEmpty } from '../../../utilities';
 import { theme } from '@/components/Theme/themes/theme.css';
 import * as styles from './BaseInput.css';
 
-const displayClassName = (root, className, variant) =>
-    cn(root, className, {
+const displayClassName = (root, variant, className) => {
+    return cn(root, className, {
         [`${styles.alert}`]: variant === 'alert',
         [`${styles.primary}`]: variant === 'primary',
         [`${styles.success}`]: variant === 'success',
         [`${styles.warning}`]: variant === 'warning',
     });
+};
 
 export const BaseInput = forwardRef(
-    ({ actions, className, onChange, helperText, required, variant = 'base', value = '', ...props }, ref) => {
+    ({ actions, className = '', onChange, helperText, required, variant = 'base', value = '', ...props }, ref) => {
         const inputRef = useRef(null);
         const [inputText, setInputText] = useState(value);
 
@@ -45,9 +46,9 @@ export const BaseInput = forwardRef(
         }, [value]);
 
         return (
-            <div className={displayClassName(styles.container, className, variant)}>
+            <div className={displayClassName(styles.root, variant)}>
                 <input
-                    className={displayClassName(styles.input, className, variant)}
+                    className={displayClassName(styles.input, variant, className)}
                     ref={inputRef}
                     onFocus={handleFocus}
                     onChange={handleChange}
