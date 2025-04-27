@@ -15,15 +15,12 @@ export default defineConfig({
         ],
     },
     build: {
-        copyPublicDir: false,
         cssCodeSplit: true,
         lib: {
             entry: resolve(__dirname, './lib/components/index.js'),
             formats: ['es'],
             fileName: 'index',
         },
-        manifest: 'manifest.json',
-        ssrManifest: 'ssr-manifest.json',
         rollupOptions: {
             external: ['react', 'react/jsx-runtime'],
             jsx: 'react-jsx',
