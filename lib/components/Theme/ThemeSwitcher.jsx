@@ -5,20 +5,20 @@ import { Button, Icon, useTheme } from '@/components';
 
 const getSystemTheme = () => (window?.matchMedia('(prefers-color-scheme: dark)')?.matches ? 'dark' : 'light');
 const ThemeSwitcher = forwardRef(({ variant = 'base' }, ref) => {
-    const { theme, setTheme } = useTheme();
+    const { themeName, setThemeName } = useTheme();
 
     const toggleMode = () => {
-        var t = theme === 'light' ? 'dark' : 'light';
-        setTheme(t);
+        var t = themeName === 'light' ? 'dark' : 'light';
+        setThemeName(t);
     };
 
     useEffect(() => {
-        setTheme(theme ?? getSystemTheme());
+        setThemeName(themeName ?? getSystemTheme());
     }, []);
 
     return (
         <Button ref={ref} appearance="basic" rounded={true} size="sm" variant={variant} onClick={toggleMode}>
-            <Icon>{theme === 'light' ? <Sun weight="bold" /> : <Moon weight="bold" />}</Icon>
+            <Icon>{themeName === 'light' ? <Sun weight="bold" /> : <Moon weight="bold" />}</Icon>
         </Button>
     );
 });
