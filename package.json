@@ -1,6 +1,6 @@
 {
     "name": "@spiffdog/spiffy-components",
-    "version": "0.3.1-c",
+    "version": "0.3.1-d",
     "type": "module",
     "main": "dist/index.js",
     "module": "dist/index.js",
