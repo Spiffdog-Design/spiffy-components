@@ -37,13 +37,18 @@ export const Demo = {
             <Grid {...args}>
                 <GridItem style={{ border: '3px solid lightblue', padding: 8, height: '100px' }}>Item 1</GridItem>
                 <GridItem style={{ border: '3px solid lightcoral', padding: 8, height: '100px' }}>Item 2</GridItem>
-                <GridItem span={2} s style={{ border: '3px solid lightgreen', padding: 8, height: '100px' }}>
-                    Item 3
+                <GridItem style={{ border: '3px solid lightgreen', padding: 8, height: '100px' }}>Item 3</GridItem>
+                <GridItem span={3} style={{ border: '3px solid aquamarine', padding: 8, height: '100px' }}>
+                    Item 4
                 </GridItem>
-                <GridItem style={{ border: '3px solid aquamarine', padding: 8, height: '100px' }}>Item 4</GridItem>
                 <GridItem style={{ border: '3px solid lightpink', padding: 8, height: '100px' }}>Item 5</GridItem>
-                <GridItem style={{ border: '3px solid lightblue', padding: 8, height: '100px' }}>Item 6</GridItem>
-                <GridItem style={{ border: '3px solid lightgreen', padding: 8, height: '100px' }}>Item 7</GridItem>
+                <GridItem span={2} style={{ border: '3px solid lightblue', padding: 8, height: '100px' }}>
+                    Item 6
+                </GridItem>
+                <GridItem span={2} style={{ border: '3px solid lightgreen', padding: 8, height: '100px' }}>
+                    Item 7
+                </GridItem>
+                <GridItem style={{ border: '3px solid lightgreen', padding: 8, height: '100px' }}>Item 8</GridItem>
             </Grid>
         </ThemeWrapper>
     ),
@@ -63,7 +68,9 @@ export const Auto = {
                     Item 1
                 </GridItem>
                 <GridItem style={{ border: '3px solid lightcoral', padding: 8, height: '100px' }}>Item 2</GridItem>
-                <GridItem style={{ border: '3px solid lightgreen', padding: 8, height: '100px' }}>Item 3</GridItem>
+                <GridItem span={2} style={{ border: '3px solid lightgreen', padding: 8, height: '100px' }}>
+                    Item 3
+                </GridItem>
                 <GridItem style={{ border: '3px solid aquamarine', padding: 8, height: '100px' }}>Item 4</GridItem>
                 <GridItem span={2} style={{ border: '3px solid lightpink', padding: 8, height: '100px' }}>
                     Item 5
