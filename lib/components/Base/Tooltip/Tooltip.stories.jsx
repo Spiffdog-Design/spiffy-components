@@ -40,31 +40,43 @@ export const Demo = {
 
     render: (args) => (
         <ThemeWrapper>
-            <Tooltip trigger={<p>Show Tooltip</p>} {...args}>
-                {({ color }) => (
-                    <div>
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    gap: '1rem',
+                    height: '100%',
+                    width: '100%',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
+                <Tooltip side="right" trigger={<p>Show Tooltip</p>} {...args}>
+                    {({ color }) => (
                         <div>
-                            <strong style={{ color: color }}>Name: </strong>
-                            <span>Martin Rollings</span>
+                            <div>
+                                <strong style={{ color: color }}>Name: </strong>
+                                <span>Martin Rollings</span>
+                            </div>
+                            <div>
+                                <strong style={{ color: color }}>Source: </strong>
+                                <span>IMDB</span>
+                            </div>
+                            <div>
+                                <strong style={{ color: color }}>Description: </strong>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                                    irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                                    deserunt mollit anim id est laborum.
+                                </p>
+                            </div>
                         </div>
-                        <div>
-                            <strong style={{ color: color }}>Source: </strong>
-                            <span>IMDB</span>
-                        </div>
-                        <div>
-                            <strong style={{ color: color }}>Description: </strong>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                                mollit anim id est laborum.
-                            </p>
-                        </div>
-                    </div>
-                )}
-            </Tooltip>
+                    )}
+                </Tooltip>
+            </div>
         </ThemeWrapper>
     ),
 };
