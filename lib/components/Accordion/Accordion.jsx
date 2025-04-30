@@ -4,9 +4,8 @@ import * as styles from './Accordion.css';
 import cn from 'classnames';
 
 import { Content, Header, Item, Root, Trigger } from '@radix-ui/react-accordion';
-import { CaretDown, CaretRight } from '@phosphor-icons/react';
 
-import { Icon } from '@/components';
+import { FaIcon } from '@/components';
 
 const displayClassName = (className, variant) =>
     cn(className, {
@@ -60,12 +59,8 @@ export const AccordionTrigger = forwardRef(({ children, className, variant, ...p
         <Header className={classes}>
             <Trigger className={trigger} ref={ref} {...props}>
                 {children}
-                <Icon>
-                    <CaretRight className="open" />
-                </Icon>
-                <Icon>
-                    <CaretDown className="close" />
-                </Icon>
+                <FaIcon className="open" name="angle-right" />
+                <FaIcon className="closed" name="angle-down" />
             </Trigger>
         </Header>
     );

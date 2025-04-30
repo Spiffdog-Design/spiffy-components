@@ -1,9 +1,8 @@
 import { forwardRef, useEffect, useState } from 'react';
-import { X } from '@phosphor-icons/react';
 import { Close, Content, Description, Overlay, Portal, Root, Title, Trigger } from '@radix-ui/react-dialog';
 import cn from 'classnames';
 
-import { Button, Icon } from '@/components';
+import { Button, FaIcon } from '@/components';
 
 import * as styles from './Dialog.css';
 
@@ -62,9 +61,7 @@ export const Dialog = forwardRef(
                             </div>
                             <Close asChild>
                                 <Button rounded={true} appearance="basic" variant={variant} onClick={handleClose}>
-                                    <Icon>
-                                        <X weight="bold" />
-                                    </Icon>
+                                    <FaIcon name="xmark" />
                                 </Button>
                             </Close>
                         </div>

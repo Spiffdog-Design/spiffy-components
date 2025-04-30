@@ -1,7 +1,6 @@
 import { action } from '@storybook/addon-actions';
-import { ArrowFatRight } from '@phosphor-icons/react'; // https://phosphoricons.com/ -- Phosphor Icons
 
-import { Button, Icon } from '@/components';
+import { Button, FaIcon } from '@/components';
 import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
 
 const meta = {
@@ -34,19 +33,21 @@ export const Demo = {
         busy: false,
         disabled: false,
         rounded: false,
-        children: (
-            <>
-                <span>Click Me</span>
-                <Icon>
-                    <ArrowFatRight weight="fill" />
-                </Icon>
-            </>
-        ),
+        children: <></>,
     },
 
     render: (args) => (
         <ThemeWrapper>
-            <Button {...args} onClick={action('clicked')} />
+            <div style={{ display: 'flex', flexDirection: 'row', gap: 4, height: 50 }}>
+                <Button {...args} onClick={action('clicked')}>
+                    <FaIcon set="regular" name="heart" />
+                    <span>With Icons</span>
+                    <FaIcon set="regular" name="face-smile" />
+                </Button>
+                <Button {...args} onClick={action('clicked')}>
+                    <span>Without Icons</span>
+                </Button>
+            </div>
         </ThemeWrapper>
     ),
 };

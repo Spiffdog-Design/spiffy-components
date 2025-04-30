@@ -1,8 +1,7 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import { X } from '@phosphor-icons/react'; // https://phosphoricons.com/ -- Phosphor Icons
 import cn from 'classnames';
 
-import { Button, Icon } from '@/components';
+import { Button, FaIcon } from '@/components';
 import { getVariantMainColor, isNullOrEmpty } from '../../../utilities';
 import { theme } from '@/components/Theme/themes/theme.css';
 import * as styles from './BaseInput.css';
@@ -58,9 +57,7 @@ export const BaseInput = forwardRef(
                 <div className={displayClassName(styles.actions, variant)}>
                     {!isNullOrEmpty(inputText) && (
                         <Button appearance="basic" variant={variant} onClick={handleClear}>
-                            <Icon>
-                                <X />
-                            </Icon>
+                            <FaIcon name="xmark" />
                         </Button>
                     )}
                     {actions != null && typeof actions === 'function' ? actions({ color, variant }) : actions}

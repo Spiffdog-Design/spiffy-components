@@ -1,11 +1,22 @@
-import { forwardRef } from 'react';
-import { CircleNotch } from '@phosphor-icons/react';
-import { Icon } from '@/components';
-import * as styles from './Spinner.css';
+import { spinner, colorVar, sizeVar } from './Spinner.css';
+import cn from 'classnames';
 
-export const Spinner = forwardRef(({ size = undefined, weight = undefined }, ref) => (
-    <Icon size={size} weight={weight}>
-        <CircleNotch ref={ref} className={styles.animated} />
-    </Icon>
-));
-Spinner.displayName = 'Spinner';
+import { useTheme } from '@/components';
+import { assignInlineVars } from '@vanilla-extract/dynamic';
+
+export const Spinner = ({ className, size, style, ...props }) => {
+    const pxSize = size != null && !isNaN(size) ? `${Math.max(size, 30)}px` : '48px';
+
+    return (
+        <span
+            className={cn(spinner)}
+            style={{
+                ...style,
+                ...assignInlineVars({
+                    [sizeVar]: pxSize,
+                }),
+            }}
+            {...props}
+        ></span>
+    );
+};

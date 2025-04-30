@@ -1,6 +1,4 @@
-import { ArrowFatRight } from '@phosphor-icons/react'; // https://phosphoricons.com/ -- Phosphor Icons
-
-import { Tooltip, Button, Icon } from '@/components';
+import { Tooltip } from '@/components';
 import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
 
 const meta = {

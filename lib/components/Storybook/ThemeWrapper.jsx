@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
-import { ArrowsClockwise } from '@phosphor-icons/react';
 
-import { AppRoot, Button, Icon, ThemeSwitcher } from '@/components';
+import { AppRoot, Button, FaIcon, ThemeSwitcher } from '@/components';
 
 import * as styles from './ThemeWrapper.css.js';
 import './ThemeWrapper-SB.css';
@@ -18,9 +17,7 @@ const ThemeWrapper = ({ children, title }) => {
                     <div className={styles.actions}>
                         <ThemeSwitcher />
                         <Button appearance="basic" variant="base" rounded={true} onClick={handleReload}>
-                            <Icon>
-                                <ArrowsClockwise />
-                            </Icon>
+                            <FaIcon name="rotate" />
                         </Button>
                     </div>
                 </div>

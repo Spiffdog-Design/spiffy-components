@@ -1,7 +1,6 @@
 import { action } from '@storybook/addon-actions';
-import { Radioactive } from '@phosphor-icons/react';
 
-import { Button, Dialog, Icon } from '@/components';
+import { Button, Dialog, FaIcon } from '@/components';
 import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
 
 const meta = {
@@ -39,9 +38,7 @@ export const Demo = {
                             Cancel
                         </Button>
                         <Button variant="alert">
-                            <Icon>
-                                <Radioactive weight="fill" />
-                            </Icon>
+                            <FaIcon set="regular" name="trash-can" />
                             Me!
                         </Button>
                     </>

@@ -1,7 +1,6 @@
 import { action } from '@storybook/addon-actions';
-import { Bluetooth } from '@phosphor-icons/react';
 
-import { Button, ButtonBar, Icon } from '@/components';
+import { Button, ButtonBar, FaIcon } from '@/components';
 import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
 
 const meta = {
@@ -47,9 +46,7 @@ export const Demo = {
         <ThemeWrapper>
             <ButtonBar {...args} onActiveClick={action('clicked')}>
                 <Button>
-                    <Icon>
-                        <Bluetooth />
-                    </Icon>
+                    <FaIcon name="bluetooth" />
                 </Button>
                 <Button>Button #2</Button>
                 <Button>Button #3</Button>

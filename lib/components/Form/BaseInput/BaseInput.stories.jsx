@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { ArrowFatRight } from '@phosphor-icons/react'; // https://phosphoricons.com/ -- Phosphor Icons
 
-import { Button, Icon, BaseInput } from '@/components';
+import { Button, FaIcon, BaseInput } from '@/components';
 import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
 
 const meta = {
@@ -34,9 +33,7 @@ export const Demo = {
                         <>
                             <Button variant={variant}>
                                 <span>Submit</span>
-                                <Icon>
-                                    <ArrowFatRight weight="fill" />
-                                </Icon>
+                                <FaIcon name="arrow-right" />
                             </Button>
                         </>
                     )}
