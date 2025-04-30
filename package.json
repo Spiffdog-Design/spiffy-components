@@ -1,6 +1,6 @@
 {
     "name": "@spiffdog/spiffy-components",
-    "version": "0.3.1-d",
+    "version": "0.3.1-e",
     "type": "module",
     "main": "dist/index.js",
     "module": "dist/index.js",
@@ -66,7 +66,6 @@
         "globals": "^15.12.0",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
-        "react-helmet": "^6.1.0",
         "react-hook-form": "^7.54.2",
         "storybook": "^8.6.10",
         "typescript": "^5.6.3",

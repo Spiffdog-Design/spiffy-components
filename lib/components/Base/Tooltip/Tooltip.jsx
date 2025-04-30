@@ -11,34 +11,41 @@ const abortEvent = (evt) => {
     evt.stopPropagation();
 };
 
-export const Tooltip = forwardRef(
-    ({ children, className, enabled = true, open, padded = true, trigger, variant = 'base', ...props }, ref) => {
-        const displayClassName = cn(styles.content, className, {
-            [`${styles.padded}`]: padded === true,
-            [`${styles.alert}`]: variant === 'alert',
-            [`${styles.primary}`]: variant === 'primary',
-            [`${styles.success}`]: variant === 'success',
-            [`${styles.warning}`]: variant === 'warning',
-        });
+export const Tooltip = ({
+    children,
+    className,
+    enabled = true,
+    open,
+    padded = true,
+    trigger,
+    variant = 'base',
+    ...props
+}) => {
+    const displayClassName = cn(styles.content, className, {
+        [`${styles.padded}`]: padded === true,
+        [`${styles.alert}`]: variant === 'alert',
+        [`${styles.primary}`]: variant === 'primary',
+        [`${styles.success}`]: variant === 'success',
+        [`${styles.warning}`]: variant === 'warning',
+    });
 
-        const color = getVariantMainColor(variant, theme);
+    const color = getVariantMainColor(variant, theme);
 
-        return enabled ? (
-            <Provider delayDuration={100}>
-                <Root open={open}>
-                    <Trigger onClick={abortEvent} ref={ref} className={cn(styles.trigger, className)} asChild>
-                        {trigger}
-                    </Trigger>
-                    <Portal>
-                        <Content onPointerDownOutside={abortEvent} className={displayClassName} {...props}>
-                            {typeof children === 'function' ? children({ color }) : children}
-                        </Content>
-                    </Portal>
-                </Root>
-            </Provider>
-        ) : (
-            children
-        );
-    },
-);
+    return enabled ? (
+        <Provider delayDuration={100}>
+            <Root open={open}>
+                <Trigger onClick={abortEvent} className={cn(styles.trigger, className)} asChild>
+                    {trigger}
+                </Trigger>
+                <Portal>
+                    <Content onPointerDownOutside={abortEvent} className={displayClassName} {...props}>
+                        {typeof children === 'function' ? children({ color }) : children}
+                    </Content>
+                </Portal>
+            </Root>
+        </Provider>
+    ) : (
+        children
+    );
+};
 Tooltip.displayName = 'Tooltip';
