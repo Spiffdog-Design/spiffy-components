@@ -1,11 +1,11 @@
 import { useId } from 'react';
 import cn from 'classnames';
 
-import { BaseInput, BaseLabel } from '@/components';
+import { Input, Label } from '@/components';
 import * as styles from './Input.css';
 import { isNullOrEmpty } from '../../../utilities';
 
-export const Input = ({ layout = 'unset', ...props }) => {
+export const FormInput = ({ layout = 'unset', ...props }) => {
     const className = cn({
         [`${styles.vertical}`]: layout === 'vertical',
         [`${styles.horizontal}`]: layout === 'horizontal',
@@ -19,17 +19,17 @@ export const Input = ({ layout = 'unset', ...props }) => {
         </div>
     );
 };
-Input.displayName = 'Input';
+FormInput.displayName = 'FormInput';
 
 const InnerInputComponents = ({ helperText, layout, label, required, variant, ...props }) => {
     const id = useId();
 
     return (
         <>
-            <BaseLabel htmlFor={id} required={required} variant={variant}>
+            <Label htmlFor={id} required={required} variant={variant}>
                 {label}
-            </BaseLabel>
-            <BaseInput id={id} required={required} variant={variant} {...props} />
+            </Label>
+            <Input id={id} required={required} variant={variant} {...props} />
             {!isNullOrEmpty(helperText) ? <small className="helperText">{helperText}</small> : null}
         </>
     );

@@ -4,7 +4,7 @@ import cn from 'classnames';
 import { Button, FaIcon } from '@/components';
 import { getVariantMainColor, isNullOrEmpty } from '../../../utilities';
 import { theme } from '@/components/Theme/themes/theme.css';
-import * as styles from './BaseInput.css';
+import * as styles from './Input.css';
 
 const displayClassName = (root, variant, className) => {
     return cn(root, className, {
@@ -15,7 +15,7 @@ const displayClassName = (root, variant, className) => {
     });
 };
 
-export const BaseInput = forwardRef(
+export const Input = forwardRef(
     ({ actions, className = '', onChange, helperText, required, variant = 'base', value = '', ...props }, ref) => {
         const inputRef = useRef(null);
         const [inputText, setInputText] = useState(value);
@@ -66,4 +66,4 @@ export const BaseInput = forwardRef(
         );
     },
 );
-BaseInput.displayName = 'BaseInput';
+Input.displayName = 'Input';

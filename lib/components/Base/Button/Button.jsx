@@ -7,19 +7,23 @@ import { Spinner } from '@/components';
 
 export const Button = forwardRef(
     ({ appearance = 'solid', busy, children, className, disabled, rounded, variant = 'base', ...props }, ref) => {
-        const displayClassName = cn(styles.base, className, {
-            rounded: rounded,
-            [`${styles.basic}`]: appearance === 'basic',
-            [`${styles.outline}`]: appearance === 'outline',
-            [`${styles.alert}`]: variant === 'alert',
-            [`${styles.primary}`]: variant === 'primary',
-            [`${styles.success}`]: variant === 'success',
-            [`${styles.warning}`]: variant === 'warning',
-        });
+        const displayClassName = cn(
+            styles.base,
+            {
+                rounded: rounded,
+                [`${styles.basic}`]: appearance === 'basic',
+                [`${styles.outline}`]: appearance === 'outline',
+                [`${styles.alert}`]: variant === 'alert',
+                [`${styles.primary}`]: variant === 'primary',
+                [`${styles.success}`]: variant === 'success',
+                [`${styles.warning}`]: variant === 'warning',
+            },
+            className,
+        );
 
         return (
             <button ref={ref} className={displayClassName} disabled={disabled || busy} {...props}>
-                {children}
+                <div className={styles.content}>{children}</div>
                 <div className={cn(styles.busy, { rounded: rounded, show: busy })}>
                     <Spinner size={36} />
                 </div>

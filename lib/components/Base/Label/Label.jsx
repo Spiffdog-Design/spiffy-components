@@ -1,11 +1,11 @@
-import * as styles from './BaseLabel.css';
+import * as styles from './Label.css';
 import cn from 'classnames';
 
-export const BaseLabel = ({ children, required = false, ...props }) => {
+export const Label = ({ children, required = false, ...props }) => {
     return (
         <label className={cn(styles.root, { [`${styles.required}`]: required === true })} {...props}>
             {children}
         </label>
     );
 };
-BaseLabel.displayName = 'BaseLabel';
+Label.displayName = 'Label';
