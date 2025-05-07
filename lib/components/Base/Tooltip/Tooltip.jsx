@@ -1,4 +1,4 @@
-import { Provider, Root, Trigger, Portal, Content } from '@radix-ui/react-tooltip';
+import { Arrow, Provider, Root, Trigger, Portal, Content } from '@radix-ui/react-tooltip';
 import cn from 'classnames';
 
 import { getVariantMainColor } from '../../../utilities';
@@ -13,6 +13,7 @@ export const Tooltip = ({
     padded = true,
     trigger,
     variant = 'base',
+    open,
     ...props
 }) => {
     const displayClassName = cn(styles.content, className, {
@@ -27,13 +28,14 @@ export const Tooltip = ({
 
     return enabled ? (
         <Provider delayDuration={100}>
-            <Root>
+            <Root open={open}>
                 <Trigger className={cn(styles.trigger, className)} asChild>
                     {trigger}
                 </Trigger>
                 <Portal>
-                    <Content className={displayClassName} {...props}>
+                    <Content className={displayClassName} sideOffset={10} {...props}>
                         {typeof children === 'function' ? children({ color }) : children}
+                        <Arrow className={styles.arrow} width={16} height={8} />
                     </Content>
                 </Portal>
             </Root>

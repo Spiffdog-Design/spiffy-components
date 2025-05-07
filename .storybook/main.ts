@@ -3,17 +3,24 @@ import path from 'path';
 
 const config: StorybookConfig = {
     stories: ['../lib/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+
     addons: [
         '@storybook/addon-links',
         '@storybook/addon-essentials',
         '@storybook/addon-onboarding',
         '@storybook/addon-interactions',
+        '@chromatic-com/storybook'
     ],
-    framework: '@storybook/react-vite',
-    core: {
-        builder: '@storybook/builder-vite',
-        disableTelemetry: true,
+
+    framework: {
+        name: '@storybook/react-vite',
+        options: {}
     },
+
+    core: {
+        disableTelemetry: true
+    },
+
     async viteFinal(config) {
         return {
             ...config,
@@ -25,7 +32,14 @@ const config: StorybookConfig = {
             },
         };
     },
-    docs: {},
+
+    docs: {
+        autodocs: true
+    },
+
+    typescript: {
+        reactDocgen: 'react-docgen-typescript'
+    }
 };
 
 export default config;
