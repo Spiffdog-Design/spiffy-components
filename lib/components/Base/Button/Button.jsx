@@ -25,7 +25,7 @@ export const Button = forwardRef(
             <button ref={ref} className={displayClassName} disabled={disabled || busy} {...props}>
                 <div className={styles.content}>{children}</div>
                 <div className={cn(styles.busy, { rounded: rounded, show: busy })}>
-                    <Spinner size={36} />
+                    <Spinner size={28} />
                 </div>
             </button>
         );
