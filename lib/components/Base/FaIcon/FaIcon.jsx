@@ -1,5 +1,4 @@
-// https://fonts.google.com/icons
-
+// https://fontawesome.com/icons
 import cn from 'classnames';
 
 export const FaIcon = ({ className, name, set = 'solid', size, style, ...props }) => (

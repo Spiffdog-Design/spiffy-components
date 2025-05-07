@@ -53,10 +53,10 @@ export const AccordionItem = forwardRef(({ children, className, variant, ...prop
 });
 
 export const AccordionTrigger = forwardRef(({ children, className, variant, ...props }, ref) => {
-    const classes = displayClassName(styles.header, variant);
+    const header = displayClassName(styles.header, variant);
     const trigger = displayClassName(styles.trigger, variant);
     return (
-        <Header className={classes}>
+        <Header className={header}>
             <Trigger className={trigger} ref={ref} {...props}>
                 {children}
                 <FaIcon className="open" name="angle-right" />
