@@ -9,6 +9,7 @@ import * as styles from './Tooltip.css';
 export const Tooltip = ({
     children,
     className,
+    cursor = 'default',
     enabled = true,
     padded = true,
     trigger,
@@ -29,7 +30,7 @@ export const Tooltip = ({
     return enabled ? (
         <Provider delayDuration={100}>
             <Root open={open}>
-                <Trigger className={cn(styles.trigger, className)} asChild>
+                <Trigger className={cn(styles.trigger, className)} style={{ cursor }} asChild>
                     {trigger}
                 </Trigger>
                 <Portal>

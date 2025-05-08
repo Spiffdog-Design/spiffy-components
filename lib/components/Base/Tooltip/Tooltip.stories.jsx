@@ -5,6 +5,10 @@ const meta = {
     title: 'Base/Tooltip',
     component: Tooltip,
     argTypes: {
+        cursor: {
+            options: ['default', 'help', 'pointer'],
+            control: { type: 'radio' },
+        },
         enabled: {
             control: { type: 'boolean' },
         },
@@ -29,8 +33,8 @@ export default meta;
 
 export const Demo = {
     args: {
+        cursor: 'default',
         enabled: true,
-        //open: false,
         padded: true,
         side: 'bottom',
         variant: 'base',
