@@ -4,7 +4,7 @@ import { useTheme } from '@/components';
 import { Palette } from './Palette';
 
 const meta = {
-    title: 'Colors/Palette',
+    title: 'Colors/Theme',
     component: Palette,
     argTypes: {
         type: {
@@ -31,25 +31,19 @@ export const Demo = {
 const ColorPalette = ({ type = 'solid' }) => {
     const { theme, themeName } = useTheme();
 
-    const paletteKeys = Object.keys(theme.palette).filter((name) => {
-        if (type === 'alpha' && name.endsWith('A')) return true;
-        if (type === 'solid' && !name.endsWith('A')) return true;
-        return false;
-    });
-
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-            <div style={{ fontWeight: 700, textTransform: 'uppercase', color: theme.colors.solid.base[11] }}>
-                <span>theme.palette ({themeName})</span>
-            </div>
-            {paletteKeys.map((name) => (
+            <div
+                style={{ fontWeight: 700, textTransform: 'uppercase', color: theme.colors.solid.base[11] }}
+            >{`theme.colors.${type} (${themeName})`}</div>
+            {Object.keys(theme.colors[type]).map((name) => (
                 <div>
                     <div style={{ fontWeight: 700, textTransform: 'uppercase', color: theme.colors.solid.base[11] }}>
                         {name}
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'row', gap: 8 }}>
-                        {Object.keys(theme.palette[name]).map((variant) => {
-                            const code = theme.palette[name][variant];
+                        {Object.keys(theme.colors[type][name]).map((variant) => {
+                            const code = theme.colors[type][name][variant];
                             return <Palette color={code}>{variant}</Palette>;
                         })}
                     </div>
