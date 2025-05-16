@@ -7,8 +7,12 @@ import { FaIcon } from '@/components';
 import * as styles from './Badge.css';
 
 export const Badge = forwardRef(
-    ({ appearance = 'base', children, className, onClose, variant = 'base', ...props }, ref) => {
+    ({ appearance = 'base', children, className, onClick, onClose, variant = 'base', ...props }, ref) => {
+        const useClick = onClose == null && onClick != null;
+        const handleClick = useClick ? onClick : undefined;
+
         const displayClassName = cn(styles.badge, className, {
+            [`${styles.pointer}`]: useClick,
             [`${styles.alert}`]: variant === 'alert',
             [`${styles.base}`]: variant === 'base',
             [`${styles.primary}`]: variant === 'primary',
@@ -19,7 +23,7 @@ export const Badge = forwardRef(
         });
 
         return (
-            <div data-type={onClose != null ? 'close' : 'base'} className={displayClassName}>
+            <div data-type={onClose != null ? 'close' : 'base'} className={displayClassName} onClick={handleClick}>
                 <div className={styles.content}>{children}</div>
                 {onClose != null && (
                     <button className={styles.button} onClick={onClose}>

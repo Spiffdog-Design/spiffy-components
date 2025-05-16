@@ -17,7 +17,7 @@ export const Tooltip = ({
     open,
     ...props
 }) => {
-    const displayClassName = cn(styles.content, className, {
+    const displayClassName = cn(styles.content, {
         [`${styles.padded}`]: padded === true,
         [`${styles.alert}`]: variant === 'alert',
         [`${styles.primary}`]: variant === 'primary',
@@ -28,13 +28,13 @@ export const Tooltip = ({
     const color = getVariantMainColor(variant, theme);
 
     return enabled ? (
-        <Provider delayDuration={100}>
+        <Provider delayDuration={0}>
             <Root open={open}>
-                <Trigger className={cn(styles.trigger, className)} style={{ cursor }} asChild>
+                <Trigger className={styles.trigger} style={{ cursor }} asChild>
                     {trigger}
                 </Trigger>
                 <Portal>
-                    <Content className={displayClassName} sideOffset={10} {...props}>
+                    <Content className={cn(displayClassName, className)} sideOffset={10} {...props}>
                         {typeof children === 'function' ? children({ color }) : children}
                         <Arrow className={styles.arrow} width={16} height={8} />
                     </Content>

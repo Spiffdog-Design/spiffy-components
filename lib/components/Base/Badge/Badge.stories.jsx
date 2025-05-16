@@ -28,7 +28,7 @@ export const Demo = {
 
     render: (args) => (
         <ThemeWrapper>
-            <div style={{ display: 'flex', flexDirection: 'row', gap: 12, height: 50 }}>
+            <div style={{ display: 'flex', flexDirection: 'row', gap: 12 }}>
                 <Badge {...args}>Without onClose</Badge>
                 <Badge onClose={action('clicked')} {...args}>
                     With onClose

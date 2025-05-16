@@ -1,15 +1,11 @@
 import { useState } from 'react';
-import { BadgeList, createDataList } from '@/components';
+import { BadgeToggleList, createDataList } from '@/components';
 import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
 
 const meta = {
-    title: 'Base/BadgeList',
-    component: BadgeList,
+    title: 'Base/BadgeToggleList',
+    component: BadgeToggleList,
     argTypes: {
-        appearance: {
-            options: ['basic', 'outline', 'solid'],
-            control: { type: 'radio' },
-        },
         variant: {
             options: ['alert', 'base', 'primary', 'success', 'warning'],
             control: { type: 'radio' },
@@ -30,23 +26,23 @@ export default meta;
 
 export const Demo = {
     args: {
-        appearance: 'base',
         bordered: false,
         maxLength: 3,
         rounded: false,
         variant: 'base',
     },
-
     render: (args) => {
-        const [data, setData] = useState(createDataList(demoData, 'CountryID', 'Name'));
-
-        const handleClose = (id) => {
-            setData((data) => data.filter((d) => d.id != id));
+        const handleChange = (ids) => {
+            console.log(ids);
         };
 
         return (
             <ThemeWrapper>
-                <BadgeList data={data} onClose={handleClose} {...args} />
+                <BadgeToggleList
+                    data={createDataList(demoData, 'CountryID', 'Name')}
+                    onChange={handleChange}
+                    {...args}
+                />
             </ThemeWrapper>
         );
     },

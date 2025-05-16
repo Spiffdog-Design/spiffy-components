@@ -1,11 +1,11 @@
-import { forwardRef } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import cn from 'classnames';
 
 import { Badge, FaIcon, Tooltip } from '@/components';
 
 import * as styles from './BadgeList.css';
 
-export const BadgeList = forwardRef(
+export const BadgeToggleList = forwardRef(
     (
         {
             data,
@@ -15,18 +15,17 @@ export const BadgeList = forwardRef(
             rounded = false,
             maxLength,
             variant = 'base',
-            onClose,
+            onChange,
             ...props
         },
         ref,
     ) => {
-        const closeFn = (id) => (onClose != null ? () => onClose(id) : undefined);
+        const [items, setItems] = useState([]);
         const displayClassName = cn(
             styles.badgeList,
             {
                 [`${styles.border}`]: bordered === true,
                 [`${styles.rounded}`]: rounded === true,
-
                 [`${styles.alert}`]: variant === 'alert',
                 [`${styles.base}`]: variant === 'base',
                 [`${styles.primary}`]: variant === 'primary',
@@ -36,26 +35,47 @@ export const BadgeList = forwardRef(
             className,
         );
 
-        const maxItems = maxLength != null ? Math.max(maxLength, 1) : data?.length;
-        const items = data?.slice(0, maxItems) ?? [];
-        const extItems = data?.slice(maxItems) ?? [];
+        const handleBadgeClick = (id) => () => {
+            setItems((itms) => itms.map((i) => ({ ...i, selected: i.id === id ? !i.selected : i.selected })));
+        };
+
+        useEffect(() => {
+            if (onChange != null) {
+                onChange(
+                    items.reduce((acc, i) => {
+                        if (i.selected) {
+                            acc.push(i.id);
+                        }
+                        return acc;
+                    }, []),
+                );
+            }
+        }, [items]);
+
+        useEffect(() => {
+            setItems(data.map((d) => ({ ...d, selected: false })));
+        }, [data]);
+
+        const maxItems = maxLength != null ? Math.max(maxLength, 1) : items?.length;
+        const displayItems = items?.slice(0, maxItems) ?? [];
+        const displayItemExt = items?.slice(maxItems) ?? [];
 
         return (
             <div ref={ref} className={displayClassName} {...props}>
-                {(items ?? []).map((i, idx) => {
+                {(displayItems ?? []).map((i, idx) => {
                     return (
                         <Badge
                             tabIndex={idx}
                             key={i.id}
-                            appearance={appearance}
+                            appearance={i.selected ? 'solid' : 'basic'}
                             variant={variant}
-                            onClose={closeFn(i.id)}
+                            onClick={handleBadgeClick(i.id)}
                         >
                             {i.label}
                         </Badge>
                     );
                 })}
-                {extItems?.length > 0 && (
+                {displayItemExt?.length > 0 && (
                     <Tooltip
                         align="end"
                         side="bottom"
@@ -63,19 +83,23 @@ export const BadgeList = forwardRef(
                         variant={variant}
                         trigger={
                             <div>
-                                <Badge appearance={appearance} variant={variant} className={styles.badge}>
+                                <Badge
+                                    appearance={displayItemExt?.some((i) => i.selected) ? 'solid' : 'basic'}
+                                    variant={variant}
+                                    className={styles.badge}
+                                >
                                     <FaIcon name="angle-down" size={15} />
                                 </Badge>
                             </div>
                         }
                     >
-                        {extItems?.map((i) => (
+                        {displayItemExt?.map((i) => (
                             <Badge
                                 key={i.id}
-                                appearance={appearance}
+                                appearance={i.selected ? 'solid' : 'basic'}
                                 variant={variant}
                                 className={styles.badge}
-                                onClose={closeFn(i.id)}
+                                onClick={handleBadgeClick(i.id)}
                             >
                                 {i.label}
                             </Badge>
@@ -86,4 +110,4 @@ export const BadgeList = forwardRef(
         );
     },
 );
-BadgeList.displayName = 'BadgeList';
+BadgeToggleList.displayName = 'BadgeToggleList';
