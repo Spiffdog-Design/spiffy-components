@@ -63,20 +63,14 @@ export const BadgeList = forwardRef(
                         variant={variant}
                         trigger={
                             <div>
-                                <Badge appearance={appearance} variant={variant} className={styles.badge}>
+                                <Badge appearance={appearance} variant={variant}>
                                     <FaIcon name="angle-down" size={15} />
                                 </Badge>
                             </div>
                         }
                     >
                         {extItems?.map((i) => (
-                            <Badge
-                                key={i.id}
-                                appearance={appearance}
-                                variant={variant}
-                                className={styles.badge}
-                                onClose={closeFn(i.id)}
-                            >
+                            <Badge key={i.id} appearance={appearance} variant={variant} onClose={closeFn(i.id)}>
                                 {i.label}
                             </Badge>
                         ))}

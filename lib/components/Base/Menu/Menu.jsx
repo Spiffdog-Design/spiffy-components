@@ -35,7 +35,7 @@ export const Menu = ({ children, open, title, trigger, ...props }) => {
 export const SubMenu = ({ children, trigger }) => {
     return (
         <Sub>
-            <SubTrigger className={cn(styles.trigger, styles.item, styles.subMenu)}>{trigger}</SubTrigger>
+            <SubTrigger className={cn(styles.item, styles.subMenu)}>{trigger}</SubTrigger>
             <Portal>
                 <SubContent className={cn(styles.content)}>{children}</SubContent>
             </Portal>

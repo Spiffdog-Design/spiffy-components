@@ -86,7 +86,6 @@ export const BadgeToggleList = forwardRef(
                                 <Badge
                                     appearance={displayItemExt?.some((i) => i.selected) ? 'solid' : 'basic'}
                                     variant={variant}
-                                    className={styles.badge}
                                 >
                                     <FaIcon name="angle-down" size={15} />
                                 </Badge>
@@ -98,7 +97,6 @@ export const BadgeToggleList = forwardRef(
                                 key={i.id}
                                 appearance={i.selected ? 'solid' : 'basic'}
                                 variant={variant}
-                                className={styles.badge}
                                 onClick={handleBadgeClick(i.id)}
                             >
                                 {i.label}
