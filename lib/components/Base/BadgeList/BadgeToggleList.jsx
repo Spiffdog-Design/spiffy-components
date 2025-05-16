@@ -53,7 +53,7 @@ export const BadgeToggleList = forwardRef(
         }, [items]);
 
         useEffect(() => {
-            setItems(data.map((d) => ({ ...d, selected: false })));
+            setItems(data.map((d) => ({ ...d, selected: d.selected ?? false })));
         }, [data]);
 
         const maxItems = maxLength != null ? Math.max(maxLength, 1) : items?.length;
