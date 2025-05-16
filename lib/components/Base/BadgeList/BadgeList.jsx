@@ -7,16 +7,19 @@ import { Badge } from '@/components';
 import * as styles from './BadgeList.css';
 
 export const BadgeList = forwardRef(
-    ({ data, className, appearance, rounded, variant = 'base', onClose, ...props }, ref) => {
+    ({ data, className, appearance, bordered = false, rounded = false, variant = 'base', onClose, ...props }, ref) => {
         const closeFn = (id) => (onClose != null ? () => onClose(id) : undefined);
         const displayClassName = cn(
             styles.badgeList,
             {
+                [`${styles.border}`]: bordered === true,
+                [`${styles.rounded}`]: rounded === true,
+
                 [`${styles.alert}`]: variant === 'alert',
+                [`${styles.base}`]: variant === 'base',
                 [`${styles.primary}`]: variant === 'primary',
                 [`${styles.success}`]: variant === 'success',
                 [`${styles.warning}`]: variant === 'warning',
-                [`${styles.rounded}`]: rounded === true,
             },
             className,
         );

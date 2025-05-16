@@ -14,6 +14,9 @@ const meta = {
             options: ['alert', 'base', 'primary', 'success', 'warning'],
             control: { type: 'radio' },
         },
+        bordered: {
+            control: { type: 'boolean' },
+        },
         rounded: {
             control: { type: 'boolean' },
         },
@@ -25,6 +28,7 @@ export default meta;
 export const Demo = {
     args: {
         appearance: 'base',
+        bordered: false,
         rounded: false,
         variant: 'base',
     },
