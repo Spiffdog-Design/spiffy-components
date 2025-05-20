@@ -22,16 +22,19 @@ export const BadgeList = forwardRef(
     ) => {
         const containerRef = useRef(null);
         const measureRef = useRef(null);
-        const allChildren = Children.map(children, (child) =>
-            cloneElement(child, {
-                ...child.props,
-                appearance,
-                mode,
-                variant,
-                onClick,
-                enabled: child.props.enabled ?? false,
-            }),
-        );
+        const allChildren =
+            children == null
+                ? []
+                : Children.map(children, (child) =>
+                      cloneElement(child, {
+                          ...child.props,
+                          appearance,
+                          mode,
+                          variant,
+                          onClick,
+                          enabled: child.props.enabled ?? false,
+                      }),
+                  );
         const [visibleCount, setVisibleCount] = useState(Children.count(children));
         const lastCountRef = useRef(visibleCount);
 
