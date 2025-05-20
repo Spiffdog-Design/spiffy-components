@@ -7,18 +7,17 @@ const config: StorybookConfig = {
     addons: [
         '@storybook/addon-links',
         '@storybook/addon-essentials',
-        '@storybook/addon-onboarding',
         '@storybook/addon-interactions',
-        '@chromatic-com/storybook'
+        '@chromatic-com/storybook',
     ],
 
     framework: {
         name: '@storybook/react-vite',
-        options: {}
+        options: {},
     },
 
     core: {
-        disableTelemetry: true
+        disableTelemetry: true,
     },
 
     async viteFinal(config) {
@@ -34,12 +33,12 @@ const config: StorybookConfig = {
     },
 
     docs: {
-        autodocs: true
+        autodocs: true,
     },
 
     typescript: {
-        reactDocgen: 'react-docgen-typescript'
-    }
+        reactDocgen: 'react-docgen-typescript',
+    },
 };
 
 export default config;

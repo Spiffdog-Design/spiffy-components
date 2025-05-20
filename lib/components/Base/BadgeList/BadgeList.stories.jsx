@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { BadgeList, createDataList } from '@/components';
+import { useEffect, useState } from 'react';
+import { Badge, BadgeList, ToggleBadge } from '@/components';
 import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
 
 const meta = {
@@ -10,18 +10,19 @@ const meta = {
             options: ['basic', 'outline', 'solid'],
             control: { type: 'radio' },
         },
-        variant: {
-            options: ['alert', 'base', 'primary', 'success', 'warning'],
-            control: { type: 'radio' },
-        },
         bordered: {
             control: { type: 'boolean' },
         },
-        maxLength: {
-            control: { type: 'number' },
+        mode: {
+            options: ['none', 'close', 'toggle'],
+            control: { type: 'radio' },
         },
         rounded: {
             control: { type: 'boolean' },
+        },
+        variant: {
+            options: ['alert', 'base', 'primary', 'success', 'warning'],
+            control: { type: 'radio' },
         },
     },
 };
@@ -30,23 +31,36 @@ export default meta;
 
 export const Demo = {
     args: {
-        appearance: 'base',
+        appearance: undefined,
         bordered: false,
-        maxLength: 3,
+        mode: 'none',
         rounded: false,
         variant: 'base',
     },
 
     render: (args) => {
-        const [data, setData] = useState(createDataList(demoData, 'CountryID', 'Name'));
+        const [data, setData] = useState(demoData.map((d) => ({ ...d, enabled: false })));
 
-        const handleClose = (id) => {
-            setData((data) => data.filter((d) => d.id != id));
-        };
+        const handleClose = (id) => setData(data.filter((d) => d.CountryID != id));
+        const handleToggle = (id) =>
+            setData(data.map((d) => ({ ...d, enabled: d.CountryID === id ? !d.enabled : d.enabled })));
 
         return (
             <ThemeWrapper>
-                <BadgeList data={data} onClose={handleClose} {...args} />
+                <BadgeList onClick={args.mode === 'close' ? handleClose : handleToggle} {...args}>
+                    {data.map((item) => {
+                        return args.mode === 'toggle' ? (
+                            <ToggleBadge
+                                key={item.CountryID}
+                                value={item.CountryID}
+                                label={item.Name}
+                                enabled={item.enabled}
+                            />
+                        ) : (
+                            <Badge key={item.CountryID} value={item.CountryID} label={item.Name} {...args} />
+                        );
+                    })}
+                </BadgeList>
             </ThemeWrapper>
         );
     },
