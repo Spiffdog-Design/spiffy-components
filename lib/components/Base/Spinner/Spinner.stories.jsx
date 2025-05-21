@@ -1,4 +1,4 @@
-import { Spinner, FaIcon } from '@/components';
+import { Spinner, ThreeDotSpinner } from '@/components';
 import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
 
 const meta = {
@@ -22,13 +22,15 @@ export const Demo = {
             <div
                 style={{
                     display: 'flex',
-                    flexDirection: 'row',
+                    flexDirection: 'column',
+                    gap: 24,
                     justifyContent: 'center',
                     alignItems: 'center',
                     height: '100%',
                 }}
             >
                 <Spinner {...args} />
+                <ThreeDotSpinner />
             </div>
         </ThemeWrapper>
     ),
