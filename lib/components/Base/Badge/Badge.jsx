@@ -19,12 +19,7 @@ export const Badge = forwardRef(
             [`${styles.outline}`]: appearance === 'outline',
         });
         const handleClick = (args) => () => {
-            if (mode === 'toggle' && onClick != null) {
-                onClick(args);
-            }
-            if (mode === 'close' && onClick != null) {
-                onClick(args);
-            }
+            if (onClick != null) onClick(args);
         };
 
         return (
@@ -32,7 +27,7 @@ export const Badge = forwardRef(
                 ref={ref}
                 data-type={mode === 'close' ? 'close' : ''}
                 className={displayClassName}
-                onClick={handleClick(value)}
+                onClick={mode === 'toggle' ? handleClick(value) : undefined}
             >
                 <div className={styles.content}>{label}</div>
                 {mode === 'close' && (

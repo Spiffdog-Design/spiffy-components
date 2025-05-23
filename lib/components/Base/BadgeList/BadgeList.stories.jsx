@@ -39,25 +39,26 @@ export const Demo = {
     },
 
     render: (args) => {
-        const [data, setData] = useState(demoData.map((d) => ({ ...d, enabled: false })));
+        const TAGS = Array.from({ length: 50 }).map((_, i, a) => ({
+            id: i,
+            label: `v1.2.0-beta.${i + 1}`,
+            enabled: false,
+        }));
+        const [data, setData] = useState(TAGS);
 
-        const handleClose = (id) => setData(data.filter((d) => d.CountryID != id));
-        const handleToggle = (id) =>
-            setData(data.map((d) => ({ ...d, enabled: d.CountryID === id ? !d.enabled : d.enabled })));
+        const handleClick = (items) => {
+            console.log(items);
+            setData(items);
+        };
 
         return (
             <ThemeWrapper>
-                <BadgeList onClick={args.mode === 'close' ? handleClose : handleToggle} {...args}>
+                <BadgeList onClick={handleClick} {...args}>
                     {data.map((item) => {
                         return args.mode === 'toggle' ? (
-                            <ToggleBadge
-                                key={item.CountryID}
-                                value={item.CountryID}
-                                label={item.Name}
-                                enabled={item.enabled}
-                            />
+                            <ToggleBadge key={item.id} value={item.id} label={item.label} enabled={item.enabled} />
                         ) : (
-                            <Badge key={item.CountryID} value={item.CountryID} label={item.Name} {...args} />
+                            <Badge key={item.id} value={item.id} label={item.label} {...args} />
                         );
                     })}
                 </BadgeList>
@@ -65,50 +66,3 @@ export const Demo = {
         );
     },
 };
-
-const demoData = [
-    {
-        CountryID: 58,
-        Name: 'Czech Republic',
-    },
-    {
-        CountryID: 66,
-        Name: 'Dominican Republic',
-    },
-    {
-        CountryID: 75,
-        Name: 'Ecuador',
-    },
-    {
-        CountryID: 67,
-        Name: 'Egypt',
-    },
-    {
-        CountryID: 177,
-        Name: 'El Salvador',
-    },
-    {
-        CountryID: 33,
-        Name: 'Iceland',
-    },
-    {
-        CountryID: 29,
-        Name: 'India',
-    },
-    {
-        CountryID: 78,
-        Name: 'Panama',
-    },
-    {
-        CountryID: 46,
-        Name: 'Thailand',
-    },
-    {
-        CountryID: 21,
-        Name: 'United States',
-    },
-    {
-        CountryID: 50,
-        Name: 'Zimbabwe',
-    },
-];

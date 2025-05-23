@@ -14,7 +14,6 @@ export const Popover = forwardRef(
             onOpenChange = () => null,
             padded = true,
             showArrow = true,
-            showHeader = true,
             trigger,
             variant = 'base',
             ...props
@@ -22,6 +21,7 @@ export const Popover = forwardRef(
         ref,
     ) => {
         const variantClass = cn({
+            [`${styles.padded}`]: padded === true,
             [`${styles.alert}`]: variant === 'alert',
             [`${styles.primary}`]: variant === 'primary',
             [`${styles.success}`]: variant === 'success',
@@ -33,14 +33,7 @@ export const Popover = forwardRef(
                 <Trigger asChild>{trigger}</Trigger>
                 <Portal>
                     <Content className={cn(styles.content, variantClass)} sideOffset={5} {...props}>
-                        {showHeader === true && (
-                            <div className={styles.header}>
-                                <Close className={cn(styles.close, variantClass)} aria-label="Close" asChild>
-                                    <FaIcon name="xmark" />
-                                </Close>
-                            </div>
-                        )}
-                        <div className={cn(styles.children, { [`${styles.padded}`]: padded === true })}>{children}</div>
+                        {children}
                         {showArrow === true && <Arrow className={styles.arrow} width={16} height={8} />}
                     </Content>
                 </Portal>

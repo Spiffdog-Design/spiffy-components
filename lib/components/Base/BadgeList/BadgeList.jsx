@@ -1,7 +1,7 @@
 import { Children, cloneElement, forwardRef, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react';
 import cn from 'classnames';
 
-import { Badge, ToggleBadge, FaIcon, Tooltip } from '@/components';
+import { Badge, ToggleBadge, FaIcon, Popover } from '@/components';
 
 import * as styles from './BadgeList.css';
 
@@ -22,6 +22,22 @@ export const BadgeList = forwardRef(
     ) => {
         const containerRef = useRef(null);
         const measureRef = useRef(null);
+        const [visibleCount, setVisibleCount] = useState(Children.count(children));
+        const lastCountRef = useRef(visibleCount);
+        const handleClick = (id) => () => {
+            console.log('handleClick', id);
+
+            return mode === 'toggle'
+                ? data.map((d) => {
+                      return {
+                          ...d,
+                          enabled: d.id === id ? !d.enabled : d.enabled,
+                      };
+                  })
+                : mode === 'close'
+                ? data.filter((d) => d.id != id)
+                : null;
+        };
         const allChildren =
             children == null
                 ? []
@@ -31,12 +47,10 @@ export const BadgeList = forwardRef(
                           appearance,
                           mode,
                           variant,
-                          onClick,
+                          onClick: handleClick(child.props.value),
                           enabled: child.props.enabled ?? false,
                       }),
                   );
-        const [visibleCount, setVisibleCount] = useState(Children.count(children));
-        const lastCountRef = useRef(visibleCount);
 
         useImperativeHandle(ref, () => containerRef.current, []);
 
@@ -110,10 +124,12 @@ export const BadgeList = forwardRef(
                 <div ref={containerRef} className={displayClassName} {...props}>
                     {visibleBadges}
                     {remCount > 0 && (
-                        <Tooltip
+                        <Popover
+                            open={true}
                             align="end"
                             side="bottom"
-                            className={styles.tooltip}
+                            showHeader={false}
+                            className={styles.popover}
                             variant={variant}
                             trigger={
                                 <div>
@@ -142,8 +158,8 @@ export const BadgeList = forwardRef(
                                 </div>
                             }
                         >
-                            {remBadges}
-                        </Tooltip>
+                            <div className={styles.badgeListRemaining}>{remBadges}</div>
+                        </Popover>
                     )}
                 </div>
                 <div className={cn(displayClassName, styles.measuringContainer)} ref={measureRef} aria-hidden>
