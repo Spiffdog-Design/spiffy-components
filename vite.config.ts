@@ -7,12 +7,9 @@ import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 export default defineConfig({
     plugins: [vanillaExtractPlugin(), react()],
     resolve: {
-        alias: [
-            {
-                find: '@/components',
-                replacement: resolve(__dirname, './lib/components'),
-            },
-        ],
+        alias: {
+            '@': '/lib',
+        },
     },
     build: {
         cssCodeSplit: true,

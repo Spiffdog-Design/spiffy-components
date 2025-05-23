@@ -1,7 +1,7 @@
 import { Arrow, Provider, Root, Trigger, Portal, Content } from '@radix-ui/react-tooltip';
 import cn from 'classnames';
 
-import { getVariantMainColor } from '../../../utilities';
+import { getVariantMainColor } from '@/utilities';
 import { theme } from '@/components/Theme/themes/theme.css';
 
 import * as styles from './Tooltip.css';

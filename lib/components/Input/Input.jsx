@@ -2,8 +2,9 @@ import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 're
 import cn from 'classnames';
 
 import { Button, FaIcon } from '@/components';
-import { getVariantMainColor, isNullOrEmpty } from '../../../utilities';
 import { theme } from '@/components/Theme/themes/theme.css';
+import { getVariantMainColor, isNullOrEmpty } from '@/utilities';
+
 import * as styles from './Input.css';
 
 const displayClassName = (root, variant, className) => {
