@@ -34,11 +34,21 @@ const ColorPalette = ({ type = 'solid' }) => {
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
             <div
-                style={{ fontWeight: 700, textTransform: 'uppercase', color: theme.colors.solid.base[11] }}
+                style={{
+                    fontWeight: theme.font.weight.semibold,
+                    textTransform: 'uppercase',
+                    color: theme.colors.solid.base[11],
+                }}
             >{`theme.colors.${type} (${themeName})`}</div>
             {Object.keys(theme.colors[type]).map((name) => (
                 <div>
-                    <div style={{ fontWeight: 700, textTransform: 'uppercase', color: theme.colors.solid.base[11] }}>
+                    <div
+                        style={{
+                            fontWeight: theme.font.weight.semibold,
+                            textTransform: 'uppercase',
+                            color: theme.colors.solid.base[11],
+                        }}
+                    >
                         {name}
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'row', gap: 8 }}>

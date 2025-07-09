@@ -1,10 +1,11 @@
-import { createContext, forwardRef, useContext, useEffect, useRef, useState } from 'react';
+import { forwardRef, useEffect, useRef, useState } from 'react';
+
 import { lightTheme } from '@/components/Theme/themes/lightTheme.css';
 import { darkTheme } from '@/components/Theme/themes/darkTheme.css';
 import { theme } from '@/components/Theme/themes/theme.css';
+import { ThemeContext } from '@/components/Theme/themes/useTheme';
 
-export const useTheme = () => useContext(ThemeContext);
-export const ThemeProvider = forwardRef(({ children }, ref) => {
+export const ThemeProvider = forwardRef(function ThemeProvider({ children }, ref) {
     const matcher = useRef(window?.matchMedia('(prefers-color-scheme: dark)'));
     const [themeName, setThemeName] = useState(getSystemTheme(matcher.current)); // Initial theme name
 
@@ -32,13 +33,5 @@ export const ThemeProvider = forwardRef(({ children }, ref) => {
         </ThemeContext.Provider>
     );
 });
-ThemeProvider.displayName = 'ThemeProvider';
 
 const getSystemTheme = (matcher) => (matcher?.matches ? 'dark' : 'light');
-
-const ThemeContext = createContext({
-    theme,
-    themeName: 'light',
-    themeClass: lightTheme,
-    setThemeName: (name) => {},
-});

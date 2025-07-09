@@ -28,6 +28,9 @@ export const Demo = {
                     <hr />
                     <small>small: {children}</small>
                     <span className="text-caption">text-caption: {children}</span>
+                    <hr />
+                    <pre>This is a pre-formatted section.</pre>
+                    <code>This is a code section.</code>
                 </div>
             </ThemeWrapper>
         );

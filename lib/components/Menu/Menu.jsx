@@ -1,68 +1,49 @@
-import {
-    Root,
-    Arrow,
-    CheckboxItem,
-    Content,
-    Item,
-    Portal,
-    Sub,
-    SubTrigger,
-    SubContent,
-    Trigger,
-    ItemIndicator,
-} from '@radix-ui/react-dropdown-menu';
+import { forwardRef } from 'react';
+import * as Ariakit from '@ariakit/react';
 import cn from 'classnames';
-
-import { FaIcon } from '@/components';
 
 import * as styles from './Menu.css';
 
-export const Menu = ({ children, open, title, trigger, ...props }) => {
-    return (
-        <Root open={open}>
-            <Trigger asChild>{trigger}</Trigger>
-            <Portal>
-                <Content className={cn(styles.content)} {...props}>
-                    {title != null && <div className={styles.title}>{title}</div>}
-                    {children}
-                    <Arrow className={styles.arrow} />
-                </Content>
-            </Portal>
-        </Root>
-    );
-};
+export const Menu = forwardRef(function Menu({ anchor, className, ...props }, ref) {
+    const menu = Ariakit.useMenuContext();
 
-export const SubMenu = ({ children, trigger }) => {
     return (
-        <Sub>
-            <SubTrigger className={cn(styles.item, styles.subMenu)}>{trigger}</SubTrigger>
-            <Portal>
-                <SubContent className={cn(styles.content)}>{children}</SubContent>
-            </Portal>
-        </Sub>
+        <Ariakit.MenuProvider>
+            {anchor != null && anchor}
+            <Ariakit.Menu
+                ref={ref}
+                portal
+                fitViewport
+                unmountOnHide
+                overlap={!!menu?.parent}
+                gutter={menu?.parent ? 12 : 4}
+                shift={menu?.parent ? -9 : -2}
+                flip={menu?.parent ? true : 'bottom-end'}
+                {...props}
+                className={cn(styles.menu, className)}
+            />
+        </Ariakit.MenuProvider>
     );
-};
+});
 
-export const CheckMenuItem = ({ children, ...props }) => {
+export const MenuBar = forwardRef(function MenuBar({ anchor, className, ...props }, ref) {
+    return <Ariakit.Menubar ref={ref} className={cn(styles.menuBar, className)} {...props} />;
+});
+
+export const MenuButton = forwardRef(function MenuButton({ children, ...props }, ref) {
+    const menu = Ariakit.useMenuContext();
     return (
-        <CheckboxItem className={styles.item} {...props}>
-            <ItemIndicator className={styles.indicator}>
-                <FaIcon name="check" />
-            </ItemIndicator>
-            {children}
-        </CheckboxItem>
+        <Ariakit.MenuButton ref={ref} {...props}>
+            <span className={styles.menuLabel}>{children}</span>
+            {!!menu?.parent && <Ariakit.MenuButtonArrow />}
+        </Ariakit.MenuButton>
     );
-};
+});
 
-export const MenuItem = ({ children, ...props }) => {
-    return (
-        <Item className={styles.item} {...props}>
-            {children}
-        </Item>
-    );
-};
+export const MenuItem = forwardRef(function MenuItem({ className, ...props }, ref) {
+    return <Ariakit.MenuItem ref={ref} {...props} className={cn(styles.menuItem, className)} />;
+});
 
-CheckMenuItem.displayName = 'CheckMenuItem';
-Menu.displayName = 'Menu';
-MenuItem.displayName = 'MenuItem';
-SubMenu.displayName = 'SubMenu';
+export const MenuSeparator = forwardRef(function MenuSeparator({ className, ...props }, ref) {
+    return <Ariakit.MenuSeparator ref={ref} {...props} className={cn(styles.separator, className)} />;
+});

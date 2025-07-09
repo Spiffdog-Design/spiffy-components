@@ -1,3 +1,9 @@
 #storybook-root {
     height: 100%;
 }
+
+.sb-anchor,
+.sbdocs-preview,
+.docs-story {
+    overflow: auto !important;
+}

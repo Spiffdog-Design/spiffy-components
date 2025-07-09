@@ -1,9 +1,11 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import cn from 'classnames';
 
-import { Button, FaIcon } from '@/components';
+import { isNullOrEmpty } from '@spiffdog/spiffy-tools';
+
+import { Button, Icon } from '@/components';
 import { theme } from '@/components/Theme/themes/theme.css';
-import { getVariantMainColor, isNullOrEmpty } from '@/utilities';
+import { getVariantMainColor } from '@/utilities';
 
 import * as styles from './Input.css';
 
@@ -16,55 +18,56 @@ const displayClassName = (root, variant, className) => {
     });
 };
 
-export const Input = forwardRef(
-    ({ actions, className = '', onChange, helperText, required, variant = 'base', value = '', ...props }, ref) => {
-        const inputRef = useRef(null);
-        const [inputText, setInputText] = useState(value);
+export const Input = forwardRef(function Input(
+    { actions, className = '', onChange, helperText, required, variant = 'base', value = '', ...props },
+    ref,
+) {
+    const inputRef = useRef(null);
+    const [inputText, setInputText] = useState(value);
 
-        const color = getVariantMainColor(variant, theme);
+    const color = getVariantMainColor(variant, theme);
 
-        const handleChange = (evt) => {
-            if (onChange != null) {
-                onChange(evt.currentTarget.value);
-            }
-        };
-        const handleClear = () => {
-            if (onChange != null) {
-                onChange('');
-            }
-        };
+    const handleChange = (evt) => {
+        if (onChange != null) {
+            onChange(evt.currentTarget.value);
+        }
+    };
+    const handleClear = () => {
+        if (onChange != null) {
+            onChange('');
+        }
+    };
 
-        const handleFocus = (evt) => {
-            evt.currentTarget.focus();
-            evt.currentTarget.select();
-        };
+    const handleFocus = (evt) => {
+        evt.currentTarget.focus();
+        evt.currentTarget.select();
+    };
 
-        useImperativeHandle(ref, () => inputRef.current);
+    useImperativeHandle(ref, () => inputRef.current);
 
-        useEffect(() => {
-            setInputText(value);
-        }, [value]);
+    useEffect(() => {
+        setInputText(value);
+    }, [value]);
 
-        return (
-            <div className={displayClassName(styles.root, variant)}>
-                <input
-                    className={displayClassName(styles.input, variant, className)}
-                    ref={inputRef}
-                    onFocus={handleFocus}
-                    onChange={handleChange}
-                    value={inputText}
-                    {...props}
-                />
-                <div className={displayClassName(styles.actions, variant)}>
-                    {!isNullOrEmpty(inputText) && (
-                        <Button appearance="basic" variant={variant} onClick={handleClear}>
-                            <FaIcon name="xmark" />
-                        </Button>
-                    )}
-                    {actions != null && typeof actions === 'function' ? actions({ color, variant }) : actions}
-                </div>
+    return (
+        <div className={displayClassName(styles.root, variant)}>
+            <input
+                className={displayClassName(styles.input, variant, className)}
+                ref={inputRef}
+                onFocus={handleFocus}
+                onChange={handleChange}
+                value={inputText}
+                {...props}
+            />
+            <div className={displayClassName(styles.actions, variant)}>
+                {!isNullOrEmpty(inputText) && (
+                    <Button appearance="basic" variant={variant} onClick={handleClear}>
+                        <Icon name="xmark" />
+                    </Button>
+                )}
+                {actions != null && typeof actions === 'function' ? actions({ color, variant }) : actions}
             </div>
-        );
-    },
-);
+        </div>
+    );
+});
 Input.displayName = 'Input';

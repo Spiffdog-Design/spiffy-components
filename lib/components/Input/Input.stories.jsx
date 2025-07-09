@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Button, FaIcon, Input } from '@/components';
+import { Button, Icon, Input } from '@/components';
 import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
 
 const meta = {
@@ -38,7 +38,7 @@ export const Demo = {
                         <>
                             <Button variant={variant}>
                                 <span>Submit</span>
-                                <FaIcon name="arrow-right" />
+                                <Icon name="arrow-right" />
                             </Button>
                         </>
                     )}

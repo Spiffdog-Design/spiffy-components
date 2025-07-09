@@ -1,5 +1,5 @@
 // src/components/Grid/Grid.tsx
-import React, { useEffect, useState } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 import cn from 'classnames';
 
@@ -7,16 +7,10 @@ import { gridContainer, gridItem, gridCellSpanVar, gridConfigVar, gridGapVar } f
 
 const buildConfig = (config, columns, width) => (config != null ? config : `repeat(${columns}, minmax(${width}, 1fr))`);
 
-export const Grid = ({
-    children,
-    className,
-    columns = 4,
-    columnWidth = 100,
-    config = null,
-    gap = 16,
-    style = {},
-    ...rest
-}) => {
+export const Grid = forwardRef(function Grid(
+    { children, className, columns = 4, columnWidth = 100, config = null, gap = 16, style = {}, ...props },
+    ref,
+) {
     const [columnConfig, setColumnConfig] = useState(buildConfig(config, columns, columnWidth));
 
     console.log(config, columns, columnWidth);
@@ -27,6 +21,8 @@ export const Grid = ({
 
     return (
         <div
+            {...props}
+            ref={ref}
             className={cn(gridContainer, className)}
             style={{
                 ...style,
@@ -35,16 +31,17 @@ export const Grid = ({
                     [gridGapVar]: `${gap}px`,
                 }),
             }}
-            {...rest}
         >
             {children}
         </div>
     );
-};
+});
 
-export const GridItem = ({ span = 1, style = {}, ...rest }) => {
+export const GridItem = forwardRef(function GridItem({ span = 1, style = {}, ...props }, ref) {
     return (
         <div
+            {...props}
+            ref={ref}
             className={gridItem}
             style={{
                 ...style,
@@ -52,7 +49,6 @@ export const GridItem = ({ span = 1, style = {}, ...rest }) => {
                     [gridCellSpanVar]: span,
                 }),
             }}
-            {...rest}
         />
     );
-};
+});

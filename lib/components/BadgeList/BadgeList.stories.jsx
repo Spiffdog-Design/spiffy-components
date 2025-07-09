@@ -1,10 +1,18 @@
-import { useEffect, useState } from 'react';
-import { Badge, BadgeList, ToggleBadge } from '@/components';
+import { useState } from 'react';
+import { action } from '@storybook/addon-actions';
+import { Badge, BadgeList, Button, ToggleBadge } from '@/components';
+
 import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
+import { demoListData } from '@/components/Storybook/demoData';
 
 const meta = {
-    title: 'Base/BadgeList',
+    title: 'Base/Badges/Badge List',
     component: BadgeList,
+};
+
+export default meta;
+
+export const ReadOnlyBadgeList = {
     argTypes: {
         appearance: {
             options: ['basic', 'outline', 'solid'],
@@ -12,10 +20,6 @@ const meta = {
         },
         bordered: {
             control: { type: 'boolean' },
-        },
-        mode: {
-            options: ['none', 'close', 'toggle'],
-            control: { type: 'radio' },
         },
         rounded: {
             control: { type: 'boolean' },
@@ -25,40 +29,129 @@ const meta = {
             control: { type: 'radio' },
         },
     },
-};
-
-export default meta;
-
-export const Demo = {
     args: {
         appearance: undefined,
         bordered: false,
-        mode: 'none',
         rounded: false,
         variant: 'base',
     },
 
     render: (args) => {
-        const TAGS = Array.from({ length: 50 }).map((_, i, a) => ({
-            id: i,
-            label: `v1.2.0-beta.${i + 1}`,
-            enabled: false,
-        }));
-        const [data, setData] = useState(TAGS);
-
-        const handleClick = (items) => {
-            console.log(items);
-            setData(items);
-        };
+        const [data] = useState(demoListData);
 
         return (
             <ThemeWrapper>
-                <BadgeList onClick={handleClick} {...args}>
+                <BadgeList {...args}>
                     {data.map((item) => {
-                        return args.mode === 'toggle' ? (
-                            <ToggleBadge key={item.id} value={item.id} label={item.label} enabled={item.enabled} />
-                        ) : (
-                            <Badge key={item.id} value={item.id} label={item.label} {...args} />
+                        return (
+                            <Badge key={item.id} value={item.id} {...args}>
+                                {item.label}
+                            </Badge>
+                        );
+                    })}
+                </BadgeList>
+            </ThemeWrapper>
+        );
+    },
+};
+
+export const CloseBadgeList = {
+    argTypes: {
+        appearance: {
+            options: ['basic', 'outline', 'solid'],
+            control: { type: 'radio' },
+        },
+        bordered: {
+            control: { type: 'boolean' },
+        },
+        rounded: {
+            control: { type: 'boolean' },
+        },
+        variant: {
+            options: ['alert', 'base', 'primary', 'success', 'warning'],
+            control: { type: 'radio' },
+        },
+    },
+    args: {
+        appearance: undefined,
+        bordered: false,
+        rounded: false,
+        variant: 'base',
+    },
+
+    render: (args) => {
+        const [data, setData] = useState(demoListData);
+
+        const handleBadgeClose = (value) => {
+            console.log(value, data);
+
+            setData((items) => items.filter((i) => i.id !== value));
+        };
+
+        return (
+            <ThemeWrapper
+                actions={
+                    <Button appearance="basic" onClick={() => setData(demoListData)}>
+                        Reset
+                    </Button>
+                }
+            >
+                <BadgeList {...args}>
+                    {data.map((item) => {
+                        return (
+                            <Badge key={item.id} value={item.id} onClick={handleBadgeClose} {...args}>
+                                {item.label}
+                            </Badge>
+                        );
+                    })}
+                </BadgeList>
+            </ThemeWrapper>
+        );
+    },
+};
+
+export const ToggleBadgeList = {
+    args: {
+        bordered: false,
+        rounded: false,
+        variant: 'base',
+    },
+    argTypes: {
+        bordered: {
+            control: { type: 'boolean' },
+        },
+        rounded: {
+            control: { type: 'boolean' },
+        },
+        variant: {
+            options: ['alert', 'base', 'primary', 'success', 'warning'],
+            control: { type: 'radio' },
+        },
+    },
+
+    render: (args) => {
+        const [data, setData] = useState(demoListData);
+
+        const handleClick = (value) => {
+            const newData = data.map((d) => ({ ...d, selected: d.id === value ? !d.selected : d.selected }));
+            setData(newData);
+            action('selected')(newData.filter((d) => d.selected));
+        };
+
+        return (
+            <ThemeWrapper
+                actions={
+                    <Button appearance="basic" onClick={() => setData(demoListData)}>
+                        Reset
+                    </Button>
+                }
+            >
+                <BadgeList {...args}>
+                    {data.map((item) => {
+                        return (
+                            <ToggleBadge key={item.id} value={item.id} selected={item.selected} onClick={handleClick}>
+                                {item.label}
+                            </ToggleBadge>
                         );
                     })}
                 </BadgeList>

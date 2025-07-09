@@ -4,7 +4,7 @@ import { useTheme } from '@/components';
 import { Palette } from './Palette';
 
 const meta = {
-    title: 'Colors/Palette',
+    title: 'Colors/Full Palette',
     component: Palette,
     argTypes: {
         type: {
@@ -39,12 +39,24 @@ const ColorPalette = ({ type = 'solid' }) => {
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-            <div style={{ fontWeight: 700, textTransform: 'uppercase', color: theme.colors.solid.base[11] }}>
+            <div
+                style={{
+                    fontWeight: theme.font.weight.bold,
+                    textTransform: 'uppercase',
+                    color: theme.colors.solid.base[11],
+                }}
+            >
                 <span>theme.palette ({themeName})</span>
             </div>
             {paletteKeys.map((name) => (
                 <div>
-                    <div style={{ fontWeight: 700, textTransform: 'uppercase', color: theme.colors.solid.base[11] }}>
+                    <div
+                        style={{
+                            fontWeight: theme.font.weight.bold,
+                            textTransform: 'uppercase',
+                            color: theme.colors.solid.base[11],
+                        }}
+                    >
                         {name}
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'row', gap: 8 }}>

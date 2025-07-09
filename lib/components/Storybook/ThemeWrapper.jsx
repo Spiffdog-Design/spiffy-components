@@ -1,23 +1,24 @@
-import React, { useRef } from 'react';
+import React, { forwardRef, useRef } from 'react';
 
-import { AppRoot, Button, FaIcon, ThemeSwitcher } from '@/components';
+import { AppRoot, Button, Icon, ThemeSwitcher } from '@/components';
 
 import * as styles from './ThemeWrapper.css.js';
 import './ThemeWrapper-SB.css';
 
-const ThemeWrapper = ({ children, title }) => {
+const ThemeWrapper = forwardRef(function ThemeWrapper({ actions, children, title }, ref) {
     const winRef = useRef(window);
     const handleReload = () => winRef.current?.location.reload();
 
     return (
         <AppRoot>
-            <div className={styles.themeWrapper}>
+            <div ref={ref} className={styles.themeWrapper}>
                 <div className={styles.line}>
                     <h3 className="title">{title}</h3>
                     <div className={styles.actions}>
+                        {actions}
                         <ThemeSwitcher />
                         <Button appearance="basic" variant="base" rounded={true} onClick={handleReload}>
-                            <FaIcon name="rotate" />
+                            <Icon name="rotate" />
                         </Button>
                     </div>
                 </div>
@@ -25,6 +26,6 @@ const ThemeWrapper = ({ children, title }) => {
             </div>
         </AppRoot>
     );
-};
+});
 
 export default ThemeWrapper;

@@ -1,56 +1,17 @@
 import { Children, cloneElement, forwardRef, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react';
 import cn from 'classnames';
 
-import { Badge, ToggleBadge, FaIcon, Popover } from '@/components';
+import { Badge, Icon, Popover } from '@/components';
 
 import * as styles from './BadgeList.css';
+import { useMemo } from 'react';
 
 export const BadgeList = forwardRef(
-    (
-        {
-            children,
-            className,
-            appearance,
-            bordered = false,
-            mode = 'close',
-            rounded = false,
-            variant = 'base',
-            onClick,
-            ...props
-        },
-        ref,
-    ) => {
+    ({ children, className, bordered = false, rounded = false, variant = 'base', onClick, ...props }, ref) => {
         const containerRef = useRef(null);
         const measureRef = useRef(null);
         const [visibleCount, setVisibleCount] = useState(Children.count(children));
         const lastCountRef = useRef(visibleCount);
-        const handleClick = (id) => () => {
-            console.log('handleClick', id);
-
-            return mode === 'toggle'
-                ? data.map((d) => {
-                      return {
-                          ...d,
-                          enabled: d.id === id ? !d.enabled : d.enabled,
-                      };
-                  })
-                : mode === 'close'
-                ? data.filter((d) => d.id != id)
-                : null;
-        };
-        const allChildren =
-            children == null
-                ? []
-                : Children.map(children, (child) =>
-                      cloneElement(child, {
-                          ...child.props,
-                          appearance,
-                          mode,
-                          variant,
-                          onClick: handleClick(child.props.value),
-                          enabled: child.props.enabled ?? false,
-                      }),
-                  );
 
         useImperativeHandle(ref, () => containerRef.current, []);
 
@@ -67,6 +28,18 @@ export const BadgeList = forwardRef(
             },
             className,
         );
+
+        const badgeArray = useMemo(() => {
+            return children == null
+                ? []
+                : Children.map(children, (child) =>
+                      cloneElement(child, {
+                          ...child.props,
+                          variant,
+                          selected: child.props.selected ?? false,
+                      }),
+                  );
+        }, [children]);
 
         const updateVisibleCount = () => {
             const container = containerRef.current;
@@ -112,58 +85,39 @@ export const BadgeList = forwardRef(
                 resizeObserver.disconnect();
                 window.removeEventListener('resize', updateVisibleCount);
             };
-        }, [allChildren.length]);
+        }, [badgeArray.length]);
 
-        const visibleBadges = allChildren.slice(0, visibleCount);
-        const remCount = allChildren.length - visibleCount;
-        const remBadges = allChildren.slice(visibleCount);
-        const hasRemToggled = remBadges.some((badge) => badge.props.enabled);
+        const visibleBadges = badgeArray.slice(0, visibleCount - 1);
+        const remCount = badgeArray.length - (visibleCount + 1);
+        const remBadges = badgeArray.slice(visibleCount);
 
         return (
             <>
-                <div ref={containerRef} className={displayClassName} {...props}>
-                    {visibleBadges}
-                    {remCount > 0 && (
-                        <Popover
-                            open={true}
-                            align="end"
-                            side="bottom"
-                            showHeader={false}
-                            className={styles.popover}
-                            variant={variant}
-                            trigger={
-                                <div>
-                                    {mode === 'toggle' ? (
-                                        <ToggleBadge
-                                            enabled={hasRemToggled}
-                                            label={
-                                                <>
-                                                    <span>+ {remCount}</span>
-                                                    <FaIcon name="angle-down" size={15} />
-                                                </>
-                                            }
-                                        />
-                                    ) : (
-                                        <Badge
-                                            appearance={appearance}
-                                            variant={variant}
-                                            label={
-                                                <>
-                                                    <span>+ {remCount}</span>
-                                                    <FaIcon name="angle-down" size={15} />
-                                                </>
-                                            }
-                                        />
-                                    )}
-                                </div>
-                            }
-                        >
-                            <div className={styles.badgeListRemaining}>{remBadges}</div>
-                        </Popover>
-                    )}
+                <div {...props} ref={containerRef}>
+                    <div className={displayClassName}>
+                        {visibleBadges}
+                        {remCount > 0 && (
+                            <Popover
+                                mode="click"
+                                placement="bottom-start"
+                                className={styles.popover}
+                                variant={variant}
+                                trigger={({ events }) => (
+                                    <div {...events}>
+                                        <Badge appearance="basic" variant={variant}>
+                                            <span>+ {remCount}</span>
+                                            <Icon name="angle-down" size={15} />
+                                        </Badge>
+                                    </div>
+                                )}
+                            >
+                                <div className={styles.badgeListRemaining}>{remBadges}</div>
+                            </Popover>
+                        )}
+                    </div>
                 </div>
                 <div className={cn(displayClassName, styles.measuringContainer)} ref={measureRef} aria-hidden>
-                    {allChildren}
+                    {badgeArray}
                 </div>
             </>
         );

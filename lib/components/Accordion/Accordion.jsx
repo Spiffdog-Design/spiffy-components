@@ -1,11 +1,9 @@
-// src/components/Accordion/Accordion.tsx
-import { Children, cloneElement, forwardRef } from 'react';
-import * as styles from './Accordion.css';
+import { forwardRef } from 'react';
 import cn from 'classnames';
+import * as Ariakit from '@ariakit/react';
+import * as styles from './Accordion.css';
 
-import { Content, Header, Item, Root, Trigger } from '@radix-ui/react-accordion';
-
-import { FaIcon } from '@/components';
+import { Icon } from '@/components';
 
 const displayClassName = (className, variant) =>
     cn(className, {
@@ -15,53 +13,25 @@ const displayClassName = (className, variant) =>
         [`${styles.warning}`]: variant === 'warning',
     });
 
-export const Accordion = forwardRef(({ children, className, variant, ...props }, ref) => {
-    const classes = displayClassName(styles.root, variant);
-    return (
-        <Root className={classes} ref={ref} {...props}>
-            {Children.map(children, (child) => {
-                return cloneElement(child, {
-                    ...child.props,
-                    variant,
-                });
-            })}
-        </Root>
-    );
-});
+export const Accordion = forwardRef(function Accordion(
+    { children, className, open, variant, heading, onHeadingClick },
+    ref,
+) {
+    const headingClasses = displayClassName(styles.heading, variant);
+    const contentClasses = displayClassName(styles.content, variant);
 
-export const AccordionContent = forwardRef(({ children, className, variant, ...props }, ref) => {
-    const classes = displayClassName(styles.content, variant);
     return (
-        <Content className={classes} ref={ref} {...props}>
-            {children}
-        </Content>
-    );
-});
-
-export const AccordionItem = forwardRef(({ children, className, variant, ...props }, ref) => {
-    const classes = displayClassName(styles.item, variant);
-    return (
-        <Item className={classes} ref={ref} {...props}>
-            {Children.map(children, (child) => {
-                return cloneElement(child, {
-                    ...child.props,
-                    variant,
-                });
-            })}
-        </Item>
-    );
-});
-
-export const AccordionTrigger = forwardRef(({ children, className, variant, ...props }, ref) => {
-    const header = displayClassName(styles.header, variant);
-    const trigger = displayClassName(styles.trigger, variant);
-    return (
-        <Header className={header}>
-            <Trigger className={trigger} ref={ref} {...props}>
-                {children}
-                <FaIcon className="open" name="angle-right" />
-                <FaIcon className="closed" name="angle-down" />
-            </Trigger>
-        </Header>
+        <div className={cn(styles.accordion, className)} ref={ref}>
+            <Ariakit.DisclosureProvider open={open} setOpen={onHeadingClick}>
+                <Ariakit.Disclosure render={<button className={headingClasses} />}>
+                    <div className={styles.headingContainer}>{heading}</div>
+                    <div className={styles.iconContainer}>
+                        <Icon set="solid" name="angle-down" className={styles.headingIconOpen} />
+                        <Icon set="solid" name="angle-right" className={styles.headingIconClosed} />
+                    </div>
+                </Ariakit.Disclosure>
+                <Ariakit.DisclosureContent className={contentClasses}>{children}</Ariakit.DisclosureContent>
+            </Ariakit.DisclosureProvider>
+        </div>
     );
 });

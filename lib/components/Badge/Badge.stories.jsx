@@ -1,24 +1,20 @@
 import { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 
-import { Badge, ToggleBadge } from '@/components';
+import { Badge } from '@/components';
 import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
 
 const meta = {
-    title: 'Base/Badge',
+    title: 'Base/Badges/Standard Badge',
     component: Badge,
 };
 
 export default meta;
 
-export const BadgeDemo = {
+export const ReadOnlyBadge = {
     argTypes: {
         appearance: {
             options: ['basic', 'outline', 'solid'],
-            control: { type: 'radio' },
-        },
-        mode: {
-            options: ['none', 'close', 'toggle'],
             control: { type: 'radio' },
         },
         variant: {
@@ -29,39 +25,43 @@ export const BadgeDemo = {
     args: {
         appearance: 'solid',
         variant: 'base',
-        mode: 'close',
     },
 
     render: (args) => (
         <ThemeWrapper>
             <div style={{ display: 'flex', flexDirection: 'row', gap: 12 }}>
-                <Badge label="My Cool Badge" value={42} mode="close" onClick={action('clicked')} {...args} />
+                <Badge {...args}>My Read Only Badge</Badge>
             </div>
         </ThemeWrapper>
     ),
 };
 
-export const ToggleBadgeDemo = {
+export const CloseBadge = {
     argTypes: {
+        appearance: {
+            options: ['basic', 'outline', 'solid'],
+            control: { type: 'radio' },
+        },
         variant: {
             options: ['alert', 'base', 'primary', 'success', 'warning'],
             control: { type: 'radio' },
         },
     },
     args: {
+        appearance: 'solid',
         variant: 'base',
     },
 
-    render: () => {
-        const [toggled, setToggled] = useState(true);
+    render: (args) => {
         const handleClick = (id) => {
-            setToggled((t) => !t);
-            action('clicked')(id);
+            action('on close triggered')(id);
         };
         return (
             <ThemeWrapper>
                 <div style={{ display: 'flex', flexDirection: 'row', gap: 12 }}>
-                    <ToggleBadge label="My Cool Badge" enabled={toggled} value={42} onClick={handleClick} />
+                    <Badge value="badge-id" onClick={handleClick} {...args}>
+                        My Close Badge
+                    </Badge>
                 </div>
             </ThemeWrapper>
         );

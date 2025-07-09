@@ -1,9 +1,9 @@
-import { Accordion } from '@/components';
+import { Accordion, AccordionList } from '@/components';
 import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
 
 const meta = {
-    title: 'Base/Accordion/Accordion',
-    component: Accordion,
+    title: 'Base/Accordion/AccordionList',
+    component: AccordionList,
     argTypes: {
         variant: {
             control: { type: 'radio' },
@@ -23,9 +23,12 @@ export const Demo = {
 
     render: ({ content, ...args }) => (
         <ThemeWrapper>
-            <Accordion {...args} heading="Item-1">
-                {content}
-            </Accordion>
+            <AccordionList {...args}>
+                <Accordion heading="Item-1">{content}</Accordion>
+                <Accordion heading="Item-2">{content}</Accordion>
+                <Accordion heading="Item-3">{content}</Accordion>
+                <Accordion heading="Item-4">{content}</Accordion>
+            </AccordionList>
         </ThemeWrapper>
     ),
 };

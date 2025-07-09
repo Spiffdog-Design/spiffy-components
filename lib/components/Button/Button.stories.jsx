@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
 
-import { Button, FaIcon, Label } from '@/components';
+import { Button, Icon, Label } from '@/components';
 import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
 
 const meta = {
@@ -15,6 +15,9 @@ const meta = {
             options: ['alert', 'base', 'primary', 'success', 'warning'],
             control: { type: 'radio' },
         },
+        compact: {
+            control: { type: 'boolean' },
+        },
         disabled: {
             control: { type: 'boolean' },
         },
@@ -26,25 +29,46 @@ const meta = {
 
 export default meta;
 
-export const Demo = {
+export const DefaultButton = {
     args: {
         appearance: 'solid',
-        variant: 'base',
         busy: false,
+        compact: false,
         disabled: false,
         rounded: false,
+        variant: 'base',
     },
-
     render: (args) => (
         <ThemeWrapper>
             <div style={{ display: 'flex', flexDirection: 'row', gap: 4, height: 50 }}>
                 <Button {...args} onClick={action('clicked')}>
-                    <FaIcon set="regular" name="heart" />
-                    <span>With Icons</span>
-                    <FaIcon set="regular" name="face-smile" />
+                    <span>Default Button</span>
                 </Button>
+            </div>
+        </ThemeWrapper>
+    ),
+};
+
+export const IconButton = {
+    args: {
+        appearance: 'solid',
+        busy: false,
+        compact: false,
+        disabled: false,
+        rounded: false,
+        variant: 'base',
+    },
+    render: (args) => (
+        <ThemeWrapper>
+            <div style={{ display: 'flex', flexDirection: 'row', gap: 4, height: 50 }}>
                 <Button {...args} onClick={action('clicked')}>
-                    <span>Without Icons</span>
+                    {({ iconSize }) => (
+                        <>
+                            <Icon set="regular" name="plus" size={iconSize} />
+                            <span>With Icons</span>
+                            <Icon set="solid" name="angle-right" size={iconSize} />
+                        </>
+                    )}
                 </Button>
             </div>
         </ThemeWrapper>
@@ -53,10 +77,11 @@ export const Demo = {
 export const LongText = {
     args: {
         appearance: 'solid',
-        variant: 'base',
         busy: false,
+        compact: false,
         disabled: false,
         rounded: false,
+        variant: 'base',
     },
 
     render: (args) => (
@@ -73,7 +98,7 @@ export const LongText = {
                     </Button>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                    <Label>Text Inside a &lt;SPAN /&gt; container</Label>
+                    <Label>Text Inside a &lt;span&gt; element</Label>
                     <Button {...args} onClick={action('clicked')}>
                         <span>
                             Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece
