@@ -4,7 +4,7 @@ import { Button, Icon, Input } from '@/components';
 import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
 
 const meta = {
-    title: 'Base/Input',
+    title: 'Base/Form/Input',
     component: Input,
     argTypes: {
         appearance: {
@@ -20,7 +20,25 @@ const meta = {
 
 export default meta;
 
-export const Demo = {
+export const Basic = {
+    args: {
+        appearance: 'default',
+        variant: 'base',
+    },
+
+    render: (args) => {
+        const [text, setText] = useState('');
+        const handleChange = (v) => setText(v);
+
+        return (
+            <ThemeWrapper>
+                <Input placeholder="Enter something here" onChange={handleChange} value={text} {...args} />
+            </ThemeWrapper>
+        );
+    },
+};
+
+export const WithActions = {
     args: {
         appearance: 'default',
         variant: 'base',

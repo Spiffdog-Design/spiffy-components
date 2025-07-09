@@ -2,7 +2,7 @@ import { Label } from '@/components';
 import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
 
 const meta = {
-    title: 'Base/Label',
+    title: 'Base/Form/Label',
     component: Label,
     argTypes: {
         required: {
