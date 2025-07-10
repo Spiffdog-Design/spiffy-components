@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 
 import { Checkbox, FormControl, Label } from '@/components';
 import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
-import { useEffect, useId, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const meta = {
     title: 'Base/Form/Checkbox',
@@ -58,7 +58,7 @@ export const Default = {
     },
 };
 
-export const HorizontalLabel = {
+export const WithLabel = {
     args: {
         appearance: 'solid',
         checked: false,
@@ -67,7 +67,6 @@ export const HorizontalLabel = {
         variant: 'base',
     },
     render: ({ checked, ...args }) => {
-        const id = useId();
         const [isChecked, setIsChecked] = useState(checked);
 
         const handleCheck = (arg) => {
@@ -81,41 +80,21 @@ export const HorizontalLabel = {
 
         return (
             <ThemeWrapper>
-                <FormControl direction="horizontal">
-                    <Label htmlFor={id}>Checkbox 1</Label>
-                    <Checkbox id={id} onChange={handleCheck} checked={isChecked} {...args} />
-                </FormControl>
-            </ThemeWrapper>
-        );
-    },
-};
-
-export const VerticalLabel = {
-    args: {
-        appearance: 'solid',
-        checked: false,
-        compact: false,
-        disabled: false,
-        variant: 'base',
-    },
-    render: ({ checked, ...args }) => {
-        const id = useId();
-        const [isChecked, setIsChecked] = useState(checked);
-
-        const handleCheck = (arg) => {
-            setIsChecked(arg);
-            action(arg);
-        };
-
-        useEffect(() => {
-            setIsChecked(checked);
-        }, [checked]);
-
-        return (
-            <ThemeWrapper>
-                <FormControl direction="vertical">
-                    <Label htmlFor={id}>Checkbox 1</Label>
-                    <Checkbox id={id} onChange={handleCheck} checked={isChecked} {...args} />
+                <FormControl>
+                    {(id) => (
+                        <div
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'flex-start',
+                                alignItems: 'center',
+                                gap: 8,
+                            }}
+                        >
+                            <Label htmlFor={id}>Checkbox 1</Label>
+                            <Checkbox id={id} onChange={handleCheck} checked={isChecked} {...args} />
+                        </div>
+                    )}
                 </FormControl>
             </ThemeWrapper>
         );

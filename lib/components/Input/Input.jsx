@@ -9,8 +9,9 @@ import { getVariantMainColor } from '@/utilities';
 
 import * as styles from './Input.css';
 
-const displayClassName = (root, variant, className) => {
+const displayClassName = (root, compact, variant, className) => {
     return cn(root, className, {
+        [`${styles.compact}`]: compact === true,
         [`${styles.alert}`]: variant === 'alert',
         [`${styles.primary}`]: variant === 'primary',
         [`${styles.success}`]: variant === 'success',
@@ -19,7 +20,17 @@ const displayClassName = (root, variant, className) => {
 };
 
 export const Input = forwardRef(function Input(
-    { actions, className = '', onChange, helperText, required, variant = 'base', value = '', ...props },
+    {
+        actions,
+        className = '',
+        compact = false,
+        onChange,
+        helperText,
+        required,
+        variant = 'base',
+        value = '',
+        ...props
+    },
     ref,
 ) {
     const inputRef = useRef(null);
@@ -52,7 +63,7 @@ export const Input = forwardRef(function Input(
     return (
         <div className={displayClassName(styles.root, variant)}>
             <input
-                className={displayClassName(styles.input, variant, className)}
+                className={displayClassName(styles.input, compact, variant, className)}
                 ref={inputRef}
                 onFocus={handleFocus}
                 onChange={handleChange}
@@ -61,7 +72,7 @@ export const Input = forwardRef(function Input(
             />
             <div className={displayClassName(styles.actions, variant)}>
                 {!isNullOrEmpty(inputText) && (
-                    <Button appearance="basic" variant={variant} onClick={handleClear}>
+                    <Button appearance="basic" variant={variant} onClick={handleClear} compact={compact}>
                         <Icon name="xmark" />
                     </Button>
                 )}

@@ -11,6 +11,9 @@ const meta = {
             options: ['default', 'transparent'],
             control: { type: 'radio' },
         },
+        compact: {
+            control: { type: 'boolean' },
+        },
         variant: {
             options: ['alert', 'base', 'primary', 'success', 'warning'],
             control: { type: 'radio' },
@@ -23,6 +26,7 @@ export default meta;
 export const Basic = {
     args: {
         appearance: 'default',
+        compact: false,
         variant: 'base',
     },
 

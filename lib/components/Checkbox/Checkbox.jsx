@@ -44,12 +44,24 @@ const getIconSet = (appearance) => {
 };
 
 export const Checkbox = forwardRef(function Checkbox(
-    { appearance = 'solid', checked = false, children, className, disabled, id, variant = 'base', onChange, ...props },
+    {
+        appearance = 'solid',
+        checked = false,
+        children,
+        className,
+        compact = false,
+        disabled,
+        id,
+        variant = 'base',
+        onChange,
+        ...props
+    },
     ref,
 ) {
     const iconSet = getIconSet(appearance);
 
     const handleToggle = () => {
+        if (disabled) return;
         if (onChange) {
             onChange(!checked);
         }
@@ -65,12 +77,15 @@ export const Checkbox = forwardRef(function Checkbox(
     return (
         <>
             <input
+                ref={ref}
                 type="checkbox"
                 id={id}
                 checked={checked}
                 onChange={handleToggle}
                 style={{ display: 'none' }}
                 aria-hidden="true"
+                disabled={disabled}
+                {...props}
             />
             <div
                 role="checkbox"
@@ -78,16 +93,13 @@ export const Checkbox = forwardRef(function Checkbox(
                 tabIndex={0}
                 onClick={handleToggle}
                 onKeyDown={handleKeyDown}
-                ref={ref}
                 style={{
                     cursor: 'pointer',
                     display: 'inline-block',
-                    height: 25,
-                    width: 25,
-                    opacity: checked === false && appearance === 'basic' ? 0.1 : 1,
+                    opacity: disabled === true ? 0.5 : checked === false && appearance === 'basic' ? 0.1 : 1,
                 }}
             >
-                <Icon {...(checked === true ? iconSet.checked : iconSet.unchecked)} size={25} />
+                <Icon {...(checked === true ? iconSet.checked : iconSet.unchecked)} size={compact === true ? 25 : 35} />
             </div>
         </>
     );
