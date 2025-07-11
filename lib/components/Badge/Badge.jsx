@@ -28,7 +28,7 @@ export const Badge = forwardRef(function Badge(
             <div className={styles.content}>{children}</div>
             {onClick != null && (
                 <button className={cn(styles.closeButton, styles.pointer)} onClick={handleClick(value)}>
-                    <Icon name="xmark" size={14} />
+                    <Icon name="xmark" size="sm" />
                 </button>
             )}
         </div>

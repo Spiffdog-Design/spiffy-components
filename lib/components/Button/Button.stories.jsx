@@ -1,4 +1,15 @@
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
+import {
+    ArgTypes,
+    Canvas,
+    Controls,
+    Description,
+    Primary,
+    Source,
+    Story,
+    Subtitle,
+    Title,
+} from '@storybook/addon-docs/blocks';
 
 import { Button, Icon, Label } from '@/components';
 import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
@@ -6,23 +17,56 @@ import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
 const meta = {
     title: 'Base/Button',
     component: Button,
+    parameters: {
+        componentSubtitle: 'BUTTONS!',
+        layout: 'fullscreen',
+        docs: {
+            page: () => (
+                <>
+                    <Title />
+                    <Subtitle />
+                    <Description />
+
+                    <Canvas />
+                    <Controls />
+                </>
+            ),
+        },
+    },
     argTypes: {
         appearance: {
             options: ['basic', 'outline', 'solid'],
             control: { type: 'radio' },
+            description: 'Defines the visual style of the button. Choose between "basic", "outline", or "solid".',
+            defaultValue: 'solid',
+        },
+        busy: {
+            control: { type: 'boolean' },
+            description:
+                'If true, the button will show a busy state.  This will blur the button, show a spinner and disable any interactivity.  Used when doing an operation where multiple clicks are undesirable (like making API calls, etc)',
+            defaultValue: false,
         },
         variant: {
             options: ['alert', 'base', 'primary', 'success', 'warning'],
             control: { type: 'radio' },
-        },
-        compact: {
-            control: { type: 'boolean' },
+            description:
+                'Specifies the variant of the button, affecting its color scheme. Options include "alert", "base", "primary", "success", and "warning".',
+            defaultValue: 'base',
         },
         disabled: {
             control: { type: 'boolean' },
+            description: 'Disables the button, preventing user interaction.',
+            defaultValue: false,
         },
         rounded: {
             control: { type: 'boolean' },
+            description: 'If true, the button will have rounded corners.',
+            defaultValue: false,
+        },
+        size: {
+            options: ['xs', 'sm', 'md', 'lg', 'xl', 'x2'],
+            control: { type: 'radio' },
+            defaultValue: 'md',
         },
     },
 };
@@ -33,9 +77,9 @@ export const DefaultButton = {
     args: {
         appearance: 'solid',
         busy: false,
-        compact: false,
         disabled: false,
         rounded: false,
+        size: 'md',
         variant: 'base',
     },
     render: (args) => (
@@ -53,20 +97,20 @@ export const IconButton = {
     args: {
         appearance: 'solid',
         busy: false,
-        compact: false,
         disabled: false,
         rounded: false,
+        size: 'md',
         variant: 'base',
     },
     render: (args) => (
         <ThemeWrapper>
             <div style={{ display: 'flex', flexDirection: 'row', gap: 4, height: 50 }}>
                 <Button {...args} onClick={action('clicked')}>
-                    {({ iconSize }) => (
+                    {({ size }) => (
                         <>
-                            <Icon set="regular" name="plus" size={iconSize} />
+                            <Icon set="regular" name="plus" size={size} />
                             <span>With Icons</span>
-                            <Icon set="solid" name="angle-right" size={iconSize} />
+                            <Icon set="solid" name="angle-right" size={size} />
                         </>
                     )}
                 </Button>
@@ -78,9 +122,9 @@ export const LongText = {
     args: {
         appearance: 'solid',
         busy: false,
-        compact: false,
         disabled: false,
         rounded: false,
+        size: 'md',
         variant: 'base',
     },
 

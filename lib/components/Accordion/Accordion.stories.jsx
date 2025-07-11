@@ -18,8 +18,16 @@ export default meta;
 export const Demo = {
     args: {
         variant: 'base',
-        content:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sapien dui, posuere eu auctor at, vulputate sed nisl. Integer nec mauris eget ex aliquet vestibulum. Nam convallis tincidunt blandit. Nulla cursus, sem at sodales congue, urna nisi ornare felis, ultricies ultrices sapien nunc at eros. Phasellus et metus neque. Curabitur commodo, mauris eget ullamcorper luctus, orci augue tristique sem, sed venenatis nibh ligula sit amet nisi. Donec hendrerit urna ut tempor mollis. Sed non ornare massa. Maecenas orci nulla, ultricies vel finibus quis, eleifend sit amet nulla. Suspendisse non finibus quam, sed vestibulum velit. Vivamus sit amet sollicitudin mauris, fermentum aliquam nulla. Cras suscipit erat quis lacus rhoncus accumsan.',
+        content: (
+            <span>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec libero ante, venenatis at varius nec,
+                dignissim non est. Maecenas a nunc sem. Cras sed ipsum lectus. Sed at dolor feugiat, maximus sapien
+                mattis, suscipit dolor. Nunc sit amet augue a diam interdum mattis. Duis efficitur fringilla suscipit.
+                Nunc varius porta leo, vitae eleifend massa. Phasellus vehicula nibh ut commodo efficitur. Donec maximus
+                libero nibh, sed mollis dolor finibus et. Donec commodo felis in sapien euismod accumsan. Nulla
+                consectetur nibh tortor, ac suscipit eros efficitur eu. Aliquam erat volutpat.
+            </span>
+        ),
     },
 
     render: ({ content, ...args }) => (

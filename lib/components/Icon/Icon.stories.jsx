@@ -1,4 +1,4 @@
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 import { Icon } from '@/components';
 import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
@@ -16,7 +16,7 @@ const meta = {
             control: { type: 'radio' },
         },
         size: {
-            options: [12, 14, 20, 24, 32, 40, 48],
+            options: ['xs', 'sm', 'md', 'lg', 'xl', 'x2', 'x3', 'x4'],
             control: { type: 'radio' },
         },
     },
@@ -28,7 +28,7 @@ export const Demo = {
     args: {
         set: 'solid',
         name: 'trash-can',
-        size: 48,
+        size: 'md',
     },
 
     render: (args) => {

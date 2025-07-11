@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 import { ToggleBadge } from '@/components';
 import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
@@ -24,9 +24,9 @@ export const ToggleBadgeDemo = {
 
     render: () => {
         const [toggled, setToggled] = useState(false);
-        const handleClick = (id) => {
+        const handleClick = (value) => {
             setToggled((t) => !t);
-            action('toggled')(id);
+            action('toggled')(value);
         };
         return (
             <ThemeWrapper>

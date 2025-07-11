@@ -106,7 +106,7 @@ export const BadgeList = forwardRef(
                                     <div {...events}>
                                         <Badge appearance="basic" variant={variant}>
                                             <span>+ {remCount}</span>
-                                            <Icon name="angle-down" size={15} />
+                                            <Icon name="angle-down" />
                                         </Badge>
                                     </div>
                                 )}

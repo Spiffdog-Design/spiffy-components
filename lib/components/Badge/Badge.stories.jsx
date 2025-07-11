@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 import { Badge } from '@/components';
 import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
@@ -53,8 +53,8 @@ export const CloseBadge = {
     },
 
     render: (args) => {
-        const handleClick = (id) => {
-            action('on close triggered')(id);
+        const handleClick = (value) => {
+            action('on close triggered')(value);
         };
         return (
             <ThemeWrapper>

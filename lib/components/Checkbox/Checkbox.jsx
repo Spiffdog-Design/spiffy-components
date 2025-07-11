@@ -99,7 +99,7 @@ export const Checkbox = forwardRef(function Checkbox(
                     opacity: disabled === true ? 0.5 : checked === false && appearance === 'basic' ? 0.1 : 1,
                 }}
             >
-                <Icon {...(checked === true ? iconSet.checked : iconSet.unchecked)} size={compact === true ? 25 : 35} />
+                <Icon {...(checked === true ? iconSet.checked : iconSet.unchecked)} />
             </div>
         </>
     );

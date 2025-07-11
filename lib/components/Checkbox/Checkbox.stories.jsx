@@ -1,4 +1,4 @@
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 import { Checkbox, FormControl, Label } from '@/components';
 import ThemeWrapper from '@/components/Storybook/ThemeWrapper';

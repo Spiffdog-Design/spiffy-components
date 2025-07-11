@@ -6,9 +6,8 @@ const config: StorybookConfig = {
 
     addons: [
         '@storybook/addon-links',
-        '@storybook/addon-essentials',
-        '@storybook/addon-interactions',
         '@chromatic-com/storybook',
+        '@storybook/addon-docs'
     ],
 
     framework: {
@@ -32,13 +31,9 @@ const config: StorybookConfig = {
         };
     },
 
-    docs: {
-        autodocs: true,
-    },
-
     typescript: {
         reactDocgen: 'react-docgen-typescript',
-    },
+    }
 };
 
 export default config;

@@ -25,11 +25,11 @@ export const Demo = {
         return (
             <ThemeWrapper>
                 <Select {...args}>
-                    <SelectItem value="Apple">🍎 Apple</SelectItem>
-                    <SelectItem value="Banana">🍌 Banana</SelectItem>
-                    <SelectItem value="Orange">🍊 Orange</SelectItem>
-                    <SelectItem value="Pear">🍐 Pear</SelectItem>
-                    <SelectItem value="Grape">🍇 Grape</SelectItem>
+                    <SelectItem value="apple">🍎 Apple</SelectItem>
+                    <SelectItem value="banana">🍌 Banana</SelectItem>
+                    <SelectItem value="orange">🍊 Orange</SelectItem>
+                    <SelectItem value="pear">🍐 Pear</SelectItem>
+                    <SelectItem value="grape">🍇 Grape</SelectItem>
                 </Select>
             </ThemeWrapper>
         );

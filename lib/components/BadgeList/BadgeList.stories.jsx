@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { Badge, BadgeList, Button, ToggleBadge } from '@/components';
 
 import ThemeWrapper from '@/components/Storybook/ThemeWrapper';

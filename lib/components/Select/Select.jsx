@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useMemo, Children, cloneElement, isValidElement } from 'react';
+import { useState, useRef, useEffect, useMemo, Children, isValidElement } from 'react';
 import ReactDOM from 'react-dom';
 import * as styles from './Select.css';
 
