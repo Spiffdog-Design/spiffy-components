@@ -46,6 +46,7 @@ export const BadgeList = forwardRef(
             const measure = measureRef.current;
             if (!container || !measure) return;
 
+            measure.style.display = 'flex';
             const containerWidth = container.offsetWidth;
             const badges = Array.from(measure.children);
 
@@ -66,6 +67,7 @@ export const BadgeList = forwardRef(
                 setVisibleCount(nextCount);
                 lastCountRef.current = nextCount;
             }
+            measure.style.display = 'none';
         };
 
         useLayoutEffect(() => {
