@@ -4,20 +4,20 @@ import cn from 'classnames';
 
 import { Icon } from '@/components';
 
-import * as styles from './Badge.css';
+import styles from './Badge.module.css';
 
 export const Badge = forwardRef(function Badge(
     { appearance = 'solid', value, children, className, onClick, variant = 'base', ...props },
     ref,
 ) {
-    const displayClassName = cn(styles.badge, className, {
-        [`${styles.alert}`]: variant === 'alert',
-        [`${styles.base}`]: variant === 'base',
-        [`${styles.primary}`]: variant === 'primary',
-        [`${styles.success}`]: variant === 'success',
-        [`${styles.warning}`]: variant === 'warning',
-        [`${styles.basic}`]: appearance === 'basic',
-        [`${styles.outline}`]: appearance === 'outline',
+    const displayClassName = cn(styles['sc-badge'], className, {
+        [styles['sc-badge-alert']]: variant === 'alert',
+        [styles['sc-badge-base']]: variant === 'base',
+        [styles['sc-badge-primary']]: variant === 'primary',
+        [styles['sc-badge-success']]: variant === 'success',
+        [styles['sc-badge-warning']]: variant === 'warning',
+        [styles['sc-badge-basic']]: appearance === 'basic',
+        [styles['sc-badge-outline']]: appearance === 'outline',
     });
     const handleClick = (args) => () => {
         if (onClick != null) onClick(args);
@@ -25,9 +25,12 @@ export const Badge = forwardRef(function Badge(
 
     return (
         <div {...props} ref={ref} data-type={onClick != null ? 'close' : ''} className={displayClassName}>
-            <div className={styles.content}>{children}</div>
+            <div className={styles['sc-badge-content']}>{children}</div>
             {onClick != null && (
-                <button className={cn(styles.closeButton, styles.pointer)} onClick={handleClick(value)}>
+                <button
+                    className={cn(styles['sc-badge-close-button'], styles['sc-badge-pointer'])}
+                    onClick={handleClick(value)}
+                >
                     <Icon name="xmark" size="sm" />
                 </button>
             )}

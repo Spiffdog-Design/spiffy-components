@@ -1,11 +1,15 @@
 import { forwardRef } from 'react';
 import cn from 'classnames';
 
-import * as styles from './Label.css';
+import styles from './Label.module.css';
 
 export const Label = forwardRef(function Label({ children, required = false, ...props }, ref) {
     return (
-        <label {...props} ref={ref} className={cn(styles.root, { [`${styles.required}`]: required === true })}>
+        <label
+            {...props}
+            ref={ref}
+            className={cn(styles['sc-label'], { [styles['sc-label-required']]: required === true })}
+        >
             {children}
         </label>
     );

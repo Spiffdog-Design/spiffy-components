@@ -1,37 +1,39 @@
 import { forwardRef } from 'react';
 import cn from 'classnames';
-import * as Ariakit from '@ariakit/react';
-import * as styles from './Accordion.css';
+import styles from './Accordion.module.css';
 
 import { Icon } from '@/components';
-
-const displayClassName = (className, variant) =>
-    cn(className, {
-        [`${styles.alert}`]: variant === 'alert',
-        [`${styles.primary}`]: variant === 'primary',
-        [`${styles.success}`]: variant === 'success',
-        [`${styles.warning}`]: variant === 'warning',
-    });
 
 export const Accordion = forwardRef(function Accordion(
     { children, className, open, variant, heading, onHeadingClick },
     ref,
 ) {
-    const headingClasses = displayClassName(styles.heading, variant);
-    const contentClasses = displayClassName(styles.content, variant);
+    const summaryClasses = displayClassName(styles['sc-accordion-heading'], variant);
+
+    const handleToggle = (e) => {
+        if (onHeadingClick) {
+            e.preventDefault();
+            onHeadingClick(!open);
+        }
+    };
 
     return (
-        <div className={cn(styles.accordion, className)} ref={ref}>
-            <Ariakit.DisclosureProvider open={open} setOpen={onHeadingClick}>
-                <Ariakit.Disclosure render={<button className={headingClasses} />}>
-                    <div className={styles.headingContainer}>{heading}</div>
-                    <div className={styles.iconContainer}>
-                        <Icon set="solid" name="angle-down" className={styles.headingIconOpen} />
-                        <Icon set="solid" name="angle-right" className={styles.headingIconClosed} />
-                    </div>
-                </Ariakit.Disclosure>
-                <Ariakit.DisclosureContent className={contentClasses}>{children}</Ariakit.DisclosureContent>
-            </Ariakit.DisclosureProvider>
-        </div>
+        <details className={cn(styles['sc-accordion'], className)} open={open} ref={ref}>
+            <summary className={summaryClasses} onClick={handleToggle}>
+                <div className={styles['sc-accordion-heading-container']}>{heading}</div>
+                <div className={styles['sc-accordion-icon-container']}>
+                    <Icon set="solid" name="angle-right" className={styles['sc-accordion-heading-icon']} />
+                </div>
+            </summary>
+            <div className={styles['sc-accordion-content']}>{children}</div>
+        </details>
     );
 });
+
+const displayClassName = (className, variant) =>
+    cn(className, {
+        [styles['sc-accordion-alert']]: variant === 'alert',
+        [styles['sc-accordion-primary']]: variant === 'primary',
+        [styles['sc-accordion-success']]: variant === 'success',
+        [styles['sc-accordion-warning']]: variant === 'warning',
+    });

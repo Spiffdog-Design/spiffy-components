@@ -1,0 +1,9 @@
+/* ThemeWrapper CSS Module */
+.themeWrapper {
+    display: flex;
+    justify-content: center;
+    background-color: var(--slate12);
+    min-height: 30vh;
+    padding: 2rem;
+    min-width: 100%;
+}

@@ -1,0 +1,61 @@
+@keyframes sc-spinner-rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes sc-spinner-rotation-back {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+.sc-spinner {
+    --size: 48px;
+    --solid-12: var(--base-11);
+    --transparent: transparent;
+
+    position: relative;
+    display: inline-block;
+    animation: sc-spinner-rotation 1s linear infinite;
+    border-color: var(--solid-12) var(--solid-12) var(--transparent) var(--transparent);
+    border-style: solid;
+    border-radius: 50%;
+    border-width: calc(var(--size) * 0.0625);
+    box-sizing: border-box;
+    height: var(--size);
+    width: var(--size);
+}
+
+.sc-spinner::after,
+.sc-spinner::before {
+    position: absolute;
+    content: '';
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: calc(var(--size) * 0.833);
+    margin: auto;
+    width: calc(var(--size) * 0.833);
+    animation: sc-spinner-rotation-back 0.5s linear infinite;
+    border-color: var(--warning-9) var(--warning-9) var(--transparent) var(--transparent);
+    border-style: solid;
+    border-radius: 50%;
+    border-width: calc(var(--size) * 0.0625);
+    box-sizing: border-box;
+    transform-origin: center center;
+}
+
+.sc-spinner::before {
+    width: calc(var(--size) * 0.6666);
+    height: calc(var(--size) * 0.6666);
+    border-color: var(--primary-9) var(--primary-9) var(--transparent) var(--transparent);
+    animation: sc-spinner-rotation 1.5s linear infinite;
+}

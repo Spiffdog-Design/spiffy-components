@@ -1,4 +1,4 @@
-import * as styles from './TextScale.css';
+import styles from './TextScale.module.css';
 import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
 
 const meta = {
@@ -14,7 +14,7 @@ export const Demo = {
     render: ({ children }) => {
         return (
             <ThemeWrapper title="Text Scale (1.125 ratio -- Major 2nd)">
-                <div className={styles.container}>
+                <div className={styles['sc-text-scale-container']}>
                     <h1>h1: {children}</h1>
                     <h2>h2: {children}</h2>
                     <h3>h3: {children}</h3>

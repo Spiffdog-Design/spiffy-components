@@ -1,0 +1,72 @@
+/* Input CSS Module */
+.sc-input-root {
+    /* CSS Variables for theming */
+    --root-color: var(--base-12);
+    --root-background: transparent;
+    --input-color: var(--base-2);
+
+    background-color: var(--root-background);
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    border-color: var(--root-color);
+    border-style: solid;
+    border-width: 3px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.sc-input-root button {
+    height: 100%;
+}
+
+.sc-input {
+    background-color: transparent;
+    border: 0;
+    color: var(--base-12);
+    outline: none;
+    width: 100%;
+    padding: var(--spacing-padding-4);
+}
+
+.sc-input[type='number'] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+.sc-input::-webkit-outer-spin-button,
+.sc-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.sc-input-compact {
+    padding: var(--spacing-padding-1) var(--spacing-padding-1);
+    font-size: var(--font-size-1);
+}
+
+.sc-input-actions {
+    display: flex;
+    flex-direction: row;
+    padding: var(--spacing-padding-1);
+    gap: var(--spacing-gap-1);
+}
+
+/* Color Variants */
+.sc-input-alert {
+    --input-color: var(--alert-2);
+    --root-color: var(--alert-9);
+}
+
+.sc-input-primary {
+    --input-color: var(--primary-2);
+    --root-color: var(--primary-9);
+}
+
+.sc-input-success {
+    --input-color: var(--success-2);
+    --root-color: var(--success-9);
+}
+
+.sc-input-warning {
+    --input-color: var(--warning-2);
+    --root-color: var(--warning-9);
+}

@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet';
 
 import { ThemeProvider, useTheme } from '@/components';
 
+import '@spiffdog/spiffy-colors/dist/index.css';
 import './AppRoot.css';
 
 export const AppRoot = ({ children, ...props }) => {
@@ -14,15 +15,16 @@ export const AppRoot = ({ children, ...props }) => {
 };
 
 const AppRootContainer = ({ children }) => {
-    const { themeClass } = useTheme();
+    const { themeName } = useTheme();
     const docRef = useRef(window?.document);
 
     useEffect(() => {
+        console.log(themeName);
         const body = docRef.current?.body;
         if (body != null) {
-            body.className = themeClass;
+            body.className = themeName;
         }
-    }, [themeClass]);
+    }, [themeName]);
 
     return (
         <>

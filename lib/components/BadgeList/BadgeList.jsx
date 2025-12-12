@@ -3,7 +3,7 @@ import cn from 'classnames';
 
 import { Badge, Icon, Popover } from '@/components';
 
-import * as styles from './BadgeList.css';
+import styles from './BadgeList.module.css';
 import { useMemo } from 'react';
 
 export const BadgeList = forwardRef(
@@ -16,15 +16,15 @@ export const BadgeList = forwardRef(
         useImperativeHandle(ref, () => containerRef.current, []);
 
         const displayClassName = cn(
-            styles.badgeList,
+            styles['sc-badge-list'],
             {
-                [styles.border]: bordered === true,
-                [styles.rounded]: rounded === true,
-                [styles.alert]: variant === 'alert',
-                [styles.base]: variant === 'base',
-                [styles.primary]: variant === 'primary',
-                [styles.success]: variant === 'success',
-                [styles.warning]: variant === 'warning',
+                [styles['sc-badge-list-border']]: bordered === true,
+                [styles['sc-badge-list-rounded']]: rounded === true,
+                [styles['sc-badge-list-alert']]: variant === 'alert',
+                [styles['sc-badge-list-base']]: variant === 'base',
+                [styles['sc-badge-list-primary']]: variant === 'primary',
+                [styles['sc-badge-list-success']]: variant === 'success',
+                [styles['sc-badge-list-warning']]: variant === 'warning',
             },
             className,
         );
@@ -102,7 +102,7 @@ export const BadgeList = forwardRef(
                             <Popover
                                 mode="click"
                                 placement="bottom-start"
-                                className={styles.popover}
+                                className={styles['sc-badge-list-popover']}
                                 variant={variant}
                                 trigger={({ events }) => (
                                     <div {...events}>
@@ -113,12 +113,16 @@ export const BadgeList = forwardRef(
                                     </div>
                                 )}
                             >
-                                <div className={styles.badgeListRemaining}>{remBadges}</div>
+                                <div className={styles['sc-badge-list-remaining']}>{remBadges}</div>
                             </Popover>
                         )}
                     </div>
                 </div>
-                <div className={cn(displayClassName, styles.measuringContainer)} ref={measureRef} aria-hidden>
+                <div
+                    className={cn(displayClassName, styles['sc-badge-list-measuring-container'])}
+                    ref={measureRef}
+                    aria-hidden
+                >
                     {badgeArray}
                 </div>
             </>

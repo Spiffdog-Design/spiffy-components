@@ -4,7 +4,7 @@ import cn from 'classnames';
 
 import { Spinner, useTheme } from '@/components';
 
-import * as styles from './Button.css';
+import styles from './Button.module.css';
 
 /**
  * A customizable button component that supports various appearances, variants, and states.
@@ -20,8 +20,10 @@ export const Button = forwardRef(function Button(props, ref) {
             data-theme={themeName}
             disabled={disabled || busy}
         >
-            <div className={styles.content}>{typeof children === 'function' ? children(props) : children}</div>
-            <div className={cn(styles.busy, { rounded: rounded, show: busy })}>
+            <div className={styles['sc-button-content']}>
+                {typeof children === 'function' ? children(props) : children}
+            </div>
+            <div className={cn(styles['sc-button-busy'], { rounded: rounded, show: busy })}>
                 <Spinner size={['xs', 'sm'].includes(size) ? 20 : 28} />
             </div>
         </Aria.Button>
@@ -30,20 +32,19 @@ export const Button = forwardRef(function Button(props, ref) {
 
 const getClass = (styles, props) => {
     const { appearance = 'solid', className, rounded, size = 'md', variant = 'base' } = props;
-    return cn(className, styles.button, {
+    return cn(className, styles['sc-button'], {
         rounded: rounded === true,
-        [`${styles.basic}`]: appearance === 'basic',
-        [`${styles.outline}`]: appearance === 'outline',
-        [`${styles.alert}`]: variant === 'alert',
-        [`${styles.primary}`]: variant === 'primary',
-        [`${styles.success}`]: variant === 'success',
-        [`${styles.warning}`]: variant === 'warning',
-        [`${styles.xs}`]: size === 'xs',
-        [`${styles.sm}`]: size === 'sm',
-        [`${styles.md}`]: size === 'md',
-        [`${styles.lg}`]: size === 'lg',
-        [`${styles.xl}`]: size === 'xl',
-        [`${styles.x2}`]: size === 'x2',
-        [`${styles.x3}`]: size === 'x3',
+        [styles['sc-button-basic']]: appearance === 'basic',
+        [styles['sc-button-outline']]: appearance === 'outline',
+        [styles['sc-button-alert']]: variant === 'alert',
+        [styles['sc-button-primary']]: variant === 'primary',
+        [styles['sc-button-success']]: variant === 'success',
+        [styles['sc-button-warning']]: variant === 'warning',
+        [styles['sc-button-xs']]: size === 'xs',
+        [styles['sc-button-sm']]: size === 'sm',
+        [styles['sc-button-md']]: size === 'md',
+        [styles['sc-button-lg']]: size === 'lg',
+        [styles['sc-button-xl']]: size === 'xl',
+        [styles['sc-button-x2']]: size === 'x2',
     });
 };

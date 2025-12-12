@@ -1,0 +1,23 @@
+/* Label CSS Module */
+.sc-label {
+    position: relative;
+    background-color: transparent;
+    color: var(--base-12);
+    cursor: pointer;
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-1);
+    text-transform: uppercase;
+    flex-shrink: 0;
+    user-select: none;
+    width: fit-content;
+}
+
+.sc-label-required::after {
+    position: absolute;
+    top: -4px;
+    right: -12px;
+    color: var(--alert-9);
+    content: '*';
+    font-size: var(--font-size-3);
+    font-weight: var(--font-weight-medium);
+}

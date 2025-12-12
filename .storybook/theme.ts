@@ -1,45 +1,45 @@
 // .storybook/theme.js
 import { create } from 'storybook/theming';
-import { light } from '@spiffdog/spiffy-colors';
+import { dark } from '@spiffdog/spiffy-colors';
 
 const palette = {
-    alert: { ...light.red },
-    base: { ...light.slate },
-    primary: { ...light.blue },
-    success: { ...light.green },
-    warning: { ...light.orange },
+    alert: { ...dark.red },
+    base: { ...dark.slate },
+    primary: { ...dark.blue },
+    success: { ...dark.green },
+    warning: { ...dark.orange },
 };
 
 export default create({
-    base: 'light', // or 'dark'
+    base: 'dark', // or 'light'
 
     // Brand colors
-    colorPrimary: palette.alert[11], // Your primary color
-    colorSecondary: palette.primary[11], // Your secondary color
+    // colorPrimary: palette.alert[11], // Your primary color
+    // colorSecondary: palette.primary[11], // Your secondary color
 
     // UI
-    appBg: 'white',
-    appContentBg: 'white',
-    appBorderColor: 'grey',
-    appBorderRadius: 4,
+    // appBg: 'white',
+    // appContentBg: 'white',
+    // appBorderColor: 'grey',
+    // appBorderRadius: 4,
 
     // Typography
     fontBase: '"Roboto", sans-serif',
     fontCode: 'monospace',
 
     // Text colors
-    textColor: palette.base[11],
-    textInverseColor: palette.base[1],
+    // textColor: `rgb(from ${palette.base[11]} r g b)`,
+    // textInverseColor: `rgb(from ${palette.base[1]} r g b)`,
 
     // Toolbar default and active colors
-    barTextColor: palette.base[7],
-    barSelectedColor: palette.base[11],
-    barBg: palette.base[1],
+    // barTextColor: `rgb(from ${palette.base[7]} r g b)`,
+    // barSelectedColor: `rgb(from ${palette.base[11]} r g b)`,
+    // barBg: `rgb(from ${palette.base[1]} r g b)`,
 
     // Form colors
-    inputBg: palette.base[1],
-    inputBorder: palette.base[7],
-    inputTextColor: palette.base[11],
+    // inputBg: `rgb(from ${palette.base[1]} r g b)`,
+    // inputBorder: `rgb(from ${palette.base[7]} r g b)`,
+    // inputTextColor: `rgb(from ${palette.base[11]} r g b)`,
     inputBorderRadius: 4,
 
     // Brand

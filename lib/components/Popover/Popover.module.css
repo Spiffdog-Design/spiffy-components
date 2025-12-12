@@ -1,0 +1,64 @@
+.sc-popover-content {
+    --solid-10: var(--base-10);
+    background-color: var(--base-1);
+    border: 3px solid var(--solid-10);
+    border-radius: 8px;
+    box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+    outline: none;
+    padding: var(--spacing-padding-0);
+    min-width: 200px;
+    max-width: 33vw;
+    z-index: 1000;
+}
+
+.sc-popover-content:focus-visible {
+    outline: none;
+}
+
+.sc-popover-padded {
+    padding: var(--spacing-padding-2);
+}
+
+.sc-popover-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    background-color: hsl(from var(--solid-10) h s l / 15%);
+    padding: var(--spacing-padding-1);
+    width: 100%;
+}
+
+.sc-popover-arrow {
+}
+
+.sc-popover-trigger {
+    cursor: help;
+    user-select: none;
+}
+
+.sc-popover-alert {
+    --solid-10: var(--alert-10);
+}
+
+.sc-popover-primary {
+    --solid-10: var(--primary-10);
+}
+
+.sc-popover-success {
+    --solid-10: var(--success-10);
+}
+
+.sc-popover-warning {
+    --solid-10: var(--warning-10);
+}
+
+/* Global styles for arrow SVG */
+.sc-popover-arrow svg {
+    stroke: var(--solid-10);
+    fill: var(--solid-10);
+}
+
+/* Global style for dialog containers */
+div[data-dialog]:has(.sc-popover-content) {
+    outline: none;
+}

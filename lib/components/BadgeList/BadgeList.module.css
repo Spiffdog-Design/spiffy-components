@@ -1,0 +1,64 @@
+.sc-badge-list {
+    background-color: transparent;
+    border: 2px solid transparent;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--spacing-gap-2);
+    padding: var(--spacing-padding-1);
+    width: fit-content;
+}
+
+.sc-badge-list-remaining {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--spacing-gap-2);
+    width: 100%;
+}
+
+.sc-badge-list-popover {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--spacing-gap-2);
+}
+
+.sc-badge-list-measuring-container {
+    display: none;
+    position: absolute;
+    background-color: transparent;
+    visibility: hidden;
+    pointer-events: none;
+    height: 0;
+    overflow: hidden;
+}
+
+.sc-badge-list-border {
+    --color: var(--base-10);
+    border-color: var(--color);
+}
+
+.sc-badge-list-rounded {
+    border-radius: 16px;
+}
+
+.sc-badge-list-alert {
+    --color: var(--alert-10);
+}
+
+.sc-badge-list-base {
+    --color: var(--base-10);
+}
+
+.sc-badge-list-primary {
+    --color: var(--primary-10);
+}
+
+.sc-badge-list-success {
+    --color: var(--success-10);
+}
+
+.sc-badge-list-warning {
+    --color: var(--warning-10);
+}

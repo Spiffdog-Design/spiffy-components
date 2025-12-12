@@ -1,0 +1,91 @@
+.sc-dialog-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: var(--spacing-gap-2);
+}
+
+.sc-dialog-backdrop {
+    --theme-color: var(--base-12);
+    background-color: hsl(from var(--theme-color) h s l / 0.1);
+    -webkit-backdrop-filter: blur(4px);
+    opacity: 0;
+    transition-property: opacity, backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: var(--animation-duration, 150ms);
+    backdrop-filter: blur(0);
+}
+
+.sc-dialog-backdrop[data-enter] {
+    opacity: 1;
+    backdrop-filter: blur(4px);
+}
+
+.sc-dialog-body {
+    font-size: var(--font-size-2);
+    padding: var(--spacing-padding-0) var(--spacing-padding-3);
+}
+
+.sc-dialog-description {
+    font-size: var(--font-size-1);
+    color: var(--base-10);
+}
+
+.sc-dialog {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: var(--spacing-padding-2) var(--spacing-padding-2);
+    position: fixed;
+    inset: 0.75rem;
+    z-index: 50;
+    background-color: var(--base-1);
+    box-shadow: 0 25px 50px -12px hsl(from var(--theme-color) h s l / 0.25);
+    color: var(--base-12);
+    height: fit-content;
+    margin: auto;
+    max-height: calc(100dvh - 0.75rem * 2);
+    max-width: calc(100dvw - 0.75rem * 2);
+    opacity: 0;
+    overflow: auto;
+    width: fit-content;
+    transform-origin: center;
+    transform: scale(0.95);
+    transition-property: opacity, transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: var(--animation-duration, 150ms);
+}
+
+.sc-dialog[data-enter] {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.sc-dialog-heading {
+    color: var(--theme-color);
+    font-size: var(--font-size-2);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+}
+
+.sc-dialog-heading-container {
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-padding-2) var(--spacing-padding-3) var(--spacing-padding-0) var(--spacing-padding-3);
+}
+
+.sc-dialog-alert {
+    --theme-color: var(--alert-10);
+}
+
+.sc-dialog-primary {
+    --theme-color: var(--primary-10);
+}
+
+.sc-dialog-success {
+    --theme-color: var(--success-10);
+}
+
+.sc-dialog-warning {
+    --theme-color: var(--warning-10);
+}

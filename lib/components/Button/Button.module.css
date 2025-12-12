@@ -1,0 +1,192 @@
+/* Button CSS Module */
+.sc-button {
+    /* CSS Variables for theming */
+    --theme-color: var(--base-10);
+
+    align-items: center;
+    background: var(--theme-color);
+    border-width: 3px;
+    border-style: solid;
+    border-color: var(--theme-color);
+    border-radius: var(--border-radius-0);
+    color: var(--base-1);
+    cursor: pointer;
+    display: inline-flex;
+    flex-direction: row;
+    font-size: var(--font-size-2);
+    font-weight: var(--font-weight-semibold);
+    gap: var(--spacing-gap-2);
+    height: fit-content;
+    justify-content: center;
+    line-height: var(--font-line-height);
+    padding: var(--spacing-padding-1) var(--spacing-padding-3);
+    position: relative;
+    text-transform: uppercase;
+    user-select: none;
+    width: fit-content;
+    transition: all var(--animation-speed) ease-in-out;
+}
+
+.sc-button.rounded {
+    border-radius: 999.9rem;
+}
+
+.sc-button:hover {
+    background: color-mix(in srgb, var(--theme-color) 90%, white);
+    border-color: color-mix(in srgb, var(--theme-color) 90%, white);
+}
+
+.sc-button:disabled {
+    background: color-mix(in srgb, var(--theme-color) 50%, transparent);
+    border-color: transparent;
+    cursor: not-allowed;
+}
+
+.sc-button:focus,
+.sc-button:focus-visible {
+    outline: 2px solid var(--base-1);
+    box-shadow: 0 0 0 5px var(--primary-11);
+}
+
+.sc-button-content {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-gap-2);
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 50ch;
+    width: calc(100%);
+}
+
+.sc-button-busy {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(3px);
+    height: 100%;
+    width: 100%;
+}
+
+.sc-button-busy svg {
+    fill: var(--theme-color);
+}
+
+.sc-button-busy.compact {
+    padding: var(--spacing-padding-2) var(--spacing-padding-3);
+}
+
+.sc-button-busy.rounded {
+    border-radius: var(--border-radius-6);
+}
+
+.sc-button-busy.show {
+    display: flex;
+}
+
+/* Appearance Variants */
+.sc-button-basic {
+    background: transparent;
+    border-color: transparent;
+    color: var(--theme-color);
+}
+
+.sc-button-basic:hover {
+    background: color-mix(in srgb, var(--theme-color) 40%, transparent);
+    border-color: transparent;
+    color: var(--theme-color);
+}
+
+.sc-button-basic:disabled {
+    background: transparent;
+    border-color: transparent;
+    color: color-mix(in srgb, var(--theme-color) 50%, transparent);
+}
+
+[data-theme='dark'] .sc-button-basic:hover {
+    background: color-mix(in srgb, var(--theme-color) 25%, transparent);
+    border-color: transparent;
+    color: var(--theme-color);
+}
+
+.sc-button-outline {
+    background: transparent;
+    border-color: var(--theme-color);
+    color: var(--theme-color);
+}
+
+.sc-button-outline:hover {
+    background: color-mix(in srgb, var(--theme-color) 40%, transparent);
+    border-color: var(--theme-color);
+    color: var(--theme-color);
+}
+
+.sc-button-outline:disabled {
+    background: transparent;
+    border-color: color-mix(in srgb, var(--theme-color) 50%, transparent);
+    color: color-mix(in srgb, var(--theme-color) 50%, transparent);
+}
+
+[data-theme='dark'] .sc-button-outline:hover {
+    background: color-mix(in srgb, var(--theme-color) 25%, transparent);
+    border-color: var(--theme-color);
+    color: var(--theme-color);
+}
+
+/* Color Variants */
+.sc-button-alert {
+    --theme-color: var(--alert-10);
+}
+
+.sc-button-primary {
+    --theme-color: var(--primary-10);
+}
+
+.sc-button-success {
+    --theme-color: var(--success-10);
+}
+
+.sc-button-warning {
+    --theme-color: var(--warning-10);
+}
+
+/* Size Variants */
+.sc-button-xs {
+    padding: var(--button-text-xs-padding);
+    font-size: var(--button-text-xs-font-size);
+    line-height: var(--button-text-xs-line-height);
+}
+
+.sc-button-sm {
+    padding: var(--button-text-sm-padding);
+    font-size: var(--button-text-sm-font-size);
+    line-height: var(--button-text-sm-line-height);
+}
+
+.sc-button-md {
+    padding: var(--button-text-md-padding);
+    font-size: var(--button-text-md-font-size);
+    line-height: var(--button-text-md-line-height);
+}
+
+.sc-button-lg {
+    padding: var(--button-text-lg-padding);
+    font-size: var(--button-text-lg-font-size);
+    line-height: var(--button-text-lg-line-height);
+}
+
+.sc-button-xl {
+    padding: var(--button-text-xl-padding);
+    font-size: var(--button-text-xl-font-size);
+    line-height: var(--button-text-xl-line-height);
+}
+
+.sc-button-x2 {
+    padding: var(--button-text-x2-padding);
+    font-size: var(--button-text-x2-font-size);
+    line-height: var(--button-text-x2-line-height);
+}

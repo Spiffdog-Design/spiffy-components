@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 
 import { Icon } from '@/components';
 
-import * as styles from './Radio.css';
+import styles from './Radio.module.css';
 
 const getIconSet = (appearance) => {
     switch (appearance) {

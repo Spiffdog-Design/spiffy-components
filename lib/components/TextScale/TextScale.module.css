@@ -1,0 +1,5 @@
+.sc-text-scale-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-gap-1);
+}

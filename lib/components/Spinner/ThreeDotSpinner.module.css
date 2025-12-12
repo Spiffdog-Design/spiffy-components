@@ -1,0 +1,76 @@
+@keyframes sc-three-dot-spinner-animation {
+    0% {
+        background-color: var(--alert-9);
+    }
+    25% {
+        background-color: var(--base-3);
+    }
+    50% {
+        background-color: var(--primary-9);
+    }
+    75% {
+        background-color: var(--base-3);
+    }
+    100% {
+        background-color: var(--warning-9);
+    }
+}
+
+.sc-three-dot-spinner {
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacing-gap-1);
+}
+
+.sc-three-dot {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: var(--base-3);
+    color: var(--base-3);
+    animation: sc-three-dot-spinner-animation 1s infinite linear alternate;
+    animation-delay: 500ms;
+}
+
+.sc-three-dot::before,
+.sc-three-dot::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 0;
+}
+
+.sc-three-dot::before {
+    left: -15px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: var(--base-3);
+    color: var(--base-3);
+    animation: sc-three-dot-spinner-animation 1s infinite linear alternate;
+    animation-delay: 0ms;
+}
+
+.sc-three-dot::after {
+    left: 15px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: var(--base-3);
+    color: var(--base-3);
+    animation: sc-three-dot-spinner-animation 1s infinite alternate;
+    animation-delay: 1000ms;
+}
+
+.sc-three-dot-1 {
+    animation-delay: 0ms;
+}
+
+.sc-three-dot-2 {
+    animation-delay: 250ms;
+}
+
+.sc-three-dot-3 {
+    animation-delay: 500ms;
+}

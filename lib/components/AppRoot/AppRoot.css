@@ -1,0 +1,135 @@
+/* AppRoot Global Styles - CSS Module with :root declarations */
+@import '../Theme/themes/default-theme.css';
+
+*,
+*:after,
+*:before {
+    box-sizing: border-box;
+    font-smooth: antialiased;
+    interpolate-size: allow-keywords;
+    margin: 0;
+}
+
+html,
+body,
+#root {
+    font-family: 'Roboto', sans-serif;
+    height: 100%;
+    min-height: 100vh;
+    width: 100%;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    line-height: 1.65;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 400;
+    color: var(--slate1);
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+    font-family: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+em,
+small,
+span,
+strong,
+.text-caption {
+    color: inherit;
+    font-family: inherit;
+    hyphens: auto;
+    overflow-wrap: break-word;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 500;
+}
+
+strong {
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 3.24rem;
+}
+
+h2 {
+    font-size: 2.88rem;
+}
+
+h3 {
+    font-size: 2.56rem;
+}
+
+h4 {
+    font-size: 2.27rem;
+}
+
+h5 {
+    font-size: 2.02rem;
+}
+
+h6 {
+    font-size: 1.8rem;
+}
+
+.text-caption {
+    font-size: 1.42rem;
+}
+
+small {
+    font-size: 1.26rem;
+    color: var(--slate2);
+}
+
+em {
+    font-style: oblique;
+    font-style: italic;
+}
+
+code {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+pre {
+    background-color: var(--slate5);
+    border: 1px solid var(--slate7);
+    color: var(--slate11);
+    padding: 0.4rem 0.8rem;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid var(--slate10);
+    margin: 1rem 0;
+    width: 100%;
+}

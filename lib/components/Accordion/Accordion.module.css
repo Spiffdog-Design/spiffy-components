@@ -1,0 +1,93 @@
+/* Accordion CSS Module */
+.sc-accordion {
+    background-color: var(--base-1);
+    color: var(--base-12);
+    padding: var(--spacing-padding-2);
+    width: 100%;
+    height: fit-content;
+    box-sizing: border-box;
+}
+
+.sc-accordion-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-gap-2);
+    width: 100%;
+}
+
+.sc-accordion-heading {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    background-color: transparent;
+    border-color: transparent;
+    border-left-color: var(--base-12);
+    border-right-color: var(--base-12);
+    border-style: solid;
+    border-width: 3px;
+    cursor: pointer;
+    font-size: var(--font-size-2);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--font-line-height);
+    padding: var(--spacing-padding-1) var(--spacing-padding-3);
+    width: 100%;
+    list-style: none;
+    outline: none;
+}
+
+.sc-accordion-heading-container {
+    user-select: none;
+    align-self: center;
+    justify-self: start;
+}
+
+.sc-accordion-icon-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.sc-accordion-heading-icon {
+    transition: transform var(--animation-speed) ease-in-out;
+}
+
+.sc-accordion-content {
+    display: grid;
+    grid-template-rows: 0fr;
+    overflow: hidden;
+    font-size: var(--font-size-2);
+    padding: 0rem var(--spacing-padding-3) var(--spacing-padding-2) var(--spacing-padding-3);
+    height: 0;
+    transition: height var(--animation-speed) ease-out;
+}
+
+.sc-accordion[open] {
+    .sc-accordion-heading-icon {
+        transform: rotate(90deg);
+    }
+
+    .sc-accordion-content {
+        grid-template-rows: 1fr;
+        height: auto;
+    }
+}
+
+.sc-accordion-alert {
+    border-left-color: var(--alert-7);
+    border-right-color: var(--alert-7);
+}
+
+.sc-accordion-primary {
+    border-left-color: var(--primary-7);
+    border-right-color: var(--primary-7);
+}
+
+.sc-accordion-success {
+    border-left-color: var(--success-7);
+    border-right-color: var(--success-7);
+}
+
+.sc-accordion-warning {
+    border-left-color: var(--warning-7);
+    border-right-color: var(--warning-7);
+}

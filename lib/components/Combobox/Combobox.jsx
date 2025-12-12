@@ -5,15 +5,15 @@ import { matchSorter } from 'match-sorter';
 
 import { Button, Label } from '@/components';
 
-import * as styles from './Combobox.css';
+import styles from './Combobox.module.css';
 
 const getVariantTheme = (root, position, variant, className) =>
     cn(root, className, {
-        [`${styles.row}`]: position === 'horizontal',
-        [`${styles.alert}`]: variant === 'alert',
-        [`${styles.primary}`]: variant === 'primary',
-        [`${styles.success}`]: variant === 'success',
-        [`${styles.warning}`]: variant === 'warning',
+        [styles['sc-combobox-row']]: position === 'horizontal',
+        [styles['sc-combobox-alert']]: variant === 'alert',
+        [styles['sc-combobox-primary']]: variant === 'primary',
+        [styles['sc-combobox-success']]: variant === 'success',
+        [styles['sc-combobox-warning']]: variant === 'warning',
     });
 
 export const Combobox = forwardRef(function Combobox(
@@ -35,7 +35,7 @@ export const Combobox = forwardRef(function Combobox(
     },
     ref,
 ) {
-    const rootClass = getVariantTheme(styles.root, position, variant, className);
+    const rootClass = getVariantTheme(styles['sc-combobox-root'], position, variant, className);
     const [items, setItems] = useState(data);
     const [searchValue, setSearchValue] = useState('');
 
@@ -90,16 +90,16 @@ export const Combobox = forwardRef(function Combobox(
                         }
                     />
 
-                    <Ariakit.SelectPopover gutter={4} className={styles.popover}>
-                        <Ariakit.Combobox autoSelect placeholder="Search..." className={styles.comboboxInput} />
+                    <Ariakit.SelectPopover gutter={4} className={styles['sc-combobox-popover']}>
+                        <Ariakit.Combobox autoSelect placeholder="Search..." className={styles['sc-combobox-input']} />
                         <Ariakit.ComboboxList>
                             {Array.isArray(matches) &&
                                 matches?.map((item) => (
                                     <Ariakit.SelectItem
                                         key={item.id}
                                         value={item.label}
-                                        className={cn(styles.comboSelectItem, {
-                                            [`${styles.comboSelectItemCompact}`]: compact === true,
+                                        className={cn(styles['sc-combo-select-item'], {
+                                            [styles['sc-combo-select-item-compact']]: compact === true,
                                         })}
                                         render={<Ariakit.ComboboxItem />}
                                     />

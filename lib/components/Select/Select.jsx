@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useMemo, Children, isValidElement } from 'react';
 import ReactDOM from 'react-dom';
-import * as styles from './Select.css';
+import styles from './Select.module.css';
 
 // Helper component to wrap each selectable item
 export const SelectItem = ({ value, children }) => {
@@ -242,10 +242,15 @@ export const Select = ({
 
     return (
         <>
-            <div ref={containerRef} className={styles.container} tabIndex={0} onClick={() => inputRef.current.focus()}>
-                <div className={styles.badgesContainer}>
+            <div
+                ref={containerRef}
+                className={styles['sc-select-container']}
+                tabIndex={0}
+                onClick={() => inputRef.current.focus()}
+            >
+                <div className={styles['sc-select-badges-container']}>
                     {selected.map((item) => (
-                        <div key={item} className={styles.badge}>
+                        <div key={item} className={styles['sc-select-badge']}>
                             {valueToChildMap.get(item) ?? item}
                             <button
                                 type="button"
@@ -254,7 +259,7 @@ export const Select = ({
                                     e.stopPropagation();
                                     removeSelected(item);
                                 }}
-                                className={styles.removeButton}
+                                className={styles['sc-select-remove-button']}
                             >
                                 ×
                             </button>
@@ -262,7 +267,7 @@ export const Select = ({
                     ))}
                     <input
                         ref={inputRef}
-                        className={styles.input}
+                        className={styles['sc-select-input']}
                         value={input}
                         onChange={(e) => {
                             setInput(e.target.value);
@@ -302,7 +307,7 @@ export const Select = ({
                                 setLimitMessage('');
                                 setSelected([]);
                             }}
-                            className={styles.clearAllButton}
+                            className={styles['sc-select-clear-all-button']}
                             title="Clear all selected items"
                             aria-label="Clear all selected items"
                         >
@@ -329,7 +334,7 @@ export const Select = ({
                             }}
                             id="select-portal-dropdown"
                             role="listbox"
-                            className={styles.suggestionsList}
+                            className={styles['sc-select-suggestions-list']}
                         >
                             {suggestions.length > 0 ? (
                                 suggestions.map((item, idx) => {
@@ -351,7 +356,7 @@ export const Select = ({
                                     );
                                 })
                             ) : isDirty && input.trim() !== '' && !isMaxedOut && !readOnly ? (
-                                <li className={styles.noResults} aria-disabled="true">
+                                <li className={styles['sc-select-no-results']} aria-disabled="true">
                                     Press Enter to add "<strong>{input.trim()}</strong>"
                                 </li>
                             ) : input.trim() === '' ? (
@@ -371,23 +376,25 @@ export const Select = ({
                                                     onClick={() => addSelected(item)}
                                                     onMouseEnter={() => setHighlightIndex(idx)}
                                                     data-highlighted={highlightIndex === idx}
-                                                    className={styles.suggestion}
+                                                    className={styles['sc-select-suggestion']}
                                                 >
                                                     {child ?? item}
                                                 </li>
                                             );
                                         })
                                 ) : (
-                                    <li className={styles.noResults} aria-disabled="true">
+                                    <li className={styles['sc-select-no-results']} aria-disabled="true">
                                         No matches found
                                     </li>
                                 )
                             ) : (
-                                <li className={styles.noResults} aria-disabled="true">
+                                <li className={styles['sc-select-no-results']} aria-disabled="true">
                                     No matches found
                                 </li>
                             )}
-                            {isMaxedOut && <div className={styles.dropdownDisabledOverlay} aria-hidden="true" />}
+                            {isMaxedOut && (
+                                <div className={styles['sc-select-dropdown-disabled-overlay']} aria-hidden="true" />
+                            )}
                         </div>,
                         document.body,
                     )}
@@ -400,12 +407,22 @@ export const Select = ({
                 {lastAdded ? `Added "${lastAdded}"` : ''}
             </div>
             {selected.length === 0 && input.trim() === '' && (
-                <div id="zero-state-message" className={styles.zeroState} role="status" aria-live="polite">
+                <div
+                    id="zero-state-message"
+                    className={styles['sc-select-zero-state']}
+                    role="status"
+                    aria-live="polite"
+                >
                     Start typing or paste a comma/semicolon separated list to add items.
                 </div>
             )}
             {limitMessage && (
-                <div id="limit-message" className={styles.limitMessage} role="alert" aria-live="assertive">
+                <div
+                    id="limit-message"
+                    className={styles['sc-select-limit-message']}
+                    role="alert"
+                    aria-live="assertive"
+                >
                     {limitMessage}
                 </div>
             )}

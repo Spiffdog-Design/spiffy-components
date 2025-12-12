@@ -1,0 +1,13 @@
+.sc-grid-container {
+    --grid-columns: '';
+    --grid-gap: var(--spacing-gap-4);
+    display: grid;
+    width: 100%;
+    grid-template-columns: var(--grid-columns);
+    gap: var(--grid-gap);
+}
+
+.sc-grid-item {
+    --grid-cell-span: 1;
+    grid-column: span var(--grid-cell-span);
+}

@@ -1,0 +1,37 @@
+/* Icon CSS Module */
+.sc-icon {
+    outline: none;
+    font-size: 16px;
+}
+
+.sc-icon-xs {
+    font-size: 0.9rem;
+}
+
+.sc-icon-sm {
+    font-size: 1rem;
+}
+
+.sc-icon-md {
+    font-size: 1.2rem;
+}
+
+.sc-icon-lg {
+    font-size: 1.4rem;
+}
+
+.sc-icon-xl {
+    font-size: 1.6rem;
+}
+
+.sc-icon-x2 {
+    font-size: 1.8rem;
+}
+
+.sc-icon-x3 {
+    font-size: 2.4rem;
+}
+
+.sc-icon-x4 {
+    font-size: 3rem;
+}

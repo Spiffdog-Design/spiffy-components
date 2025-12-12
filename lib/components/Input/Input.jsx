@@ -4,10 +4,9 @@ import cn from 'classnames';
 import { isNullOrEmpty } from '@spiffdog/spiffy-tools';
 
 import { Button, Icon } from '@/components';
-import { theme } from '@/components/Theme/themes/theme.css';
 import { getVariantMainColor } from '@/utilities';
 
-import * as styles from './Input.css';
+import styles from './Input.module.css';
 
 const displayClassName = (root, compact, variant, className) => {
     return cn(root, className, {
@@ -36,7 +35,7 @@ export const Input = forwardRef(function Input(
     const inputRef = useRef(null);
     const [inputText, setInputText] = useState(value);
 
-    const color = getVariantMainColor(variant, theme);
+    const color = getVariantMainColor(variant);
 
     const handleChange = (evt) => {
         if (onChange != null) {

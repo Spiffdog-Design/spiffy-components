@@ -1,0 +1,185 @@
+/* Default Theme CSS Custom Properties */
+:root {
+    /* Animation */
+    --animation-speed: 150ms;
+
+    /* Semantic Color Mappings */
+    /* Base/Neutral Colors */
+    --base-1: var(--slate1);
+    --base-2: var(--slate2);
+    --base-3: var(--slate3);
+    --base-4: var(--slate4);
+    --base-5: var(--slate5);
+    --base-6: var(--slate6);
+    --base-7: var(--slate7);
+    --base-8: var(--slate8);
+    --base-9: var(--slate9);
+    --base-10: var(--slate10);
+    --base-11: var(--slate11);
+    --base-12: var(--slate12);
+
+    /* Primary Colors */
+    --primary-1: var(--blue1);
+    --primary-2: var(--blue2);
+    --primary-3: var(--blue3);
+    --primary-4: var(--blue4);
+    --primary-5: var(--blue5);
+    --primary-6: var(--blue6);
+    --primary-7: var(--blue7);
+    --primary-8: var(--blue8);
+    --primary-9: var(--blue9);
+    --primary-10: var(--blue10);
+    --primary-11: var(--blue11);
+    --primary-12: var(--blue12);
+
+    /* Success Colors */
+    --success-1: var(--green1);
+    --success-2: var(--green2);
+    --success-3: var(--green3);
+    --success-4: var(--green4);
+    --success-5: var(--green5);
+    --success-6: var(--green6);
+    --success-7: var(--green7);
+    --success-8: var(--green8);
+    --success-9: var(--green9);
+    --success-10: var(--green10);
+    --success-11: var(--green11);
+    --success-12: var(--green12);
+
+    /* Warning Colors */
+    --warning-1: var(--amber1);
+    --warning-2: var(--amber2);
+    --warning-3: var(--amber3);
+    --warning-4: var(--amber4);
+    --warning-5: var(--amber5);
+    --warning-6: var(--amber6);
+    --warning-7: var(--amber7);
+    --warning-8: var(--amber8);
+    --warning-9: var(--amber9);
+    --warning-10: var(--amber10);
+    --warning-11: var(--amber11);
+    --warning-12: var(--amber12);
+
+    /* Alert/Error Colors */
+    --alert-1: var(--red1);
+    --alert-2: var(--red2);
+    --alert-3: var(--red3);
+    --alert-4: var(--red4);
+    --alert-5: var(--red5);
+    --alert-6: var(--red6);
+    --alert-7: var(--red7);
+    --alert-8: var(--red8);
+    --alert-9: var(--red9);
+    --alert-10: var(--red10);
+    --alert-11: var(--red11);
+    --alert-12: var(--red12);
+
+    /* Font Family */
+    --font-family-base: 'Roboto', sans-serif;
+    --font-family-mono: 'Courier New', Courier, monospace;
+
+    /* Font Base */
+    --font-line-height: 1.65;
+    --font-size-base: 1.6rem;
+    --font-style: normal;
+    --font-weight-base: 400;
+
+    /* Font Sizes */
+    --font-size-1: 1.26rem;
+    --font-size-2: 1.42rem;
+    --font-size-3: 1.8rem;
+    --font-size-4: 2.02rem;
+    --font-size-5: 2.27rem;
+    --font-size-6: 2.56rem;
+    --font-size-7: 2.88rem;
+    --font-size-8: 3.24rem;
+
+    /* Font Weights */
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    /* Border Radius */
+    --border-radius-0: 0rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 0.8rem;
+    --border-radius-3: 1.2rem;
+    --border-radius-4: 2rem;
+    --border-radius-5: 50%;
+    --border-radius-6: 99999px;
+
+    /* Spacing - Gap */
+    --spacing-gap-0: 0rem;
+    --spacing-gap-1: 0.4rem;
+    --spacing-gap-2: 0.8rem;
+    --spacing-gap-3: 1.2rem;
+    --spacing-gap-4: 1.6rem;
+    --spacing-gap-5: 2.4rem;
+
+    /* Spacing - Padding */
+    --spacing-padding-0: 0rem;
+    --spacing-padding-1: 0.4rem;
+    --spacing-padding-2: 0.8rem;
+    --spacing-padding-3: 1.2rem;
+    --spacing-padding-4: 1.6rem;
+    --spacing-padding-5: 2.4rem;
+
+    /* Button Text Sizes */
+    --button-text-xs-padding: 0.3rem 0.5rem;
+    --button-text-xs-font-size: 0.9rem;
+    --button-text-xs-line-height: 0.9rem;
+
+    --button-text-sm-padding: 0.4rem 0.8rem;
+    --button-text-sm-font-size: 1rem;
+    --button-text-sm-line-height: 1rem;
+
+    --button-text-md-padding: 0.5rem 1rem;
+    --button-text-md-font-size: 1.2rem;
+    --button-text-md-line-height: 1.2rem;
+
+    --button-text-lg-padding: 0.7rem 1.4rem;
+    --button-text-lg-font-size: 1.4rem;
+    --button-text-lg-line-height: 1.4rem;
+
+    --button-text-xl-padding: 0.8rem 1.6rem;
+    --button-text-xl-font-size: 1.6rem;
+    --button-text-xl-line-height: 1.6rem;
+
+    --button-text-x2-padding: 0.9rem 1.8rem;
+    --button-text-x2-font-size: 1.8rem;
+    --button-text-x2-line-height: 1.8rem;
+}
+
+/* Dark Theme Overrides */
+[data-theme='dark'] {
+    /* You can override any semantic colors for dark theme */
+    --base-1: var(--slate12);
+    --base-2: var(--slate11);
+    --base-11: var(--slate2);
+    --base-12: var(--slate1);
+
+    /* Adjust other colors as needed for dark theme */
+    --primary-1: var(--blue12);
+    --primary-12: var(--blue1);
+}
+
+/* Auto-detect system preference when no manual theme is set */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+        --base-1: var(--slate12);
+        --base-2: var(--slate11);
+        --base-11: var(--slate2);
+        --base-12: var(--slate1);
+
+        --primary-1: var(--blue12);
+        --primary-12: var(--blue1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        --animation-speed: 0ms;
+    }
+}

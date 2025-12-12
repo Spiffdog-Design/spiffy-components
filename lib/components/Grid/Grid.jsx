@@ -1,9 +1,8 @@
 // src/components/Grid/Grid.tsx
 import React, { forwardRef, useEffect, useState } from 'react';
-import { assignInlineVars } from '@vanilla-extract/dynamic';
 import cn from 'classnames';
 
-import { gridContainer, gridItem, gridCellSpanVar, gridConfigVar, gridGapVar } from './Grid.css';
+import styles from './Grid.module.css';
 
 const buildConfig = (config, columns, width) => (config != null ? config : `repeat(${columns}, minmax(${width}, 1fr))`);
 
@@ -23,13 +22,11 @@ export const Grid = forwardRef(function Grid(
         <div
             {...props}
             ref={ref}
-            className={cn(gridContainer, className)}
+            className={cn(styles['sc-grid-container'], className)}
             style={{
                 ...style,
-                ...assignInlineVars({
-                    [gridConfigVar]: columnConfig,
-                    [gridGapVar]: `${gap}px`,
-                }),
+                '--grid-columns': columnConfig,
+                '--grid-gap': `${gap}px`,
             }}
         >
             {children}
@@ -42,12 +39,10 @@ export const GridItem = forwardRef(function GridItem({ span = 1, style = {}, ...
         <div
             {...props}
             ref={ref}
-            className={gridItem}
+            className={styles['sc-grid-item']}
             style={{
                 ...style,
-                ...assignInlineVars({
-                    [gridCellSpanVar]: span,
-                }),
+                '--grid-cell-span': span,
             }}
         />
     );

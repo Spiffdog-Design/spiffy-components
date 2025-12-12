@@ -1,14 +1,14 @@
 import { forwardRef } from 'react';
 import cn from 'classnames';
 
-import * as styles from './ThreeDotSpinner.css';
+import styles from './ThreeDotSpinner.module.css';
 
 export const ThreeDotSpinner = forwardRef(function ThreeDotSpinner(props, ref) {
     return (
-        <div {...props} ref={ref} class={styles.spinner}>
-            <div class={cn(styles.threedot, styles.threedot1)}></div>
-            <div class={cn(styles.threedot, styles.threedot2)}></div>
-            <div class={cn(styles.threedot, styles.threedot3)}></div>
+        <div {...props} ref={ref} className={styles['sc-three-dot-spinner']}>
+            <div className={cn(styles['sc-three-dot'], styles['sc-three-dot-1'])}></div>
+            <div className={cn(styles['sc-three-dot'], styles['sc-three-dot-2'])}></div>
+            <div className={cn(styles['sc-three-dot'], styles['sc-three-dot-3'])}></div>
         </div>
     );
 });

@@ -2,10 +2,9 @@ import { forwardRef, useState } from 'react';
 import { Popover as AriaPopover, PopoverArrow, PopoverDisclosure, PopoverProvider } from '@ariakit/react';
 import cn from 'classnames';
 
-import { theme } from '@/components/Theme/themes/theme.css';
 import { getVariantMainColor } from '@/utilities';
 
-import * as styles from './Popover.css';
+import styles from './Popover.module.css';
 
 export const Popover = forwardRef(function Popover(
     {
@@ -22,13 +21,13 @@ export const Popover = forwardRef(function Popover(
     ref,
 ) {
     const variantClass = cn({
-        [`${styles.padded}`]: padded === true,
-        [`${styles.alert}`]: variant === 'alert',
-        [`${styles.primary}`]: variant === 'primary',
-        [`${styles.success}`]: variant === 'success',
-        [`${styles.warning}`]: variant === 'warning',
+        [styles['sc-popover-padded']]: padded === true,
+        [styles['sc-popover-alert']]: variant === 'alert',
+        [styles['sc-popover-primary']]: variant === 'primary',
+        [styles['sc-popover-success']]: variant === 'success',
+        [styles['sc-popover-warning']]: variant === 'warning',
     });
-    const color = getVariantMainColor(variant, theme);
+    const color = getVariantMainColor(variant);
     const [open, setOpen] = useState(false);
 
     const handleClickOutside = () => {
@@ -77,9 +76,9 @@ export const Popover = forwardRef(function Popover(
                 }
             />
             <AriaPopover onClose={handleClickOutside} {...props}>
-                <div className={cn(styles.content, variantClass)}>
+                <div className={cn(styles['sc-popover-content'], variantClass)}>
                     {typeof children === 'function' ? children({ color }) : children}
-                    {showArrow === true && <PopoverArrow className={styles.arrow} />}
+                    {showArrow === true && <PopoverArrow className={styles['sc-popover-arrow']} />}
                 </div>
             </AriaPopover>
         </PopoverProvider>

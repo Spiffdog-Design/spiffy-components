@@ -2,17 +2,17 @@ import { forwardRef } from 'react';
 import { Dialog as AriaDialog, DialogDescription, DialogHeading, useDialogStore } from '@ariakit/react';
 import cn from 'classnames';
 
-import * as styles from './Dialog.css';
+import styles from './Dialog.module.css';
 
 export const Dialog = forwardRef(function Dialog(
     { actions, className, children, description, modal = false, title, trigger, variant = 'base', ...props },
     ref,
 ) {
-    const variantClass = cn(styles.dialog, className, {
-        [`${styles.alert}`]: variant === 'alert',
-        [`${styles.primary}`]: variant === 'primary',
-        [`${styles.success}`]: variant === 'success',
-        [`${styles.warning}`]: variant === 'warning',
+    const variantClass = cn(styles['sc-dialog'], className, {
+        [styles['sc-dialog-alert']]: variant === 'alert',
+        [styles['sc-dialog-primary']]: variant === 'primary',
+        [styles['sc-dialog-success']]: variant === 'success',
+        [styles['sc-dialog-warning']]: variant === 'warning',
     });
 
     const dialog = useDialogStore();
@@ -28,18 +28,24 @@ export const Dialog = forwardRef(function Dialog(
                 autoFocusOnShow={true}
                 store={dialog}
                 className={variantClass}
-                backdrop={<div className={styles.backdrop} />}
+                backdrop={<div className={styles['sc-dialog-backdrop']} />}
             >
                 {(title != null || description != null) && (
-                    <div className={styles.headingContainer}>
-                        {title != null && <DialogHeading className={styles.heading}>{title}</DialogHeading>}
+                    <div className={styles['sc-dialog-heading-container']}>
+                        {title != null && (
+                            <DialogHeading className={styles['sc-dialog-heading']}>{title}</DialogHeading>
+                        )}
                         {description != null && (
-                            <DialogDescription className={styles.description}>{description}</DialogDescription>
+                            <DialogDescription className={styles['sc-dialog-description']}>
+                                {description}
+                            </DialogDescription>
                         )}
                     </div>
                 )}
-                {children != null && <div className={styles.body}>{children}</div>}
-                {actions != null && <div className={styles.actions}>{actions({ onClose: dialog.hide })}</div>}
+                {children != null && <div className={styles['sc-dialog-body']}>{children}</div>}
+                {actions != null && (
+                    <div className={styles['sc-dialog-actions']}>{actions({ onClose: dialog.hide })}</div>
+                )}
             </AriaDialog>
         </>
     );

@@ -2,24 +2,28 @@ import react from '@vitejs/plugin-react';
 
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
-import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 
 export default defineConfig({
-    plugins: [vanillaExtractPlugin(), react()],
+    plugins: [react()],
     resolve: {
         alias: {
             '@': '/lib',
         },
     },
+    css: {
+        modules: {
+            generateScopedName: '[local]',
+        },
+    },
     build: {
-        cssCodeSplit: true,
+        cssCodeSplit: false,
         lib: {
             entry: resolve(__dirname, './lib/components/index.js'),
             formats: ['es'],
             fileName: 'index',
         },
         rollupOptions: {
-            external: ['react', 'react/jsx-runtime'],
+            external: ['react', 'react/jsx-runtime', '@spiffdog/spiffy-colors/dist/index.css'],
             jsx: 'react-jsx',
         },
         sourcemap: true,

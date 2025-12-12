@@ -4,11 +4,7 @@ import path from 'path';
 const config: StorybookConfig = {
     stories: ['../lib/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
 
-    addons: [
-        '@storybook/addon-links',
-        '@chromatic-com/storybook',
-        '@storybook/addon-docs'
-    ],
+    addons: ['@storybook/addon-links', '@chromatic-com/storybook', '@storybook/addon-docs'],
 
     framework: {
         name: '@storybook/react-vite',
@@ -28,12 +24,17 @@ const config: StorybookConfig = {
                     '@/utilities': path.resolve(__dirname, '../lib/utilities'), // Add more aliases as needed
                 },
             },
+            css: {
+                modules: {
+                    generateScopedName: '[local]',
+                },
+            },
         };
     },
 
     typescript: {
         reactDocgen: 'react-docgen-typescript',
-    }
+    },
 };
 
 export default config;

@@ -1,6 +1,6 @@
 import { Children, cloneElement, forwardRef, useMemo } from 'react';
 import cn from 'classnames';
-import * as styles from './Accordion.css';
+import styles from './Accordion.module.css';
 
 export const AccordionList = forwardRef(function AccordionList({ children, className, variant }, ref) {
     const accordionArray = useMemo(() => {
@@ -15,7 +15,7 @@ export const AccordionList = forwardRef(function AccordionList({ children, class
     }, [children]);
 
     return (
-        <div className={cn(styles.accordionList, className)} ref={ref}>
+        <div className={cn(styles['sc-accordion-list'], className)} ref={ref}>
             {accordionArray}
         </div>
     );

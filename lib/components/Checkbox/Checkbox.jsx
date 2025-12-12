@@ -3,7 +3,7 @@ import cn from 'classnames';
 
 import { Icon, useTheme } from '@/components';
 
-import * as styles from './Checkbox.css';
+import styles from './Checkbox.module.css';
 
 const getIconSet = (appearance) => {
     switch (appearance) {

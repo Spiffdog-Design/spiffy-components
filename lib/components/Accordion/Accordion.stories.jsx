@@ -1,9 +1,26 @@
 import { Accordion } from '@/components';
 import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
+import { Canvas, Controls, Description, Subtitle, Title } from '@storybook/addon-docs/blocks';
 
 const meta = {
     title: 'Base/Accordion/Accordion',
     component: Accordion,
+    parameters: {
+        componentSubtitle: 'Accordion Component',
+        layout: 'fullscreen',
+        docs: {
+            page: () => (
+                <>
+                    <Title />
+                    <Subtitle />
+                    <Description />
+
+                    <Canvas />
+                    <Controls />
+                </>
+            ),
+        },
+    },
     argTypes: {
         variant: {
             control: { type: 'radio' },
