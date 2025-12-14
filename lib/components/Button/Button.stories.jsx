@@ -35,7 +35,7 @@ const meta = {
     },
     argTypes: {
         appearance: {
-            options: ['basic', 'outline', 'solid'],
+            options: ['basic', 'outline', 'solid', 'contained', 'text', 'outlined', 'elevated'],
             control: { type: 'radio' },
             description: 'Defines the visual style of the button. Choose between "basic", "outline", or "solid".',
             defaultValue: 'solid',
@@ -153,6 +153,101 @@ export const LongText = {
                         </span>
                     </Button>
                 </div>
+            </div>
+        </ThemeWrapper>
+    ),
+};
+
+export const Variants = {
+    render: (args) => (
+        <ThemeWrapper>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                <div style={{ display: 'flex', gap: 8 }}>
+                    <Button {...args} appearance="contained" onClick={action('contained')}>
+                        Contained
+                    </Button>
+                    <Button {...args} appearance="elevated" onClick={action('elevated')}>
+                        Elevated
+                    </Button>
+                    <Button {...args} appearance="outlined" onClick={action('outlined')}>
+                        Outlined
+                    </Button>
+                    <Button {...args} appearance="text" onClick={action('text')}>
+                        Text
+                    </Button>
+                    <Button {...args} appearance="basic" onClick={action('basic')}>
+                        Basic
+                    </Button>
+                </div>
+            </div>
+        </ThemeWrapper>
+    ),
+};
+
+export const ColorVariants = {
+    render: (args) => (
+        <ThemeWrapper>
+            <div style={{ display: 'flex', gap: 8 }}>
+                <Button {...args} appearance="contained" variant="primary">
+                    Primary
+                </Button>
+                <Button {...args} appearance="contained" variant="success">
+                    Success
+                </Button>
+                <Button {...args} appearance="contained" variant="alert">
+                    Alert
+                </Button>
+                <Button {...args} appearance="contained" variant="warning">
+                    Warning
+                </Button>
+            </div>
+        </ThemeWrapper>
+    ),
+};
+
+export const States = {
+    render: (args) => (
+        <ThemeWrapper>
+            <div style={{ display: 'flex', gap: 8 }}>
+                <Button {...args} appearance="contained">
+                    Normal
+                </Button>
+                <Button {...args} appearance="contained" disabled>
+                    Disabled
+                </Button>
+                <Button {...args} appearance="contained" busy>
+                    Busy
+                </Button>
+                <Button {...args} appearance="contained" rounded>
+                    Rounded
+                </Button>
+            </div>
+        </ThemeWrapper>
+    ),
+};
+
+export const Sizes = {
+    render: (args) => (
+        <ThemeWrapper>
+            <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                <Button {...args} appearance="contained" size="xs">
+                    XS
+                </Button>
+                <Button {...args} appearance="contained" size="sm">
+                    SM
+                </Button>
+                <Button {...args} appearance="contained" size="md">
+                    MD
+                </Button>
+                <Button {...args} appearance="contained" size="lg">
+                    LG
+                </Button>
+                <Button {...args} appearance="contained" size="xl">
+                    XL
+                </Button>
+                <Button {...args} appearance="contained" size="x2">
+                    X2
+                </Button>
             </div>
         </ThemeWrapper>
     ),

@@ -31,11 +31,19 @@ export const Button = forwardRef(function Button(props, ref) {
 });
 
 const getClass = (styles, props) => {
+    // Accept both existing and MUI-like appearance names.
+    // appearance: 'solid' (legacy) | 'contained' | 'text' | 'basic' | 'outline' | 'outlined'
     const { appearance = 'solid', className, rounded, size = 'md', variant = 'base' } = props;
+    const isText = appearance === 'basic' || appearance === 'text';
+    const isOutlined = appearance === 'outline' || appearance === 'outlined';
+    const isContained = appearance === 'solid' || appearance === 'contained' || appearance === 'elevated';
+
     return cn(className, styles['sc-button'], {
         rounded: rounded === true,
-        [styles['sc-button-basic']]: appearance === 'basic',
-        [styles['sc-button-outline']]: appearance === 'outline',
+        [styles['sc-button-basic']]: isText,
+        [styles['sc-button-text']]: isText,
+        [styles['sc-button-outline']]: isOutlined,
+        [styles['sc-button-contained']]: isContained,
         [styles['sc-button-alert']]: variant === 'alert',
         [styles['sc-button-primary']]: variant === 'primary',
         [styles['sc-button-success']]: variant === 'success',

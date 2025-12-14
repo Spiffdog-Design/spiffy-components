@@ -22,9 +22,35 @@
     padding: var(--spacing-padding-1) var(--spacing-padding-3);
     position: relative;
     text-transform: uppercase;
+    -webkit-user-select: none;
     user-select: none;
     width: fit-content;
     transition: all var(--animation-speed) ease-in-out;
+}
+
+/* Ripple container */
+.sc-button::after {
+    content: '';
+    position: absolute;
+    border-radius: inherit;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+        circle at var(--ripple-x, 50%) var(--ripple-y, 50%),
+        rgba(255, 255, 255, 0.35) 0%,
+        rgba(255, 255, 255, 0.15) 20%,
+        transparent 40%
+    );
+    opacity: 0;
+    transform: scale(0.6);
+    transition: opacity 300ms ease, transform 300ms ease;
+}
+
+.sc-button:active::after,
+.sc-button:focus::after {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 400ms ease, transform 400ms ease;
 }
 
 .sc-button.rounded {
@@ -67,6 +93,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    -webkit-backdrop-filter: blur(3px);
     backdrop-filter: blur(3px);
     height: 100%;
     width: 100%;
@@ -95,6 +122,35 @@
     color: var(--theme-color);
 }
 
+.sc-button-text {
+    /* MUI `text` variant: no background, no outline, subtle on hover */
+    background: transparent;
+    border-color: transparent;
+    color: var(--theme-color);
+}
+
+.sc-button-contained {
+    /* MUI `contained` variant: solid background, elevated shadow */
+    background: var(--theme-color);
+    border-color: transparent;
+    color: var(--base-1);
+    box-shadow: 0 1px 3px rgba(16, 24, 40, 0.08), 0 1px 2px rgba(16, 24, 40, 0.04);
+}
+
+.sc-button-contained:hover {
+    filter: brightness(0.97);
+    transform: translateY(-1px);
+}
+
+.sc-button-contained:active {
+    transform: translateY(0);
+    filter: brightness(0.92);
+}
+
+.sc-button.elevated {
+    box-shadow: 0 6px 10px rgba(16, 24, 40, 0.12);
+}
+
 .sc-button-basic:hover {
     background: color-mix(in srgb, var(--theme-color) 40%, transparent);
     border-color: transparent;
@@ -114,6 +170,13 @@
 }
 
 .sc-button-outline {
+    background: transparent;
+    border-color: var(--theme-color);
+    color: var(--theme-color);
+}
+
+.sc-button-outlined {
+    /* alias to outline for MUI naming */
     background: transparent;
     border-color: var(--theme-color);
     color: var(--theme-color);
@@ -189,4 +252,37 @@
     padding: var(--button-text-x2-padding);
     font-size: var(--button-text-x2-font-size);
     line-height: var(--button-text-x2-line-height);
+}
+
+/* Disabled variants for contained/text/outlined */
+.sc-button-contained:disabled,
+.sc-button-contained[disabled] {
+    background: color-mix(in srgb, var(--theme-color) 50%, transparent);
+    color: color-mix(in srgb, var(--base-1) 60%, transparent);
+    box-shadow: none;
+}
+
+.sc-button-text:disabled,
+.sc-button-basic:disabled,
+.sc-button-text[disabled] {
+    color: color-mix(in srgb, var(--theme-color) 50%, transparent);
+}
+
+.sc-button-outlined:disabled,
+.sc-button-outline:disabled {
+    border-color: color-mix(in srgb, var(--theme-color) 50%, transparent);
+    color: color-mix(in srgb, var(--theme-color) 50%, transparent);
+}
+
+/* Focus ring adjustments per MUI-like aesthetic */
+.sc-button:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--theme-color) 20%, transparent);
+}
+
+/* Keyboard navigation ease: increase hit area on small sizes */
+.sc-button.sc-button-xs,
+.sc-button.sc-button-sm {
+    min-height: 2.2rem;
+    padding-inline: 0.6rem;
 }
