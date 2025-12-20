@@ -1,5 +1,10 @@
+:root {
+    /* TextScale Layout - Using design system tokens as defaults */
+    --text-scale-gap: var(--spacing-gap-1);
+}
+
 .sc-text-scale-container {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-gap-1);
+    gap: var(--text-scale-gap);
 }

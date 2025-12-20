@@ -1,19 +1,31 @@
+:root {
+    /* BadgeList Sizing & Spacing - Using design system tokens as defaults */
+    --badge-list-border-width: 2px;
+    --badge-list-border-radius: 16px;
+    --badge-list-gap: var(--spacing-gap-2);
+    --badge-list-padding: var(--spacing-padding-1);
+    --badge-list-measuring-top: 300px;
+
+    /* BadgeList Theming - Default colors */
+    --badge-list-color: var(--base-10);
+}
+
 .sc-badge-list {
     background-color: transparent;
-    border: 2px solid transparent;
+    border: var(--badge-list-border-width) solid transparent;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: var(--spacing-gap-2);
-    padding: var(--spacing-padding-1);
-    width: fit-content;
+    gap: var(--badge-list-gap);
+    padding: var(--badge-list-padding);
+    width: 100%;
 }
 
 .sc-badge-list-remaining {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: var(--spacing-gap-2);
+    gap: var(--badge-list-gap);
     width: 100%;
 }
 
@@ -21,44 +33,44 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: var(--spacing-gap-2);
+    gap: var(--badge-list-gap);
 }
 
 .sc-badge-list-measuring-container {
-    display: none;
+    /* 
     position: absolute;
-    background-color: transparent;
+    top: var(--location-offscreen);
+    left: var(--location-offscreen);
     visibility: hidden;
     pointer-events: none;
-    height: 0;
-    overflow: hidden;
+    */
+    width: max-content;
 }
 
-.sc-badge-list-border {
-    --color: var(--base-10);
-    border-color: var(--color);
+.sc-badge-list[data-bordered='true'] {
+    border-color: var(--badge-list-color);
 }
 
-.sc-badge-list-rounded {
-    border-radius: 16px;
+.sc-badge-list[data-rounded='true'] {
+    border-radius: var(--badge-list-border-radius);
 }
 
-.sc-badge-list-alert {
-    --color: var(--alert-10);
+.sc-badge-list[data-variant='alert'] {
+    --badge-list-color: var(--alert-10);
 }
 
-.sc-badge-list-base {
-    --color: var(--base-10);
+.sc-badge-list[data-variant='base'] {
+    --badge-list-color: var(--base-10);
 }
 
-.sc-badge-list-primary {
-    --color: var(--primary-10);
+.sc-badge-list[data-variant='primary'] {
+    --badge-list-color: var(--primary-10);
 }
 
-.sc-badge-list-success {
-    --color: var(--success-10);
+.sc-badge-list[data-variant='success'] {
+    --badge-list-color: var(--success-10);
 }
 
-.sc-badge-list-warning {
-    --color: var(--warning-10);
+.sc-badge-list[data-variant='warning'] {
+    --badge-list-color: var(--warning-10);
 }

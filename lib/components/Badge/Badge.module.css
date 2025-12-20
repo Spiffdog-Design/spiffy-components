@@ -1,86 +1,103 @@
+:root {
+    /* Badge Sizing & Spacing - Using design system tokens as defaults */
+    --badge-border-width: 2px;
+    --badge-border-radius-rounded: var(--border-radius-rounded);
+    --badge-border-radius-square: var(--border-radius-0);
+    --badge-min-height: 33px;
+    --badge-max-width: 50ch;
+    --badge-content-padding: var(--spacing-padding-1) var(--spacing-padding-3);
+    --badge-content-gap: var(--spacing-gap-1);
+    --badge-content-transform: translateY(1px);
+    --badge-close-padding: var(--spacing-padding-1) var(--spacing-padding-1) var(--spacing-padding-1)
+        var(--spacing-padding-0);
+    --badge-close-button-padding: var(--spacing-padding-1);
+    --badge-close-button-radius: 50%;
+    --badge-font-size: var(--font-size-1);
+    --badge-font-weight: var(--font-weight-semibold);
+    --badge-line-height: 1;
+
+    /* Badge Theming - Default colors (can be overridden by users) */
+    --badge-theme-color: var(--base-2);
+    --badge-text-color: var(--base-12);
+    --badge-hover-color: var(--base-4);
+}
+
 /* Badge CSS Module */
 .sc-badge {
-    /* CSS Variables for theming */
-    --theme-color: var(--base-11);
-    --text-color: var(--base-1);
-    --bg-color: var(--theme-color);
-    --border-color: var(--theme-color);
-    --hover-color: var(--base-8);
+    /* Computed colors - these will update when --badge-theme-color changes */
+    --badge-bg-color: var(--badge-theme-color);
+    --badge-border-color: var(--badge-theme-color);
 
     align-items: center;
-    background: var(--bg-color);
-    border-width: 2px;
+    background: var(--badge-bg-color);
+    border-width: var(--badge-border-width);
     border-style: solid;
-    border-color: var(--border-color);
-    border-radius: 9999px;
-    color: var(--text-color);
+    border-color: var(--badge-border-color);
+    border-radius: var(--badge-border-radius-rounded); /* Default to rounded */
+    color: var(--badge-text-color);
     display: flex;
     flex-direction: row;
-    font-size: var(--font-size-1);
-    font-weight: var(--font-weight-semibold);
+    font-size: var(--badge-font-size);
+    font-weight: var(--badge-font-weight);
     gap: var(--spacing-gap-0);
-    min-height: 26px;
     justify-content: center;
-    line-height: var(--font-line-height);
-    padding: var(--spacing-padding-0) var(--spacing-padding-2);
+    line-height: var(--badge-line-height);
     position: relative;
     text-transform: uppercase;
     user-select: none;
     width: fit-content;
+    height: fit-content;
+    min-height: var(--badge-min-height);
 }
 
-.sc-badge[data-type='close'] {
-    padding-right: var(--spacing-padding-0);
+.sc-badge[data-closable='true'] {
+    padding: var(--badge-close-padding);
 }
 
-.sc-badge-pointer {
-    cursor: pointer;
+.sc-badge[data-rounded='false'] {
+    border-radius: var(--badge-border-radius-square);
 }
 
 .sc-badge-content {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: var(--spacing-gap-2);
-    max-width: 50ch;
+    gap: var(--badge-content-gap);
+    max-width: var(--badge-max-width);
     overflow: hidden;
     white-space: nowrap;
-    height: 100%;
-    width: 100%;
+    transform: var(--badge-content-transform);
+    padding: var(--badge-content-padding);
 }
 
 /* Appearance Variants */
-.sc-badge-basic {
-    --bg-color: transparent;
-    --border-color: transparent;
-    --text-color: var(--theme-color);
+.sc-badge[data-appearance='basic'] {
+    --badge-bg-color: transparent;
+    --badge-border-color: transparent;
+    --badge-text-color: var(--badge-theme-color);
 }
 
-.sc-badge-outline {
-    --bg-color: transparent;
-    --border-color: var(--theme-color);
-    --text-color: var(--theme-color);
+.sc-badge[data-appearance='outline'] {
+    --badge-bg-color: transparent;
+    --badge-border-color: var(--badge-theme-color);
+    --badge-text-color: var(--badge-theme-color);
 }
 
 /* Color Variants */
-.sc-badge-alert {
-    --theme-color: var(--alert-9);
+.sc-badge[data-variant='alert'] {
+    --badge-theme-color: var(--alert-5);
 }
 
-.sc-badge-base {
-    --theme-color: var(--base-11);
+.sc-badge[data-variant='primary'] {
+    --badge-theme-color: var(--primary-5);
 }
 
-.sc-badge-primary {
-    --theme-color: var(--primary-10);
+.sc-badge[data-variant='success'] {
+    --badge-theme-color: var(--success-5);
 }
 
-.sc-badge-success {
-    --theme-color: var(--success-10);
-}
-
-.sc-badge-warning {
-    --theme-color: var(--warning-9);
+.sc-badge[data-variant='warning'] {
+    --badge-theme-color: var(--warning-5);
 }
 
 .sc-badge-close-button {
@@ -90,20 +107,21 @@
     text-align: center;
     background: transparent;
     border: none;
-    border-radius: 9999px;
-    color: var(--text-color);
-    width: 30px;
-    height: 22px;
+    border-radius: var(--badge-close-button-radius);
+    color: var(--badge-text-color);
+    width: fit-content;
+    height: fit-content;
+    aspect-ratio: 1;
     margin: 0;
-    padding: var(--spacing-padding-0);
+    padding: var(--badge-close-button-padding);
     transition: background var(--animation-speed) ease-in-out;
 }
 
 .sc-badge-close-button:hover {
-    background: color-mix(in srgb, var(--theme-color) 75%, transparent);
+    background: color-mix(in srgb, var(--badge-theme-color) 75%, transparent);
 }
 
-.sc-badge-basic .sc-badge-close-button:hover,
-.sc-badge-outline .sc-badge-close-button:hover {
-    background: color-mix(in srgb, var(--theme-color) 25%, transparent);
+.sc-badge[data-appearance='basic'] .sc-badge-close-button:hover,
+.sc-badge[data-appearance='outline'] .sc-badge-close-button:hover {
+    background: color-mix(in srgb, var(--badge-theme-color) 25%, transparent);
 }

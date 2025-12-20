@@ -1,37 +1,49 @@
 /* Icon CSS Module */
+:root {
+    /* Icon Sizing - Using design system font-size tokens */
+    --icon-size-xs: var(--font-size-0); /* 1.12rem */
+    --icon-size-sm: var(--font-size-1); /* 1.26rem */
+    --icon-size-md: var(--font-size-2); /* 1.42rem */
+    --icon-size-lg: var(--font-size-base); /* 1.6rem */
+    --icon-size-xl: var(--font-size-3); /* 1.8rem */
+    --icon-size-x2: var(--font-size-4); /* 2.02rem */
+    --icon-size-x3: var(--font-size-6); /* 2.56rem */
+    --icon-size-x4: var(--font-size-8); /* 3.24rem */
+}
+
 .sc-icon {
     outline: none;
-    font-size: 16px;
+    font-size: var(--icon-size-md);
 }
 
 .sc-icon-xs {
-    font-size: 0.9rem;
+    font-size: var(--icon-size-xs);
 }
 
 .sc-icon-sm {
-    font-size: 1rem;
+    font-size: var(--icon-size-sm);
 }
 
 .sc-icon-md {
-    font-size: 1.2rem;
+    font-size: var(--icon-size-md);
 }
 
 .sc-icon-lg {
-    font-size: 1.4rem;
+    font-size: var(--icon-size-lg);
 }
 
 .sc-icon-xl {
-    font-size: 1.6rem;
+    font-size: var(--icon-size-xl);
 }
 
 .sc-icon-x2 {
-    font-size: 1.8rem;
+    font-size: var(--icon-size-x2);
 }
 
 .sc-icon-x3 {
-    font-size: 2.4rem;
+    font-size: var(--icon-size-x3);
 }
 
 .sc-icon-x4 {
-    font-size: 3rem;
+    font-size: var(--icon-size-x4);
 }

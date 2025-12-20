@@ -16,21 +16,30 @@
     }
 }
 
-.sc-spinner {
-    --size: 48px;
-    --solid-12: var(--base-11);
-    --transparent: transparent;
+:root {
+    /* Spinner Sizing - Using design system tokens as defaults */
+    --spinner-size: 48px;
+    --spinner-border-width: calc(var(--spinner-size) * 0.0625);
 
+    /* Spinner Theming - Default colors */
+    --spinner-primary-color: var(--base-11);
+    --spinner-secondary-color: var(--warning-9);
+    --spinner-tertiary-color: var(--primary-9);
+    --spinner-transparent: transparent;
+}
+
+.sc-spinner {
     position: relative;
     display: inline-block;
     animation: sc-spinner-rotation 1s linear infinite;
-    border-color: var(--solid-12) var(--solid-12) var(--transparent) var(--transparent);
+    border-color: var(--spinner-primary-color) var(--spinner-primary-color) var(--spinner-transparent)
+        var(--spinner-transparent);
     border-style: solid;
     border-radius: 50%;
-    border-width: calc(var(--size) * 0.0625);
+    border-width: var(--spinner-border-width);
     box-sizing: border-box;
-    height: var(--size);
-    width: var(--size);
+    height: var(--spinner-size);
+    width: var(--spinner-size);
 }
 
 .sc-spinner::after,
@@ -41,21 +50,23 @@
     right: 0;
     top: 0;
     bottom: 0;
-    height: calc(var(--size) * 0.833);
+    height: calc(var(--spinner-size) * 0.833);
     margin: auto;
-    width: calc(var(--size) * 0.833);
+    width: calc(var(--spinner-size) * 0.833);
     animation: sc-spinner-rotation-back 0.5s linear infinite;
-    border-color: var(--warning-9) var(--warning-9) var(--transparent) var(--transparent);
+    border-color: var(--spinner-secondary-color) var(--spinner-secondary-color) var(--spinner-transparent)
+        var(--spinner-transparent);
     border-style: solid;
     border-radius: 50%;
-    border-width: calc(var(--size) * 0.0625);
+    border-width: var(--spinner-border-width);
     box-sizing: border-box;
     transform-origin: center center;
 }
 
 .sc-spinner::before {
-    width: calc(var(--size) * 0.6666);
-    height: calc(var(--size) * 0.6666);
-    border-color: var(--primary-9) var(--primary-9) var(--transparent) var(--transparent);
+    width: calc(var(--spinner-size) * 0.6666);
+    height: calc(var(--spinner-size) * 0.6666);
+    border-color: var(--spinner-tertiary-color) var(--spinner-tertiary-color) var(--spinner-transparent)
+        var(--spinner-transparent);
     animation: sc-spinner-rotation 1.5s linear infinite;
 }

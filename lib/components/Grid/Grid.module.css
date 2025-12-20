@@ -1,6 +1,11 @@
-.sc-grid-container {
+:root {
+    /* Grid Layout - Using design system tokens as defaults */
     --grid-columns: '';
     --grid-gap: var(--spacing-gap-4);
+    --grid-cell-span: 1;
+}
+
+.sc-grid-container {
     display: grid;
     width: 100%;
     grid-template-columns: var(--grid-columns);
@@ -8,6 +13,5 @@
 }
 
 .sc-grid-item {
-    --grid-cell-span: 1;
     grid-column: span var(--grid-cell-span);
 }

@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet';
 import { ThemeProvider, useTheme } from '@/components';
 
 import '@spiffdog/spiffy-colors/dist/index.css';
+import '../Theme/themes/default-theme.css';
 import './AppRoot.css';
 
 export const AppRoot = ({ children, ...props }) => {

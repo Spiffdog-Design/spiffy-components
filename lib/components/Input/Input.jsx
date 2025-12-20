@@ -1,5 +1,5 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import cn from 'classnames';
+import { cn } from '@/utilities';
 
 import { isNullOrEmpty } from '@spiffdog/spiffy-tools';
 
@@ -7,16 +7,6 @@ import { Button, Icon } from '@/components';
 import { getVariantMainColor } from '@/utilities';
 
 import styles from './Input.module.css';
-
-const displayClassName = (root, compact, variant, className) => {
-    return cn(root, className, {
-        [`${styles.compact}`]: compact === true,
-        [`${styles.alert}`]: variant === 'alert',
-        [`${styles.primary}`]: variant === 'primary',
-        [`${styles.success}`]: variant === 'success',
-        [`${styles.warning}`]: variant === 'warning',
-    });
-};
 
 export const Input = forwardRef(function Input(
     {
@@ -60,16 +50,17 @@ export const Input = forwardRef(function Input(
     }, [value]);
 
     return (
-        <div className={displayClassName(styles.root, variant)}>
+        <div className={styles['sc-input-root']} data-variant={variant}>
             <input
-                className={displayClassName(styles.input, compact, variant, className)}
+                className={cn(styles['sc-input'], className)}
                 ref={inputRef}
                 onFocus={handleFocus}
                 onChange={handleChange}
                 value={inputText}
+                data-compact={compact ? 'true' : 'false'}
                 {...props}
             />
-            <div className={displayClassName(styles.actions, variant)}>
+            <div className={styles['sc-input-actions']}>
                 {!isNullOrEmpty(inputText) && (
                     <Button appearance="basic" variant={variant} onClick={handleClear} compact={compact}>
                         <Icon name="xmark" />

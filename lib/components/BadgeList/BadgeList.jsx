@@ -1,5 +1,14 @@
-import { Children, cloneElement, forwardRef, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react';
-import cn from 'classnames';
+import {
+    Children,
+    cloneElement,
+    forwardRef,
+    useImperativeHandle,
+    useLayoutEffect,
+    useRef,
+    useState,
+    useCallback,
+} from 'react';
+import { cn } from '@/utilities';
 
 import { Badge, Icon, Popover } from '@/components';
 
@@ -8,26 +17,15 @@ import { useMemo } from 'react';
 
 export const BadgeList = forwardRef(
     ({ children, className, bordered = false, rounded = false, variant = 'base', onClick, ...props }, ref) => {
-        const containerRef = useRef(null);
-        const measureRef = useRef(null);
         const [visibleCount, setVisibleCount] = useState(Children.count(children));
+
+        const containerRef = useRef(null);
         const lastCountRef = useRef(visibleCount);
+        const measureRef = useRef(null);
 
         useImperativeHandle(ref, () => containerRef.current, []);
 
-        const displayClassName = cn(
-            styles['sc-badge-list'],
-            {
-                [styles['sc-badge-list-border']]: bordered === true,
-                [styles['sc-badge-list-rounded']]: rounded === true,
-                [styles['sc-badge-list-alert']]: variant === 'alert',
-                [styles['sc-badge-list-base']]: variant === 'base',
-                [styles['sc-badge-list-primary']]: variant === 'primary',
-                [styles['sc-badge-list-success']]: variant === 'success',
-                [styles['sc-badge-list-warning']]: variant === 'warning',
-            },
-            className,
-        );
+        const displayClassName = cn(styles['sc-badge-list'], className);
 
         const badgeArray = useMemo(() => {
             return children == null
@@ -35,7 +33,6 @@ export const BadgeList = forwardRef(
                 : Children.map(children, (child) =>
                       cloneElement(child, {
                           ...child.props,
-                          variant,
                           selected: child.props.selected ?? false,
                       }),
                   );
@@ -46,28 +43,37 @@ export const BadgeList = forwardRef(
             const measure = measureRef.current;
             if (!container || !measure) return;
 
-            measure.style.display = 'flex';
+            // measure.style.display = 'flex';
             const containerWidth = container.offsetWidth;
             const badges = Array.from(measure.children);
 
             let totalWidth = 0;
             let count = 0;
+            let gap = 0;
+
+            if (badges != null && badges.length > 0) {
+                const badge = badges[0];
+                const style = window.getComputedStyle(badge);
+                gap = parseInt(style.gap.replace('px', ''), 10) || 0;
+            }
+            const counterBadgeWidth = gap * 2 + 32; // Add width for the counter badge if needed
 
             for (let i = 0; i < badges.length; i++) {
                 const badge = badges[i];
-                totalWidth += badge.offsetWidth + 4; // 4px gap
-                if (totalWidth > containerWidth) break;
+                totalWidth += badge.offsetWidth + gap; // Add 16px for the badge's border
+                const containerWidthWithCounter = totalWidth + counterBadgeWidth;
+                if (containerWidthWithCounter > containerWidth) break;
                 count++;
             }
 
-            const nextCount = count < badges.length ? Math.max(count - 1, 0) : count;
+            const nextCount = count <= badges.length ? Math.max(count, 0) : count;
 
             // Always update state to ensure growth works
             if (lastCountRef.current !== nextCount) {
                 setVisibleCount(nextCount);
                 lastCountRef.current = nextCount;
             }
-            measure.style.display = 'none';
+            // measure.style.display = 'none';
         };
 
         useLayoutEffect(() => {
@@ -89,14 +95,23 @@ export const BadgeList = forwardRef(
             };
         }, [badgeArray.length]);
 
-        const visibleBadges = badgeArray.slice(0, visibleCount - 1);
-        const remCount = badgeArray.length - (visibleCount + 1);
+        const visibleBadges = badgeArray.slice(0, visibleCount);
+        const remCount = badgeArray.length - visibleCount;
         const remBadges = badgeArray.slice(visibleCount);
+
+        console.log('render BadgeList:', { visibleCount, remCount });
 
         return (
             <>
-                <div {...props} ref={containerRef}>
-                    <div className={displayClassName}>
+                <div>
+                    <div
+                        className={displayClassName}
+                        ref={containerRef}
+                        data-variant={variant}
+                        data-bordered={bordered ? 'true' : 'false'}
+                        data-rounded={rounded ? 'true' : 'false'}
+                        {...props}
+                    >
                         {visibleBadges}
                         {remCount > 0 && (
                             <Popover
@@ -117,13 +132,13 @@ export const BadgeList = forwardRef(
                             </Popover>
                         )}
                     </div>
-                </div>
-                <div
-                    className={cn(displayClassName, styles['sc-badge-list-measuring-container'])}
-                    ref={measureRef}
-                    aria-hidden
-                >
-                    {badgeArray}
+                    <div
+                        className={cn(displayClassName, styles['sc-badge-list-measuring-container'])}
+                        ref={measureRef}
+                        aria-hidden
+                    >
+                        {badgeArray}
+                    </div>
                 </div>
             </>
         );

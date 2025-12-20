@@ -1,6 +1,6 @@
 // https://fontawesome.com/icons
 import { forwardRef } from 'react';
-import cn from 'classnames';
+import { cn } from '@/utilities';
 
 import styles from './Icon.module.css';
 

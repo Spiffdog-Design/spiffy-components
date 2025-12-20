@@ -3,6 +3,7 @@
     display: flex;
     justify-content: center;
     background-color: var(--slate12);
+    border: var(--slate9) solid 1px;
     min-height: 30vh;
     padding: 2rem;
     min-width: 100%;

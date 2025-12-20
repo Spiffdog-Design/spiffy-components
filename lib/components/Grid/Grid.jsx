@@ -1,6 +1,6 @@
 // src/components/Grid/Grid.tsx
 import React, { forwardRef, useEffect, useState } from 'react';
-import cn from 'classnames';
+import { cn } from '@/utilities';
 
 import styles from './Grid.module.css';
 

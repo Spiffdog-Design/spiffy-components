@@ -1,5 +1,5 @@
 import React, { forwardRef, useMemo, useState } from 'react';
-import cn from 'classnames';
+import { cn } from '@/utilities';
 
 import { Icon, useTheme } from '@/components';
 

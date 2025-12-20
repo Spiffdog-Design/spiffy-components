@@ -22,7 +22,7 @@ export const ToggleBadgeDemo = {
         variant: 'base',
     },
 
-    render: () => {
+    render: (args) => {
         const [toggled, setToggled] = useState(false);
         const handleClick = (value) => {
             setToggled((t) => !t);
@@ -31,7 +31,7 @@ export const ToggleBadgeDemo = {
         return (
             <ThemeWrapper>
                 <div style={{ display: 'flex', flexDirection: 'row', gap: 12 }}>
-                    <ToggleBadge value="toggle-badge-id" selected={toggled} onClick={handleClick}>
+                    <ToggleBadge value="toggle-badge-id" selected={toggled} onClick={handleClick} {...args}>
                         My Toggle Badge
                     </ToggleBadge>
                 </div>

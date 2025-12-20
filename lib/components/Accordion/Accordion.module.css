@@ -1,8 +1,28 @@
+:root {
+    /* Accordion Sizing & Spacing - Using design system tokens as defaults */
+    --accordion-padding: var(--spacing-padding-2);
+    --accordion-list-gap: var(--spacing-gap-2);
+    --accordion-heading-border-width: 3px;
+    --accordion-heading-padding: var(--spacing-padding-1) var(--spacing-padding-3);
+    --accordion-content-padding: 0rem var(--spacing-padding-3) var(--spacing-padding-2) var(--spacing-padding-3);
+    --accordion-font-size: var(--font-size-2);
+    --accordion-font-weight: var(--font-weight-bold);
+    --accordion-line-height: var(--font-line-height);
+
+    /* Accordion Theming - Default colors */
+    --accordion-bg-color: var(--base-1);
+    --accordion-text-color: var(--base-12);
+    --accordion-border-color: var(--base-12);
+}
+
 /* Accordion CSS Module */
 .sc-accordion {
-    background-color: var(--base-1);
-    color: var(--base-12);
-    padding: var(--spacing-padding-2);
+    display: flex;
+    flex-direction: column;
+    background-color: var(--accordion-bg-color);
+    color: var(--accordion-text-color);
+    padding: var(--accordion-padding);
+    gap: 0;
     width: 100%;
     height: fit-content;
     box-sizing: border-box;
@@ -11,7 +31,7 @@
 .sc-accordion-list {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-gap-2);
+    gap: var(--accordion-list-gap);
     width: 100%;
 }
 
@@ -19,16 +39,15 @@
     display: grid;
     grid-template-columns: 1fr auto;
     background-color: transparent;
-    border-color: transparent;
-    border-left-color: var(--base-12);
-    border-right-color: var(--base-12);
-    border-style: solid;
-    border-width: 3px;
+    border-left: var(--accordion-heading-border-width) solid var(--accordion-border-color);
+    border-right: var(--accordion-heading-border-width) solid var(--accordion-border-color);
+    border-top: 0;
+    border-bottom: 0;
     cursor: pointer;
-    font-size: var(--font-size-2);
-    font-weight: var(--font-weight-bold);
-    line-height: var(--font-line-height);
-    padding: var(--spacing-padding-1) var(--spacing-padding-3);
+    font-size: var(--accordion-font-size);
+    font-weight: var(--accordion-font-weight);
+    line-height: var(--accordion-line-height);
+    padding: var(--accordion-heading-padding);
     width: 100%;
     list-style: none;
     outline: none;
@@ -55,13 +74,15 @@
     display: grid;
     grid-template-rows: 0fr;
     overflow: hidden;
-    font-size: var(--font-size-2);
-    padding: 0rem var(--spacing-padding-3) var(--spacing-padding-2) var(--spacing-padding-3);
+    font-size: var(--accordion-font-size);
+    padding: var(--accordion-content-padding);
     height: 0;
     transition: height var(--animation-speed) ease-out;
 }
 
 .sc-accordion[open] {
+    gap: var(--accordion-list-gap);
+
     .sc-accordion-heading-icon {
         transform: rotate(90deg);
     }
@@ -72,22 +93,18 @@
     }
 }
 
-.sc-accordion-alert {
-    border-left-color: var(--alert-7);
-    border-right-color: var(--alert-7);
+.sc-accordion[data-variant='alert'] {
+    --accordion-border-color: var(--alert-6);
 }
 
-.sc-accordion-primary {
-    border-left-color: var(--primary-7);
-    border-right-color: var(--primary-7);
+.sc-accordion[data-variant='primary'] {
+    --accordion-border-color: var(--primary-6);
 }
 
-.sc-accordion-success {
-    border-left-color: var(--success-7);
-    border-right-color: var(--success-7);
+.sc-accordion[data-variant='success'] {
+    --accordion-border-color: var(--success-6);
 }
 
-.sc-accordion-warning {
-    border-left-color: var(--warning-7);
-    border-right-color: var(--warning-7);
+.sc-accordion[data-variant='warning'] {
+    --accordion-border-color: var(--warning-6);
 }

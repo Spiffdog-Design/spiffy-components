@@ -1,3 +1,30 @@
+:root {
+    /* Button Text Sizes - Using design system tokens as defaults */
+    --button-text-xs-padding: var(--spacing-padding-0) var(--spacing-padding-1);
+    --button-text-xs-font-size: var(--font-size-0);
+    --button-text-xs-line-height: var(--font-line-height);
+
+    --button-text-sm-padding: var(--spacing-padding-0) var(--spacing-padding-2);
+    --button-text-sm-font-size: var(--font-size-1);
+    --button-text-sm-line-height: var(--font-line-height);
+
+    --button-text-md-padding: var(--spacing-padding-1) var(--spacing-padding-3);
+    --button-text-md-font-size: var(--font-size-2);
+    --button-text-md-line-height: var(--font-line-height);
+
+    --button-text-lg-padding: var(--spacing-padding-2) var(--spacing-padding-4);
+    --button-text-lg-font-size: var(--font-size-3);
+    --button-text-lg-line-height: var(--font-line-height);
+
+    --button-text-xl-padding: var(--spacing-padding-2) var(--spacing-padding-5);
+    --button-text-xl-font-size: var(--font-size-4);
+    --button-text-xl-line-height: var(--font-line-height);
+
+    --button-text-x2-padding: var(--spacing-padding-3) var(--spacing-padding-6);
+    --button-text-x2-font-size: var(--font-size-5);
+    --button-text-x2-line-height: var(--font-line-height);
+}
+
 /* Button CSS Module */
 .sc-button {
     /* CSS Variables for theming */
@@ -53,7 +80,7 @@
     transition: opacity 400ms ease, transform 400ms ease;
 }
 
-.sc-button.rounded {
+.sc-button[data-rounded='true'] {
     border-radius: 999.9rem;
 }
 
@@ -107,8 +134,8 @@
     padding: var(--spacing-padding-2) var(--spacing-padding-3);
 }
 
-.sc-button-busy.rounded {
-    border-radius: var(--border-radius-6);
+.sc-button-busy[data-rounded='true'] {
+    border-radius: var(--border-radius-rounded);
 }
 
 .sc-button-busy.show {
@@ -116,20 +143,16 @@
 }
 
 /* Appearance Variants */
-.sc-button-basic {
+.sc-button[data-appearance='basic'],
+.sc-button[data-appearance='text'] {
     background: transparent;
     border-color: transparent;
     color: var(--theme-color);
 }
 
-.sc-button-text {
-    /* MUI `text` variant: no background, no outline, subtle on hover */
-    background: transparent;
-    border-color: transparent;
-    color: var(--theme-color);
-}
-
-.sc-button-contained {
+.sc-button[data-appearance='solid'],
+.sc-button[data-appearance='contained'],
+.sc-button[data-appearance='elevated'] {
     /* MUI `contained` variant: solid background, elevated shadow */
     background: var(--theme-color);
     border-color: transparent;
@@ -137,12 +160,16 @@
     box-shadow: 0 1px 3px rgba(16, 24, 40, 0.08), 0 1px 2px rgba(16, 24, 40, 0.04);
 }
 
-.sc-button-contained:hover {
+.sc-button[data-appearance='solid']:hover,
+.sc-button[data-appearance='contained']:hover,
+.sc-button[data-appearance='elevated']:hover {
     filter: brightness(0.97);
     transform: translateY(-1px);
 }
 
-.sc-button-contained:active {
+.sc-button[data-appearance='solid']:active,
+.sc-button[data-appearance='contained']:active,
+.sc-button[data-appearance='elevated']:active {
     transform: translateY(0);
     filter: brightness(0.92);
 }
@@ -151,125 +178,130 @@
     box-shadow: 0 6px 10px rgba(16, 24, 40, 0.12);
 }
 
-.sc-button-basic:hover {
+.sc-button[data-appearance='basic']:hover,
+.sc-button[data-appearance='text']:hover {
     background: color-mix(in srgb, var(--theme-color) 40%, transparent);
     border-color: transparent;
     color: var(--theme-color);
 }
 
-.sc-button-basic:disabled {
+.sc-button[data-appearance='basic']:disabled,
+.sc-button[data-appearance='text']:disabled {
     background: transparent;
     border-color: transparent;
     color: color-mix(in srgb, var(--theme-color) 50%, transparent);
 }
 
-[data-theme='dark'] .sc-button-basic:hover {
+[data-theme='dark'] .sc-button[data-appearance='basic']:hover,
+[data-theme='dark'] .sc-button[data-appearance='text']:hover {
     background: color-mix(in srgb, var(--theme-color) 25%, transparent);
     border-color: transparent;
     color: var(--theme-color);
 }
 
-.sc-button-outline {
+.sc-button[data-appearance='outline'],
+.sc-button[data-appearance='outlined'] {
     background: transparent;
     border-color: var(--theme-color);
     color: var(--theme-color);
 }
 
-.sc-button-outlined {
-    /* alias to outline for MUI naming */
-    background: transparent;
-    border-color: var(--theme-color);
-    color: var(--theme-color);
-}
-
-.sc-button-outline:hover {
+.sc-button[data-appearance='outline']:hover,
+.sc-button[data-appearance='outlined']:hover {
     background: color-mix(in srgb, var(--theme-color) 40%, transparent);
     border-color: var(--theme-color);
     color: var(--theme-color);
 }
 
-.sc-button-outline:disabled {
+.sc-button[data-appearance='outline']:disabled,
+.sc-button[data-appearance='outlined']:disabled {
     background: transparent;
     border-color: color-mix(in srgb, var(--theme-color) 50%, transparent);
     color: color-mix(in srgb, var(--theme-color) 50%, transparent);
 }
 
-[data-theme='dark'] .sc-button-outline:hover {
+[data-theme='dark'] .sc-button[data-appearance='outline']:hover,
+[data-theme='dark'] .sc-button[data-appearance='outlined']:hover {
     background: color-mix(in srgb, var(--theme-color) 25%, transparent);
     border-color: var(--theme-color);
     color: var(--theme-color);
 }
 
 /* Color Variants */
-.sc-button-alert {
+.sc-button[data-variant='alert'] {
     --theme-color: var(--alert-10);
 }
 
-.sc-button-primary {
+.sc-button[data-variant='primary'] {
     --theme-color: var(--primary-10);
 }
 
-.sc-button-success {
+.sc-button[data-variant='success'] {
     --theme-color: var(--success-10);
 }
 
-.sc-button-warning {
+.sc-button[data-variant='warning'] {
     --theme-color: var(--warning-10);
 }
 
 /* Size Variants */
-.sc-button-xs {
+.sc-button[data-size='xs'] {
     padding: var(--button-text-xs-padding);
     font-size: var(--button-text-xs-font-size);
     line-height: var(--button-text-xs-line-height);
 }
 
-.sc-button-sm {
+.sc-button[data-size='sm'] {
     padding: var(--button-text-sm-padding);
     font-size: var(--button-text-sm-font-size);
     line-height: var(--button-text-sm-line-height);
 }
 
-.sc-button-md {
+.sc-button[data-size='md'] {
     padding: var(--button-text-md-padding);
     font-size: var(--button-text-md-font-size);
     line-height: var(--button-text-md-line-height);
 }
 
-.sc-button-lg {
+.sc-button[data-size='lg'] {
     padding: var(--button-text-lg-padding);
     font-size: var(--button-text-lg-font-size);
     line-height: var(--button-text-lg-line-height);
 }
 
-.sc-button-xl {
+.sc-button[data-size='xl'] {
     padding: var(--button-text-xl-padding);
     font-size: var(--button-text-xl-font-size);
     line-height: var(--button-text-xl-line-height);
 }
 
-.sc-button-x2 {
+.sc-button[data-size='x2'] {
     padding: var(--button-text-x2-padding);
     font-size: var(--button-text-x2-font-size);
     line-height: var(--button-text-x2-line-height);
 }
 
 /* Disabled variants for contained/text/outlined */
-.sc-button-contained:disabled,
-.sc-button-contained[disabled] {
+.sc-button[data-appearance='solid']:disabled,
+.sc-button[data-appearance='contained']:disabled,
+.sc-button[data-appearance='elevated']:disabled,
+.sc-button[data-appearance='solid'][disabled],
+.sc-button[data-appearance='contained'][disabled],
+.sc-button[data-appearance='elevated'][disabled] {
     background: color-mix(in srgb, var(--theme-color) 50%, transparent);
     color: color-mix(in srgb, var(--base-1) 60%, transparent);
     box-shadow: none;
 }
 
-.sc-button-text:disabled,
-.sc-button-basic:disabled,
-.sc-button-text[disabled] {
+.sc-button[data-appearance='text']:disabled,
+.sc-button[data-appearance='basic']:disabled,
+.sc-button[data-appearance='text'][disabled],
+.sc-button[data-appearance='basic'][disabled] {
     color: color-mix(in srgb, var(--theme-color) 50%, transparent);
 }
 
-.sc-button-outlined:disabled,
-.sc-button-outline:disabled {
+.sc-button[data-appearance='outlined']:disabled,
+.sc-button[data-appearance='outline']:disabled {
     border-color: color-mix(in srgb, var(--theme-color) 50%, transparent);
     color: color-mix(in srgb, var(--theme-color) 50%, transparent);
 }
@@ -281,8 +313,8 @@
 }
 
 /* Keyboard navigation ease: increase hit area on small sizes */
-.sc-button.sc-button-xs,
-.sc-button.sc-button-sm {
+.sc-button[data-size='xs'],
+.sc-button[data-size='sm'] {
     min-height: 2.2rem;
     padding-inline: 0.6rem;
 }

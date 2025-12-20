@@ -85,6 +85,7 @@
     --font-weight-base: 400;
 
     /* Font Sizes */
+    --font-size-0: 1.12rem;
     --font-size-1: 1.26rem;
     --font-size-2: 1.42rem;
     --font-size-3: 1.8rem;
@@ -108,48 +109,35 @@
     --border-radius-3: 1.2rem;
     --border-radius-4: 2rem;
     --border-radius-5: 50%;
-    --border-radius-6: 99999px;
+    --border-radius-rounded: calc(infinity * 1px);
+
+    /* Spacing Base Unit */
+    --spacing-unit: 0.4rem;
 
     /* Spacing - Gap */
     --spacing-gap-0: 0rem;
-    --spacing-gap-1: 0.4rem;
-    --spacing-gap-2: 0.8rem;
-    --spacing-gap-3: 1.2rem;
-    --spacing-gap-4: 1.6rem;
-    --spacing-gap-5: 2.4rem;
+    --spacing-gap-1: 0.4rem; /* 1 × base */
+    --spacing-gap-2: 0.8rem; /* 2 × base */
+    --spacing-gap-3: 1.2rem; /* 3 × base */
+    --spacing-gap-4: 1.6rem; /* 4 × base */
+    --spacing-gap-5: 2rem; /* 5 × base */
+    --spacing-gap-6: 2.4rem; /* 6 × base */
+    --spacing-gap-7: 2.8rem; /* 7 × base */
+    --spacing-gap-8: 3.2rem; /* 8 × base */
 
     /* Spacing - Padding */
     --spacing-padding-0: 0rem;
-    --spacing-padding-1: 0.4rem;
-    --spacing-padding-2: 0.8rem;
-    --spacing-padding-3: 1.2rem;
-    --spacing-padding-4: 1.6rem;
-    --spacing-padding-5: 2.4rem;
+    --spacing-padding-1: 0.4rem; /* 1 × base */
+    --spacing-padding-2: 0.8rem; /* 2 × base */
+    --spacing-padding-3: 1.2rem; /* 3 × base */
+    --spacing-padding-4: 1.6rem; /* 4 × base */
+    --spacing-padding-5: 2rem; /* 5 × base */
+    --spacing-padding-6: 2.4rem; /* 6 × base */
+    --spacing-padding-7: 2.8rem; /* 7 × base */
+    --spacing-padding-8: 3.2rem; /* 8 × base */
 
-    /* Button Text Sizes */
-    --button-text-xs-padding: 0.3rem 0.5rem;
-    --button-text-xs-font-size: 0.9rem;
-    --button-text-xs-line-height: 0.9rem;
-
-    --button-text-sm-padding: 0.4rem 0.8rem;
-    --button-text-sm-font-size: 1rem;
-    --button-text-sm-line-height: 1rem;
-
-    --button-text-md-padding: 0.5rem 1rem;
-    --button-text-md-font-size: 1.2rem;
-    --button-text-md-line-height: 1.2rem;
-
-    --button-text-lg-padding: 0.7rem 1.4rem;
-    --button-text-lg-font-size: 1.4rem;
-    --button-text-lg-line-height: 1.4rem;
-
-    --button-text-xl-padding: 0.8rem 1.6rem;
-    --button-text-xl-font-size: 1.6rem;
-    --button-text-xl-line-height: 1.6rem;
-
-    --button-text-x2-padding: 0.9rem 1.8rem;
-    --button-text-x2-font-size: 1.8rem;
-    --button-text-x2-line-height: 1.8rem;
+    /* Utility - Positioning */
+    --location-offscreen: calc(infinity * 1px);
 }
 
 /* Dark Theme Overrides */

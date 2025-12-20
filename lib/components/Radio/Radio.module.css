@@ -1,24 +1,30 @@
+:root {
+    /* Radio Sizing & Theming - Using design system tokens as defaults */
+    --radio-size: 25px;
+    --radio-theme-color: var(--base-10);
+}
+
 /* Radio CSS Module */
 .sc-radio {
-    --theme-color: var(--base-10);
     cursor: pointer;
     display: inline-block;
-    height: 25px;
-    width: 25px;
+    height: var(--radio-size);
+    width: var(--radio-size);
+    color: var(--radio-theme-color);
 }
 
 .sc-radio-alert {
-    --theme-color: var(--alert-10);
+    --radio-theme-color: var(--alert-10);
 }
 
 .sc-radio-primary {
-    --theme-color: var(--primary-10);
+    --radio-theme-color: var(--primary-10);
 }
 
 .sc-radio-success {
-    --theme-color: var(--success-10);
+    --radio-theme-color: var(--success-10);
 }
 
 .sc-radio-warning {
-    --theme-color: var(--warning-10);
+    --radio-theme-color: var(--warning-10);
 }

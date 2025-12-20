@@ -21,10 +21,14 @@ export const ReadOnlyBadge = {
             options: ['alert', 'base', 'primary', 'success', 'warning'],
             control: { type: 'radio' },
         },
+        rounded: {
+            control: { type: 'boolean' },
+        },
     },
     args: {
         appearance: 'solid',
         variant: 'base',
+        rounded: true,
     },
 
     render: (args) => (
@@ -46,10 +50,14 @@ export const CloseBadge = {
             options: ['alert', 'base', 'primary', 'success', 'warning'],
             control: { type: 'radio' },
         },
+        rounded: {
+            control: { type: 'boolean' },
+        },
     },
     args: {
         appearance: 'solid',
         variant: 'base',
+        rounded: true,
     },
 
     render: (args) => {

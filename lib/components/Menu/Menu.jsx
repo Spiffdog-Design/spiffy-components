@@ -1,49 +1,50 @@
-import { forwardRef } from 'react';
-import * as Ariakit from '@ariakit/react';
-import cn from 'classnames';
+import { forwardRef, createContext, useContext, useState } from 'react';
+import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
+import { cn } from '@/utilities';
 
 import styles from './Menu.module.css';
 
+const MenuContext = createContext();
+
 export const Menu = forwardRef(function Menu({ anchor, className, ...props }, ref) {
-    const menu = Ariakit.useMenuContext();
+    const [open, setOpen] = useState(false);
 
     return (
-        <Ariakit.MenuProvider>
-            {anchor != null && anchor}
-            <Ariakit.Menu
-                ref={ref}
-                portal
-                fitViewport
-                unmountOnHide
-                overlap={!!menu?.parent}
-                gutter={menu?.parent ? 12 : 4}
-                shift={menu?.parent ? -9 : -2}
-                flip={menu?.parent ? true : 'bottom-end'}
-                {...props}
-                className={cn(styles['sc-menu'], className)}
-            />
-        </Ariakit.MenuProvider>
+        <MenuContext.Provider value={{ open, setOpen }}>
+            <RadixDropdownMenu.Root open={open} onOpenChange={setOpen}>
+                {anchor != null && anchor}
+                <RadixDropdownMenu.Portal>
+                    <RadixDropdownMenu.Content
+                        ref={ref}
+                        {...props}
+                        className={cn(styles['sc-menu'], className)}
+                        sideOffset={4}
+                        collisionPadding={8}
+                    />
+                </RadixDropdownMenu.Portal>
+            </RadixDropdownMenu.Root>
+        </MenuContext.Provider>
     );
 });
 
-export const MenuBar = forwardRef(function MenuBar({ anchor, className, ...props }, ref) {
-    return <Ariakit.Menubar ref={ref} className={cn(styles['sc-menu-bar'], className)} {...props} />;
+export const MenuBar = forwardRef(function MenuBar({ className, ...props }, ref) {
+    return <div ref={ref} className={cn(styles['sc-menu-bar'], className)} {...props} />;
 });
 
 export const MenuButton = forwardRef(function MenuButton({ children, ...props }, ref) {
-    const menu = Ariakit.useMenuContext();
     return (
-        <Ariakit.MenuButton ref={ref} {...props}>
-            <span className={styles['sc-menu-label']}>{children}</span>
-            {!!menu?.parent && <Ariakit.MenuButtonArrow />}
-        </Ariakit.MenuButton>
+        <RadixDropdownMenu.Trigger ref={ref} {...props} asChild>
+            <button className={styles['sc-menu-button']}>
+                <span className={styles['sc-menu-label']}>{children}</span>
+            </button>
+        </RadixDropdownMenu.Trigger>
     );
 });
 
 export const MenuItem = forwardRef(function MenuItem({ className, ...props }, ref) {
-    return <Ariakit.MenuItem ref={ref} {...props} className={cn(styles['sc-menu-item'], className)} />;
+    return <RadixDropdownMenu.Item ref={ref} {...props} className={cn(styles['sc-menu-item'], className)} />;
 });
 
 export const MenuSeparator = forwardRef(function MenuSeparator({ className, ...props }, ref) {
-    return <Ariakit.MenuSeparator ref={ref} {...props} className={cn(styles['sc-menu-separator'], className)} />;
+    return <RadixDropdownMenu.Separator ref={ref} {...props} className={cn(styles['sc-menu-separator'], className)} />;
 });

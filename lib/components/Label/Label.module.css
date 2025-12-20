@@ -1,11 +1,25 @@
+:root {
+    /* Label Sizing & Spacing - Using design system tokens as defaults */
+    --label-font-size: var(--font-size-1);
+    --label-font-weight: var(--font-weight-semibold);
+    --label-required-top: -4px;
+    --label-required-right: -12px;
+    --label-required-font-size: var(--font-size-3);
+    --label-required-font-weight: var(--font-weight-medium);
+
+    /* Label Theming - Default colors */
+    --label-text-color: var(--base-12);
+    --label-required-color: var(--alert-9);
+}
+
 /* Label CSS Module */
 .sc-label {
     position: relative;
     background-color: transparent;
-    color: var(--base-12);
+    color: var(--label-text-color);
     cursor: pointer;
-    font-weight: var(--font-weight-semibold);
-    font-size: var(--font-size-1);
+    font-weight: var(--label-font-weight);
+    font-size: var(--label-font-size);
     text-transform: uppercase;
     flex-shrink: 0;
     user-select: none;
@@ -14,10 +28,10 @@
 
 .sc-label-required::after {
     position: absolute;
-    top: -4px;
-    right: -12px;
-    color: var(--alert-9);
+    top: var(--label-required-top);
+    right: var(--label-required-right);
+    color: var(--label-required-color);
     content: '*';
-    font-size: var(--font-size-3);
-    font-weight: var(--font-weight-medium);
+    font-size: var(--label-required-font-size);
+    font-weight: var(--label-required-font-weight);
 }
