@@ -1,0 +1,329 @@
+# Spiffy Components - Visual Consistency Rules
+
+This React component library uses vanilla CSS with CSS Modules for styling. Follow these rules to maintain visual consistency across all components.
+
+## CSS Module Structure
+
+- All component styles MUST use CSS Modules (`.module.css` files)
+- Each component should have its own `ComponentName.module.css` file
+- Import CSS modules directly: `import './ComponentName.module.css';`
+- NEVER use inline styles or global CSS classes for component-specific styling
+- CSS modules are scoped automatically - use them for all component styling
+
+## Class Naming Conventions
+
+- All component classes MUST use the `sc-` prefix (e.g., `.sc-button`, `.sc-accordion`)
+- Use kebab-case for class names: `.sc-component-name`
+- Nested elements use compound names: `.sc-component-element` (e.g., `.sc-button-content`, `.sc-accordion-heading`)
+- BEM-like structure but with `sc-` prefix: `.sc-component`, `.sc-component-element`, `.sc-component-element-modifier`
+- Examples:
+  - Component: `.sc-button`
+  - Element: `.sc-button-content`, `.sc-accordion-heading`
+  - Modifier: `.sc-button-busy` (when needed as a separate class)
+
+## CSS Variable Patterns
+
+- Define component-specific CSS variables in `:root` within each module file
+- Group variables by category with clear comments:
+  - `/* Component Sizing & Spacing - Using design system tokens as defaults */`
+  - `/* Component Typography */`
+  - `/* Component Theming - Default colors */`
+- Use design system tokens as defaults (e.g., `var(--spacing-padding-2)`, `var(--font-size-2)`)
+- Component variables should follow pattern: `--component-name-property` (e.g., `--button-padding`, `--accordion-border-color`)
+- Always reference design tokens rather than hardcoding values
+
+## Color System (spiffy-colors)
+
+- ALWAYS use CSS variables from spiffy-colors, NEVER hardcoded colors
+- The spiffy-colors package provides base color scales that are mapped to semantic colors
+- Use semantic color mappings from the default theme:
+  - Base/Neutral: `--base-1` through `--base-12` (1 = lightest, 12 = darkest)
+  - Primary: `--primary-1` through `--primary-12`
+  - Success: `--success-1` through `--success-12`
+  - Warning: `--warning-1` through `--warning-12`
+  - Alert/Error: `--alert-1` through `--alert-12`
+- For variants, typically use:
+  - Backgrounds: scale 10-12 (theme colors will automatically switch between light and dark modes as long as it's configured correctly)
+  - Borders/Accents: scale 6-9 (medium emphasis)
+  - Text: scale 1-3 (theme colors will automatically switch between light and dark modes as long as it's configured correctly)
+- Theme colors automatically switch between light and dark modes when configured correctly in the default theme
+- Reference: `lib/components/Theme/themes/default-theme.css` for semantic mappings
+- Import spiffy-colors CSS in AppRoot: `import '@spiffdog/spiffy-colors/dist/index.css';`
+
+## Design Token Usage
+
+- **Spacing**: Use `--spacing-padding-*` and `--spacing-gap-*` (0-8 scale)
+  - Example: `padding: var(--spacing-padding-2);`
+- **Typography**: Use `--font-size-*` (0-8), `--font-weight-*`, `--font-line-height`
+  - Example: `font-size: var(--font-size-2);`
+- **Border Radius**: Use `--border-radius-*` (0-5, plus `--border-radius-rounded`)
+  - Example: `border-radius: var(--border-radius-0);`
+- **Animation**: Use `--animation-speed` for transitions
+  - Example: `transition: all var(--animation-speed) ease-in-out;`
+- NEVER hardcode spacing, font sizes, or border radius values
+- Always reference design tokens to maintain consistency
+
+## Variant Patterns & Data Attributes
+
+- **CRITICAL: Use data attributes for ALL simple state values** - NEVER use className toggles for variants, appearance, or boolean states
+- Use `data-variant` attribute for color variants: `data-variant="primary"`, `data-variant="alert"`, `data-variant="success"`, `data-variant="warning"`, `data-variant="base"`
+- Use `data-appearance` attribute for style variants: `data-appearance="basic"`, `data-appearance="outline"`, `data-appearance="solid"`, `data-appearance="text"`, `data-appearance="contained"`, `data-appearance="elevated"`
+- Use `data-rounded` for border radius toggles: `data-rounded="true"` or `data-rounded="false"`
+- Use `data-size` for size variants: `data-size="xs"`, `data-size="sm"`, `data-size="md"`, `data-size="lg"`, `data-size="xl"`, `data-size="x2"`
+- Use `data-closable` for closable components: `data-closable="true"`
+- Use `data-compact` for compact variants: `data-compact="true"`
+- Target data attributes in CSS: `.sc-component[data-variant='primary']`, `.sc-component[data-rounded='true']`
+- Override component CSS variables within variant selectors
+- In JSX, set data attributes directly: `<div className="sc-component" data-variant={variant} data-rounded={rounded} />`
+- Boolean data attributes: Use string values `"true"` or `"false"` (e.g., `data-rounded="true"`)
+- Example CSS:
+  ```css
+  .sc-component[data-variant='primary'] {
+      --component-theme-color: var(--primary-10);
+  }
+  .sc-component[data-rounded='true'] {
+      border-radius: var(--border-radius-rounded);
+  }
+  ```
+
+## State Management (Hover, Disabled, Focus)
+
+- **Use data attributes for component state values** - Track simple state like variants, appearance, rounded, closable, compact, size, etc. via data attributes
+- Use `color-mix()` for hover and disabled states:
+  - Hover: `color-mix(in srgb, var(--theme-color) 90%, white)`
+  - Disabled: `color-mix(in srgb, var(--theme-color) 50%, transparent)`
+- For disabled states, use opacity mixing: `color-mix(in srgb, var(--theme-color) 50%, transparent)`
+- ALWAYS include `:hover`, `:disabled`, `:focus`, and `:focus-visible` states
+- Use `transition: all var(--animation-speed) ease-in-out` for smooth state changes
+- Support dark theme with `[data-theme='dark']` selectors when needed
+- For complex interactive states (open/closed, active), use native HTML attributes when possible:
+  - `[open]` for details element
+  - `:checked` for inputs
+  - `:disabled` for form elements
+- Example:
+  ```css
+  .sc-component:hover {
+      background: color-mix(in srgb, var(--theme-color) 90%, white);
+  }
+  .sc-component:disabled {
+      background: color-mix(in srgb, var(--theme-color) 50%, transparent);
+      cursor: not-allowed;
+  }
+  ```
+
+## Component Structure
+
+- Define CSS variables in `:root` at the top of the module file
+- Main component class comes after variable definitions
+- Use nested selectors for component elements (modern CSS nesting is supported)
+- Group related styles together in this order:
+  1. `:root` variable definitions
+  2. Base component class (`.sc-component`)
+  3. Component element classes (`.sc-component-element`)
+  4. Variant selectors (`.sc-component[data-variant='...']`)
+  5. Appearance selectors (`.sc-component[data-appearance='...']`)
+  6. State selectors (`:hover`, `:disabled`, `:focus`, etc.)
+  7. Modifier selectors (`.sc-component[data-rounded='true']`, etc.)
+- Example structure:
+  ```css
+  :root {
+      /* Variables */
+  }
+  .sc-component {
+      /* Base styles */
+  }
+  .sc-component[data-variant='primary'] {
+      /* Variant overrides */
+  }
+  .sc-component:hover {
+      /* State styles */
+  }
+  ```
+
+## File Organization
+
+- Component files: `ComponentName.jsx` and `ComponentName.module.css` in the same directory
+- Import CSS module in the JSX file: `import './ComponentName.module.css';`
+- Use `cn()` utility for className composition: `className={cn('sc-component', className)}`
+- Import `cn` from `@/utilities`: `import { cn } from '@/utilities';`
+- Example JSX:
+  ```jsx
+  import { cn } from '@/utilities';
+  import './Component.module.css';
+  
+  export const Component = ({ className, variant, rounded, ...props }) => {
+      return (
+          <div 
+              className={cn('sc-component', className)}
+              data-variant={variant}
+              data-rounded={rounded}
+              {...props}
+          >
+              {children}
+          </div>
+      );
+  };
+  ```
+
+## Accessibility & Best Practices
+
+- ALWAYS include focus states for keyboard navigation
+- Use semantic HTML elements (button, input, details, etc.)
+- Support `prefers-reduced-motion` (handled by default theme - `--animation-speed` becomes `0ms`)
+- Ensure sufficient color contrast (use scale 10-12 for backgrounds and scale 1-3 for text - theme colors automatically switch between light and dark modes when configured correctly)
+- Include `:focus-visible` for visible focus indicators
+- Example focus styles:
+  ```css
+  .sc-component:focus,
+  .sc-component:focus-visible {
+      outline: 2px solid var(--base-1);
+      box-shadow: 0 0 0 5px var(--primary-11);
+  }
+  ```
+
+## Example Pattern Reference
+
+### CSS Module (Component.module.css)
+```css
+:root {
+    /* Component Sizing & Spacing - Using design system tokens as defaults */
+    --component-padding: var(--spacing-padding-2);
+    --component-gap: var(--spacing-gap-2);
+    
+    /* Component Typography */
+    --component-font-size: var(--font-size-2);
+    --component-font-weight: var(--font-weight-semibold);
+    --component-line-height: var(--font-line-height);
+    
+    /* Component Theming - Default colors */
+    --component-theme-color: var(--base-10);
+    --component-bg-color: var(--base-1);
+    --component-text-color: var(--base-12);
+    --component-border-color: var(--base-12);
+}
+
+/* Component CSS Module */
+.sc-component {
+    display: flex;
+    align-items: center;
+    background-color: var(--component-bg-color);
+    color: var(--component-text-color);
+    padding: var(--component-padding);
+    gap: var(--component-gap);
+    font-size: var(--component-font-size);
+    font-weight: var(--component-font-weight);
+    line-height: var(--component-line-height);
+    border-radius: var(--border-radius-0);
+    transition: all var(--animation-speed) ease-in-out;
+}
+
+.sc-component-content {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-gap-1);
+}
+
+/* Data attribute selectors for state */
+.sc-component[data-variant='primary'] {
+    --component-theme-color: var(--primary-10);
+    --component-border-color: var(--primary-10);
+}
+
+.sc-component[data-variant='alert'] {
+    --component-theme-color: var(--alert-10);
+    --component-border-color: var(--alert-10);
+}
+
+.sc-component[data-appearance='outline'] {
+    background: transparent;
+    border: 3px solid var(--component-theme-color);
+    color: var(--component-theme-color);
+}
+
+.sc-component[data-rounded='true'] {
+    border-radius: var(--border-radius-rounded);
+}
+
+.sc-component[data-size='sm'] {
+    padding: var(--spacing-padding-1) var(--spacing-padding-2);
+    font-size: var(--font-size-1);
+}
+
+.sc-component:hover {
+    background: color-mix(in srgb, var(--component-theme-color) 90%, white);
+}
+
+.sc-component:disabled {
+    background: color-mix(in srgb, var(--component-theme-color) 50%, transparent);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.sc-component:focus,
+.sc-component:focus-visible {
+    outline: 2px solid var(--base-1);
+    box-shadow: 0 0 0 5px var(--primary-11);
+}
+```
+
+### JSX Component (Component.jsx)
+```jsx
+import { forwardRef } from 'react';
+import { cn } from '@/utilities';
+import './Component.module.css';
+
+export const Component = forwardRef(function Component(
+    { 
+        children, 
+        className, 
+        variant = 'base',
+        appearance = 'solid',
+        rounded = false,
+        size = 'md',
+        disabled = false,
+        ...props 
+    },
+    ref,
+) {
+    return (
+        <div
+            ref={ref}
+            className={cn('sc-component', className)}
+            data-variant={variant}
+            data-appearance={appearance}
+            data-rounded={rounded ? 'true' : 'false'}
+            data-size={size}
+            disabled={disabled}
+            {...props}
+        >
+            <div className="sc-component-content">
+                {children}
+            </div>
+        </div>
+    );
+});
+```
+
+## Files to Reference
+
+When creating or modifying components, reference these files for patterns:
+- `lib/components/Theme/themes/default-theme.css` - Design token definitions and semantic color mappings
+- `lib/components/Button/Button.module.css` - Comprehensive example with variants, appearances, sizes, and states
+- `lib/components/Accordion/Accordion.module.css` - Variant pattern example
+- `lib/components/Badge/Badge.module.css` - Appearance variant and data attribute examples
+- `lib/components/Input/Input.module.css` - Form component styling patterns
+
+## Summary Checklist
+
+When creating or modifying a component, ensure:
+- [ ] CSS Module file exists: `ComponentName.module.css`
+- [ ] All classes use `sc-` prefix
+- [ ] CSS variables defined in `:root` grouped by category
+- [ ] Design tokens used (no hardcoded values)
+- [ ] Colors from spiffy-colors semantic mappings
+- [ ] Data attributes used for variants, appearance, size, rounded, etc.
+- [ ] Hover, disabled, focus states included
+- [ ] `color-mix()` used for state variations
+- [ ] Transitions use `--animation-speed`
+- [ ] Focus states for accessibility
+- [ ] JSX uses `cn()` utility and sets data attributes
