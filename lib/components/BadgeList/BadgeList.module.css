@@ -1,7 +1,7 @@
 :root {
     /* BadgeList Sizing & Spacing - Using design system tokens as defaults */
     --badge-list-border-width: 2px;
-    --badge-list-border-radius: 16px;
+    --badge-list-border-radius: var(--border-radius-4);
     --badge-list-gap: var(--spacing-gap-2);
     --badge-list-padding: var(--spacing-padding-1);
     --badge-list-measuring-top: 300px;
@@ -15,10 +15,12 @@
     border: var(--badge-list-border-width) solid transparent;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: var(--badge-list-gap);
     padding: var(--badge-list-padding);
     width: 100%;
+    overflow: hidden;
+    align-items: center;
 }
 
 .sc-badge-list-remaining {
@@ -30,21 +32,27 @@
 }
 
 .sc-badge-list-popover {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: var(--badge-list-gap);
+    min-width: 20rem !important;
+    width: max-content;
+    max-width: 30rem;
+}
+
+.sc-badge-list-popover .sc-popover-content {
+    min-width: 20rem;
+    width: 100%;
 }
 
 .sc-badge-list-measuring-container {
-    /* 
     position: absolute;
-    top: var(--location-offscreen);
-    left: var(--location-offscreen);
+    top: -9999px;
+    left: -9999px;
     visibility: hidden;
     pointer-events: none;
-    */
     width: max-content;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: var(--badge-list-gap);
 }
 
 .sc-badge-list[data-bordered='true'] {
@@ -73,4 +81,19 @@
 
 .sc-badge-list[data-variant='warning'] {
     --badge-list-color: var(--warning-10);
+}
+
+/* Size Variants - mainly affects spacing for dense layouts */
+.sc-badge-list[data-size='xs'] {
+    --badge-list-gap: var(--spacing-gap-1);
+    --badge-list-padding: 0.2rem;
+}
+
+.sc-badge-list[data-size='sm'] {
+    --badge-list-gap: var(--spacing-gap-1);
+    --badge-list-padding: 0.2rem;
+}
+
+.sc-badge-list[data-size='md'] {
+    /* Default values */
 }

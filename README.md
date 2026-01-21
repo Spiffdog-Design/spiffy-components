@@ -1,52 +1,39 @@
+# @spiffdog/spiffy-components
+
+A React component library built for data-dense dashboards, data entry forms, and grids. Features a consistent design system with tree-shakable components, full dark theme support, and optimized sizing for information-dense interfaces.
+
 [Documentation](https://spiffdog-design.github.io/spiffy-components)
 
-# React + TypeScript + Vite
+## Features
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- ✅ **Tree-shakable**: Only components you use are included in your bundle
+- ✅ **Native JavaScript**: No TypeScript required, but full IntelliSense support via JSDoc
+- ✅ **Dark Theme**: Automatic dark theme support via `@spiffdog/spiffy-colors`
+- ✅ **Consistent Design System**: Unified spacing, sizing, and color tokens
+- ✅ **Dense Layout Optimized**: Sizing optimized for data-dense dashboards and forms
+- ✅ **Accessible**: ARIA attributes and keyboard navigation support
+- ✅ **Modular CSS**: CSS Modules for scoped styling
+- ✅ **Storybook**: Interactive component documentation
 
-Currently, two official plugins are available:
+## Documentation
 
--   [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
--   [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Installation](docs/installation.md) - Installation and peer dependencies
+- [Quick Start](docs/quick-start.md) - Get up and running quickly
+- [Design System](docs/design-system.md) - Spacing, typography, colors, and tokens
+- [Components](docs/components.md) - Complete component reference
+- [Theming](docs/theming.md) - Theme configuration and customization
+- [Component Patterns](docs/component-patterns.md) - Consistent prop patterns and data attributes
+- [Best Practices](docs/best-practices.md) - Guidelines for dashboards, forms, and color usage
+- [Development](docs/development.md) - Building and running Storybook
+- [Browser Support](docs/browser-support.md) - Supported browsers and features
+- [Contributing](docs/contributing.md) - Guidelines for contributing
 
-## Expanding the ESLint configuration
+## License
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+See LICENSE file for details.
 
--   Configure the top-level `parserOptions` property like this:
+## Related Packages
 
-```js
-export default tseslint.config({
-    languageOptions: {
-        // other options...
-        parserOptions: {
-            project: ['./tsconfig.node.json', './tsconfig.app.json'],
-            tsconfigRootDir: import.meta.dirname,
-        },
-    },
-});
-```
-
--   Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
--   Optionally add `...tseslint.configs.stylisticTypeChecked`
--   Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react';
-
-export default tseslint.config({
-    // Set the react version
-    settings: { react: { version: '18.3' } },
-    plugins: {
-        // Add the react plugin
-        react,
-    },
-    rules: {
-        // other rules...
-        // Enable its recommended rules
-        ...react.configs.recommended.rules,
-        ...react.configs['jsx-runtime'].rules,
-    },
-});
-```
+- [`@spiffdog/spiffy-colors`](https://github.com/spiffdog-design/spiffy-colors) - Color palette with dark theme support
+- [`@spiffdog/spiffy-hooks`](https://github.com/spiffdog-design/spiffy-hooks) - React hooks utilities
+- [`@spiffdog/spiffy-tools`](https://github.com/spiffdog-design/spiffy-tools) - Utility functions

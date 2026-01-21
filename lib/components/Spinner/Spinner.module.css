@@ -17,14 +17,18 @@
 }
 
 :root {
-    /* Spinner Sizing - Using design system tokens as defaults */
-    --spinner-size: 48px;
-    --spinner-border-width: calc(var(--spinner-size) * 0.0625);
+    /* Spinner Sizing - Using design system tokens (matching Icon sizes) */
+    --spinner-size-xs: 2.8rem;
+    --spinner-size-sm: 3.2rem;
+    --spinner-size-md: 3.6rem;
+    --spinner-size-lg: 4.0rem;
+    --spinner-size-xl: 4.8rem;
+    --spinner-size-x2: 6.4rem;
 
     /* Spinner Theming - Default colors */
-    --spinner-primary-color: var(--base-11);
-    --spinner-secondary-color: var(--warning-9);
-    --spinner-tertiary-color: var(--primary-9);
+    --spinner-primary-color: var(--warning-8);
+    --spinner-secondary-color: var(--success-8);
+    --spinner-tertiary-color: var(--primary-6);
     --spinner-transparent: transparent;
 }
 
@@ -36,10 +40,10 @@
         var(--spinner-transparent);
     border-style: solid;
     border-radius: 50%;
-    border-width: var(--spinner-border-width);
     box-sizing: border-box;
-    height: var(--spinner-size);
-    width: var(--spinner-size);
+    height: var(--spinner-size-md);
+    width: var(--spinner-size-md);
+    border-width: calc(var(--spinner-size-md) * 0.0625);
 }
 
 .sc-spinner::after,
@@ -50,23 +54,132 @@
     right: 0;
     top: 0;
     bottom: 0;
-    height: calc(var(--spinner-size) * 0.833);
     margin: auto;
-    width: calc(var(--spinner-size) * 0.833);
     animation: sc-spinner-rotation-back 0.5s linear infinite;
     border-color: var(--spinner-secondary-color) var(--spinner-secondary-color) var(--spinner-transparent)
         var(--spinner-transparent);
     border-style: solid;
     border-radius: 50%;
-    border-width: var(--spinner-border-width);
     box-sizing: border-box;
     transform-origin: center center;
+    height: calc(var(--spinner-size-md) * 0.833);
+    width: calc(var(--spinner-size-md) * 0.833);
+    border-width: calc(var(--spinner-size-md) * 0.0625);
 }
 
 .sc-spinner::before {
-    width: calc(var(--spinner-size) * 0.6666);
-    height: calc(var(--spinner-size) * 0.6666);
+    width: calc(var(--spinner-size-md) * 0.6666);
+    height: calc(var(--spinner-size-md) * 0.6666);
     border-color: var(--spinner-tertiary-color) var(--spinner-tertiary-color) var(--spinner-transparent)
         var(--spinner-transparent);
     animation: sc-spinner-rotation 1.5s linear infinite;
+}
+
+/* Size Variants */
+.sc-spinner-xs {
+    height: var(--spinner-size-xs);
+    width: var(--spinner-size-xs);
+    border-width: calc(var(--spinner-size-xs) * 0.0625);
+}
+
+.sc-spinner-xs::after {
+    height: calc(var(--spinner-size-xs) * 0.833);
+    width: calc(var(--spinner-size-xs) * 0.833);
+    border-width: calc(var(--spinner-size-xs) * 0.0625);
+}
+
+.sc-spinner-xs::before {
+    width: calc(var(--spinner-size-xs) * 0.6666);
+    height: calc(var(--spinner-size-xs) * 0.6666);
+    border-width: calc(var(--spinner-size-xs) * 0.0625);
+}
+
+.sc-spinner-sm {
+    height: var(--spinner-size-sm);
+    width: var(--spinner-size-sm);
+    border-width: calc(var(--spinner-size-sm) * 0.0625);
+}
+
+.sc-spinner-sm::after {
+    height: calc(var(--spinner-size-sm) * 0.833);
+    width: calc(var(--spinner-size-sm) * 0.833);
+    border-width: calc(var(--spinner-size-sm) * 0.0625);
+}
+
+.sc-spinner-sm::before {
+    width: calc(var(--spinner-size-sm) * 0.6666);
+    height: calc(var(--spinner-size-sm) * 0.6666);
+    border-width: calc(var(--spinner-size-sm) * 0.0625);
+}
+
+.sc-spinner-md {
+    height: var(--spinner-size-md);
+    width: var(--spinner-size-md);
+    border-width: calc(var(--spinner-size-md) * 0.0625);
+}
+
+.sc-spinner-md::after {
+    height: calc(var(--spinner-size-md) * 0.833);
+    width: calc(var(--spinner-size-md) * 0.833);
+    border-width: calc(var(--spinner-size-md) * 0.0625);
+}
+
+.sc-spinner-md::before {
+    width: calc(var(--spinner-size-md) * 0.6666);
+    height: calc(var(--spinner-size-md) * 0.6666);
+    border-width: calc(var(--spinner-size-md) * 0.0625);
+}
+
+.sc-spinner-lg {
+    height: var(--spinner-size-lg);
+    width: var(--spinner-size-lg);
+    border-width: calc(var(--spinner-size-lg) * 0.0625);
+}
+
+.sc-spinner-lg::after {
+    height: calc(var(--spinner-size-lg) * 0.833);
+    width: calc(var(--spinner-size-lg) * 0.833);
+    border-width: calc(var(--spinner-size-lg) * 0.0625);
+}
+
+.sc-spinner-lg::before {
+    width: calc(var(--spinner-size-lg) * 0.6666);
+    height: calc(var(--spinner-size-lg) * 0.6666);
+    border-width: calc(var(--spinner-size-lg) * 0.0625);
+}
+
+.sc-spinner-xl {
+    height: var(--spinner-size-xl);
+    width: var(--spinner-size-xl);
+    border-width: calc(var(--spinner-size-xl) * 0.0625);
+}
+
+.sc-spinner-xl::after {
+    height: calc(var(--spinner-size-xl) * 0.833);
+    width: calc(var(--spinner-size-xl) * 0.833);
+    border-width: calc(var(--spinner-size-xl) * 0.0625);
+}
+
+.sc-spinner-xl::before {
+    width: calc(var(--spinner-size-xl) * 0.6666);
+    height: calc(var(--spinner-size-xl) * 0.6666);
+    border-width: calc(var(--spinner-size-xl) * 0.0625);
+}
+
+.sc-spinner-x2 {
+    height: var(--spinner-size-x2);
+    width: var(--spinner-size-x2);
+    border-width: calc(var(--spinner-size-x2) * 0.0625);
+}
+
+.sc-spinner-x2::after {
+    height: calc(var(--spinner-size-x2) * 0.833);
+    width: calc(var(--spinner-size-x2) * 0.833);
+    border-width: calc(var(--spinner-size-x2) * 0.0625);
+}
+
+.sc-spinner-x2::before {
+    width: calc(var(--spinner-size-x2) * 0.6666);
+    height: calc(var(--spinner-size-x2) * 0.6666);
+    border-width: calc(var(--spinner-size-x2) * 0.0625);
 }

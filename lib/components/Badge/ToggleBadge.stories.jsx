@@ -2,11 +2,31 @@ import { useState } from 'react';
 import { action } from 'storybook/actions';
 
 import { ToggleBadge } from '@/components';
-import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
 
 const meta = {
     title: 'Base/Badges/Toggle Badge',
     component: ToggleBadge,
+    parameters: {
+        docs: {
+            description: {
+                component: `
+A badge that can be toggled between selected and unselected states.
+
+Automatically switches between \`solid\` and \`outline\` appearance based on selection state. Perfect for filter chips and toggleable tags.
+
+## Props
+
+- **children**: Content to display in the badge
+- **selected**: Controls selected state (required)
+- **onClick**: Toggle handler (required)
+- **variant**: Color variant (\`'base' | 'primary' | 'success' | 'warning' | 'alert'\`) - Default: \`'base'\`
+- **size**: Size variant (\`'xs' | 'sm' | 'md'\`) - Default: \`'md'\`
+- **value**: Value passed to onClick handler
+- **className**: Additional CSS class names
+                `.trim(),
+            },
+        },
+    },
 };
 
 export default meta;
@@ -29,13 +49,11 @@ export const ToggleBadgeDemo = {
             action('toggled')(value);
         };
         return (
-            <ThemeWrapper>
-                <div style={{ display: 'flex', flexDirection: 'row', gap: 12 }}>
-                    <ToggleBadge value="toggle-badge-id" selected={toggled} onClick={handleClick} {...args}>
-                        My Toggle Badge
-                    </ToggleBadge>
-                </div>
-            </ThemeWrapper>
+            <div style={{ display: 'flex', flexDirection: 'row', gap: 12 }}>
+                <ToggleBadge value="toggle-badge-id" selected={toggled} onClick={handleClick} {...args}>
+                    My Toggle Badge
+                </ToggleBadge>
+            </div>
         );
     },
 };

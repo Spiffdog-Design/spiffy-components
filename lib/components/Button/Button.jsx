@@ -6,8 +6,27 @@ import { Spinner, useTheme } from '@/components';
 import styles from './Button.module.css';
 
 /**
- * A customizable button component that supports various appearances, variants, and states.
+ * Button component - A customizable button that supports various appearances, variants, and states.
  * Implements ARIA-recommended behaviors for accessibility.
+ * 
+ * @typedef {'basic' | 'outline' | 'solid'} ButtonAppearance
+ * @typedef {'base' | 'primary' | 'success' | 'warning' | 'alert'} ButtonVariant
+ * @typedef {'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'x2'} ButtonSize
+ * 
+ * @param {Object} props
+ * @param {React.ReactNode | Function} props.children - Content to display in the button. Can be a function that receives props (including size) for dynamic rendering
+ * @param {ButtonAppearance} [props.appearance='solid'] - Visual appearance style
+ * @param {ButtonVariant} [props.variant='base'] - Color variant
+ * @param {ButtonSize} [props.size='md'] - Size variant
+ * @param {boolean} [props.busy=false] - If true, shows a busy state with spinner and disables interaction. Used for operations like API calls
+ * @param {boolean} [props.disabled=false] - Disables the button, preventing user interaction
+ * @param {boolean} [props.rounded=false] - Whether to apply rounded corners
+ * @param {string} [props.type='button'] - Button type ('button', 'submit', 'reset')
+ * @param {string} [props['aria-label']] - ARIA label for accessibility
+ * @param {string} [props['aria-describedby']] - ARIA describedby for accessibility
+ * @param {string} [props.className] - Additional CSS class names
+ * @param {Function} [props.onClick] - Click handler
+ * @param {React.Ref<HTMLButtonElement>} ref
  */
 export const Button = forwardRef(function Button(props, ref) {
     const {
@@ -50,8 +69,10 @@ export const Button = forwardRef(function Button(props, ref) {
                 {typeof children === 'function' ? children(props) : children}
             </div>
             <div className={cn(styles['sc-button-busy'], { rounded: rounded, show: busy })}>
-                <Spinner size={['xs', 'sm'].includes(size) ? 20 : 28} />
+                <Spinner size={['xs', 'sm'].includes(size) ? 'sm' : 'md'} />
             </div>
         </button>
     );
 });
+
+Button.displayName = 'Button';

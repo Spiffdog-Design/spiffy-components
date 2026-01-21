@@ -1,9 +1,25 @@
 import { Accordion, AccordionList } from '@/components';
-import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
 
 const meta = {
     title: 'Base/Accordion/AccordionList',
     component: AccordionList,
+    parameters: {
+        docs: {
+            description: {
+                component: `
+A container for multiple accordion items.
+
+Automatically applies the variant prop to all child Accordion components.
+
+## Props
+
+- **children**: Accordion components to display
+- **variant**: Color variant to apply to all accordions (\`'base' | 'primary' | 'success' | 'warning' | 'alert'\`) - Default: \`'base'\`
+- **className**: Additional CSS class names
+                `.trim(),
+            },
+        },
+    },
     argTypes: {
         variant: {
             control: { type: 'radio' },
@@ -42,13 +58,11 @@ export const Demo = {
     },
 
     render: ({ content, ...args }) => (
-        <ThemeWrapper>
-            <AccordionList {...args}>
-                <Accordion heading="Item-1">{content}</Accordion>
-                <Accordion heading="Item-2">{content}</Accordion>
-                <Accordion heading="Item-3">{content}</Accordion>
-                <Accordion heading="Item-4">{content}</Accordion>
-            </AccordionList>
-        </ThemeWrapper>
+        <AccordionList {...args}>
+            <Accordion heading="Item-1">{content}</Accordion>
+            <Accordion heading="Item-2">{content}</Accordion>
+            <Accordion heading="Item-3">{content}</Accordion>
+            <Accordion heading="Item-4">{content}</Accordion>
+        </AccordionList>
     ),
 };

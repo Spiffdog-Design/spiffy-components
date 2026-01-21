@@ -1,4 +1,6 @@
 import type { Preview } from '@storybook/react-vite';
+import ThemeWrapper from '../lib/components/Storybook/ThemeWrapper';
+import React from 'react';
 
 const preview: Preview = {
     parameters: {
@@ -9,6 +11,13 @@ const preview: Preview = {
             },
         },
     },
+    decorators: [
+        (Story) => (
+            <ThemeWrapper>
+                <Story />
+            </ThemeWrapper>
+        ),
+    ],
     tags: ['autodocs'],
 };
 

@@ -7,6 +7,19 @@ import '@spiffdog/spiffy-colors/dist/index.css';
 import '../Theme/themes/default-theme.css';
 import './AppRoot.css';
 
+/**
+ * AppRoot component - Root component that sets up theming, fonts, and global styles.
+ * 
+ * Wrap your entire app with this component. It provides:
+ * - Theme context via ThemeProvider
+ * - Roboto font loading
+ * - Global CSS reset and base styles
+ * - HTML font-size configuration (62.5% for easy rem calculations)
+ * 
+ * @param {Object} props
+ * @param {React.ReactNode} props.children - Your app content
+ * @param {string} [props.themeName] - Initial theme name ('light' | 'dark')
+ */
 export const AppRoot = ({ children, ...props }) => {
     return (
         <ThemeProvider {...props}>
@@ -14,6 +27,8 @@ export const AppRoot = ({ children, ...props }) => {
         </ThemeProvider>
     );
 };
+
+AppRoot.displayName = 'AppRoot';
 
 const AppRootContainer = ({ children }) => {
     const { themeName } = useTheme();

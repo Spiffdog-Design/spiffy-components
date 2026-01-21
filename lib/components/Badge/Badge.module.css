@@ -3,7 +3,7 @@
     --badge-border-width: 2px;
     --badge-border-radius-rounded: var(--border-radius-rounded);
     --badge-border-radius-square: var(--border-radius-0);
-    --badge-min-height: 33px;
+    --badge-min-height: calc(var(--spacing-padding-1) * 2 + var(--font-size-1) * var(--font-line-height));
     --badge-max-width: 50ch;
     --badge-content-padding: var(--spacing-padding-1) var(--spacing-padding-3);
     --badge-content-gap: var(--spacing-gap-1);
@@ -15,6 +15,12 @@
     --badge-font-size: var(--font-size-1);
     --badge-font-weight: var(--font-weight-semibold);
     --badge-line-height: 1;
+    --badge-content-padding-xs: 0.2rem var(--spacing-padding-2);
+    --badge-content-padding-sm: var(--spacing-padding-1) var(--spacing-padding-2);
+    --badge-content-padding-md: var(--spacing-padding-1) var(--spacing-padding-3);
+    --badge-min-height-xs: calc(0.2rem * 2 + var(--font-size-0) * var(--font-line-height));
+    --badge-min-height-sm: calc(var(--spacing-padding-1) * 2 + var(--font-size-0) * var(--font-line-height));
+    --badge-min-height-md: calc(var(--spacing-padding-1) * 2 + var(--font-size-1) * var(--font-line-height));
 
     /* Badge Theming - Default colors (can be overridden by users) */
     --badge-theme-color: var(--base-2);
@@ -58,6 +64,24 @@
     border-radius: var(--badge-border-radius-square);
 }
 
+/* Size Variants */
+.sc-badge[data-size='xs'] {
+    --badge-font-size: var(--font-size-0);
+    --badge-content-padding: var(--badge-content-padding-xs);
+    min-height: var(--badge-min-height-xs);
+}
+
+.sc-badge[data-size='sm'] {
+    --badge-font-size: var(--font-size-0);
+    --badge-content-padding: var(--badge-content-padding-sm);
+    min-height: var(--badge-min-height-sm);
+}
+
+.sc-badge[data-size='md'] {
+    --badge-content-padding: var(--badge-content-padding-md);
+    min-height: var(--badge-min-height-md);
+}
+
 .sc-badge-content {
     display: flex;
     flex-direction: row;
@@ -85,19 +109,19 @@
 
 /* Color Variants */
 .sc-badge[data-variant='alert'] {
-    --badge-theme-color: var(--alert-5);
+    --badge-theme-color: var(--alert-7);
 }
 
 .sc-badge[data-variant='primary'] {
-    --badge-theme-color: var(--primary-5);
+    --badge-theme-color: var(--primary-7);
 }
 
 .sc-badge[data-variant='success'] {
-    --badge-theme-color: var(--success-5);
+    --badge-theme-color: var(--success-7);
 }
 
 .sc-badge[data-variant='warning'] {
-    --badge-theme-color: var(--warning-5);
+    --badge-theme-color: var(--warning-7);
 }
 
 .sc-badge-close-button {

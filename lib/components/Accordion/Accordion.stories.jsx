@@ -1,5 +1,4 @@
 import { Accordion } from '@/components';
-import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
 import { Canvas, Controls, Description, Subtitle, Title } from '@storybook/addon-docs/blocks';
 
 const meta = {
@@ -9,6 +8,23 @@ const meta = {
         componentSubtitle: 'Accordion Component',
         layout: 'fullscreen',
         docs: {
+            description: {
+                component: `
+A collapsible content section.
+
+Uses native HTML \`<details>\` and \`<summary>\` elements for accessibility.
+
+## Props
+
+- **children**: Content to display when expanded
+- **heading**: The heading content (displayed in summary) - Required
+- **open**: Controls open/closed state - Required
+- **onHeadingClick**: Callback when heading is clicked (receives new open state) - Required
+- **variant**: Color variant (\`'base' | 'primary' | 'success' | 'warning' | 'alert'\`) - Default: \`'base'\`
+- **size**: Size variant (\`'xs' | 'sm' | 'md'\`) - Default: \`'md'\`
+- **className**: Additional CSS class names
+                `.trim(),
+            },
             page: () => (
                 <>
                     <Title />
@@ -48,10 +64,8 @@ export const Demo = {
     },
 
     render: ({ content, ...args }) => (
-        <ThemeWrapper>
-            <Accordion {...args} heading="Item-1">
-                {content}
-            </Accordion>
-        </ThemeWrapper>
+        <Accordion {...args} heading="Item-1">
+            {content}
+        </Accordion>
     ),
 };

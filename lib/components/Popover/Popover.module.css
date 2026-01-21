@@ -1,64 +1,305 @@
+:root {
+    /* Popover sizing - Using design system tokens */
+    --popover-padding-xs: var(--spacing-padding-1);
+    --popover-padding-sm: var(--spacing-padding-2);
+    --popover-padding-md: var(--spacing-padding-3);
+    --popover-padding-lg: var(--spacing-padding-4);
+    --popover-padding-xl: var(--spacing-padding-5);
+    --popover-padding-x2: var(--spacing-padding-6);
+
+    /* Popover z-index layers */
+    --popover-z-index: 1000;
+    --popover-z-index-modal: 2000;
+    --popover-z-index-tooltip: 3000;
+}
+
+/* Base Popover Styles */
+.sc-popover {
+    position: absolute;
+    z-index: var(--popover-z-index);
+    background-color: var(--base-12);
+    color: var(--base-1);
+    border: 1px solid var(--base-6);
+    border-radius: var(--border-radius-2);
+    box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1), 0 0.2rem 0.4rem rgba(0, 0, 0, 0.06);
+    min-width: 12rem;
+    max-width: 90vw;
+    max-height: var(--popover-max-height, 90vh);
+    top: var(--popover-top, auto);
+    left: var(--popover-left, auto);
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.15s ease-out, transform 0.15s ease-out;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+/* When rendered in portal, use fixed positioning */
+.sc-popover-portal {
+    position: fixed;
+}
+
+.sc-popover-open {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+    visibility: visible;
+}
+
 .sc-popover-content {
-    --solid-10: var(--base-10);
-    background-color: var(--base-1);
-    border: 3px solid var(--solid-10);
-    border-radius: 8px;
-    box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
-    outline: none;
-    padding: var(--spacing-padding-0);
-    min-width: 200px;
-    max-width: 33vw;
-    z-index: 1000;
+    position: relative;
+    z-index: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: inherit;
+    padding: var(--popover-padding-md);
 }
 
-.sc-popover-content:focus-visible {
-    outline: none;
+/* Scrollbar styling for popover content */
+.sc-popover-content::-webkit-scrollbar {
+    width: 0.8rem;
 }
 
-.sc-popover-content[data-padded='true'] {
-    padding: var(--spacing-padding-2);
+.sc-popover-content::-webkit-scrollbar-track {
+    background: var(--base-2);
+    border-radius: var(--border-radius-1);
 }
 
-.sc-popover-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    background-color: hsl(from var(--solid-10) h s l / 15%);
+.sc-popover-content::-webkit-scrollbar-thumb {
+    background: var(--base-6);
+    border-radius: var(--border-radius-1);
+}
+
+.sc-popover-content::-webkit-scrollbar-thumb:hover {
+    background: var(--base-7);
+}
+
+/* Modal Type - Uses native dialog element */
+/* Note: Modal dialogs use showModal()/close() which controls visibility automatically */
+/* We override base .sc-popover hidden styles here */
+.sc-popover.sc-popover-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    z-index: var(--popover-z-index-modal);
+    margin: 0;
+    padding: var(--popover-padding-md);
+    max-width: 90vw;
+    max-height: 90vh;
+    border: 1px solid var(--base-6);
+    border-radius: var(--border-radius-3);
+    background-color: var(--base-12);
+    color: var(--base-1);
+    box-shadow: 0 1.6rem 3.2rem rgba(0, 0, 0, 0.2), 0 0.8rem 1.6rem rgba(0, 0, 0, 0.15);
+    /* Browser controls visibility via showModal()/close(), but we need to override base hidden styles */
+    /* When dialog is shown, browser makes it visible - these styles apply when visible */
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+}
+
+.sc-popover-modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(0.2rem);
+}
+
+/* When dialog is shown via showModal(), override base popover hidden styles */
+.sc-popover-modal:not([hidden]) {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+    visibility: visible;
+}
+
+/* Fallback for non-modal dialogs using open attribute */
+.sc-popover-modal[open],
+.sc-popover-modal[data-open='true'],
+.sc-popover-modal-open {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+    visibility: visible;
+}
+
+/* Tooltip Type */
+/* Tooltips always use fixed positioning for proper anchoring, even when not in portal */
+.sc-popover-tooltip {
+    position: fixed;
+    z-index: var(--popover-z-index-tooltip);
+    padding: var(--spacing-padding-1) var(--spacing-padding-2);
+    font-size: var(--font-size-1);
+    line-height: var(--font-line-height);
+    max-width: 20rem;
+    min-width: auto;
+    border-radius: var(--border-radius-1);
+    box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.15);
+}
+
+/* Dropdown Type */
+.sc-popover-dropdown {
     padding: var(--spacing-padding-1);
-    width: 100%;
+    min-width: 12rem;
+    border-radius: var(--border-radius-2);
 }
 
-.sc-popover-arrow {
+/* Position Variants */
+/* Note: Actual positioning is handled by JavaScript inline styles */
+/* These classes are for initial state and CSS-only fallback */
+
+/* Center */
+.sc-popover-center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
 }
 
-.sc-popover-trigger {
-    cursor: help;
-    user-select: none;
+.sc-popover-center.sc-popover-open {
+    transform: translate(-50%, -50%) scale(1);
 }
 
-.sc-popover-content[data-variant='alert'] {
-    --solid-10: var(--alert-10);
+/* Center with vertical positions */
+.sc-popover-center-top {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) scale(0.95);
+    margin-top: var(--spacing-gap-1);
 }
 
-.sc-popover-content[data-variant='primary'] {
-    --solid-10: var(--primary-10);
+.sc-popover-center-top.sc-popover-open {
+    transform: translateX(-50%) scale(1);
 }
 
-.sc-popover-content[data-variant='success'] {
-    --solid-10: var(--success-10);
+.sc-popover-center-bottom {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) scale(0.95);
+    margin-bottom: var(--spacing-gap-1);
 }
 
-.sc-popover-content[data-variant='warning'] {
-    --solid-10: var(--warning-10);
+.sc-popover-center-bottom.sc-popover-open {
+    transform: translateX(-50%) scale(1);
 }
 
-/* Global styles for arrow SVG */
-.sc-popover-arrow svg {
-    stroke: var(--solid-10);
-    fill: var(--solid-10);
+/* Left with vertical positions */
+.sc-popover-left-top {
+    top: 0;
+    right: 100%;
+    transform: scale(0.95);
+    margin-right: var(--spacing-gap-1);
+    margin-top: var(--spacing-gap-1);
 }
 
-/* Global style for dialog containers */
-div[data-dialog]:has(.sc-popover-content) {
-    outline: none;
+.sc-popover-left-top.sc-popover-open {
+    transform: scale(1);
+}
+
+.sc-popover-left-center {
+    top: 50%;
+    right: 100%;
+    transform: translateY(-50%) scale(0.95);
+    margin-right: var(--spacing-gap-1);
+}
+
+.sc-popover-left-center.sc-popover-open {
+    transform: translateY(-50%) scale(1);
+}
+
+.sc-popover-left-bottom {
+    bottom: 0;
+    right: 100%;
+    transform: scale(0.95);
+    margin-right: var(--spacing-gap-1);
+    margin-bottom: var(--spacing-gap-1);
+}
+
+.sc-popover-left-bottom.sc-popover-open {
+    transform: scale(1);
+}
+
+/* Right with vertical positions */
+.sc-popover-right-top {
+    top: 0;
+    left: 100%;
+    transform: scale(0.95);
+    margin-left: var(--spacing-gap-1);
+    margin-top: var(--spacing-gap-1);
+}
+
+.sc-popover-right-top.sc-popover-open {
+    transform: scale(1);
+}
+
+.sc-popover-right-center {
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%) scale(0.95);
+    margin-left: var(--spacing-gap-1);
+}
+
+.sc-popover-right-center.sc-popover-open {
+    transform: translateY(-50%) scale(1);
+}
+
+.sc-popover-right-bottom {
+    bottom: 0;
+    left: 100%;
+    transform: scale(0.95);
+    margin-left: var(--spacing-gap-1);
+    margin-bottom: var(--spacing-gap-1);
+}
+
+.sc-popover-right-bottom.sc-popover-open {
+    transform: scale(1);
+}
+
+/* Size Variants */
+.sc-popover-xs {
+    padding: var(--popover-padding-xs);
+    font-size: var(--font-size-1);
+    min-width: 8rem;
+}
+
+.sc-popover-sm {
+    padding: var(--popover-padding-sm);
+    font-size: var(--font-size-1);
+    min-width: 10rem;
+}
+
+.sc-popover-md {
+    padding: var(--popover-padding-md);
+    font-size: var(--font-size-2);
+    min-width: 12rem;
+}
+
+.sc-popover-lg {
+    padding: var(--popover-padding-lg);
+    font-size: var(--font-size-3);
+    min-width: 16rem;
+}
+
+.sc-popover-xl {
+    padding: var(--popover-padding-xl);
+    font-size: var(--font-size-4);
+    min-width: 20rem;
+}
+
+.sc-popover-x2 {
+    padding: var(--popover-padding-x2);
+    font-size: var(--font-size-5);
+    min-width: 24rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 48rem) {
+    .sc-popover-modal {
+        max-width: 95vw;
+        max-height: 95vh;
+    }
+}
+
+/* Focus management for accessibility */
+.sc-popover:focus-visible {
+    outline: 2px solid var(--primary-9);
+    outline-offset: 2px;
 }

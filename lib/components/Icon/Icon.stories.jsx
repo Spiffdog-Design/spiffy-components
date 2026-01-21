@@ -1,86 +1,100 @@
-import { action } from 'storybook/actions';
-
 import { Icon } from '@/components';
-import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
-import { Accordion } from '../Accordion/Accordion';
 
 const meta = {
     title: 'Base/Icon',
     component: Icon,
     parameters: {
-        layout: 'fullscreen',
+        docs: {
+            description: {
+                component: `
+Icon component that wraps Lucide React icons with tree-shaking support.
+
+Icons must be registered in the iconRegistry to be used. Only registered icons will be included in the bundle (tree-shaking).
+
+## Props
+
+- **name**: Name of the icon (must be registered in iconRegistry) - See available icons below
+- **size**: Size of the icon (\`'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'x2'\`) - Default: \`'md'\`
+- **className**: Additional CSS class names
+- **...props**: Additional SVG props
+
+## Available Icons
+
+Navigation: \`chevron-right\`, \`chevron-left\`, \`chevron-down\`, \`chevron-up\`, \`angle-right\`, \`angle-left\`, \`angle-down\`, \`angle-up\`
+
+Actions: \`plus\`, \`minus\`, \`x\`, \`xmark\`, \`check\`, \`check-circle\`
+
+Common: \`home\`, \`user\`, \`settings\`, \`search\`, \`bell\`, \`mail\`, \`heart\`, \`star\`, \`info\`
+                `.trim(),
+            },
+        },
     },
     argTypes: {
-        set: {
-            options: ['regular', 'solid'],
-            control: { type: 'radio' },
+        name: {
+            control: { type: 'text' },
+            description: 'Name of the Lucide icon (kebab-case, e.g., "chevron-right", "user-plus")',
         },
         size: {
-            options: ['xs', 'sm', 'md', 'lg', 'xl', 'x2', 'x3', 'x4'],
+            options: ['xs', 'sm', 'md', 'lg', 'xl', 'x2'],
             control: { type: 'radio' },
+            description: 'Size of the icon',
+            defaultValue: 'md',
         },
     },
 };
 
 export default meta;
 
-export const Demo = {
+export const Default = {
     args: {
-        set: 'solid',
-        name: 'trash-can',
+        name: 'heart',
         size: 'md',
     },
+};
 
-    render: (args) => {
-        return (
-            <ThemeWrapper>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-                    <Icon {...args} />
-                    <Accordion heading="Usage Instructions">
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-                            <p>
-                                This library imports{' '}
-                                <a
-                                    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-                                    target="_blank"
-                                >
-                                    Font Awesome v6.7.2 CSS
-                                </a>{' '}
-                                reference as the default icon library.
-                            </p>
-                            <p>
-                                Go to{' '}
-                                <a href="https://fontawesome.com/v6/search?ic=free" target="_blank">
-                                    Font Awesome v6 Search
-                                </a>{' '}
-                                and locate a <em>FREE</em> icon you wish to import. Then use the icon's class name
-                                values to populate the <code>set</code> and <code>name</code> values of the component.
-                            </p>
-                            <p>
-                                For example, if you wish to import the shopping cart icon:
-                                <br />
-                                <code>&lt;i class="fa-solid fa-cart-shopping" /&gt;</code>
-                            </p>
-                            <p>
-                                Simply set the props like this:{' '}
-                                <code>&lt;Icon set="solid" name="cart-shopping" /&gt;</code>
-                            </p>
-                            <p>
-                                This would be the result: <Icon set="solid" name="cart-shopping" />
-                            </p>
-                            <div>
-                                <strong>Special note about sizing:</strong>
-                                <p>
-                                    While you may use any valid css font-size rule value with the <code>size</code> prop
-                                    (i.e. <code>20px</code> or <code>0.850rem</code>), it is recommended to use one of
-                                    the values in the panel below. This is to maintain visual consistency.
-                                </p>
-                            </div>
-                            <p>Use the panel below to test props settings.</p>
-                        </div>
-                    </Accordion>
-                </div>
-            </ThemeWrapper>
-        );
-    },
+export const Sizes = {
+    render: () => (
+        <div style={{ display: 'flex', gap: '1.6rem', alignItems: 'center' }}>
+            <Icon name="star" size="xs" />
+            <Icon name="star" size="sm" />
+            <Icon name="star" size="md" />
+            <Icon name="star" size="lg" />
+            <Icon name="star" size="xl" />
+            <Icon name="star" size="x2" />
+        </div>
+    ),
+};
+
+export const CommonIcons = {
+    render: () => (
+        <div style={{ display: 'flex', gap: '1.6rem', flexWrap: 'wrap' }}>
+            <Icon name="home" size="lg" />
+            <Icon name="user" size="lg" />
+            <Icon name="settings" size="lg" />
+            <Icon name="search" size="lg" />
+            <Icon name="bell" size="lg" />
+            <Icon name="mail" size="lg" />
+            <Icon name="heart" size="lg" />
+            <Icon name="star" size="lg" />
+            <Icon name="chevron-right" size="lg" />
+            <Icon name="chevron-left" size="lg" />
+            <Icon name="chevron-down" size="lg" />
+            <Icon name="chevron-up" size="lg" />
+            <Icon name="x" size="lg" />
+            <Icon name="check" size="lg" />
+            <Icon name="plus" size="lg" />
+            <Icon name="minus" size="lg" />
+        </div>
+    ),
+};
+
+export const WithColors = {
+    render: () => (
+        <div style={{ display: 'flex', gap: '1.6rem', flexWrap: 'wrap' }}>
+            <Icon name="heart" size="lg" style={{ color: 'var(--alert-6)' }} />
+            <Icon name="star" size="lg" style={{ color: 'var(--warning-6)' }} />
+            <Icon name="check-circle" size="lg" style={{ color: 'var(--success-6)' }} />
+            <Icon name="info" size="lg" style={{ color: 'var(--primary-6)' }} />
+        </div>
+    ),
 };

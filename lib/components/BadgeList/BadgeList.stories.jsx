@@ -1,13 +1,32 @@
 import { useState } from 'react';
 import { action } from 'storybook/actions';
 import { Badge, BadgeList, Button, ToggleBadge } from '@/components';
-
-import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
 import { demoListData } from '@/components/Storybook/demoData';
 
 const meta = {
     title: 'Base/Badges/Badge List',
     component: BadgeList,
+    parameters: {
+        docs: {
+            description: {
+                component: `
+A container for displaying multiple badges with overflow handling.
+
+Automatically handles overflow by showing a "+N" popover when badges don't fit. Uses ResizeObserver to dynamically calculate visible badge count.
+
+## Props
+
+- **children**: Badge components to display
+- **variant**: Color variant (\`'base' | 'primary' | 'success' | 'warning' | 'alert'\`) - Default: \`'base'\`
+- **size**: Size variant (\`'xs' | 'sm' | 'md'\`) - Default: \`'md'\`
+- **bordered**: Whether to show border around the list - Default: \`false\`
+- **rounded**: Whether to apply rounded corners - Default: \`false\`
+- **onClick**: Click handler
+- **className**: Additional CSS class names
+                `.trim(),
+            },
+        },
+    },
 };
 
 export default meta;
@@ -40,17 +59,15 @@ export const ReadOnlyBadgeList = {
         const [data] = useState(demoListData);
 
         return (
-            <ThemeWrapper>
-                <BadgeList {...args}>
-                    {data.map((item) => {
-                        return (
-                            <Badge key={item.id} value={item.id} {...args}>
-                                {item.label}
-                            </Badge>
-                        );
-                    })}
-                </BadgeList>
-            </ThemeWrapper>
+            <BadgeList {...args}>
+                {data.map((item) => {
+                    return (
+                        <Badge key={item.id} value={item.id} {...args}>
+                            {item.label}
+                        </Badge>
+                    );
+                })}
+            </BadgeList>
         );
     },
 };
@@ -89,13 +106,12 @@ export const CloseBadgeList = {
         };
 
         return (
-            <ThemeWrapper
-                actions={
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.6rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                     <Button appearance="basic" onClick={() => setData(demoListData)}>
                         Reset
                     </Button>
-                }
-            >
+                </div>
                 <BadgeList {...args}>
                     {data.map((item) => {
                         return (
@@ -105,7 +121,7 @@ export const CloseBadgeList = {
                         );
                     })}
                 </BadgeList>
-            </ThemeWrapper>
+            </div>
         );
     },
 };
@@ -139,13 +155,12 @@ export const ToggleBadgeList = {
         };
 
         return (
-            <ThemeWrapper
-                actions={
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.6rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                     <Button appearance="basic" onClick={() => setData(demoListData)}>
                         Reset
                     </Button>
-                }
-            >
+                </div>
                 <BadgeList {...args}>
                     {data.map((item) => {
                         return (
@@ -155,7 +170,56 @@ export const ToggleBadgeList = {
                         );
                     })}
                 </BadgeList>
-            </ThemeWrapper>
+            </div>
+        );
+    },
+};
+
+export const ShortBadgeList = {
+    args: {
+        bordered: false,
+        rounded: false,
+        variant: 'base',
+    },
+    argTypes: {
+        bordered: {
+            control: { type: 'boolean' },
+        },
+        rounded: {
+            control: { type: 'boolean' },
+        },
+        variant: {
+            options: ['alert', 'base', 'primary', 'success', 'warning'],
+            control: { type: 'radio' },
+        },
+    },
+
+    render: (args) => {
+        const [data, setData] = useState(demoListData.slice(0, 6));
+
+        const handleClick = (value) => {
+            const newData = data.map((d) => ({ ...d, selected: d.id === value ? !d.selected : d.selected }));
+            setData(newData);
+            action('selected')(newData.filter((d) => d.selected));
+        };
+
+        return (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.6rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <Button appearance="basic" onClick={() => setData(demoListData)}>
+                        Reset
+                    </Button>
+                </div>
+                <BadgeList {...args}>
+                    {data.map((item) => {
+                        return (
+                            <ToggleBadge key={item.id} value={item.id} selected={item.selected} onClick={handleClick}>
+                                {item.label}
+                            </ToggleBadge>
+                        );
+                    })}
+                </BadgeList>
+            </div>
         );
     },
 };

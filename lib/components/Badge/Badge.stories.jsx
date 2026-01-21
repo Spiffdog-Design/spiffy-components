@@ -1,12 +1,29 @@
-import { useState } from 'react';
 import { action } from 'storybook/actions';
 
 import { Badge } from '@/components';
-import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
 
 const meta = {
     title: 'Base/Badges/Standard Badge',
     component: Badge,
+    parameters: {
+        docs: {
+            description: {
+                component: `
+Badge component for labels, tags, and status indicators.
+
+## Props
+
+- **children**: Content to display in the badge
+- **variant**: Color variant (\`'base' | 'primary' | 'success' | 'warning' | 'alert'\`) - Default: \`'base'\`
+- **appearance**: Visual appearance (\`'solid' | 'outline' | 'basic'\`) - Default: \`'solid'\`
+- **size**: Size variant (\`'xs' | 'sm' | 'md'\`) - Default: \`'md'\`
+- **rounded**: Whether to apply rounded corners - Default: \`true\`
+- **onClick**: Click handler - makes badge closable with X button
+- **value**: Value passed to onClick handler
+                `.trim(),
+            },
+        },
+    },
 };
 
 export default meta;
@@ -32,11 +49,9 @@ export const ReadOnlyBadge = {
     },
 
     render: (args) => (
-        <ThemeWrapper>
-            <div style={{ display: 'flex', flexDirection: 'row', gap: 12 }}>
-                <Badge {...args}>My Read Only Badge</Badge>
-            </div>
-        </ThemeWrapper>
+        <div style={{ display: 'flex', flexDirection: 'row', gap: 12 }}>
+            <Badge {...args}>My Read Only Badge</Badge>
+        </div>
     ),
 };
 
@@ -65,13 +80,11 @@ export const CloseBadge = {
             action('on close triggered')(value);
         };
         return (
-            <ThemeWrapper>
-                <div style={{ display: 'flex', flexDirection: 'row', gap: 12 }}>
-                    <Badge value="badge-id" onClick={handleClick} {...args}>
-                        My Close Badge
-                    </Badge>
-                </div>
-            </ThemeWrapper>
+            <div style={{ display: 'flex', flexDirection: 'row', gap: 12 }}>
+                <Badge value="badge-id" onClick={handleClick} {...args}>
+                    My Close Badge
+                </Badge>
+            </div>
         );
     },
 };

@@ -1,49 +1,49 @@
-/* Icon CSS Module */
 :root {
-    /* Icon Sizing - Using design system font-size tokens */
-    --icon-size-xs: var(--font-size-0); /* 1.12rem */
-    --icon-size-sm: var(--font-size-1); /* 1.26rem */
-    --icon-size-md: var(--font-size-2); /* 1.42rem */
-    --icon-size-lg: var(--font-size-base); /* 1.6rem */
-    --icon-size-xl: var(--font-size-3); /* 1.8rem */
-    --icon-size-x2: var(--font-size-4); /* 2.02rem */
-    --icon-size-x3: var(--font-size-6); /* 2.56rem */
-    --icon-size-x4: var(--font-size-8); /* 3.24rem */
+    /* Icon Sizing - Using design system tokens */
+    --icon-size-xs: 1.2rem;
+    --icon-size-sm: 1.4rem;
+    --icon-size-md: 1.6rem;
+    --icon-size-lg: 2rem;
+    --icon-size-xl: 2.4rem;
+    --icon-size-x2: 3.2rem;
 }
 
 .sc-icon {
-    outline: none;
-    font-size: var(--icon-size-md);
+    display: inline-flex;
+    flex-shrink: 0;
+    width: var(--icon-size-md);
+    height: var(--icon-size-md);
+    color: currentColor;
+    vertical-align: middle;
 }
 
+/* Size Variants */
 .sc-icon-xs {
-    font-size: var(--icon-size-xs);
+    width: var(--icon-size-xs);
+    height: var(--icon-size-xs);
 }
 
 .sc-icon-sm {
-    font-size: var(--icon-size-sm);
+    width: var(--icon-size-sm);
+    height: var(--icon-size-sm);
 }
 
 .sc-icon-md {
-    font-size: var(--icon-size-md);
+    width: var(--icon-size-md);
+    height: var(--icon-size-md);
 }
 
 .sc-icon-lg {
-    font-size: var(--icon-size-lg);
+    width: var(--icon-size-lg);
+    height: var(--icon-size-lg);
 }
 
 .sc-icon-xl {
-    font-size: var(--icon-size-xl);
+    width: var(--icon-size-xl);
+    height: var(--icon-size-xl);
 }
 
 .sc-icon-x2 {
-    font-size: var(--icon-size-x2);
-}
-
-.sc-icon-x3 {
-    font-size: var(--icon-size-x3);
-}
-
-.sc-icon-x4 {
-    font-size: var(--icon-size-x4);
+    width: var(--icon-size-x2);
+    height: var(--icon-size-x2);
 }

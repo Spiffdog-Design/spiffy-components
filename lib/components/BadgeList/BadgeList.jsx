@@ -15,8 +15,27 @@ import { Badge, Icon, Popover } from '@/components';
 import styles from './BadgeList.module.css';
 import { useMemo } from 'react';
 
+/**
+ * BadgeList component - A container for displaying multiple badges with overflow handling.
+ * 
+ * Automatically handles overflow by showing a "+N" popover when badges don't fit.
+ * Uses ResizeObserver to dynamically calculate visible badge count.
+ * 
+ * @typedef {'base' | 'primary' | 'success' | 'warning' | 'alert'} BadgeListVariant
+ * @typedef {'xs' | 'sm' | 'md'} BadgeListSize
+ * 
+ * @param {Object} props
+ * @param {React.ReactNode} props.children - Badge components to display
+ * @param {BadgeListVariant} [props.variant='base'] - Color variant
+ * @param {BadgeListSize} [props.size='md'] - Size variant
+ * @param {boolean} [props.bordered=false] - Whether to show border around the list
+ * @param {boolean} [props.rounded=false] - Whether to apply rounded corners
+ * @param {Function} [props.onClick] - Click handler
+ * @param {string} [props.className] - Additional CSS class names
+ * @param {React.Ref<HTMLDivElement>} ref
+ */
 export const BadgeList = forwardRef(
-    ({ children, className, bordered = false, rounded = false, variant = 'base', onClick, ...props }, ref) => {
+    ({ children, className, bordered = false, rounded = false, variant = 'base', size = 'md', onClick, ...props }, ref) => {
         const [visibleCount, setVisibleCount] = useState(Children.count(children));
 
         const containerRef = useRef(null);
@@ -43,37 +62,59 @@ export const BadgeList = forwardRef(
             const measure = measureRef.current;
             if (!container || !measure) return;
 
-            // measure.style.display = 'flex';
-            const containerWidth = container.offsetWidth;
+            // Get container width (accounting for padding)
+            const containerStyle = window.getComputedStyle(container);
+            const paddingLeft = parseFloat(containerStyle.paddingLeft) || 0;
+            const paddingRight = parseFloat(containerStyle.paddingRight) || 0;
+            const containerWidth = container.offsetWidth - paddingLeft - paddingRight;
+            
+            // Get gap from container
+            const gap = parseFloat(containerStyle.gap) || 0;
+            
             const badges = Array.from(measure.children);
+            if (badges.length === 0) {
+                setVisibleCount(0);
+                return;
+            }
+
+            // Estimate width of the "+N" counter badge based on size
+            // These are conservative estimates for "+ 99" text + icon + padding
+            const counterBadgeWidthEstimates = {
+                xs: 50,
+                sm: 55,
+                md: 60,
+            };
+            const estimatedCounterBadgeWidth = counterBadgeWidthEstimates[size] || 60;
 
             let totalWidth = 0;
             let count = 0;
-            let gap = 0;
-
-            if (badges != null && badges.length > 0) {
-                const badge = badges[0];
-                const style = window.getComputedStyle(badge);
-                gap = parseInt(style.gap.replace('px', ''), 10) || 0;
-            }
-            const counterBadgeWidth = gap * 2 + 32; // Add width for the counter badge if needed
 
             for (let i = 0; i < badges.length; i++) {
                 const badge = badges[i];
-                totalWidth += badge.offsetWidth + gap; // Add 16px for the badge's border
-                const containerWidthWithCounter = totalWidth + counterBadgeWidth;
-                if (containerWidthWithCounter > containerWidth) break;
+                const badgeWidth = badge.offsetWidth;
+                
+                // Calculate total width including this badge and gap (except for first badge)
+                const widthWithThisBadge = totalWidth + (i > 0 ? gap : 0) + badgeWidth;
+                
+                // Check if adding this badge would exceed container width (accounting for counter badge)
+                const wouldExceed = widthWithThisBadge + gap + estimatedCounterBadgeWidth > containerWidth;
+                
+                if (wouldExceed && i < badges.length) {
+                    // This badge would cause overflow, stop here
+                    break;
+                }
+                
+                totalWidth = widthWithThisBadge;
                 count++;
             }
 
-            const nextCount = count <= badges.length ? Math.max(count, 0) : count;
+            const nextCount = Math.max(0, Math.min(count, badges.length));
 
-            // Always update state to ensure growth works
+            // Update state if count changed
             if (lastCountRef.current !== nextCount) {
                 setVisibleCount(nextCount);
                 lastCountRef.current = nextCount;
             }
-            // measure.style.display = 'none';
         };
 
         useLayoutEffect(() => {
@@ -98,8 +139,7 @@ export const BadgeList = forwardRef(
         const visibleBadges = badgeArray.slice(0, visibleCount);
         const remCount = badgeArray.length - visibleCount;
         const remBadges = badgeArray.slice(visibleCount);
-
-        console.log('render BadgeList:', { visibleCount, remCount });
+        const remBadgesHasSelected = remBadges.some((badge) => badge.props.selected);
 
         return (
             <>
@@ -108,6 +148,7 @@ export const BadgeList = forwardRef(
                         className={displayClassName}
                         ref={containerRef}
                         data-variant={variant}
+                        data-size={size}
                         data-bordered={bordered ? 'true' : 'false'}
                         data-rounded={rounded ? 'true' : 'false'}
                         {...props}
@@ -115,18 +156,18 @@ export const BadgeList = forwardRef(
                         {visibleBadges}
                         {remCount > 0 && (
                             <Popover
-                                mode="click"
-                                placement="bottom-start"
+                                triggerType="click"
+                                type="dropdown"
+                                position="right bottom"
+                                portal={true}
                                 className={styles['sc-badge-list-popover']}
-                                variant={variant}
-                                trigger={({ events }) => (
-                                    <div {...events}>
-                                        <Badge appearance="basic" variant={variant}>
-                                            <span>+ {remCount}</span>
-                                            <Icon name="angle-down" />
-                                        </Badge>
-                                    </div>
-                                )}
+                                data-badge-list="true"
+                                trigger={
+                                    <Badge appearance={remBadgesHasSelected ? "solid" : "basic"} variant={variant} size={size} style={{ cursor: 'pointer' }}>
+                                        <span>+ {remCount}</span>
+                                        <Icon name="chevron-down" />
+                                    </Badge>
+                                }
                             >
                                 <div className={styles['sc-badge-list-remaining']}>{remBadges}</div>
                             </Popover>

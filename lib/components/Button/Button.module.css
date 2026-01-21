@@ -1,26 +1,28 @@
 :root {
     /* Button Text Sizes - Using design system tokens as defaults */
-    --button-text-xs-padding: var(--spacing-padding-0) var(--spacing-padding-1);
-    --button-text-xs-font-size: var(--font-size-0);
+    --button-text-xs-padding: 0.4rem 0.8rem;
+    --button-text-xs-font-size: var(--font-size-1);
     --button-text-xs-line-height: var(--font-line-height);
+    --button-text-xs-min-height: calc(var(--spacing-padding-1) * 2 + var(--font-size-1) * var(--font-line-height));
 
-    --button-text-sm-padding: var(--spacing-padding-0) var(--spacing-padding-2);
+    --button-text-sm-padding: 0.4rem 0.8rem;
     --button-text-sm-font-size: var(--font-size-1);
     --button-text-sm-line-height: var(--font-line-height);
+    --button-text-sm-min-height: calc(var(--spacing-padding-1) * 2 + var(--font-size-1) * var(--font-line-height));
 
-    --button-text-md-padding: var(--spacing-padding-1) var(--spacing-padding-3);
+    --button-text-md-padding: 0.5rem 1.2rem;
     --button-text-md-font-size: var(--font-size-2);
     --button-text-md-line-height: var(--font-line-height);
 
-    --button-text-lg-padding: var(--spacing-padding-2) var(--spacing-padding-4);
+    --button-text-lg-padding: 0.7rem 1.6rem;
     --button-text-lg-font-size: var(--font-size-3);
     --button-text-lg-line-height: var(--font-line-height);
 
-    --button-text-xl-padding: var(--spacing-padding-2) var(--spacing-padding-5);
+    --button-text-xl-padding: 0.8rem 2rem;
     --button-text-xl-font-size: var(--font-size-4);
     --button-text-xl-line-height: var(--font-line-height);
 
-    --button-text-x2-padding: var(--spacing-padding-3) var(--spacing-padding-6);
+    --button-text-x2-padding: 0.9rem 2.4rem;
     --button-text-x2-font-size: var(--font-size-5);
     --button-text-x2-line-height: var(--font-line-height);
 }
@@ -55,31 +57,6 @@
     transition: all var(--animation-speed) ease-in-out;
 }
 
-/* Ripple container */
-.sc-button::after {
-    content: '';
-    position: absolute;
-    border-radius: inherit;
-    inset: 0;
-    pointer-events: none;
-    background: radial-gradient(
-        circle at var(--ripple-x, 50%) var(--ripple-y, 50%),
-        rgba(255, 255, 255, 0.35) 0%,
-        rgba(255, 255, 255, 0.15) 20%,
-        transparent 40%
-    );
-    opacity: 0;
-    transform: scale(0.6);
-    transition: opacity 300ms ease, transform 300ms ease;
-}
-
-.sc-button:active::after,
-.sc-button:focus::after {
-    opacity: 1;
-    transform: scale(1);
-    transition: opacity 400ms ease, transform 400ms ease;
-}
-
 .sc-button[data-rounded='true'] {
     border-radius: 999.9rem;
 }
@@ -98,7 +75,6 @@
 .sc-button:focus,
 .sc-button:focus-visible {
     outline: 2px solid var(--base-1);
-    box-shadow: 0 0 0 5px var(--primary-11);
 }
 
 .sc-button-content {
@@ -143,85 +119,64 @@
 }
 
 /* Appearance Variants */
-.sc-button[data-appearance='basic'],
-.sc-button[data-appearance='text'] {
+.sc-button[data-appearance='basic'] {
     background: transparent;
     border-color: transparent;
     color: var(--theme-color);
 }
 
-.sc-button[data-appearance='solid'],
-.sc-button[data-appearance='contained'],
-.sc-button[data-appearance='elevated'] {
-    /* MUI `contained` variant: solid background, elevated shadow */
+.sc-button[data-appearance='solid'] {
     background: var(--theme-color);
     border-color: transparent;
     color: var(--base-1);
-    box-shadow: 0 1px 3px rgba(16, 24, 40, 0.08), 0 1px 2px rgba(16, 24, 40, 0.04);
+    box-shadow: 0 1px 3px color-mix(in srgb, var(--base-12) 8%, transparent), 0 1px 2px color-mix(in srgb, var(--base-12) 4%, transparent);
 }
 
-.sc-button[data-appearance='solid']:hover,
-.sc-button[data-appearance='contained']:hover,
-.sc-button[data-appearance='elevated']:hover {
+.sc-button[data-appearance='solid']:hover {
     filter: brightness(0.97);
-    transform: translateY(-1px);
 }
 
-.sc-button[data-appearance='solid']:active,
-.sc-button[data-appearance='contained']:active,
-.sc-button[data-appearance='elevated']:active {
-    transform: translateY(0);
+.sc-button[data-appearance='solid']:active {
     filter: brightness(0.92);
 }
 
-.sc-button.elevated {
-    box-shadow: 0 6px 10px rgba(16, 24, 40, 0.12);
-}
-
-.sc-button[data-appearance='basic']:hover,
-.sc-button[data-appearance='text']:hover {
+.sc-button[data-appearance='basic']:hover {
     background: color-mix(in srgb, var(--theme-color) 40%, transparent);
     border-color: transparent;
     color: var(--theme-color);
 }
 
-.sc-button[data-appearance='basic']:disabled,
-.sc-button[data-appearance='text']:disabled {
+.sc-button[data-appearance='basic']:disabled {
     background: transparent;
     border-color: transparent;
     color: color-mix(in srgb, var(--theme-color) 50%, transparent);
 }
 
-[data-theme='dark'] .sc-button[data-appearance='basic']:hover,
-[data-theme='dark'] .sc-button[data-appearance='text']:hover {
+[data-theme='dark'] .sc-button[data-appearance='basic']:hover {
     background: color-mix(in srgb, var(--theme-color) 25%, transparent);
     border-color: transparent;
     color: var(--theme-color);
 }
 
-.sc-button[data-appearance='outline'],
-.sc-button[data-appearance='outlined'] {
+.sc-button[data-appearance='outline'] {
     background: transparent;
     border-color: var(--theme-color);
     color: var(--theme-color);
 }
 
-.sc-button[data-appearance='outline']:hover,
-.sc-button[data-appearance='outlined']:hover {
+.sc-button[data-appearance='outline']:hover {
     background: color-mix(in srgb, var(--theme-color) 40%, transparent);
     border-color: var(--theme-color);
     color: var(--theme-color);
 }
 
-.sc-button[data-appearance='outline']:disabled,
-.sc-button[data-appearance='outlined']:disabled {
+.sc-button[data-appearance='outline']:disabled {
     background: transparent;
     border-color: color-mix(in srgb, var(--theme-color) 50%, transparent);
     color: color-mix(in srgb, var(--theme-color) 50%, transparent);
 }
 
-[data-theme='dark'] .sc-button[data-appearance='outline']:hover,
-[data-theme='dark'] .sc-button[data-appearance='outlined']:hover {
+[data-theme='dark'] .sc-button[data-appearance='outline']:hover {
     background: color-mix(in srgb, var(--theme-color) 25%, transparent);
     border-color: var(--theme-color);
     color: var(--theme-color);
@@ -229,19 +184,19 @@
 
 /* Color Variants */
 .sc-button[data-variant='alert'] {
-    --theme-color: var(--alert-10);
+    --theme-color: var(--alert-8);
 }
 
 .sc-button[data-variant='primary'] {
-    --theme-color: var(--primary-10);
+    --theme-color: var(--primary-8);
 }
 
 .sc-button[data-variant='success'] {
-    --theme-color: var(--success-10);
+    --theme-color: var(--success-8);
 }
 
 .sc-button[data-variant='warning'] {
-    --theme-color: var(--warning-10);
+    --theme-color: var(--warning-8);
 }
 
 /* Size Variants */
@@ -281,40 +236,27 @@
     line-height: var(--button-text-x2-line-height);
 }
 
-/* Disabled variants for contained/text/outlined */
+/* Disabled variants */
 .sc-button[data-appearance='solid']:disabled,
-.sc-button[data-appearance='contained']:disabled,
-.sc-button[data-appearance='elevated']:disabled,
-.sc-button[data-appearance='solid'][disabled],
-.sc-button[data-appearance='contained'][disabled],
-.sc-button[data-appearance='elevated'][disabled] {
+.sc-button[data-appearance='solid'][disabled] {
     background: color-mix(in srgb, var(--theme-color) 50%, transparent);
     color: color-mix(in srgb, var(--base-1) 60%, transparent);
     box-shadow: none;
 }
 
-.sc-button[data-appearance='text']:disabled,
 .sc-button[data-appearance='basic']:disabled,
-.sc-button[data-appearance='text'][disabled],
 .sc-button[data-appearance='basic'][disabled] {
     color: color-mix(in srgb, var(--theme-color) 50%, transparent);
 }
 
-.sc-button[data-appearance='outlined']:disabled,
-.sc-button[data-appearance='outline']:disabled {
+.sc-button[data-appearance='outline']:disabled,
+.sc-button[data-appearance='outline'][disabled] {
     border-color: color-mix(in srgb, var(--theme-color) 50%, transparent);
     color: color-mix(in srgb, var(--theme-color) 50%, transparent);
 }
 
-/* Focus ring adjustments per MUI-like aesthetic */
-.sc-button:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 4px color-mix(in srgb, var(--theme-color) 20%, transparent);
-}
-
-/* Keyboard navigation ease: increase hit area on small sizes */
+/* Keyboard navigation ease: ensure minimum touch target for small sizes */
 .sc-button[data-size='xs'],
 .sc-button[data-size='sm'] {
-    min-height: 2.2rem;
-    padding-inline: 0.6rem;
+    min-height: var(--button-text-xs-min-height);
 }

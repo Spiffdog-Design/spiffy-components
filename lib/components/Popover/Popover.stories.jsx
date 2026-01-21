@@ -1,89 +1,322 @@
-import { Button, Popover } from '@/components';
-import ThemeWrapper from '@/components/Storybook/ThemeWrapper';
 import { useState } from 'react';
+import { Popover } from '@/components';
+import { Button } from '@/components';
 
 const meta = {
-    title: 'Base/Popover/Popover',
+    title: 'Base/Popover',
     component: Popover,
     parameters: {
-        layout: 'fullscreen',
+        docs: {
+            description: {
+                component: `
+A flexible overlay component that can be used as a base for Modals, Tooltips, Dropdowns, and other overlay components.
+
+Uses native HTML capabilities:
+- \`<dialog>\` element for modal behavior (with showModal() and close())
+- CSS positioning for tooltips/dropdowns
+- CSS transitions for animations
+- Native focus management
+
+## Props
+
+- **children**: Content to display in the popover
+- **trigger**: Element that triggers the popover
+- **open**: Controlled open state (for manual trigger)
+- **onOpenChange**: Callback when open state changes
+- **triggerType**: How the popover is triggered (\`'click' | 'hover' | 'focus' | 'manual'\`) - Default: \`'click'\`
+- **type**: Type of popover (\`'modal' | 'tooltip' | 'dropdown' | 'popover'\`) - Default: \`'popover'\`
+- **position**: Position relative to trigger. Can be single value (\`'top' | 'bottom' | 'left' | 'right' | 'center' | 'auto'\`) or two-position pair (\`'left top' | 'right bottom' | 'center center'\`, etc.). X and Y can be in any order. - Default: \`'auto'\`
+- **size**: Size variant (\`'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'x2'\`) - Default: \`'md'\`
+- **portal**: Whether to render in a portal (default: true for modal, false for others)
+- **className**: Additional CSS class names
+- **id**: ID for the popover (auto-generated if not provided)
+                `.trim(),
+            },
+        },
     },
     argTypes: {
-        mode: {
-            options: ['click', 'hover'],
-            control: { type: 'radio' },
+        triggerType: {
+            control: { type: 'select' },
+            options: ['click', 'hover', 'focus', 'manual'],
         },
-        placement: {
+        type: {
+            control: { type: 'select' },
+            options: ['modal', 'tooltip', 'dropdown', 'popover'],
+        },
+        position: {
+            control: { type: 'select' },
             options: [
-                'bottom',
-                'bottom-end',
-                'bottom-start',
                 'top',
-                'top-end',
-                'top-start',
+                'bottom',
                 'left',
-                'left-end',
-                'left-start',
                 'right',
-                'right-end',
-                'right-start',
+                'center',
+                'auto',
+                'left top',
+                'left bottom',
+                'left center',
+                'right top',
+                'right bottom',
+                'right center',
+                'center top',
+                'center bottom',
+                'center center',
             ],
-            control: { type: 'radio' },
         },
-        variant: {
-            options: ['alert', 'base', 'primary', 'success', 'warning'],
-            control: { type: 'radio' },
+        size: {
+            control: { type: 'select' },
+            options: ['xs', 'sm', 'md', 'lg', 'xl', 'x2'],
         },
     },
 };
 
 export default meta;
 
-export const Demo = {
+export const Dropdown = {
     args: {
-        mode: 'hover',
-        padded: true,
-        placement: 'bottom',
-        showArrow: true,
-        variant: 'base',
+        trigger: <Button>Open Dropdown</Button>,
+        triggerType: 'click',
+        type: 'dropdown',
+        position: 'bottom',
+        size: 'md',
+        children: (
+            <div>
+                <div style={{ padding: '0.8rem', cursor: 'pointer' }}>Option 1</div>
+                <div style={{ padding: '0.8rem', cursor: 'pointer' }}>Option 2</div>
+                <div style={{ padding: '0.8rem', cursor: 'pointer' }}>Option 3</div>
+            </div>
+        ),
     },
+};
 
-    render: (args) => {
+export const Tooltip = {
+    args: {
+        trigger: <span style={{ textDecoration: 'underline', cursor: 'help' }}>Hover for tooltip</span>,
+        triggerType: 'hover',
+        type: 'tooltip',
+        position: 'top',
+        size: 'sm',
+        children: <div>This is a tooltip message</div>,
+    },
+};
+
+export const Modal = {
+    args: {
+        trigger: <Button variant="primary">Open Modal</Button>,
+        triggerType: 'click',
+        type: 'modal',
+        size: 'md',
+        children: (
+            <div>
+                <h2 style={{ marginTop: 0 }}>Modal Title</h2>
+                <p>This is a modal dialog using the native HTML dialog element.</p>
+                <p>It supports backdrop, escape key, and focus management natively.</p>
+            </div>
+        ),
+    },
+};
+
+export const PopoverType = {
+    args: {
+        trigger: <Button variant="success">Open Popover</Button>,
+        triggerType: 'click',
+        type: 'popover',
+        position: 'bottom',
+        size: 'md',
+        children: (
+            <div>
+                <h3 style={{ marginTop: 0 }}>Popover Title</h3>
+                <p>This is a popover with custom content.</p>
+            </div>
+        ),
+    },
+};
+
+export const Positions = {
+    render: () => {
+        const singlePositions = ['top', 'bottom', 'left', 'right', 'center'];
+        const twoPositionPairs = [
+            'left top',
+            'left bottom',
+            'left center',
+            'right top',
+            'right bottom',
+            'right center',
+            'center top',
+            'center bottom',
+            'center center',
+        ];
+        
         return (
-            <ThemeWrapper>
-                <div
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        gap: '1rem',
-                        height: '100%',
-                        width: '100%',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                    }}
-                >
-                    <Popover
-                        trigger={({ events }) => {
-                            return (
-                                <Button {...events} rounded={true} appearance="basic" variant={args.variant}>
-                                    Open Popover
-                                </Button>
-                            );
+            <div style={{ padding: '4rem', display: 'flex', flexDirection: 'column', gap: '4rem' }}>
+                <div>
+                    <h3 style={{ marginBottom: '2rem' }}>Single Positions</h3>
+                    <div
+                        style={{
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(3, 1fr)',
+                            gap: '2rem',
+                            placeItems: 'center',
                         }}
-                        {...args}
                     >
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                            <p>
-                                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a
-                                piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard
-                                McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of
-                                the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through
-                                the cites of the word in classical literature, discovered the undoubtable source.
-                            </p>
+                        {singlePositions.map((position) => (
+                            <Popover
+                                key={position}
+                                trigger={<Button>Open {position}</Button>}
+                                triggerType="click"
+                                type="popover"
+                                position={position}
+                                size="md"
+                            >
+                                <div>
+                                    <strong>Position: {position}</strong>
+                                    <p>This popover is positioned {position} of the trigger.</p>
+                                </div>
+                            </Popover>
+                        ))}
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style={{ marginBottom: '2rem' }}>Two-Position Pairs (X and Y in any order)</h3>
+                    <div
+                        style={{
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(3, 1fr)',
+                            gap: '2rem',
+                            placeItems: 'center',
+                        }}
+                    >
+                        {twoPositionPairs.map((position) => (
+                            <Popover
+                                key={position}
+                                trigger={<Button>Open {position}</Button>}
+                                triggerType="click"
+                                type="popover"
+                                position={position}
+                                size="md"
+                            >
+                                <div>
+                                    <strong>Position: {position}</strong>
+                                    <p>This popover uses x/y positioning: {position}</p>
+                                    <p style={{ fontSize: '0.875rem', marginTop: '0.5rem', color: 'var(--base-9)' }}>
+                                        (Order doesn't matter: "{position.split(' ').reverse().join(' ')}" works too)
+                                    </p>
+                                </div>
+                            </Popover>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        );
+    },
+};
+
+export const Sizes = {
+    render: () => {
+        const sizes = ['xs', 'sm', 'md', 'lg', 'xl', 'x2'];
+        return (
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '2rem',
+                    padding: '4rem',
+                    alignItems: 'center',
+                }}
+            >
+                {sizes.map((size) => (
+                    <Popover
+                        key={size}
+                        trigger={<Button>Size: {size}</Button>}
+                        triggerType="click"
+                        type="popover"
+                        position="bottom"
+                        size={size}
+                    >
+                        <div>
+                            <strong>Size: {size}</strong>
+                            <p>This popover uses the {size} size variant.</p>
                         </div>
                     </Popover>
+                ))}
+            </div>
+        );
+    },
+};
+
+export const TriggerTypes = {
+    render: () => {
+        return (
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '2rem',
+                    padding: '4rem',
+                    alignItems: 'center',
+                }}
+            >
+                <div>
+                    <Popover
+                        trigger={<Button>Click Trigger</Button>}
+                        triggerType="click"
+                        type="popover"
+                        position="bottom"
+                    >
+                        <div>Opens on click</div>
+                    </Popover>
                 </div>
-            </ThemeWrapper>
+                <div>
+                    <Popover
+                        trigger={<span style={{ textDecoration: 'underline', cursor: 'help' }}>Hover Trigger</span>}
+                        triggerType="hover"
+                        type="tooltip"
+                        position="top"
+                    >
+                        <div>Opens on hover</div>
+                    </Popover>
+                </div>
+                <div>
+                    <Popover
+                        trigger={<input type="text" placeholder="Focus Trigger" style={{ padding: '0.8rem' }} />}
+                        triggerType="focus"
+                        type="popover"
+                        position="bottom"
+                    >
+                        <div>Opens on focus</div>
+                    </Popover>
+                </div>
+            </div>
+        );
+    },
+};
+
+export const Controlled = {
+    render: () => {
+        const [open, setOpen] = useState(false);
+        return (
+            <div style={{ padding: '4rem', display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center' }}>
+                <div>
+                    <Button onClick={() => setOpen(!open)}>Toggle Popover (Controlled)</Button>
+                </div>
+                <Popover
+                    trigger={<Button>This trigger is disabled</Button>}
+                    triggerType="manual"
+                    type="popover"
+                    position="bottom"
+                    open={open}
+                    onOpenChange={setOpen}
+                >
+                    <div>
+                        <strong>Controlled Popover</strong>
+                        <p>This popover is controlled by external state.</p>
+                        <Button size="sm" onClick={() => setOpen(false)}>
+                            Close
+                        </Button>
+                    </div>
+                </Popover>
+            </div>
         );
     },
 };
