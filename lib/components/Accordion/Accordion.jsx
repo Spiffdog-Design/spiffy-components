@@ -6,12 +6,12 @@ import { Icon } from '@/components';
 
 /**
  * Accordion component - A collapsible content section.
- * 
+ *
  * Uses native HTML `<details>` and `<summary>` elements for accessibility.
- * 
+ *
  * @typedef {'base' | 'primary' | 'success' | 'warning' | 'alert'} AccordionVariant
  * @typedef {'xs' | 'sm' | 'md'} AccordionSize
- * 
+ *
  * @param {Object} props
  * @param {React.ReactNode} props.children - Content to display when expanded
  * @param {React.ReactNode} props.heading - The heading content (displayed in summary)
@@ -34,7 +34,13 @@ export const Accordion = forwardRef(function Accordion(
     };
 
     return (
-        <details className={cn('sc-accordion', className)} open={open} ref={ref} data-variant={variant} data-size={size}>
+        <details
+            className={cn('sc-accordion', className)}
+            open={open}
+            ref={ref}
+            data-variant={variant}
+            data-size={size}
+        >
             <summary className="sc-accordion-heading" onClick={handleToggle}>
                 <div className="sc-accordion-heading-container">{heading}</div>
                 <div className="sc-accordion-icon-container">

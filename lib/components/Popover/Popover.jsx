@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useRef, useState, useId } from 'react';
+import { forwardRef, useEffect, useId, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { cn } from '@/utilities';
 
@@ -10,21 +10,21 @@ import styles from './Popover.module.css';
 // Defaults to "center" for any position not explicitly assigned
 const parsePosition = (pos) => {
     if (typeof pos !== 'string') return 'center-center';
-    
+
     const trimmed = pos.trim();
     if (!trimmed || trimmed === 'center') {
         return 'center-center';
     }
-    
+
     const parts = trimmed.split(/\s+/);
-    
+
     // Define valid values for each axis
     const xValues = ['left', 'right', 'center'];
     const yValues = ['top', 'bottom', 'center'];
-    
+
     let x = 'center';
     let y = 'center';
-    
+
     // Find x and y values (can be in any order)
     for (const part of parts) {
         if (xValues.includes(part)) {
@@ -34,7 +34,7 @@ const parsePosition = (pos) => {
             y = part;
         }
     }
-    
+
     // Always return x-y format
     return `${x}-${y}`;
 };
@@ -49,18 +49,18 @@ const parsePositionXY = (pos) => {
 /**
  * Popover component - A flexible overlay component that can be used as a base for
  * Modals, Tooltips, Dropdowns, and other overlay components.
- * 
+ *
  * Uses native HTML capabilities:
  * - `<dialog>` element for modal behavior (with showModal() and close())
  * - CSS positioning for tooltips/dropdowns
  * - CSS transitions for animations
  * - Native focus management
- * 
+ *
  * @typedef {'click' | 'hover' | 'focus' | 'manual'} PopoverTrigger
  * @typedef {'top' | 'bottom' | 'left' | 'right' | 'center' | 'auto' | 'left top' | 'left bottom' | 'left center' | 'right top' | 'right bottom' | 'right center' | 'center top' | 'center bottom' | 'center center'} PopoverPosition
  * @typedef {'modal' | 'tooltip' | 'dropdown' | 'popover'} PopoverType
  * @typedef {'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'x2'} PopoverSize
- * 
+ *
  * @param {Object} props
  * @param {React.ReactNode} props.children - Content to display in the popover
  * @param {React.ReactNode} [props.trigger] - Element that triggers the popover
@@ -90,7 +90,7 @@ export const Popover = forwardRef(function Popover(
         id,
         ...props
     },
-    ref
+    ref,
 ) {
     const [internalOpen, setInternalOpen] = useState(false);
     const [computedPosition, setComputedPosition] = useState(position);
@@ -263,7 +263,12 @@ export const Popover = forwardRef(function Popover(
                     }
                 }}
                 id={popoverId}
-                className={cn(styles['sc-popover'], styles['sc-popover-modal'], isOpen && styles['sc-popover-modal-open'], className)}
+                className={cn(
+                    styles['sc-popover'],
+                    styles['sc-popover-modal'],
+                    isOpen && styles['sc-popover-modal-open'],
+                    className,
+                )}
                 data-type={type}
                 data-size={size}
                 data-open={isOpen ? 'true' : 'false'}
@@ -271,7 +276,10 @@ export const Popover = forwardRef(function Popover(
                 onClick={handleDialogClick}
                 {...props}
             >
-                <div className={cn(styles['sc-popover-content'], styles[`sc-popover-${size}`])} onClick={(e) => e.stopPropagation()}>
+                <div
+                    className={cn(styles['sc-popover-content'], styles[`sc-popover-${size}`])}
+                    onClick={(e) => e.stopPropagation()}
+                >
                     {children}
                 </div>
             </dialog>
@@ -319,7 +327,7 @@ export const Popover = forwardRef(function Popover(
     const positionClasses = [];
     // Always apply position class (even for center-center)
     positionClasses.push(styles[`sc-popover-${parsedPosition}`]);
-    
+
     const popoverElement = (
         <div
             ref={(node) => {
@@ -337,7 +345,7 @@ export const Popover = forwardRef(function Popover(
                 ...positionClasses,
                 portal && styles['sc-popover-portal'],
                 isOpen && styles['sc-popover-open'],
-                className
+                className,
             )}
             data-type={type}
             data-position={computedPosition}
@@ -392,12 +400,12 @@ export const Popover = forwardRef(function Popover(
                 requestAnimationFrame(updatePosition);
                 return;
             }
-            
+
             // Capture initial width on first render to prevent drift
             if (initialPopoverWidthRef.current === null && popoverRect.width > 0) {
                 initialPopoverWidthRef.current = popoverRect.width;
             }
-            
+
             // Use initial width for positioning calculations to prevent drift
             const stableWidth = initialPopoverWidthRef.current || popoverRect.width;
             const viewportHeight = window.innerHeight;
@@ -415,9 +423,12 @@ export const Popover = forwardRef(function Popover(
             const horizontalPos = pos.x;
 
             // Use current width for BadgeList-style positioning, stable width otherwise
-            const widthForPositioning = (horizontalPos === 'right' || horizontalPos === 'left') 
-                ? (popoverRect.width > 0 ? popoverRect.width : 320)
-                : (stableWidth || popoverRect.width);
+            const widthForPositioning =
+                horizontalPos === 'right' || horizontalPos === 'left'
+                    ? popoverRect.width > 0
+                        ? popoverRect.width
+                        : 320
+                    : stableWidth || popoverRect.width;
 
             // For tooltips, always use fixed positioning (viewport-relative) even when not using portal
             // This ensures tooltips anchor correctly to their triggers
@@ -425,7 +436,7 @@ export const Popover = forwardRef(function Popover(
 
             // Calculate vertical position
             switch (verticalPos) {
-                    case 'top': {
+                case 'top': {
                     const availableSpaceAbove = triggerRect.top - gap - viewportPadding;
                     maxHeight = Math.max(100, availableSpaceAbove);
                     // Position popover above trigger: bottom edge of popover at top of trigger minus gap
@@ -475,7 +486,7 @@ export const Popover = forwardRef(function Popover(
                 case 'center': {
                     const availableSpaceVertical = Math.min(
                         viewportHeight - triggerRect.top - viewportPadding,
-                        triggerRect.bottom - viewportPadding
+                        triggerRect.bottom - viewportPadding,
                     );
                     maxHeight = Math.max(100, availableSpaceVertical);
                     const triggerCenterY = triggerRect.top + triggerRect.height / 2;
@@ -572,7 +583,7 @@ export const Popover = forwardRef(function Popover(
             lastPopoverWidthRef.current = null;
             initialPopoverWidthRef.current = null;
         }
-        
+
         // Use requestAnimationFrame to ensure popover is fully rendered before positioning
         const rafId = requestAnimationFrame(() => {
             requestAnimationFrame(updatePosition);
@@ -582,22 +593,22 @@ export const Popover = forwardRef(function Popover(
         // Debounce to prevent rapid recalculations that cause drifting
         const resizeObserver = new ResizeObserver(() => {
             if (!popoverRef.current) return;
-            
+
             const currentWidth = popoverRef.current.offsetWidth;
             const lastWidth = lastPopoverWidthRef.current;
-            
+
             // Only update if width changed significantly (more than 2px) to prevent micro-adjustments
             if (lastWidth !== null && Math.abs(currentWidth - lastWidth) < 2) {
                 return;
             }
-            
+
             lastPopoverWidthRef.current = currentWidth;
-            
+
             // Debounce the position update
             if (resizeTimeoutRef.current) {
                 clearTimeout(resizeTimeoutRef.current);
             }
-            
+
             resizeTimeoutRef.current = setTimeout(() => {
                 updatePosition();
             }, 50); // 50ms debounce

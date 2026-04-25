@@ -56,28 +56,28 @@
     min-height: var(--badge-min-height);
 }
 
-.sc-badge[data-closable='true'] {
+.sc-badge[data-closable="true"] {
     padding: var(--badge-close-padding);
 }
 
-.sc-badge[data-rounded='false'] {
+.sc-badge[data-rounded="false"] {
     border-radius: var(--badge-border-radius-square);
 }
 
 /* Size Variants */
-.sc-badge[data-size='xs'] {
+.sc-badge[data-size="xs"] {
     --badge-font-size: var(--font-size-0);
     --badge-content-padding: var(--badge-content-padding-xs);
     min-height: var(--badge-min-height-xs);
 }
 
-.sc-badge[data-size='sm'] {
+.sc-badge[data-size="sm"] {
     --badge-font-size: var(--font-size-0);
     --badge-content-padding: var(--badge-content-padding-sm);
     min-height: var(--badge-min-height-sm);
 }
 
-.sc-badge[data-size='md'] {
+.sc-badge[data-size="md"] {
     --badge-content-padding: var(--badge-content-padding-md);
     min-height: var(--badge-min-height-md);
 }
@@ -95,32 +95,32 @@
 }
 
 /* Appearance Variants */
-.sc-badge[data-appearance='basic'] {
+.sc-badge[data-appearance="basic"] {
     --badge-bg-color: transparent;
     --badge-border-color: transparent;
     --badge-text-color: var(--badge-theme-color);
 }
 
-.sc-badge[data-appearance='outline'] {
+.sc-badge[data-appearance="outline"] {
     --badge-bg-color: transparent;
     --badge-border-color: var(--badge-theme-color);
     --badge-text-color: var(--badge-theme-color);
 }
 
 /* Color Variants */
-.sc-badge[data-variant='alert'] {
+.sc-badge[data-variant="alert"] {
     --badge-theme-color: var(--alert-7);
 }
 
-.sc-badge[data-variant='primary'] {
+.sc-badge[data-variant="primary"] {
     --badge-theme-color: var(--primary-7);
 }
 
-.sc-badge[data-variant='success'] {
+.sc-badge[data-variant="success"] {
     --badge-theme-color: var(--success-7);
 }
 
-.sc-badge[data-variant='warning'] {
+.sc-badge[data-variant="warning"] {
     --badge-theme-color: var(--warning-7);
 }
 
@@ -145,7 +145,7 @@
     background: color-mix(in srgb, var(--badge-theme-color) 75%, transparent);
 }
 
-.sc-badge[data-appearance='basic'] .sc-badge-close-button:hover,
-.sc-badge[data-appearance='outline'] .sc-badge-close-button:hover {
+.sc-badge[data-appearance="basic"] .sc-badge-close-button:hover,
+.sc-badge[data-appearance="outline"] .sc-badge-close-button:hover {
     background: color-mix(in srgb, var(--badge-theme-color) 25%, transparent);
 }

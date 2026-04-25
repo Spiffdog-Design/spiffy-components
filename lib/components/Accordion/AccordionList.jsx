@@ -4,11 +4,11 @@ import styles from './Accordion.module.css';
 
 /**
  * AccordionList component - A container for multiple accordion items.
- * 
+ *
  * Automatically applies the variant prop to all child Accordion components.
- * 
+ *
  * @typedef {'base' | 'primary' | 'success' | 'warning' | 'alert'} AccordionListVariant
- * 
+ *
  * @param {Object} props
  * @param {React.ReactNode} props.children - Accordion components to display
  * @param {AccordionListVariant} [props.variant='base'] - Color variant to apply to all accordions

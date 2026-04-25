@@ -1,18 +1,17 @@
 // src/components/Base/Badge/Badge.tsx
 import { forwardRef } from 'react';
-import { cn } from '@/utilities';
-
 import { Icon } from '@/components';
+import { cn } from '@/utilities';
 
 import styles from './Badge.module.css';
 
 /**
  * Badge component for labels, tags, and status indicators.
- * 
+ *
  * @typedef {'base' | 'primary' | 'success' | 'warning' | 'alert'} BadgeVariant
  * @typedef {'solid' | 'outline' | 'basic'} BadgeAppearance
  * @typedef {'xs' | 'sm' | 'md'} BadgeSize
- * 
+ *
  * @param {Object} props
  * @param {React.ReactNode} props.children - Content to display in the badge
  * @param {BadgeVariant} [props.variant='base'] - Color variant
@@ -25,7 +24,17 @@ import styles from './Badge.module.css';
  * @param {React.Ref<HTMLDivElement>} ref
  */
 export const Badge = forwardRef(function Badge(
-    { appearance = 'solid', value, children, className, onClick, variant = 'base', rounded = true, size = 'md', ...props },
+    {
+        appearance = 'solid',
+        value,
+        children,
+        className,
+        onClick,
+        variant = 'base',
+        rounded = true,
+        size = 'md',
+        ...props
+    },
     ref,
 ) {
     const displayClassName = cn(styles['sc-badge'], className);

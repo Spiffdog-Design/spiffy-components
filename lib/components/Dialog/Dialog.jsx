@@ -1,21 +1,21 @@
 import { forwardRef, useEffect, useRef, useState } from 'react';
-import { Popover } from '@/components/Popover/Popover';
 import { Icon } from '@/components/Icon/Icon';
-import { createFocusTrap } from '@/utilities/focusTrap';
+import { Popover } from '@/components/Popover/Popover';
 import { cn } from '@/utilities';
+import { createFocusTrap } from '@/utilities/focusTrap';
 
 import styles from './Dialog.module.css';
 
 /**
  * Dialog/Modal component - A modal dialog that can be closed with X button or Escape key.
- * 
+ *
  * Wraps the Popover component with modal-specific features:
  * - Close button (X)
  * - Focus trap for keyboard navigation
  * - Escape key support (handled by Popover)
- * 
+ *
  * @typedef {'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'x2'} DialogSize
- * 
+ *
  * @param {Object} props
  * @param {React.ReactNode} props.children - Content to display in the dialog
  * @param {React.ReactNode} [props.trigger] - Element that triggers the dialog
@@ -41,7 +41,7 @@ export const Dialog = forwardRef(function Dialog(
         title,
         ...props
     },
-    ref
+    ref,
 ) {
     const dialogRef = useRef(null);
     const [internalOpen, setInternalOpen] = useState(false);

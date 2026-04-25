@@ -1,18 +1,17 @@
 import { forwardRef } from 'react';
-import { cn } from '@/utilities';
-
 import { Spinner, useTheme } from '@/components';
+import { cn } from '@/utilities';
 
 import styles from './Button.module.css';
 
 /**
  * Button component - A customizable button that supports various appearances, variants, and states.
  * Implements ARIA-recommended behaviors for accessibility.
- * 
+ *
  * @typedef {'basic' | 'outline' | 'solid'} ButtonAppearance
  * @typedef {'base' | 'primary' | 'success' | 'warning' | 'alert'} ButtonVariant
  * @typedef {'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'x2'} ButtonSize
- * 
+ *
  * @param {Object} props
  * @param {React.ReactNode | Function} props.children - Content to display in the button. Can be a function that receives props (including size) for dynamic rendering
  * @param {ButtonAppearance} [props.appearance='solid'] - Visual appearance style

@@ -1,5 +1,4 @@
-import { Tooltip } from '@/components';
-import { Button } from '@/components';
+import { Button, Tooltip } from '@/components';
 
 const meta = {
     title: 'Base/Tooltip',
@@ -113,12 +112,18 @@ export const TriggerTypes = {
                 }}
             >
                 <div>
-                    <Tooltip trigger={<span style={{ textDecoration: 'underline' }}>Hover me</span>} triggerType="hover">
+                    <Tooltip
+                        trigger={<span style={{ textDecoration: 'underline' }}>Hover me</span>}
+                        triggerType="hover"
+                    >
                         Appears on hover
                     </Tooltip>
                 </div>
                 <div>
-                    <Tooltip trigger={<input type="text" placeholder="Focus me" style={{ padding: '0.8rem' }} />} triggerType="focus">
+                    <Tooltip
+                        trigger={<input type="text" placeholder="Focus me" style={{ padding: '0.8rem' }} />}
+                        triggerType="focus"
+                    >
                         Appears on focus
                     </Tooltip>
                 </div>
@@ -135,7 +140,8 @@ export const TriggerTypes = {
 export const LongContent = {
     args: {
         trigger: <span style={{ textDecoration: 'underline', cursor: 'help' }}>Hover for long tooltip</span>,
-        children: 'This is a longer tooltip message that demonstrates how the tooltip handles content that spans multiple lines or contains more text than a typical tooltip.',
+        children:
+            'This is a longer tooltip message that demonstrates how the tooltip handles content that spans multiple lines or contains more text than a typical tooltip.',
         position: 'top',
         size: 'md',
     },

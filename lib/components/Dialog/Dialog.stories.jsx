@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { Dialog } from '@/components';
-import { Button } from '@/components';
+import { Button, Dialog } from '@/components';
 
 const meta = {
     title: 'Base/Dialog',
@@ -117,7 +116,9 @@ export const Controlled = {
     render: () => {
         const [open, setOpen] = useState(false);
         return (
-            <div style={{ padding: '4rem', display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center' }}>
+            <div
+                style={{ padding: '4rem', display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center' }}
+            >
                 <div>
                     <Button onClick={() => setOpen(true)}>Open Controlled Dialog</Button>
                 </div>
@@ -137,7 +138,9 @@ export const WithForm = {
     render: () => {
         const [open, setOpen] = useState(false);
         return (
-            <div style={{ padding: '4rem', display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center' }}>
+            <div
+                style={{ padding: '4rem', display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center' }}
+            >
                 <Button onClick={() => setOpen(true)}>Open Form Dialog</Button>
                 <Dialog open={open} onOpenChange={setOpen} title="Form Dialog">
                     <form
@@ -196,11 +199,10 @@ export const WithForm = {
 export const KeyboardNavigation = {
     render: () => {
         return (
-            <div style={{ padding: '4rem', display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center' }}>
-                <Dialog
-                    trigger={<Button>Test Keyboard Navigation</Button>}
-                    title="Keyboard Navigation Test"
-                >
+            <div
+                style={{ padding: '4rem', display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center' }}
+            >
+                <Dialog trigger={<Button>Test Keyboard Navigation</Button>} title="Keyboard Navigation Test">
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
                         <p>Use Tab to navigate between elements. Focus should be trapped within the dialog.</p>
                         <Button>First Button</Button>

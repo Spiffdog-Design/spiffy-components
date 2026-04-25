@@ -74,7 +74,9 @@
     border-radius: var(--dialog-border-radius);
     color: var(--dialog-close-color);
     cursor: pointer;
-    transition: background-color var(--dialog-transition-speed) ease, color var(--dialog-transition-speed) ease;
+    transition:
+        background-color var(--dialog-transition-speed) ease,
+        color var(--dialog-transition-speed) ease;
     flex-shrink: 0;
 }
 

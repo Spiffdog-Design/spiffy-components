@@ -1,8 +1,9 @@
 // .storybook/theme.js
-import { create } from 'storybook/theming';
-import { dark } from '@spiffdog/spiffy-colors';
 
-const palette = {
+import { dark } from '@spiffdog/spiffy-colors';
+import { create } from 'storybook/theming';
+
+const _palette = {
     alert: { ...dark.red },
     base: { ...dark.slate },
     primary: { ...dark.blue },

@@ -4,9 +4,9 @@ const ThemeContext = createContext();
 
 /**
  * useTheme hook - Access theme context and theme management functions.
- * 
+ *
  * Must be used within a ThemeProvider.
- * 
+ *
  * @returns {Object} Theme context object
  * @returns {string} returns.theme - Current theme ('light' | 'dark')
  * @returns {string} returns.themeName - Alias for theme (for backward compatibility)
@@ -14,7 +14,7 @@ const ThemeContext = createContext();
  * @returns {Function} returns.setTheme - Manually set theme ('light' | 'dark')
  * @returns {Function} returns.resetToSystem - Reset to system preference
  * @returns {boolean} returns.isSystemTheme - Whether currently using system theme
- * 
+ *
  * @throws {Error} If used outside ThemeProvider
  */
 export const useTheme = () => {
@@ -27,10 +27,10 @@ export const useTheme = () => {
 
 /**
  * ThemeProvider component - Provides theme context to child components.
- * 
+ *
  * Manages theme state, system preference detection, and localStorage persistence.
  * Automatically applies theme to document and listens for system theme changes.
- * 
+ *
  * @param {Object} props
  * @param {React.ReactNode} props.children - Child components
  * @param {string} [props.themeName] - Initial theme name ('light' | 'dark')

@@ -1,5 +1,5 @@
-import { Accordion } from '@/components';
 import { Canvas, Controls, Description, Subtitle, Title } from '@storybook/addon-docs/blocks';
+import { Accordion } from '@/components';
 
 const meta = {
     title: 'Base/Accordion/Accordion',

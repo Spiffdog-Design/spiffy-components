@@ -75,8 +75,8 @@
     --alert-12: var(--red12);
 
     /* Font Family */
-    --font-family-base: 'Roboto', sans-serif;
-    --font-family-mono: 'Courier New', Courier, monospace;
+    --font-family-base: "Roboto", sans-serif;
+    --font-family-mono: "Courier New", Courier, monospace;
 
     /* Font Base */
     --font-line-height: 1.65;
@@ -141,7 +141,7 @@
 }
 
 /* Dark Theme Overrides */
-[data-theme='dark'] {
+[data-theme="dark"] {
     /* You can override any semantic colors for dark theme */
     --base-1: var(--slate12);
     --base-2: var(--slate11);

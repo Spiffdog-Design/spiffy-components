@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { Popover } from '@/components';
-import { Button } from '@/components';
+import { Button, Popover } from '@/components';
 
 const meta = {
     title: 'Base/Popover',
@@ -146,7 +145,7 @@ export const Positions = {
             'center bottom',
             'center center',
         ];
-        
+
         return (
             <div style={{ padding: '4rem', display: 'flex', flexDirection: 'column', gap: '4rem' }}>
                 <div>
@@ -176,7 +175,7 @@ export const Positions = {
                         ))}
                     </div>
                 </div>
-                
+
                 <div>
                     <h3 style={{ marginBottom: '2rem' }}>Two-Position Pairs (X and Y in any order)</h3>
                     <div
@@ -296,7 +295,9 @@ export const Controlled = {
     render: () => {
         const [open, setOpen] = useState(false);
         return (
-            <div style={{ padding: '4rem', display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center' }}>
+            <div
+                style={{ padding: '4rem', display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center' }}
+            >
                 <div>
                     <Button onClick={() => setOpen(!open)}>Toggle Popover (Controlled)</Button>
                 </div>

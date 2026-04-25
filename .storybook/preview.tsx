@@ -1,6 +1,6 @@
 import type { Preview } from '@storybook/react-vite';
-import ThemeWrapper from '../lib/components/Storybook/ThemeWrapper';
 import React from 'react';
+import ThemeWrapper from '../lib/components/Storybook/ThemeWrapper';
 
 const preview: Preview = {
     parameters: {

@@ -6,13 +6,13 @@ import styles from './Badge.module.css';
 
 /**
  * ToggleBadge component - A badge that can be toggled between selected and unselected states.
- * 
+ *
  * Automatically switches between `solid` and `outline` appearance based on selection state.
  * Perfect for filter chips and toggleable tags.
- * 
+ *
  * @typedef {'base' | 'primary' | 'success' | 'warning' | 'alert'} ToggleBadgeVariant
  * @typedef {'xs' | 'sm' | 'md'} ToggleBadgeSize
- * 
+ *
  * @param {Object} props
  * @param {React.ReactNode} props.children - Content to display in the badge
  * @param {boolean} props.selected - Controls selected state

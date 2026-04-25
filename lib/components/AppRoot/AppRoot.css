@@ -12,7 +12,7 @@
 html,
 body,
 #root {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     height: 100%;
     min-height: 100vh;
     width: 100%;
@@ -116,7 +116,7 @@ em {
 }
 
 code {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: "Courier New", Courier, monospace;
 }
 
 pre {

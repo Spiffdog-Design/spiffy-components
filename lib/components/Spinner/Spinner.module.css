@@ -21,7 +21,7 @@
     --spinner-size-xs: 2.8rem;
     --spinner-size-sm: 3.2rem;
     --spinner-size-md: 3.6rem;
-    --spinner-size-lg: 4.0rem;
+    --spinner-size-lg: 4rem;
     --spinner-size-xl: 4.8rem;
     --spinner-size-x2: 6.4rem;
 
@@ -49,7 +49,7 @@
 .sc-spinner::after,
 .sc-spinner::before {
     position: absolute;
-    content: '';
+    content: "";
     left: 0;
     right: 0;
     top: 0;
