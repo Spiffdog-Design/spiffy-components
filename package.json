@@ -19,7 +19,7 @@
         "preview": "vite preview"
     },
     "peerDependencies ": {
-        "@spiffdog/spiffy-colors": "^2.0.1",
+        "@spiffdog/spiffy-colors": "^3.0.0",
         "@spiffdog/spiffy-hooks": "^0.0.11",
         "@spiffdog/spiffy-tools": ">=0.3.0",
         "lucide-react": ">=0.263.0",
@@ -30,7 +30,7 @@
     },
     "devDependencies": {
         "@biomejs/biome": "2.4.13",
-        "@spiffdog/spiffy-colors": "^2.0.1",
+        "@spiffdog/spiffy-colors": "^3.0.0",
         "@spiffdog/spiffy-hooks": "^0.0.11",
         "@spiffdog/spiffy-tools": "^0.3.0",
         "@storybook/addon-docs": "^10.3.5",

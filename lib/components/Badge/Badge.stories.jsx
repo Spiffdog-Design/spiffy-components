@@ -41,11 +41,16 @@ export const ReadOnlyBadge = {
         rounded: {
             control: { type: 'boolean' },
         },
+        size: {
+            options: ['xs', 'sm', 'md'],
+            control: { type: 'radio' },
+        },
     },
     args: {
         appearance: 'solid',
         variant: 'base',
         rounded: true,
+        size: 'md',
     },
 
     render: (args) => (
@@ -68,11 +73,16 @@ export const CloseBadge = {
         rounded: {
             control: { type: 'boolean' },
         },
+        size: {
+            options: ['xs', 'sm', 'md'],
+            control: { type: 'radio' },
+        },
     },
     args: {
         appearance: 'solid',
         variant: 'base',
         rounded: true,
+        size: 'md',
     },
 
     render: (args) => {

@@ -7,7 +7,6 @@
     --badge-max-width: 50ch;
     --badge-content-padding: var(--spacing-padding-1) var(--spacing-padding-3);
     --badge-content-gap: var(--spacing-gap-1);
-    --badge-content-transform: translateY(1px);
     --badge-close-padding: var(--spacing-padding-1) var(--spacing-padding-1) var(--spacing-padding-1)
         var(--spacing-padding-0);
     --badge-close-button-padding: var(--spacing-padding-1);
@@ -80,6 +79,10 @@
 .sc-badge[data-size="md"] {
     --badge-content-padding: var(--badge-content-padding-md);
     min-height: var(--badge-min-height-md);
+    
+    & .sc-badge-content {
+        transform: translateY(1px);
+    }
 }
 
 .sc-badge-content {
@@ -90,7 +93,6 @@
     max-width: var(--badge-max-width);
     overflow: hidden;
     white-space: nowrap;
-    transform: var(--badge-content-transform);
     padding: var(--badge-content-padding);
 }
 

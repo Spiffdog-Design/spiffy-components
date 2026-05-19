@@ -3,8 +3,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: var(--slate12);
-    border: var(--slate9) solid 1px;
+    background-color: var(--gray12);
+    border: var(--gray9) solid 1px;
     min-height: 30vh;
     padding: 2rem;
     min-width: 100%;
@@ -22,7 +22,7 @@
     margin: 0;
     font-size: var(--font-size-3);
     font-weight: var(--font-weight-semibold);
-    color: var(--base-12);
+    color: var(--gray1);
 }
 
 .themeWrapperActions {

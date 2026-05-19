@@ -34,13 +34,30 @@ const AppRootContainer = ({ children }) => {
     const { themeName } = useTheme();
     const docRef = useRef(window?.document);
 
-    useEffect(() => {
-        console.log(themeName);
+    const setBodyTheme = (theme) => {
         const body = docRef.current?.body;
+
         if (body != null) {
-            body.className = themeName;
+            body.dataset.theme = theme;
         }
-    }, [themeName]);
+    };
+
+    useEffect(() => {
+        // Listen for changes in the browser's color scheme preference
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        // Set initial theme based on browser preference on load
+        const initialTheme = mediaQuery.matches ? 'dark' : 'light';
+        setBodyTheme(initialTheme);
+        
+        const handleMediaChange = (e) => {
+            const newTheme = e.matches ? 'dark' : 'light';
+            setBodyTheme(newTheme);
+        };
+
+        mediaQuery.addEventListener('change', handleMediaChange);
+        return () => mediaQuery.removeEventListener('change', handleMediaChange);
+    }, []);
 
     return (
         <>

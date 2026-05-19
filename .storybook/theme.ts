@@ -1,14 +1,14 @@
 // .storybook/theme.js
 
-import { dark } from '@spiffdog/spiffy-colors';
+import { palette } from '@spiffdog/spiffy-colors';
 import { create } from 'storybook/theming';
 
 const _palette = {
-    alert: { ...dark.red },
-    base: { ...dark.slate },
-    primary: { ...dark.blue },
-    success: { ...dark.green },
-    warning: { ...dark.orange },
+    alert: palette.red,
+    base: palette.gray,
+    primary: palette.blue,
+    success: palette.green,
+    warning: palette.amber,
 };
 
 export default create({
