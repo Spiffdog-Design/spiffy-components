@@ -5,18 +5,18 @@
 
     /* Semantic Color Mappings */
     /* Base/Neutral Colors */
-    --base-1: var(--gray1);
-    --base-2: var(--gray2);
-    --base-3: var(--gray3);
-    --base-4: var(--gray4);
-    --base-5: var(--gray5);
-    --base-6: var(--gray6);
-    --base-7: var(--gray7);
-    --base-8: var(--gray8);
-    --base-9: var(--gray9);
-    --base-10: var(--gray10);
-    --base-11: var(--gray11);
-    --base-12: var(--gray12);
+    --base-1: var(--slate1);
+    --base-2: var(--slate2);
+    --base-3: var(--slate3);
+    --base-4: var(--slate4);
+    --base-5: var(--slate5);
+    --base-6: var(--slate6);
+    --base-7: var(--slate7);
+    --base-8: var(--slate8);
+    --base-9: var(--slate9);
+    --base-10: var(--slate10);
+    --base-11: var(--slate11);
+    --base-12: var(--slate12);
 
     /* Primary Colors */
     --primary-1: var(--blue1);

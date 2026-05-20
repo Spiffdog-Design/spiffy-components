@@ -1,7 +1,6 @@
-import { useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 
-import { ThemeProvider, useTheme } from '@/components';
+import { ThemeProvider } from '@/components';
 
 import '@spiffdog/spiffy-colors/dist/index.css';
 import '../Theme/themes/default-theme.css';
@@ -31,34 +30,6 @@ export const AppRoot = ({ children, ...props }) => {
 AppRoot.displayName = 'AppRoot';
 
 const AppRootContainer = ({ children }) => {
-    const { themeName } = useTheme();
-    const docRef = useRef(window?.document);
-
-    const setBodyTheme = (theme) => {
-        const body = docRef.current?.body;
-
-        if (body != null) {
-            body.dataset.theme = theme;
-        }
-    };
-
-    useEffect(() => {
-        // Listen for changes in the browser's color scheme preference
-        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        
-        // Set initial theme based on browser preference on load
-        const initialTheme = mediaQuery.matches ? 'dark' : 'light';
-        setBodyTheme(initialTheme);
-        
-        const handleMediaChange = (e) => {
-            const newTheme = e.matches ? 'dark' : 'light';
-            setBodyTheme(newTheme);
-        };
-
-        mediaQuery.addEventListener('change', handleMediaChange);
-        return () => mediaQuery.removeEventListener('change', handleMediaChange);
-    }, []);
-
     return (
         <>
             <Helmet>

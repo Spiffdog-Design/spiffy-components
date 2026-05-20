@@ -37,9 +37,14 @@ export const ToggleBadgeDemo = {
             options: ['alert', 'base', 'primary', 'success', 'warning'],
             control: { type: 'radio' },
         },
+        size: {
+            options: ['xs', 'sm', 'md'],
+            control: { type: 'radio' },
+        },
     },
     args: {
         variant: 'base',
+        size: 'md',
     },
 
     render: (args) => {

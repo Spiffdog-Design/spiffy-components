@@ -57,12 +57,13 @@ export const ReadOnlyBadgeList = {
 
     render: (args) => {
         const [data] = useState(demoListData);
+        const { bordered, rounded, variant, appearance } = args;
 
         return (
-            <BadgeList {...args}>
+            <BadgeList bordered={bordered} rounded={rounded} variant={variant}>
                 {data.map((item) => {
                     return (
-                        <Badge key={item.id} value={item.id} {...args}>
+                        <Badge key={item.id} value={item.id} appearance={appearance} variant={variant}>
                             {item.label}
                         </Badge>
                     );
@@ -98,6 +99,7 @@ export const CloseBadgeList = {
 
     render: (args) => {
         const [data, setData] = useState(demoListData);
+        const { bordered, rounded, variant, appearance } = args;
 
         const handleBadgeClose = (value) => {
             console.log(value, data);
@@ -112,10 +114,10 @@ export const CloseBadgeList = {
                         Reset
                     </Button>
                 </div>
-                <BadgeList {...args}>
+                <BadgeList bordered={bordered} rounded={rounded} variant={variant}>
                     {data.map((item) => {
                         return (
-                            <Badge key={item.id} value={item.id} onClick={handleBadgeClose} {...args}>
+                            <Badge key={item.id} value={item.id} onClick={handleBadgeClose} appearance={appearance} variant={variant}>
                                 {item.label}
                             </Badge>
                         );

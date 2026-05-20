@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useRef, useState } from 'react';
 
 const ThemeContext = createContext();
 
@@ -8,8 +8,8 @@ const ThemeContext = createContext();
  * Must be used within a ThemeProvider.
  *
  * @returns {Object} Theme context object
- * @returns {string} returns.theme - Current theme ('light' | 'dark')
- * @returns {string} returns.themeName - Alias for theme (for backward compatibility)
+ * @returns {string} returns.themeName - Current theme ('light' | 'dark')
+ * @returns {string} returns.theme - Alias for themeName (for backward compatibility)
  * @returns {Function} returns.toggleTheme - Toggle between light and dark themes
  * @returns {Function} returns.setTheme - Manually set theme ('light' | 'dark')
  * @returns {Function} returns.resetToSystem - Reset to system preference
@@ -35,20 +35,30 @@ export const useTheme = () => {
  * @param {React.ReactNode} props.children - Child components
  * @param {string} [props.themeName] - Initial theme name ('light' | 'dark')
  */
-export const ThemeProvider = ({ children }) => {
+export const ThemeProvider = ({ children, themeName: initialThemeName }) => {
+    const container = useRef(document.documentElement);
+    
     const [theme, setTheme] = useState(() => {
-        // Check if user has a saved preference
+        // 1. Check if theme was passed as prop
+        if (initialThemeName && (initialThemeName === 'light' || initialThemeName === 'dark')) {
+            return initialThemeName;
+        }
+
+        // 2. Check if user has a saved preference in localStorage
         const saved = localStorage.getItem('theme');
         if (saved && (saved === 'light' || saved === 'dark')) {
             return saved;
         }
-        // Otherwise, use system preference
+        
+        // 3. Fall back to system preference
         return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     });
 
-    // Apply theme to document
+    // Apply theme to document and set color-scheme for light-dark() support
     useEffect(() => {
-        document.documentElement.setAttribute('data-theme', theme);
+        const html = container.current;
+        html.setAttribute('data-theme', theme);
+        html.style.colorScheme = theme;
         localStorage.setItem('theme', theme);
     }, [theme]);
 
@@ -87,8 +97,8 @@ export const ThemeProvider = ({ children }) => {
     return (
         <ThemeContext.Provider
             value={{
+                themeName: theme,
                 theme,
-                themeName: theme, // For backward compatibility
                 toggleTheme,
                 setTheme: setThemeManually,
                 resetToSystem,
